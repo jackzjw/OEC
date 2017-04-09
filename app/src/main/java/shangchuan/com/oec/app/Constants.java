@@ -17,6 +17,5 @@ public class Constants {
     public static final String SHAREPREFERENCE_NAME="my_sp";
     public static final String CURRENT_TENANT_NAME="tenantname";
     public static final String USER_PASSWORD="pwd";
-    public String test=" git test";
-    public String test2="git test2";
+  
 }
