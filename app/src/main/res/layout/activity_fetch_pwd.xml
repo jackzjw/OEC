@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_fetch_pwd"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="shangchuan.com.oec.ui.user.activity.FetchPwdActivity">
+
+    <include layout="@layout/toolbar_layout"/>
+    <EditText
+        android:id="@+id/et_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical|left"
+        android:hint="@string/user_phone_number"
+        android:numeric="integer"
+        android:maxLength="11"
+        android:textSize="14sp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_divide_color"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:id="@+id/et_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical|left"
+            android:hint="@string/user_verify_code"
+            android:numeric="integer"
+            android:textSize="14sp"
+            />
+        <shangchuan.com.oec.widget.VerifyCodeButton
+            android:id="@+id/btn_verify_code"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/user_send_verify_code"
+            android:textColor="@android:color/white"
+            android:background="@drawable/shape_user_verify_code_button_background"
+            android:layout_centerVertical="true"
+            app:vcb_afterCountdownText="@string/user_refresh_code"
+            app:vcb_clickAfterBackground="@drawable/shape_user_verifycode_button_after_click"
+            />
+
+    </RelativeLayout>
+    <Button
+
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_next"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_commit_work_order_button_bg"
+        android:text="@string/user_next"
+        android:textColor="@android:color/white"
+        />
+
+</LinearLayout>

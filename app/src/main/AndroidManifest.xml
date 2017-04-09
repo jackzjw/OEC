@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="shangchuan.com.oec">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <application
+        android:name=".app.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.MainActivity">
+        </activity>
+        <activity android:name=".base.BaseActivity"/>
+        <activity android:name=".ui.home.activity.TotalBannerActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.CreateWorkOrderActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApplyOfficeActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.WorkOvertimeActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApplyLeaveActivity">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.WorkOutsideActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.apply.activity.ReimburseActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApplyCommonActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApplyListActivity">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.CreateWorkReportActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.apply.activity.WorkReportListActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.WorkReportDetailActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ClientListActivity">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.AddClientActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.apply.activity.ClientDetailsActivity">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.AddContactsActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.AddProjectActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.apply.activity.ProjectDetailsActivity">
+        </activity>
+        <activity
+            android:name=".ui.team.activity.AddUserActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.team.activity.AddOrganizeStructureActivity">
+        </activity>
+        <activity android:name=".ui.user.activity.OrganizationInfoActivity">
+        </activity>
+        <activity
+            android:name=".ui.user.activity.ModifyOrganizeInfoActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".ui.user.activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.user.activity.FetchPwdActivity">
+        </activity>
+        <activity android:name=".ui.user.activity.SetPwdActivity">
+        </activity>
+        <activity android:name=".ui.user.activity.ModifyPwdActivity">
+        </activity>
+        <activity
+            android:name=".ui.user.activity.UserInfoActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".ui.home.activity.SearchActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.WOListActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApprovePendActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApplyOfficeDetailsActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.WorkOfficeListActivity">
+        </activity>
+        <activity android:name=".ui.user.activity.OrganizationListActivity">
+        </activity>
+        <activity android:name=".ui.user.activity.SwitchOrganizationActivity">
+        </activity>
+        <activity android:name=".ui.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.apply.activity.OaApproveDetailsActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.WoDetailsActivity">
+        </activity>
+    </application>
+
+</manifest>

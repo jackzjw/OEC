@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    >
+
+
+<android.support.v7.widget.CardView
+
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="1dp"
+
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <shangchuan.com.oec.widget.CircleImageView
+            android:id="@+id/organize_avater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_img_avatar"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            app:border_color="@color/circle_imageview_border_color"
+            app:border_width="1dp"
+            />
+        <LinearLayout
+            android:layout_toRightOf="@+id/organize_avater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                android:id="@+id/organize_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_dark_text_color"
+                android:text="商传"/>
+           <TextView
+               android:id="@+id/organize_code"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="5dp"
+               android:text="机构代码：23432"
+               />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/organize_admin"
+                android:text="管理员：12323432432"
+                />
+
+
+        </LinearLayout>
+
+       <ImageView
+           android:id="@+id/select_tag"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="15dp"
+           android:src="@drawable/user_icon_choose_selected"
+           android:visibility="invisible"
+           />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+</RelativeLayout>

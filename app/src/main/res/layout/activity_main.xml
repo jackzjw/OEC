@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="shangchuan.com.oec.ui.MainActivity">
+
+
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/navigation_divide_color"
+        android:layout_above="@+id/rg_buton"
+        />
+<RadioGroup
+    android:id="@+id/rg_buton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true">
+    <RadioButton
+        android:id="@+id/rb_home"
+        style="@style/bottomBar_radioGroup_style"
+        android:drawableTop="@drawable/seclector_fragment_home_drawable"
+        android:text="@string/bottombar_home"
+        android:checked="true"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_classify"
+        style="@style/bottomBar_radioGroup_style"
+        android:drawableTop="@drawable/seclector_fragment_classify_drawable"
+        android:text="@string/bottombar_classify"
+        />
+    <RadioButton
+        android:id="@+id/rb_team"
+        style="@style/bottomBar_radioGroup_style"
+        android:drawableTop="@drawable/seclector_fragment_team_drawable"
+        android:text="@string/bottombar_team"
+        />
+    <RadioButton
+        android:id="@+id/rb_user"
+        style="@style/bottomBar_radioGroup_style"
+        android:drawableTop="@drawable/seclector_fragment_user_drawable"
+        android:text="@string/bottombar_user"
+        />
+
+</RadioGroup>
+
+</RelativeLayout>

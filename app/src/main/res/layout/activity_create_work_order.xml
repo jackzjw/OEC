@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_work_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity">
+    <include layout="@layout/toolbar_layout"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                   android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/apply_zhu_lei_bie"
+                        android:textSize="11sp"
+                        />
+                    <TextView
+                        android:id="@+id/zhu_lei_bie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/user_divide_color"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/apply_zi_lei_bie"
+                        android:textSize="11sp"
+                        />
+                    <TextView
+                        android:id="@+id/zi_lei_bie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/user_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/apply_create_wo_title"
+                        android:textSize="11sp"
+                        />
+                    <EditText
+                        android:id="@+id/et_wo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:background="@android:color/transparent"
+                        android:textStyle="bold"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/user_divide_color"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/rel_add_owner"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                >
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_blue"
+                android:src="@drawable/application_icon_add_blue"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_below="@id/add_blue"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加责任人"
+                />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/apply_wo_tag"
+            android:textSize="12sp"
+            />
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            >
+           <RadioButton
+               android:id="@+id/rb_red"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:button="@drawable/selector_create_wo_tag_one"
+               android:padding="5dp"
+               android:background="@android:color/transparent"
+
+               />
+            <RadioButton
+                android:id="@+id/rb_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_create_wo_tag_two"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+
+                />
+            <RadioButton
+                android:id="@+id/rb_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_create_wo_tag_three"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+
+                />
+            <RadioButton
+                android:id="@+id/yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_create_wo_tag_four"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+
+                />
+            <RadioButton
+                android:id="@+id/purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/selector_create_wo_tag_five"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+
+                />
+
+
+
+        </RadioGroup>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/user_divide_color"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_create_wo_content"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:textSize="13sp"
+            android:paddingRight="15dp"
+            android:id="@+id/et_content"
+            android:hint="请输入文字"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycleview"
+            android:overScrollMode="never"
+            android:layout_marginTop="5dp"
+
+            ></android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/user_divide_color"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/application_icon_link"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/user_divide_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        >
+        <TextView
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_create_wo_owner"/>
+        <TextView
+            android:id="@+id/tv_wo_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:paddingBottom="10dp"
+            />
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/user_divide_color"
+
+        >
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_marginTop="70dp"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/apply_commit_wo"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:background="@drawable/shape_commit_work_order_button_bg"
+            android:layout_marginBottom="50dp"
+            />
+
+    </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

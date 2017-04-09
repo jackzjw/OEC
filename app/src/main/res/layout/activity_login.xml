@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="shangchuan.com.oec.ui.user.activity.LoginActivity">
+    <include layout="@layout/toolbar_layout"/>
+    <LinearLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_user_login_background"
+            >
+
+            <EditText
+                android:id="@+id/et_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:numeric="integer"
+                android:textColor="@color/theme_dark_text_color"
+                android:hint="@string/user_phone_number"
+                android:background="@android:color/transparent"
+                android:singleLine="true"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_user_login_background"
+            >
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/theme_dark_text_color"
+                android:layout_gravity="center_vertical"
+                android:numeric="integer"
+                android:paddingLeft="15dp"
+                android:maxLength="20"
+                android:password="true"
+                android:singleLine="true"
+                android:hint="@string/team_user_password"
+                android:background="@android:color/transparent"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/theme_dark_text_color"
+            android:button="@drawable/selector_user_login_checkbox_background"
+            android:text="@string/user_remember_me"
+            />
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_login"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/shape_commit_work_order_button_bg"
+            android:text="@string/user_login_btn"
+            android:textColor="@android:color/white"
+            />
+        <TextView
+            android:id="@+id/forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_forget_password"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

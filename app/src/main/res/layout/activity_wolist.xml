@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_wolist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="shangchuan.com.oec.ui.apply.activity.WOListActivity">
+   <include layout="@layout/toolbar_layout"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@color/theme_divide_color"
+        >
+        <RadioButton
+            android:id="@+id/rb_wo_wait_deal"
+            style="@style/business_classify_radioGroup_style"
+            android:text="@string/apply_wo_wait_deal_with"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/rb_wo_already_created"
+            style="@style/business_classify_radioGroup_style"
+            android:text="@string/apply_wo_already_create"
+            />
+        <RadioButton
+            android:id="@+id/rb_wo_total"
+            style="@style/business_classify_radioGroup_style"
+            android:text="@string/home_total_banners"
+            />
+    </RadioGroup>
+</LinearLayout>

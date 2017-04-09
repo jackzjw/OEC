@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="orderStatus">
+        <item>已撤销</item>
+        <item>待处理</item>
+        <item>处理中</item>
+        <item>已完成</item>
+    </string-array>
+</resources>

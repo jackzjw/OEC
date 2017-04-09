@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+ <android.support.v7.widget.Toolbar
+     android:layout_width="match_parent"
+     android:layout_height="70dp"
+     android:paddingTop="@dimen/toolbar_paddingTop"
+     android:background="@color/toobar_color"
+     >
+     <RadioGroup
+         android:id="@+id/rg_team"
+         android:layout_width="170dp"
+         android:layout_height="25dp"
+         android:layout_gravity="center"
+         android:background="@drawable/shape_team_fragment_table"
+         android:orientation="horizontal">
+         <RadioButton
+             android:id="@+id/rb_team_user"
+             style="@style/teamFragment_radioGroup_style"
+             android:text="@string/team_fragment_toolbar_user"
+             android:checked="true"
+             android:background="@drawable/selector_team_classify_left_checked"
+             />
+         <View
+             android:layout_width="1dp"
+             android:layout_height="match_parent"
+             android:background="@android:color/white"
+             />
+         <RadioButton
+             android:id="@+id/rb_team_organize"
+             style="@style/teamFragment_radioGroup_style"
+             android:text="@string/team_fragment_toobar_organization"
+             android:background="@drawable/selector_team_classify_middle_checked"
+             />
+         <View
+             android:layout_width="1dp"
+             android:layout_height="match_parent"
+             android:background="@android:color/white"
+
+             />
+         <RadioButton
+             android:id="@+id/rb_team_character"
+             style="@style/teamFragment_radioGroup_style"
+             android:text="@string/team_fragment_toolbar_character"
+             android:background="@drawable/selector_team_classify_right_checked"
+             />
+     </RadioGroup>
+
+     <ImageView
+         android:id="@+id/img_team_add_user"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="right|center_vertical"
+         android:layout_marginRight="10dp"
+         android:padding="5dp"
+         android:src="@drawable/team_icon_add_user"
+         />
+     
+ </android.support.v7.widget.Toolbar>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/team_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+</LinearLayout>

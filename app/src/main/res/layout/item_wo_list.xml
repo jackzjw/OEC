@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="60dp">
+    <ImageView
+        android:id="@+id/image_tag"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/application_wo_report_blue_normal"/>
+    <TextView
+        android:id="@+id/tv_wo_info"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/image_tag"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/theme_dark_text_color"
+        android:text="和人文洪荣宏我饿哦日和我任宏伟好维护我我我和哦i"
+        />
+    <TextView
+        android:id="@+id/tv_wo_info_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_tag"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:text="未入户哦问候"
+        />
+
+
+
+        <TextView
+            android:id="@+id/tv_apply_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02/24"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_alignBaseline="@+id/tv_wo_info_2"
+
+            />
+
+
+
+
+
+</RelativeLayout>

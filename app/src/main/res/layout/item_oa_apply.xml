@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:id="@+id/rel_work_overtime"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/oa_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply_work_overtime"
+            android:textSize="14sp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_news_arrow"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>

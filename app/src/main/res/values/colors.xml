@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 全局颜色设置-->
+    <color name="theme_color">#334054</color>
+    <color name="toobar_color">#334054</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="navigation_divide_color">#B1B1B1</color>
+    <color name="navigation_text_color">#40B8D8</color>
+    <color name="theme_dark_text_color">#2E3A4C</color>
+    <color name="theme_light_text_color">#B1B1B1</color>
+    <color name="theme_divide_color">#F5F7FA</color>
+    <color name="toast_bg">#dddfe0</color>
+    <color name="circle_imageview_border_color">#6F7886</color>
+    <color name="loading_color">#334054</color>
+    <!--我的-->
+    <color name="user_phone_number_bg_color">#C9CED6</color>
+    <color name="user_divide_color">#F5F7FA</color>
+    <color name="user_verify_code_after_click">#B7C1D0</color>
+
+     <!--首页-->
+    <color name="home_text_light_green">#40B8D8</color>
+    <color name="home_recycleview_divide_color">#E1E6EC</color>
+    <color name="home_search_cancle">#3FB6D5</color>
+    <color name="home_search_bg">#707988</color>
+    <color name="home_search_text_color">#8B97A7</color>
+    <color name="home_search_wo_text_color">#ED8675</color>
+    <color name="home_search_oa_text_color">#57C7E5</color>
+    <color name="home_search_team_text_color">#46CEA1</color>
+    <color name="home_search_extra_text_color">#8B97A7</color>
+    <color name="apply_approve_advise_pass_text">#4AD3B7</color>
+    <color name="apply_approve_advise_pass_background">#F6FDFB</color>
+    <color name="apply_approve_advise_turn_down_background">#FEF9F8</color>
+    <color name="apply_approve_advise_turn_down_text">#ED8675</color>
+    <color name="apply_approve_advise_to_other_text">#40B8D8</color>
+    <color name="apply_approve_advise_to_other_background">#F5FBFD</color>
+    <color name="apply_wait_approve_text_color">#E23D40</color>
+    <color name="action_sheet_dialog_cancle_color">#037BFF</color>
+    <color name="default_text_color_normal">#383838</color>
+    <color name="default_window_bg">#f5f5f9</color>
+
+</resources>
