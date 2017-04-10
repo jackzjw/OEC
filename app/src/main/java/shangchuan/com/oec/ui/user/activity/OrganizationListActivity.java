@@ -60,7 +60,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
       adapter=new OrganizationListAdapter(mList,this);
       mRecyclerView.setAdapter(adapter);
       //获取机构列表
-      LoadingView.Show(this);
+      LoadingView.showProgress(this);
         mPresent.getOzList();
 
       adapter.setItemOnclickListener(new OrganizationListAdapter.ItemOnclickListener() {
@@ -95,7 +95,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
         //将机构ID存入sharedpreference;
         SharePreferenceUtil.setTenantId(tenantId);
         //发进入机构请求
-        LoadingView.Show(this);
+        LoadingView.showProgress(this);
         mPresent.enterTenant(SharePreferenceUtil.getUserId(),tenantId);
         LogUtil.i("tenantId="+tenantId);
         btnSure.setEnabled(false);
@@ -110,14 +110,14 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
 
     @Override
     public void showError(String msg) {
-     LoadingView.Dismiss();
+     LoadingView.dismissProgress();
       ToastUtil.show(msg);
       btnSure.setEnabled(true);
     }
 
   @Override
   public void showTenantsResult(List<OrganizeInfoBean> beansList) {
-    LoadingView.Dismiss();
+    LoadingView.dismissProgress();
     if(beansList==null) return;
     mList.addAll(beansList);
     adapter.notifyDataSetChanged();
@@ -126,7 +126,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
 
   @Override
   public void showCharacterInfo(CharactersTokenBean bean) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         btnSure.setEnabled(true);
     startActivity(new Intent(this, MainActivity.class));
     finish();
