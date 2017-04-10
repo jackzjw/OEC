@@ -1,10 +1,16 @@
 package shangchuan.com.oec.present;
 
+import com.yalantis.ucrop.entity.LocalMedia;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import rx.Subscription;
 import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.model.bean.HttpDataResult;
@@ -12,6 +18,7 @@ import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoClassBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.AddWoContract;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
 import shangchuan.com.oec.widget.SaveToken;
@@ -24,6 +31,8 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
    private RetrofitHelper mHelper;
     private List<WoClassBean> mTotalList=new ArrayList<>();
      private List<String> childList=new ArrayList<>();
+    private String[] fileNames;
+    private String fileName;
     @Inject
     public AddWoPresent(RetrofitHelper helper){
         this.mHelper=helper;
@@ -95,5 +104,38 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
     @Override
     public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String[] filesName) {
 
+    }
+
+    @Override
+    public void upLoadFile(List<LocalMedia> selectMedia) {
+        if(selectMedia.isEmpty()) return;
+        fileNames=new String[selectMedia.size()];
+        for(int i=0;i<selectMedia.size();i++){
+            String path;
+            if(selectMedia.get(i).isCompressed()){
+                path=selectMedia.get(i).getCompressPath();
+            }else {
+                path=selectMedia.get(i).getPath();
+            }
+            mHelper.doFile("Attachment/WO/", path,i+".jpg", new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    //    LoadingView.Dismiss();
+                    e.printStackTrace();
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if(response.isSuccessful()){
+                        //   LoadingView.Dismiss();
+                        fileName=response.body().string();
+                        LogUtil.i("返回值="+response.body().string());
+                    }else{
+                        LogUtil.i(response.message());
+                    }
+                }
+            });
+           fileNames[i]=fileName;
+        }
+         mView.upLoadSuccess(fileNames);
     }
 }

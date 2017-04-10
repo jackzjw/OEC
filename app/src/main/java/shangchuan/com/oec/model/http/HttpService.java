@@ -4,10 +4,11 @@ import java.util.List;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import rx.Observable;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
+import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
+import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
@@ -77,7 +78,15 @@ public interface HttpService {
     getWoList(@Field("ClassIdA") int aid,@Field("ClassIdB") int bid,
               @Field("OrderStatus") int ostatus,@Field("Status") int status,@Field("Page") int page,@Field("token") String token);
 
+    //获取客户列表
+    @FormUrlEncoded
+    @POST("Customer/customer_list")
+    Observable<HttpDataResult<OaBasicItemBean<CustomerListBean>>> getClientLst(@Field("liveType") String type,@Field("token") String token,@Field("Page") int page);
 
+    //获取客户详情
+    @FormUrlEncoded
+    @POST("Customer/customer_info")
+    Observable<HttpDataResult<ClientDetailsBasicBean>> getClientDetails(@Field("Id") int id,@Field("token") String token);
 
 
 

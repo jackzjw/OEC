@@ -63,5 +63,12 @@ public class CommonUtil {
         config.setCompressFlag(2);
       return config;
     }
+    public static boolean isNull(String s) {
+        if (null == s || s.equals("") || s.equalsIgnoreCase("null")) {
+            return true;
+        }
+
+        return false;
+    }
 
 }

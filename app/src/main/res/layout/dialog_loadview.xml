@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.ybq.android.spinkit.SpinKitView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/spin_kit"
-    style="@style/SpinKitView.Small.Circle"
-    android:layout_width="25dp"
-    android:layout_height="25dp"
-    android:layout_gravity="center"
-    app:SpinKit_Color="@color/loading_color" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+
+    >
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerInParent="true"
+        >
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Small.Circle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            app:SpinKit_Color="@color/loading_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/message"
+            android:textSize="11sp"
+            android:layout_below="@id/spin_kit"
+            />
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

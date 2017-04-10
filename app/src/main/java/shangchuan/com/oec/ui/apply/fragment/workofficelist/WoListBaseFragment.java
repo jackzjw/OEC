@@ -24,6 +24,7 @@ import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.adapter.WoClassAdapter;
 import shangchuan.com.oec.ui.apply.adapter.WoListAdapter;
 import shangchuan.com.oec.util.DensityUtil;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -57,10 +58,11 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
     private boolean isFirst=true;
     private WoListAdapter contentAdapter;
     private boolean isLoadingMore;
-    private LoadingView loadingview;
+
 
     @Override
     public void loadData() {
+        LoadingView.showProgress(mActivity);
         mPresent.getClassName();
         parentAdapter=new WoClassAdapter(mActivity,NameParentList);
         sParent.setAdapter(parentAdapter);
@@ -71,7 +73,9 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 parentId=NameParentList.get(position).getId();
                 mPresent.parentToChild(parentId);
+                LogUtil.i("父类");
               //  LoadingView.Show(mActivity);
+               // LoadingView.showProgress(mActivity);
                 mPresent.getWoList(parentId,childId,statusId,mType);
             }
 
@@ -85,6 +89,9 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 childId=NameChildList.get(position).getId();
                   //   LoadingView.Show(mActivity);
+                LogUtil.i("子类");
+
+            //    LoadingView.showProgress(mActivity);
                 mPresent.getWoList(parentId,childId,statusId,mType);
 
             }
@@ -100,7 +107,8 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             statusId=position;
-          //  LoadingView.Show(mActivity);
+            LogUtil.i("状态类");
+      //   LoadingView.showProgress(mActivity);
            mPresent.getWoList(parentId,childId,statusId,mType);
 
         }
@@ -130,7 +138,7 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     @Override
     public void showError(String msg) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         ToastUtil.show(msg);
     }
 
@@ -150,9 +158,8 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
         childId=Bean.get(0).getId();
         childAdapter.updateData(Bean);
         if(isFirst){
+            LogUtil.i("第一次");
             isFirst=false;
-       //    loadingview=new LoadingView(mActivity);
-             //      loadingview.show();
             mPresent.getWoList(parentId,childId,statusId,mType);
         }
 
@@ -160,8 +167,8 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     @Override
     public void showContentList(List<WoListBean> bean) {
-          // loadingview.dismiss();
-           LoadingView.Dismiss();
+
+           LoadingView.dismissProgress();
         contentAdapter=new WoListAdapter(mActivity,bean);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(contentAdapter);
@@ -176,7 +183,7 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
                 if(lastVisiblePosition>totalItemCount-2&&dy>0){
                     if(!isLoadingMore){
                         isLoadingMore=true;
-                        LoadingView.Show(mActivity);
+                    //    LoadingView.showProgress(mActivity);
                         mPresent.getMoreWoList(parentId,childId,statusId,mType);
                     }
                 }
@@ -187,7 +194,7 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     @Override
     public void showMoreContent(List<WoListBean> bean,int start,int end) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         isLoadingMore=false;
            contentAdapter.updateData(bean);
         contentAdapter.notifyItemRangeInserted(start,end);

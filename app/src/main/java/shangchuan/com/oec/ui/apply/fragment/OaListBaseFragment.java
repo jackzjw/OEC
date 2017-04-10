@@ -33,7 +33,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
     private OaListAdapter adapter;
     private boolean isLoadingMore=false;
     protected String mType="";
-    private LoadingView mLoadingView;
+
     @Override
     public void loadData() {
         //懒加载
@@ -44,8 +44,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter=new OaListAdapter(mActivity,new ArrayList<OaItemBean>());
         mRecyclerView.setAdapter(adapter);
-         mLoadingView=new LoadingView(mActivity);
-        mLoadingView.show();
+        LoadingView.showProgress(mActivity);
         mPresent.getApplyType(mType);
         mRecyclerView.addItemDecoration(new DividerDecoration(
                 ContextCompat.getColor(mActivity,R.color.theme_divide_color), DensityUtil.dp2px(mActivity,1f)));
@@ -58,7 +57,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
                 if(lastVisiblePosition>totalItemCount-2&&dy>0){
                     if(!isLoadingMore){
                         isLoadingMore=true;
-                        LoadingView.Show(mActivity);
+                        LoadingView.showProgress(mActivity);
                         mPresent.getMoreContent();
                     }
                 }
@@ -85,8 +84,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
 
     @Override
     public void showError(String msg) {
-        mLoadingView.dismiss();
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         ToastUtil.show(msg);
         if(mRefreshLayout.isRefreshing()){
             mRefreshLayout.setRefreshing(false);
@@ -97,7 +95,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
 
     @Override
     public void showContent(List<OaItemBean> bean) {
-          mLoadingView.dismiss();
+       LoadingView.dismissProgress();
         if(mRefreshLayout.isRefreshing()){
             mRefreshLayout.setRefreshing(false);
         }
@@ -107,7 +105,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
 
     @Override
     public void showMoreContent(List<OaItemBean> bean,int start,int end) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         isLoadingMore=false;
         adapter.updateData(bean);
         adapter.notifyItemRangeInserted(start,end);

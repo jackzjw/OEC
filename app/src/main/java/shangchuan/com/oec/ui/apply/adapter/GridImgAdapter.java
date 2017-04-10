@@ -93,6 +93,8 @@ public class GridImgAdapter extends RecyclerView.Adapter<GridImgAdapter.ViewHold
                 break;
             case 2:
                 // 视频
+              //  Glide.with(mContext).load(Uri.fromFile(new File(path))).into(holder.Img);
+                //thunbnail是缩略的倍数，0.5f表示缩小为原来像素的一半
                 Glide.with(mContext).load(path).thumbnail(0.5f).into(holder.Img);
                 break;
             default:

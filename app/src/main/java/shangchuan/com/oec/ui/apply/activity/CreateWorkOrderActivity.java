@@ -58,8 +58,8 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     private String[] childArray;
     private int flag;
     private int[] ownerId;
-    private String[] files;
-    private LoadingView loadingview;
+
+
     @BindView(R.id.rel_link)
     RelativeLayout mRelLink;
     private GridImgAdapter adapter;
@@ -85,8 +85,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
             }
         });
         mRecyclerView.setAdapter(adapter);
-       loadingview= new LoadingView(this);
-        loadingview.show();
+      LoadingView.showProgress(this);
         mPresent.getWoClassType();
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -180,12 +179,6 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
         PictureConfig.getPictureConfig().openPhoto(this, new PictureConfig.OnSelectResultCallback() {
             @Override
             public void onSelectSuccess(List<LocalMedia> list) {
-                if(list.get(0).isCompressed()){
-                    LogUtil.i(list.get(0).getCompressPath());
-                }else {
-                    LogUtil.i(list.get(0).getPath());
-                }
-
                 selectMedia=list;
                 if(selectMedia!=null){
                     adapter.setData(selectMedia);
@@ -203,7 +196,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
 
     @Override
     public void showError(String msg) {
-         LoadingView.Dismiss();
+         LoadingView.dismissProgress();
 
         ToastUtil.show(msg);
     }
@@ -216,7 +209,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
 
     @Override
     public void showParentData(String[] parentTitles) {
-      loadingview.dismiss();
+      LoadingView.dismissProgress();
         parentArray=parentTitles;
         mParentName.setText(parentTitles[0]);
 
@@ -224,22 +217,30 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
 
     @Override
     public void showSuccess() {
-         LoadingView.Dismiss();
+         LoadingView.dismissProgress();
     }
+
+    @Override
+    public void upLoadSuccess(String[] fileName) {
+
+    }
+
     //提交工单
     @OnClick(R.id.btn_submit)
     void submit( ){
-       if(mTitle.getText().toString().isEmpty()){
+      /* if(mTitle.getText().toString().isEmpty()){
            ToastUtil.show("请输入标题");
            return;
        }
         if(mOwner.getText().toString().isEmpty()){
             ToastUtil.show("请选择审批人");
             return;
-        }
-        int classBid=mPresent.getChildId(mChildName.getText().toString());
-        LoadingView.Show(this);
-        mPresent.submitWo(classBid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,files);
+        }*/
+      mPresent.upLoadFile(selectMedia);
+
+      //  int classBid=mPresent.getChildId(mChildName.getText().toString());
+       // LoadingView.Show(this);
+      //  mPresent.submitWo(classBid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,files);
 
 
     }

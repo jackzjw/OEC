@@ -1,11 +1,11 @@
 package shangchuan.com.oec.widget;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import shangchuan.com.oec.R;
 
@@ -14,19 +14,19 @@ import shangchuan.com.oec.R;
  */
 
 public class LoadingView extends Dialog {
-    private  Context mContext;
-    private static LoadingView lv;
+    private static LoadingView mLoadView;
+
 
 
 
     public LoadingView(Context context) {
-        this(context,R.style.loading_dialog_style);
+        super(context);
     }
 
     public LoadingView(Context context, int themeResId) {
         super(context, themeResId);
-        this.mContext=context;
-        init();
+
+
     }
 
     @Override
@@ -34,13 +34,29 @@ public class LoadingView extends Dialog {
         super.onCreate(savedInstanceState);
 
     }
+    public static void showProgress(Context context){
+
+        showProgress(context,"正在加载");
+
+    }
+    public static void showProgress(Context context,String message){
+        mLoadView=new LoadingView(context,R.style.loading_dialog_style);
+        View mview= LayoutInflater.from(context).inflate(R.layout.dialog_loadview,null);
+        TextView tvMsg=(TextView)mview.findViewById(R.id.message);
+        tvMsg.setText(message);
+        mLoadView.setContentView(mview);
+
+        mLoadView.show();
+
+
+    }
+
     private void init(){
-        View mview= LayoutInflater.from(mContext).inflate(R.layout.dialog_loadview,null);
-        setContentView(mview);
+
       //  getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, 50);
 
     }
-    public static void Show(Context context){
+   /* public static void Show(Context context){
         if(context instanceof Activity){
             if(!((Activity)context).isFinishing()) {
                 if (lv == null) {
@@ -49,10 +65,10 @@ public class LoadingView extends Dialog {
                 lv.show();
             }
         }
-    }
-    public static void Dismiss(){
-        if(lv!=null){
-            lv.dismiss();
+    }*/
+    public static void dismissProgress(){
+        if(mLoadView!=null){
+            mLoadView.dismiss();
         }
     }
 

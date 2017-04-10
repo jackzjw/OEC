@@ -51,7 +51,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @OnClick(R.id.btn_total_banners)
     void toTotalActivity(){
         startActivity(new Intent(mActivity, TotalBannerActivity.class));
+
+
     }
+    @OnClick(R.id.btn_total_dynamics)
+    void toTotalDynamic(){
+
+    }
+
     //点击加号
     @OnClick(R.id.toolbar_img)
     void add(){

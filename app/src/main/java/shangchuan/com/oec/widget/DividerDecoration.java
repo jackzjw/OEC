@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
+
 public class DividerDecoration extends RecyclerView.ItemDecoration{
     private ColorDrawable mColorDrawable;
     private int mHeight;

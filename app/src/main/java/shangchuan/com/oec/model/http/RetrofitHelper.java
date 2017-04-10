@@ -1,14 +1,23 @@
 package shangchuan.com.oec.model.http;
 
 
-
+import java.io.File;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import shangchuan.com.oec.app.Constants;
+import shangchuan.com.oec.model.bean.MySelfInfo;
 
 /**
  * Created by sg280 on 2016/12/1.
@@ -17,7 +26,7 @@ import shangchuan.com.oec.app.Constants;
 public class RetrofitHelper {
     private static OkHttpClient okhttpclient=null;
     private static HttpService apiService=null;
-    private static FileHttpService fileHttpService=null;
+
 
     public RetrofitHelper(){
         init();
@@ -39,13 +48,34 @@ public class RetrofitHelper {
         }
         return apiService;
     }
-    public static FileHttpService getFileApiService(){
-        if(fileHttpService==null){
-            fileHttpService=new Retrofit.Builder().baseUrl(Constants.FILE_BASE_URL).client(okhttpclient)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create())
-                    .build().create(FileHttpService.class);
+    public static void doFile(String url, String path, String fileName, Callback callback){
+        //判断文件类型
+        MediaType MEDIA_TYPE=MediaType.parse(judgeType(path));
+        //创建文件参数
+        MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)))
+                .addFormDataPart("tenantid", MySelfInfo.getInstance().getTenantId()+"")
+                .addFormDataPart("filepath",url);
+
+
+        Request request=new Request.Builder().url(Constants.FILE_BASE_URL).post(builder.build()).build();
+        Call call=okhttpclient.newCall(request);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 根据文件路径判断MediaType
+     *
+     * @param path
+     * @return
+     */
+    private static String judgeType(String path) {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String contentTypeFor = fileNameMap.getContentTypeFor(path);
+        if (contentTypeFor == null) {
+            contentTypeFor = "application/octet-stream";
         }
-        return fileHttpService;
+        return contentTypeFor;
     }
 
 

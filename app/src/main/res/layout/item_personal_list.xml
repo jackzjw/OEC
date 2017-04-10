@@ -2,21 +2,13 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="60dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/user_img_avatar"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/client_avater"
-            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/client_avater"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -24,7 +16,7 @@
                 android:text="妖姬"
                 android:textColor="@color/theme_dark_text_color"
                 android:textSize="15sp"
-
+                android:id="@+id/tv_name"
                 />
             <TextView
                 android:id="@+id/personal_job"
@@ -49,6 +41,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/application_icon_call"
+            android:id="@+id/call_phone"
             />
 
     </RelativeLayout>

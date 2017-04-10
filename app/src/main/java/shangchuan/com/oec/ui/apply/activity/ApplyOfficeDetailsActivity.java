@@ -76,7 +76,7 @@ public static Intent newIntent(Context context,int id){
         mToolbartRight.setText("撤回");
         initToolBar(mToolbar);
         int id=getIntent().getIntExtra("id",0);
-        LoadingView.Show(this);
+        LoadingView.showProgress(this);
         mPresent.getData(id);
     }
 
@@ -87,13 +87,13 @@ public static Intent newIntent(Context context,int id){
 
     @Override
     public void showError(String msg) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         ToastUtil.show(msg);
     }
 
     @Override
     public void showContent(OaDetailsBean bean) {
-        LoadingView.Dismiss();
+        LoadingView.dismissProgress();
         Glides.getInstance().load(this, SharePreferenceUtil.getUserAvater(),mUserAvater);
         mOrderTitle.setText(bean.getOrderTitle());
         mSubmitTime.setText(bean.getOrderTime());
