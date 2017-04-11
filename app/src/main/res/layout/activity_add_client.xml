@@ -9,8 +9,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="shangchuan.com.oec.ui.apply.activity.AddClientActivity">
-    <include layout="@layout/toolbar_layout"
-        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -76,10 +74,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <EditText
-                    android:id="@+id/common_title"
+                    android:id="@+id/client_code"
                     android:textSize="14sp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     android:layout_width="match_parent"
@@ -262,21 +259,23 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/theme_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_client_remark"
-            />
 
-    </LinearLayout>
-    <View
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apply_client_remark"
+                    />
+
+            </LinearLayout>
+
+            <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/theme_divide_color"/>
@@ -287,18 +286,33 @@
         android:paddingLeft="15dp"
         android:paddingTop="5dp"
         >
-        <TextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/theme_divide_color"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apply_client_contacter"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:id="@+id/edit_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编辑"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_client_postcode"
-            />
-        <TextView
-            android:id="@+id/client_contact"
-            android:text="admin,jack"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -306,6 +320,7 @@
         android:background="@color/user_divide_color"
         >
         <Button
+            android:id="@+id/btn_submit"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
             android:layout_width="300dp"
@@ -321,4 +336,8 @@
     </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/toolbar_layout"
+        />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package shangchuan.com.oec.util;
 
 import android.text.TextUtils;
+import android.widget.EditText;
 
 import com.luck.picture.lib.model.FunctionConfig;
 import com.yalantis.ucrop.entity.LocalMedia;
@@ -70,5 +71,13 @@ public class CommonUtil {
 
         return false;
     }
-
+  //判断EditText是否为空
+  public static boolean isEmpty(EditText et){
+      String str=et.getText().toString().trim();
+      if(TextUtils.isEmpty(str)){
+          et.setError("不能为空！");
+          return true;
+      }
+      return false;
+  }
 }

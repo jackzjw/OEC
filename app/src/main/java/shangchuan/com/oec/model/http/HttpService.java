@@ -1,13 +1,16 @@
 package shangchuan.com.oec.model.http;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
+import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
@@ -87,7 +90,30 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("Customer/customer_info")
     Observable<HttpDataResult<ClientDetailsBasicBean>> getClientDetails(@Field("Id") int id,@Field("token") String token);
-
+   //新增客户
+    @FormUrlEncoded
+    @POST("Customer/customer_save")
+    Observable<HttpDataResult<WoSuccessBean>> addClient(@FieldMap HashMap<String,Object> map);
+    //客户联系人详情
+    @FormUrlEncoded
+    @POST("Customer/customer_contact_info")
+    Observable<HttpDataResult<CustomerListBean>> getClientDetails(@Field("Id") int id);
+    //客户联系人列表
+    @FormUrlEncoded
+    @POST("Customer/customer_contact_list")
+    Observable<HttpDataResult<List<ContactListBean>>> clientContactList(@Field("CustomerId") int id,@Field("token") String token);
+    //新增客户联系人
+    @FormUrlEncoded
+    @POST("Customer/customer_contact_save")
+    Observable<HttpDataResult<WoSuccessBean>> addContactSuccess(@FieldMap HashMap<String,Object> map);
+    //删除联系人
+    @FormUrlEncoded
+    @POST("Customer/customer_contact_del")
+    Observable<HttpDataResult<WoSuccessBean>> deleteContact(@Field("Id") int id,@Field("token") String token);
+    //保存联系人修改结果
+    @FormUrlEncoded
+    @POST("Customer/customer_contact_edit_save")
+    Observable<HttpDataResult<WoSuccessBean>> saveContactResult(@FieldMap HashMap<String,Object> map);
 
 
 }

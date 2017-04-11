@@ -6,9 +6,11 @@ import dagger.Component;
 import shangchuan.com.oec.di.ActivityScope;
 import shangchuan.com.oec.di.module.ActivityModule;
 import shangchuan.com.oec.ui.WelcomeActivity;
+import shangchuan.com.oec.ui.apply.activity.AddClientActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
+import shangchuan.com.oec.ui.apply.activity.ModifyClientDetailsActivity;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
 import shangchuan.com.oec.ui.user.activity.OrganizationListActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
@@ -29,4 +31,6 @@ public interface ActivityComponent {
     void inject(ApplyOfficeDetailsActivity activity);
     void inject(CreateWorkOrderActivity activity);
     void inject(ClientDetailsActivity activity);
+    void inject(AddClientActivity activity);
+    void inject(ModifyClientDetailsActivity activity);
 }

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -113,6 +114,10 @@
         <activity android:name=".ui.apply.activity.OaApproveDetailsActivity">
         </activity>
         <activity android:name=".ui.apply.activity.WoDetailsActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ModifyClientDetailsActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ModifyContactActivity">
         </activity>
     </application>
 

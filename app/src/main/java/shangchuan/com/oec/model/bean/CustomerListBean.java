@@ -140,4 +140,25 @@ public class CustomerListBean {
     public void setCreateUserId(String createUserId) {
         CreateUserId = createUserId;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerListBean{" +
+                "Id=" + Id +
+                ", TenantId=" + TenantId +
+                ", CustomerType='" + CustomerType + '\'' +
+                ", CustomerName='" + CustomerName + '\'' +
+                ", CustomerShortName='" + CustomerShortName + '\'' +
+                ", CustomerCode='" + CustomerCode + '\'' +
+                ", CustomerTel='" + CustomerTel + '\'' +
+                ", CustomerCity='" + CustomerCity + '\'' +
+                ", CustomerAddress='" + CustomerAddress + '\'' +
+                ", CustomerPostcode='" + CustomerPostcode + '\'' +
+                ", GroupId='" + GroupId + '\'' +
+                ", UserId='" + UserId + '\'' +
+                ", Remark='" + Remark + '\'' +
+                ", CreateUserId='" + CreateUserId + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                '}';
+    }
 }

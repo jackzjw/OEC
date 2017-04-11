@@ -149,6 +149,7 @@
         android:background="@color/user_divide_color"
         >
         <Button
+            android:id="@+id/btn_submit"
             android:layout_marginTop="60dp"
             android:layout_width="300dp"
             android:layout_height="40dp"

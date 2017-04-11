@@ -51,7 +51,7 @@ public class ClientListActivity extends BaseActivity {
         mToolbarRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ClientListActivity.this,AddContactsActivity.class));
+                startActivity(new Intent(ClientListActivity.this,AddClientActivity.class));
             }
         });
 

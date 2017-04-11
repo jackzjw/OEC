@@ -80,6 +80,7 @@ public  class BaseClientListFragment extends BaseFragment<ClientListPresent> imp
 
     @Override
     public void showContent(List<CustomerListBean> bean) {
+    //   LogUtil.i("数据="+bean.toString());
          adapter.updateData(bean);
       adapter.notifyDataSetChanged();
     }

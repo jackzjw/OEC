@@ -1,10 +1,12 @@
 package shangchuan.com.oec.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by sg280 on 2017/4/10.
  */
 
-public class ContactListBean {
+public class ContactListBean implements Serializable{
 
     private int Id;
     private int CustomerId;

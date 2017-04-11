@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -47,6 +48,7 @@ public class ClientDetailsActivity extends BaseActivity<ClientDetailsPresent> im
     TextView mPostCode;
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
+    private int mId;
 
     public static Intent getInstance(Context context,int id){
         Intent intent=new Intent(context,ClientDetailsActivity.class);
@@ -66,7 +68,15 @@ public class ClientDetailsActivity extends BaseActivity<ClientDetailsPresent> im
         mToolbarTitle.setText("客户详情");
         mToolbartRight.setText("修改");
         initToolBar(mToolbar);
-        mPresent.getClientDetails(getIntent().getIntExtra("id",0));
+        mId=getIntent().getIntExtra("id",0);
+        mPresent.getClientDetails(mId);
+        mToolbartRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=ModifyClientDetailsActivity.getInstance(ClientDetailsActivity.this,mId);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
