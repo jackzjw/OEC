@@ -18,7 +18,6 @@ import shangchuan.com.oec.present.OaDetailsPresent;
 import shangchuan.com.oec.present.contact.OaDetailsContract;
 import shangchuan.com.oec.ui.apply.adapter.DocumentAdapter;
 import shangchuan.com.oec.util.CommonUtil;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.util.Glides;
 import shangchuan.com.oec.util.SharePreferenceUtil;
 import shangchuan.com.oec.util.ToastUtil;
@@ -110,8 +109,7 @@ public static Intent newIntent(Context context,int id){
        if(!bean.getAttachmentList().isEmpty()){
            DocumentAdapter documentAdapter=new DocumentAdapter(this,bean.getAttachmentList());
            docRecycleView.setLayoutManager(new LinearLayoutManager(this));
-           docRecycleView.addItemDecoration(new DividerDecoration(
-                   ContextCompat.getColor(this,R.color.theme_divide_color), DensityUtil.dp2px(this,1f)));
+           docRecycleView.addItemDecoration(new DividerDecoration(this));
            docRecycleView.setAdapter(documentAdapter);
            documentAdapter.setOnItemClickListener(new DocumentAdapter.OnItemClickListener() {
                @Override

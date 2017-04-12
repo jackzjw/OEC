@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
 
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_centerInParent="true"
         android:layout_width="250dp"
         android:layout_height="350dp"
         android:orientation="vertical"
@@ -15,7 +23,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginLeft="20dp"
             >
-            <ImageView
+            <shangchuan.com.oec.widget.CircleImageView
                 android:id="@+id/user_avater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,9 +45,11 @@
                     android:text="刀疤"
                     />
                 <ImageView
+                    android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/member_name"
+                    android:paddingTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:src="@drawable/team_icon_male"
                     />
@@ -63,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/team_icon_number"
                 />
             <TextView
@@ -107,3 +118,4 @@
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
+</RelativeLayout>

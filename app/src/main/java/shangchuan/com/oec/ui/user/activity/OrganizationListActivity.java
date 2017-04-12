@@ -1,7 +1,6 @@
 package shangchuan.com.oec.ui.user.activity;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,7 +21,6 @@ import shangchuan.com.oec.present.OrganizationListPresent;
 import shangchuan.com.oec.present.contact.OrganizationListContract;
 import shangchuan.com.oec.ui.MainActivity;
 import shangchuan.com.oec.ui.user.adapter.OrganizationListAdapter;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.SharePreferenceUtil;
 import shangchuan.com.oec.util.ToastUtil;
@@ -55,8 +53,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
       mList=new ArrayList<>();
       layoutManager=new LinearLayoutManager(this);
       mRecyclerView.setLayoutManager(layoutManager);
-      mRecyclerView.addItemDecoration(new DividerDecoration(
-              ContextCompat.getColor(this,R.color.theme_divide_color), DensityUtil.dp2px(this,1f)));
+     mRecyclerView.addItemDecoration(new DividerDecoration(this));
       adapter=new OrganizationListAdapter(mList,this);
       mRecyclerView.setAdapter(adapter);
       //获取机构列表

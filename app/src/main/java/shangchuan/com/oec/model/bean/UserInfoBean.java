@@ -1,153 +1,115 @@
 package shangchuan.com.oec.model.bean;
 
 /**
- * Created by sg280 on 2017/3/27.
+ * Created by sg280 on 2017/4/12.
  */
 
 public class UserInfoBean {
-    private int  LoginUserId;
-    private String LoginUserTrueName;
-    private String LoginUserNickName;
-    private String LoginRoleIdList;
-    private int    LoginTenantId;
-    private String LoginTenantName;
-    private int    CurrentLoginId;
-    private int    LoginIsAdmin;
-    private String LastTime;
-    private String  TenantInfos     ;
-    private String      CreateTime ;
-    private String      CreateUserName ;
-    private String      UpdateTime ;
-    private String  UpdateUserName;
-    public int getLoginUserId() {
-        return LoginUserId;
+
+    private int Id ;
+    private int UserId ;
+    private int IsAdmin  ;
+    private String UserMobile ;
+    private String UserTitle ;
+    private String UserNickName ;
+    private String UserTrueName ;
+    private int UserGender  ;
+    private String UserEmail ;
+    private String UserAvatar ;
+    private String sortLetter;
+
+    public String getSortLetter() {
+        return sortLetter;
     }
 
-    public void setLoginUserId(int loginUserId) {
-        LoginUserId = loginUserId;
+    public void setSortLetter(String sortLetter) {
+        this.sortLetter = sortLetter;
     }
 
-    public String getLoginUserTrueName() {
-        return LoginUserTrueName;
+    public int getId() {
+        return Id;
     }
 
-    public void setLoginUserTrueName(String loginUserTrueName) {
-        LoginUserTrueName = loginUserTrueName;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public String getLoginUserNickName() {
-        return LoginUserNickName;
+    public int getUserId() {
+        return UserId;
     }
 
-    public void setLoginUserNickName(String loginUserNickName) {
-        LoginUserNickName = loginUserNickName;
+    public void setUserId(int userId) {
+        UserId = userId;
     }
 
-    public String getLoginRoleIdList() {
-        return LoginRoleIdList;
+    public int getIsAdmin() {
+        return IsAdmin;
     }
 
-    public void setLoginRoleIdList(String loginRoleIdList) {
-        LoginRoleIdList = loginRoleIdList;
+    public void setIsAdmin(int isAdmin) {
+        IsAdmin = isAdmin;
     }
 
-    public int getLoginTenantId() {
-        return LoginTenantId;
+    public String getUserMobile() {
+        return UserMobile;
     }
 
-    public void setLoginTenantId(int loginTenantId) {
-        LoginTenantId = loginTenantId;
+    public void setUserMobile(String userMobile) {
+        UserMobile = userMobile;
     }
 
-    public String getLoginTenantName() {
-        return LoginTenantName;
+    public String getUserTitle() {
+        return UserTitle;
     }
 
-    public void setLoginTenantName(String loginTenantName) {
-        LoginTenantName = loginTenantName;
+    public void setUserTitle(String userTitle) {
+        UserTitle = userTitle;
     }
 
-    public int getCurrentLoginId() {
-        return CurrentLoginId;
+    public String getUserNickName() {
+        return UserNickName;
     }
 
-    public void setCurrentLoginId(int currentLoginId) {
-        CurrentLoginId = currentLoginId;
+    public void setUserNickName(String userNickName) {
+        UserNickName = userNickName;
     }
 
-    public int getLoginIsAdmin() {
-        return LoginIsAdmin;
+    public String getUserTrueName() {
+        return UserTrueName;
     }
 
-    public void setLoginIsAdmin(int loginIsAdmin) {
-        LoginIsAdmin = loginIsAdmin;
+    public void setUserTrueName(String userTrueName) {
+        UserTrueName = userTrueName;
     }
 
-    public String getLastTime() {
-        return LastTime;
+    public int getUserGender() {
+        return UserGender;
     }
 
-    public void setLastTime(String lastTime) {
-        LastTime = lastTime;
+    public void setUserGender(int userGender) {
+        UserGender = userGender;
     }
 
-    public String getTenantInfos() {
-        return TenantInfos;
+    public String getUserEmail() {
+        return UserEmail;
     }
 
-    public void setTenantInfos(String tenantInfos) {
-        TenantInfos = tenantInfos;
+    public void setUserEmail(String userEmail) {
+        UserEmail = userEmail;
     }
 
-    public String getCreateTime() {
-        return CreateTime;
+    public String getUserAvatar() {
+        return UserAvatar;
     }
 
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
-    }
-
-    public String getCreateUserName() {
-        return CreateUserName;
-    }
-
-    public void setCreateUserName(String createUserName) {
-        CreateUserName = createUserName;
-    }
-
-    public String getUpdateTime() {
-        return UpdateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        UpdateTime = updateTime;
-    }
-
-    public String getUpdateUserName() {
-        return UpdateUserName;
-    }
-
-    public void setUpdateUserName(String updateUserName) {
-        UpdateUserName = updateUserName;
+    public void setUserAvatar(String userAvatar) {
+        UserAvatar = userAvatar;
     }
 
     @Override
     public String toString() {
         return "UserInfoBean{" +
-                "LoginUserId=" + LoginUserId +
-                ", LoginUserTrueName='" + LoginUserTrueName + '\'' +
-                ", LoginUserNickName='" + LoginUserNickName + '\'' +
-                ", LoginRoleIdList='" + LoginRoleIdList + '\'' +
-                ", LoginTenantId=" + LoginTenantId +
-                ", LoginTenantName='" + LoginTenantName + '\'' +
-                ", CurrentLoginId=" + CurrentLoginId +
-                ", LoginIsAdmin=" + LoginIsAdmin +
-                ", LastTime='" + LastTime + '\'' +
-                ", TenantInfos='" + TenantInfos + '\'' +
-                ", CreateTime='" + CreateTime + '\'' +
-                ", CreateUserName='" + CreateUserName + '\'' +
-                ", UpdateTime='" + UpdateTime + '\'' +
-                ", UpdateUserName='" + UpdateUserName + '\'' +
+                "sortLetter='" + sortLetter + '\'' +
                 '}';
     }
 }

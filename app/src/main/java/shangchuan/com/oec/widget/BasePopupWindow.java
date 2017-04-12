@@ -16,7 +16,7 @@ import android.widget.PopupWindow;
  * Created by sg280 on 2017/3/21.
  */
 
-public class BasePopupWindow extends PopupWindow {
+public abstract class BasePopupWindow extends PopupWindow {
     private Context mContext;
     private float mShowAlpha = 0.88f;
     private Drawable mBackgroundDrawable;

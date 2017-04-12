@@ -7,7 +7,7 @@ package shangchuan.com.oec.model.bean;
 public class LoginInfoBean
 {
     private String token;
-    private UserInfoBean userinfo;
+    private MyUserInfoBean userinfo;
 
     public String getToken() {
         return token;
@@ -17,11 +17,11 @@ public class LoginInfoBean
         this.token = token;
     }
 
-    public UserInfoBean getUserinfo() {
+    public MyUserInfoBean getUserinfo() {
         return userinfo;
     }
 
-    public void setUserinfo(UserInfoBean userinfo) {
+    public void setUserinfo(MyUserInfoBean userinfo) {
         this.userinfo = userinfo;
     }
 

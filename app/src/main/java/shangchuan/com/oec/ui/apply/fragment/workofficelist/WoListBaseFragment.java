@@ -1,7 +1,6 @@
 package shangchuan.com.oec.ui.apply.fragment.workofficelist;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -23,7 +22,6 @@ import shangchuan.com.oec.present.contact.WoListContract;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.adapter.WoClassAdapter;
 import shangchuan.com.oec.ui.apply.adapter.WoListAdapter;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
@@ -172,8 +170,7 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
         contentAdapter=new WoListAdapter(mActivity,bean);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(contentAdapter);
-        mRecyclerView.addItemDecoration(new DividerDecoration(
-                ContextCompat.getColor(mActivity,R.color.theme_divide_color), DensityUtil.dp2px(mActivity,1f)));
+        mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

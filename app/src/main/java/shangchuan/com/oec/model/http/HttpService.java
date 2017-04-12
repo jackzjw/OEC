@@ -19,6 +19,7 @@ import shangchuan.com.oec.model.bean.OaDetailsBean;
 import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
+import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoListBean;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
@@ -114,6 +115,9 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("Customer/customer_contact_edit_save")
     Observable<HttpDataResult<WoSuccessBean>> saveContactResult(@FieldMap HashMap<String,Object> map);
-
-
+    //用户列表
+    @FormUrlEncoded
+    @POST("User/user_list")
+    Observable<HttpDataResult<OaBasicItemBean<UserInfoBean>>> getUserList(@Field("Keyword") String keyword,@Field("Page") int page,@Field("token") String token);
+     
 }

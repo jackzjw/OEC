@@ -7,6 +7,7 @@ import shangchuan.com.oec.di.FragmentScope;
 import shangchuan.com.oec.ui.apply.fragment.BaseClientListFragment;
 import shangchuan.com.oec.ui.apply.fragment.OaListBaseFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.WoListBaseFragment;
+import shangchuan.com.oec.ui.team.fragment.TeamUserFragment;
 
 /**
  * Created by sg280 on 2017/3/6.
@@ -20,5 +21,6 @@ public interface FragmentComponent {
     void inject (OaListBaseFragment fragment);
     void inject(WoListBaseFragment fragment);
     void inject(BaseClientListFragment fragment);
+    void inject(TeamUserFragment fragment);
 
 }

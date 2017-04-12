@@ -2,7 +2,6 @@ package shangchuan.com.oec.ui.apply.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +16,6 @@ import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.present.ClientDetailsPresent;
 import shangchuan.com.oec.present.contact.ClientDetailContract;
 import shangchuan.com.oec.ui.apply.adapter.ClientDetailsAdapter;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 
@@ -104,7 +102,7 @@ public class ClientDetailsActivity extends BaseActivity<ClientDetailsPresent> im
         mPostCode.setText(clientInfo.getCustomerPostcode());
         mTel.setText(clientInfo.getCustomerTel());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(this,R.color.theme_divide_color), DensityUtil.dp2px(this,1f)));
+        mRecyclerView.addItemDecoration(new DividerDecoration(this));
         mRecyclerView.setAdapter(new ClientDetailsAdapter(this,result.getCclist()));
     }
 }

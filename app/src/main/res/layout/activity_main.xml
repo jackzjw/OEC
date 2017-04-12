@@ -8,24 +8,29 @@
     tools:context="shangchuan.com.oec.ui.MainActivity">
 
 
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divide_line"
+        ></FrameLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:id="@+id/divide_line"
         android:background="@color/navigation_divide_color"
-        android:layout_above="@+id/rg_buton"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
         />
 <RadioGroup
     android:id="@+id/rg_buton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
+    android:minHeight="45dp"
     android:orientation="horizontal"
-    android:layout_alignParentBottom="true">
+    android:layout_alignParentBottom="true"
+   >
     <RadioButton
         android:id="@+id/rb_home"
         style="@style/bottomBar_radioGroup_style"

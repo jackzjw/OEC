@@ -1,8 +1,6 @@
 package shangchuan.com.oec.ui.home.fragment;
 
 import android.content.Intent;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,7 +13,6 @@ import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkReportActivity;
 import shangchuan.com.oec.ui.home.activity.SearchActivity;
 import shangchuan.com.oec.ui.home.activity.TotalBannerActivity;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.widget.BasePopupWindow;
 
 /**
@@ -62,12 +59,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     //点击加号
     @OnClick(R.id.toolbar_img)
     void add(){
-         mpopupWindow=new BasePopupWindow(mActivity);
+       /*  mpopupWindow=new BasePopupWindow(mActivity);
         View contentView= LayoutInflater.from(mActivity).inflate(R.layout.popupwindow_home_add_work,null);
        mCreateWorkReport=(TextView)contentView.findViewById(R.id.create_work_report);
         mCreateWorkReport.setOnClickListener(this);
         mpopupWindow.setContentView(contentView);
-        mpopupWindow.showAsDropDown(toolbarAdd,  DensityUtil.dp2px(mActivity,-140),DensityUtil.dp2px(mActivity,20),Gravity.BOTTOM|Gravity.RIGHT);
+        mpopupWindow.showAsDropDown(toolbarAdd,  DensityUtil.dp2px(mActivity,-140),DensityUtil.dp2px(mActivity,20),Gravity.BOTTOM|Gravity.RIGHT);*/
 
     }
 

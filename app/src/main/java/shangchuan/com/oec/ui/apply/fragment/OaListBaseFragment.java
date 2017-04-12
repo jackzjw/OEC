@@ -1,6 +1,5 @@
 package shangchuan.com.oec.ui.apply.fragment;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,6 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.present.OaListPresent;
 import shangchuan.com.oec.present.contact.OaListContract;
 import shangchuan.com.oec.ui.apply.adapter.OaListAdapter;
-import shangchuan.com.oec.util.DensityUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -46,8 +44,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
         mRecyclerView.setAdapter(adapter);
         LoadingView.showProgress(mActivity);
         mPresent.getApplyType(mType);
-        mRecyclerView.addItemDecoration(new DividerDecoration(
-                ContextCompat.getColor(mActivity,R.color.theme_divide_color), DensityUtil.dp2px(mActivity,1f)));
+       mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

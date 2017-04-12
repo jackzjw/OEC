@@ -74,6 +74,7 @@ public class TeamFragment<T extends RxPresent> extends BaseFragment implements V
             public void onPageSelected(int position) {
                   switch (position){
                       case 0:  rbUser.setChecked(true);
+
                           break;
                       case 1:  rbOrganize.setChecked(true);
                           break;
