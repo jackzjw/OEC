@@ -1,13 +1,20 @@
 package shangchuan.com.oec.util;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.luck.picture.lib.model.FunctionConfig;
+import com.tbruyelle.rxpermissions.RxPermissions;
 import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.util.List;
 
+import rx.functions.Action1;
 import shangchuan.com.oec.R;
 
 /**
@@ -80,4 +87,28 @@ public class CommonUtil {
       }
       return false;
   }
+    //打电话逻辑
+    public static void callPhone(final Context context,final String phoneNo){
+        if(context instanceof Activity){
+            RxPermissions permissions=new RxPermissions((Activity)context);
+            if (!isNull(phoneNo)) {
+                permissions.request(Manifest.permission.CALL_PHONE).subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if(aBoolean) {
+                            Intent phoneIntent = new Intent(
+                                    "android.intent.action.CALL", Uri.parse("tel:"
+                                    + phoneNo));
+                            context.startActivity(phoneIntent);
+                        }
+                    }
+                });
+
+            }else {
+                ToastUtil.show("暂时未添加联系电话");
+            }
+        }
+
+
+    }
 }

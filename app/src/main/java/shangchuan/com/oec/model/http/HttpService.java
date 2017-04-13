@@ -18,6 +18,7 @@ import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.OaDetailsBean;
 import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
+import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
@@ -57,7 +58,7 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("WO/wo_save")
     Observable<HttpDataResult<WoSuccessBean>> submitWorkOrder(@Field("ClassIdB") int id,
-                                                              @Field("OrderFlag") int flag,@Field("OrderTitle") String orderTitle,@Field("OrderContent") String content,@Field("Handlers") int[] handler,@Field("AttFileName") String[] fileName );
+                                                              @Field("OrderFlag") int flag,@Field("OrderTitle") String orderTitle,@Field("OrderContent") String content,@Field("Handlers") int[] handler,@Field("AttFileName") String[] fileName,@Field("token") String token );
     // 修改工单
     @FormUrlEncoded
     @POST("WO/wo_edit_save")
@@ -119,5 +120,12 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("User/user_list")
     Observable<HttpDataResult<OaBasicItemBean<UserInfoBean>>> getUserList(@Field("Keyword") String keyword,@Field("Page") int page,@Field("token") String token);
-     
+     //工单处理人，工单审批人
+    @FormUrlEncoded
+    @POST("Common/user_list_bygroup")
+    Observable<HttpDataResult<OrgBasicBean>> getGroupList(@Field("token") String token);
+     //工单详情
+  //  @FormUrlEncoded
+   // @POST("WO/wo_info")
+
 }

@@ -20,7 +20,9 @@
         <activity android:name=".base.BaseActivity"/>
         <activity android:name=".ui.home.activity.TotalBannerActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.CreateWorkOrderActivity">
+        <activity android:name=".ui.apply.activity.CreateWorkOrderActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
         <activity android:name=".ui.apply.activity.ApplyOfficeActivity">
         </activity>
@@ -118,6 +120,8 @@
         <activity android:name=".ui.apply.activity.ModifyClientDetailsActivity">
         </activity>
         <activity android:name=".ui.apply.activity.ModifyContactActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ApproverActivity">
         </activity>
     </application>
 

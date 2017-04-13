@@ -16,6 +16,7 @@ import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoClassBean;
+import shangchuan.com.oec.model.bean.WoSuccessBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.AddWoContract;
 import shangchuan.com.oec.util.LogUtil;
@@ -103,7 +104,15 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
 
     @Override
     public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String[] filesName) {
-
+        Subscription subscription = mHelper.getApiSevice().submitWorkOrder(bid, flag, orderTitle, orderContent, handlers, filesName, SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
+                .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
+                    @Override
+                    public void onNext(WoSuccessBean bean) {
+                        mView.showSuccess();
+                    }
+                });
+          add(subscription);
     }
 
     @Override

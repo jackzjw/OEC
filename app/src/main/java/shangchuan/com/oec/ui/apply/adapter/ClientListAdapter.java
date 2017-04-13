@@ -1,10 +1,6 @@
 package shangchuan.com.oec.ui.apply.adapter;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
 import shangchuan.com.oec.util.CommonUtil;
-import shangchuan.com.oec.util.ToastUtil;
 
 /**
  * Created by sg280 on 2017/4/10.
@@ -31,13 +23,13 @@ import shangchuan.com.oec.util.ToastUtil;
 
 public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.ViewHolder> {
 
-    private final RxPermissions rxPermissions;
+
     private Context mContext;
     private List<CustomerListBean> mList;
     public ClientListAdapter(Context context,List<CustomerListBean> list){
         this.mContext=context;
         mList=list;
-        rxPermissions=new RxPermissions((Activity) context);
+
     }
    public void updateData(List<CustomerListBean> bean){
        this.mList=bean;
@@ -67,22 +59,8 @@ public class ClientListAdapter extends RecyclerView.Adapter<ClientListAdapter.Vi
             @Override
             public void onClick(View v) {
               final  String phoneNo=mList.get(position).getCustomerTel();
-                if (!CommonUtil.isNull(phoneNo)) {
-                    rxPermissions.request(Manifest.permission.CALL_PHONE).subscribe(new Action1<Boolean>() {
-                        @Override
-                        public void call(Boolean aBoolean) {
-                            if(aBoolean) {
-                                Intent phoneIntent = new Intent(
-                                        "android.intent.action.CALL", Uri.parse("tel:"
-                                        + phoneNo));
-                                mContext.startActivity(phoneIntent);
-                            }
-                        }
-                    });
-
-                }else {
-                    ToastUtil.show("暂时未添加联系电话");
-                }
+                //拨打电话
+                CommonUtil.callPhone(mContext,phoneNo);
             }
         });
 
