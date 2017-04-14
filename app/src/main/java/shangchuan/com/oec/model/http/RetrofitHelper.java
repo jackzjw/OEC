@@ -49,6 +49,7 @@ public class RetrofitHelper {
         return apiService;
     }
     public static void doFile(String url, String path, String fileName, Callback callback){
+
         //判断文件类型
         MediaType MEDIA_TYPE=MediaType.parse(judgeType(path));
         //创建文件参数
@@ -62,6 +63,14 @@ public class RetrofitHelper {
         Call call=okhttpclient.newCall(request);
         call.enqueue(callback);
     }
+    //多文件上传
+    public static void doMultiFile(String url,MultipartBody.Builder builder,Callback callback){
+        builder.addFormDataPart("tenantid", MySelfInfo.getInstance().getTenantId()+"")
+                .addFormDataPart("filepath",url);;
+        Request request=new Request.Builder().url(Constants.FILE_BASE_URL).post(builder.build()).build();
+        Call call=okhttpclient.newCall(request);
+        call.enqueue(callback);
+    }
 
     /**
      * 根据文件路径判断MediaType
@@ -69,7 +78,7 @@ public class RetrofitHelper {
      * @param path
      * @return
      */
-    private static String judgeType(String path) {
+    public static String judgeType(String path) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentTypeFor = fileNameMap.getContentTypeFor(path);
         if (contentTypeFor == null) {

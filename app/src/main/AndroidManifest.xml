@@ -26,23 +26,31 @@
         </activity>
         <activity android:name=".ui.apply.activity.ApplyOfficeActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.WorkOvertimeActivity">
+        <activity android:name=".ui.apply.activity.WorkOvertimeActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
-        <activity android:name=".ui.apply.activity.ApplyLeaveActivity">
+        <activity android:name=".ui.apply.activity.ApplyLeaveActivity"
+                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
         <activity
             android:name=".ui.apply.activity.WorkOutsideActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.ReimburseActivity">
+        <activity android:name=".ui.apply.activity.ReimburseActivity"
+                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
-        <activity android:name=".ui.apply.activity.ApplyCommonActivity">
+        <activity android:name=".ui.apply.activity.ApplyCommonActivity"
+                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
         <activity android:name=".ui.apply.activity.ApplyListActivity">
         </activity>
         <activity
             android:name=".ui.apply.activity.CreateWorkReportActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.WorkReportListActivity">
         </activity>

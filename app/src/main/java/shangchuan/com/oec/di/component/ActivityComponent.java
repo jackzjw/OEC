@@ -7,11 +7,14 @@ import shangchuan.com.oec.di.ActivityScope;
 import shangchuan.com.oec.di.module.ActivityModule;
 import shangchuan.com.oec.ui.WelcomeActivity;
 import shangchuan.com.oec.ui.apply.activity.AddClientActivity;
+import shangchuan.com.oec.ui.apply.activity.ApplyCommonActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.ApproverActivity;
 import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.activity.ModifyClientDetailsActivity;
+import shangchuan.com.oec.ui.apply.activity.WorkOutsideActivity;
+import shangchuan.com.oec.ui.apply.activity.WorkOvertimeActivity;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
 import shangchuan.com.oec.ui.user.activity.OrganizationListActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
@@ -35,4 +38,10 @@ public interface ActivityComponent {
     void inject(AddClientActivity activity);
     void inject(ModifyClientDetailsActivity activity);
     void inject(ApproverActivity activity);
+    void inject (WorkOvertimeActivity activity);
+    void inject(WorkOutsideActivity activity);
+  //  void inject(ReimburseActivity activity);
+    void inject(ApplyCommonActivity activity);
+   // void inject(ApplyLeaveActivity activity);
+
 }

@@ -127,5 +127,15 @@ public interface HttpService {
      //工单详情
   //  @FormUrlEncoded
    // @POST("WO/wo_info")
+    //新增通用申请
+    @FormUrlEncoded
+    @POST("OA/oa_save")
+    Observable<HttpDataResult<WoSuccessBean>> submitCommonApply(@FieldMap HashMap<String,Object> map,@Field("token") String token);
+    //新增申请
+    @FormUrlEncoded
+    @POST("OA/oa_save")
+    Observable<HttpDataResult<WoSuccessBean>> submitApply(@FieldMap HashMap<String,Object> map,@Field("token") String token);
+
+
 
 }

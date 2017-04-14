@@ -121,12 +121,15 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
         fileNames=new String[selectMedia.size()];
         for(int i=0;i<selectMedia.size();i++){
             String path;
+            String filename;
             if(selectMedia.get(i).isCompressed()){
                 path=selectMedia.get(i).getCompressPath();
+                filename=i+".jpg";
             }else {
                 path=selectMedia.get(i).getPath();
+                filename=i+".mp4";
             }
-            mHelper.doFile("Attachment/WO/", path,i+".jpg", new Callback() {
+            mHelper.doFile("Attachment/WO/", path,filename, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     //    LoadingView.Dismiss();

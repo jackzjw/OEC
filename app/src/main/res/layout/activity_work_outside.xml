@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
             <include layout="@layout/toolbar_layout"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -36,8 +44,9 @@
                     android:text="因公出差"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:gravity="left|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>
@@ -84,12 +93,13 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:id="@+id/rel_add_owner"
+
             >
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:id="@+id/rel_add_owner"
                 >
                 <ImageView
 
@@ -130,9 +140,10 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:id="@+id/leave_start"
+            android:gravity="left|center_vertical"
             android:textSize="14sp"
             android:text="2017-03-13"
             android:layout_marginLeft="50dp"
@@ -157,9 +168,10 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:id="@+id/leave_end"
+            android:gravity="center_vertical|left"
             android:textSize="14sp"
             android:text="2017-03-15"
             android:layout_marginLeft="50dp"
@@ -244,6 +256,7 @@
             android:layout_marginLeft="15dp"
             />
         <EditText
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
@@ -254,7 +267,10 @@
             android:maxLines="3"
             android:background="@android:color/transparent"
             android:layout_height="wrap_content"/>
-
+          <android.support.v7.widget.RecyclerView
+              android:id="@+id/img_recycleview"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
@@ -272,6 +288,8 @@
             android:src="@drawable/application_icon_link"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:id="@+id/img_link"
             />
 
     </RelativeLayout>
@@ -291,16 +309,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apply_approve_owner"/>
-        <TextView
-            android:layout_marginLeft="50dp"
-            android:id="@+id/tv_wo_owner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_gravity="center_vertical"
-            android:text="和人换购ishgh"
-            android:maxLines="1"
-            />
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/approver_recycleview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
     </LinearLayout>
@@ -310,6 +322,7 @@
         android:background="@color/user_divide_color"
         >
         <Button
+            android:id="@+id/btn_submit"
             android:layout_marginTop="50dp"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -322,7 +335,8 @@
             />
 
     </RelativeLayout>
-        </LinearLayout>
 
+
+</LinearLayout>
     </ScrollView>
-
+</LinearLayout>

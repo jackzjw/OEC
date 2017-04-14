@@ -240,11 +240,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     public void upLoadSuccess(String[] fileName) {
 
             this.filesName=fileName;
-        //上传图片成功后上传工单接口
-        ownerId=new int[ownerList.size()];
-        for(int i=0;i<ownerList.size();i++){
-            ownerId[i]=ownerList.get(i).getId();
-        }
+
         int bid=mPresent.getChildId(mChildName.getText().toString());
         mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,filesName);
 
@@ -255,6 +251,11 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.REQUEST_CODE&&resultCode==RESULT_OK){
             ownerList=(ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
+            //上传图片成功后上传工单接口
+            ownerId=new int[ownerList.size()];
+            for(int i=0;i<ownerList.size();i++){
+                ownerId[i]=ownerList.get(i).getId();
+            }
             mOwnerRec.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
             final DelApproverAdapter delAdapter = new DelApproverAdapter(this, ownerList);
             mOwnerRec.setAdapter(delAdapter);
@@ -280,7 +281,12 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
             return;
         }
         LoadingView.showProgress(this);
-      mPresent.upLoadFile(selectMedia);
+        if(selectMedia.isEmpty()){
+            int bid=mPresent.getChildId(mChildName.getText().toString());
+            mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,filesName);
+        }else {
+            mPresent.upLoadFile(selectMedia);
+        }
 
       //  int classBid=mPresent.getChildId(mChildName.getText().toString());
        // LoadingView.Show(this);
