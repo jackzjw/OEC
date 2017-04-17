@@ -23,7 +23,17 @@ android {
         exclude 'META-INF/rxjava.properties'
     }
 }
-
+//解决视频图片选择器选择图片时类AnimatorHelper找不到，可能是和引入的日期选择器冲突
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.0'
+            }
+        }
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -60,6 +70,7 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
     //图片视频选择器
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v1.2.7'
-
+   //日期时间选择器
+    compile 'com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.4.6'
   //  compile 'com.jude:easyrecyclerview:4.4.0'
 }

@@ -27,30 +27,28 @@ import shangchuan.com.oec.widget.CommonSubscriber;
 import shangchuan.com.oec.widget.SaveToken;
 
 /**
- * Created by sg280 on 2017/4/14.
+ * Created by sg280 on 2017/4/17.
  */
 
-public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements AddApplyContract.Present {
-
+public class AddWorkReportPresent extends RxPresent<AddApplyContract.View> implements AddApplyContract.Present {
     private RetrofitHelper mHelper;
     @Inject
-    public AddApplyPresent(RetrofitHelper helper){
+    public AddWorkReportPresent(RetrofitHelper helper){
         this.mHelper=helper;
     }
 
 
     @Override
     public void submitData(HashMap<String, Object> map) {
-        Subscription subscription = mHelper.getApiSevice().submitApply(map, SaveToken.mToken)
+        Subscription subscription = mHelper.getApiSevice().addWorkReport(map, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override
                     public void onNext(WoSuccessBean bean) {
-                         mView.AddSuccess();
+                           mView.AddSuccess();
                     }
                 });
-        add(subscription);
-
+               add(subscription);
     }
 
     @Override
@@ -61,16 +59,16 @@ public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements
             String fileName;
             if (selectMedia.get(i).isCompressed()) {
                 path = selectMedia.get(i).getCompressPath();
-                 fileName=i+".jpg";
+                fileName=i+".jpg";
             } else {
                 path = selectMedia.get(i).getPath();
                 fileName=i+".mp4";
             }
             MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
-           builder.addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)));
+            builder.addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)));
 
         }
-        mHelper.doMultiFile("Attachment/OA/", builder, new Callback() {
+        mHelper.doMultiFile("Attachment/OAReport/", builder, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();

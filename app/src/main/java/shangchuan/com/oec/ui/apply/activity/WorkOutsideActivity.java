@@ -22,6 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.DateTimePicker;
+import cn.qqtheme.framework.picker.OptionPicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
@@ -32,11 +34,12 @@ import shangchuan.com.oec.ui.apply.adapter.DelApproverAdapter;
 import shangchuan.com.oec.ui.apply.adapter.GridImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.FullyGridLayoutManager;
+import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.ActionSheetDialog;
 import shangchuan.com.oec.widget.LoadingView;
 
-public class WorkOutsideActivity extends BaseActivity<AddApplyPresent> implements AddApplyContract.View {
+public class WorkOutsideActivity extends BaseActivity<AddApplyPresent> implements AddApplyContract.View,View.OnClickListener {
 
     @BindView(R.id.toolbar_title)
     TextView mToolBarTitle;
@@ -113,6 +116,9 @@ public class WorkOutsideActivity extends BaseActivity<AddApplyPresent> implement
                 startActivityForResult(new Intent(WorkOutsideActivity.this,ApproverActivity.class), Constants.REQUEST_CODE);
             }
         });
+        mType.setOnClickListener(this);
+        mStart.setOnClickListener(this);
+        mEnd.setOnClickListener(this);
     }
     private void openMedia(int MediaType){
         if(selectMedia.size()==9){
@@ -230,7 +236,9 @@ public class WorkOutsideActivity extends BaseActivity<AddApplyPresent> implement
         hashMap.put("EndTime",endTime());
         hashMap.put("OrderType",type());
         hashMap.put("OrderContent",content());
-        hashMap.put("Handlers",ownId);
+        for(int id:ownId){
+            hashMap.put("Handlers",id);
+        }
         hashMap.put("CustomerName",mClient.getText().toString().trim());
         hashMap.put("Destination",destnation());
         hashMap.put("companion",mCompany.getText().toString().trim());
@@ -247,6 +255,36 @@ public class WorkOutsideActivity extends BaseActivity<AddApplyPresent> implement
     @Override
     public void upLoadFileSuccess(String filename) {
          uploadData(filename);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.leave_start:
+                PickerUtil.getInstance().setDateTimePick(this).setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
+                    @Override
+                    public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                        mStart.setText(year+"-"+month+"-"+day+" "+hour+":00");
+                    }
+                });
+                break;
+            case R.id.leave_end:
+                PickerUtil.getInstance().setDateTimePick(this).setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
+                    @Override
+                    public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                        mEnd.setText(year+"-"+month+"-"+day+" "+hour+":00");
+                    }
+                });
+                break;
+            case R.id.outside_type:
+                PickerUtil.getInstance().setOptionPick(this,new String[]{"外勤","出差"})
+                        .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                mType.setText(item);
+                            }
+                        });
+                break;
+        }
     }
 }

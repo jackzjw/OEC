@@ -4,6 +4,7 @@ import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -104,7 +105,16 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
 
     @Override
     public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String[] filesName) {
-        Subscription subscription = mHelper.getApiSevice().submitWorkOrder(bid, flag, orderTitle, orderContent, handlers, filesName, SaveToken.mToken)
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("ClassIdB",bid);
+        hashMap.put("OrderFlag",flag);
+        hashMap.put("OrderTitle",orderTitle);
+        hashMap.put("OrderContent",orderContent);
+        for(int id:handlers){
+            hashMap.put("Handlers",id);
+        }
+        hashMap.put("AttFileName",filesName);
+        Subscription subscription = mHelper.getApiSevice().submitWorkOrder(hashMap,SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override
@@ -141,13 +151,15 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
                         //   LoadingView.Dismiss();
                         fileName=response.body().string();
                         LogUtil.i("返回值="+response.body().string());
+                        mView.upLoadSuccess(fileNames);
                     }else{
+                        mView.showError(response.message());
                         LogUtil.i(response.message());
                     }
                 }
             });
            fileNames[i]=fileName;
         }
-         mView.upLoadSuccess(fileNames);
+
     }
 }

@@ -18,6 +18,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.model.bean.MySelfInfo;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2016/12/1.
@@ -81,6 +82,7 @@ public class RetrofitHelper {
     public static String judgeType(String path) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentTypeFor = fileNameMap.getContentTypeFor(path);
+        LogUtil.i("mime-type="+contentTypeFor);
         if (contentTypeFor == null) {
             contentTypeFor = "application/octet-stream";
         }

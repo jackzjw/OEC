@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.DateTimePicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
@@ -32,11 +33,13 @@ import shangchuan.com.oec.ui.apply.adapter.DelApproverAdapter;
 import shangchuan.com.oec.ui.apply.adapter.GridImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.FullyGridLayoutManager;
+import shangchuan.com.oec.util.LogUtil;
+import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.ActionSheetDialog;
 import shangchuan.com.oec.widget.LoadingView;
 
-public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implements AddApplyContract.View {
+public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implements AddApplyContract.View,View.OnClickListener {
     @BindView(R.id.toolbar_title)
     TextView mToolBarTitle;
     @BindView(R.id.toolbar)
@@ -61,6 +64,7 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
     private List<LocalMedia> selectMedia = new ArrayList<>();
     private List<SelectOwnerBean> ownerList=new ArrayList<>();
     private int[] ownId;
+
 
 
     @Override
@@ -107,6 +111,7 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
                 startActivityForResult(new Intent(WorkOvertimeActivity.this,ApproverActivity.class), Constants.REQUEST_CODE);
             }
         });
+        mStart.setOnClickListener(this);
     }
     private void openMedia(int MediaType){
         if(selectMedia.size()==9){
@@ -165,7 +170,9 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
         hashMap.put("EndTime",mEnd.getText().toString());
         hashMap.put("OrderPeriod",mDuration.getText().toString());
         hashMap.put("OrderContent",mContent.getText().toString().trim());
-        hashMap.put("Handlers",ownId);
+        for(int id:ownId){
+            hashMap.put("Handlers",id);
+        }
         hashMap.put("ImgList",filename);
         mPresent.submitData(hashMap);
     }
@@ -215,6 +222,21 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
 
 
 
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.overtime_start:
+                PickerUtil.getInstance().setDateTimePick(this).setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
+                   @Override
+                   public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                       mStart.setText(year+"-"+month+"-"+day+" "+hour+":00");
+                   }
+                   });
+                break;
+        }
 
     }
 }

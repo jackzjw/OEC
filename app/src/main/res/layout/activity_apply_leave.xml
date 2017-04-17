@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context="shangchuan.com.oec.ui.apply.activity.WorkOvertimeActivity">
     <include layout="@layout/toolbar_layout"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -31,12 +41,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/overtime_start"
-                    android:text="病假"
+                    android:id="@+id/leave_type"
+                    android:gravity="center|left"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>
@@ -57,12 +67,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/overtime_end"
-                    android:text="2"
+                    android:id="@+id/leave_duration"
+
+                    android:gravity="center|left"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
 
@@ -125,11 +136,12 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:id="@+id/leave_start"
+            android:gravity="center|left"
             android:textSize="14sp"
-            android:text="2017-03-13"
+
             android:layout_marginLeft="50dp"
             />
 
@@ -152,19 +164,17 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:id="@+id/leave_end"
+            android:gravity="center|left"
             android:textSize="14sp"
-            android:text="2017-03-15"
+
             android:layout_marginLeft="50dp"
             />
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,16 +192,25 @@
             android:layout_width="match_parent"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
-            android:text="今天加班很晚，回家加个鸡腿"
+            android:id="@+id/content"
+            android:hint="说明"
             android:textSize="13sp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
             android:maxLines="3"
             android:background="@android:color/transparent"
             android:layout_height="wrap_content"/>
-
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/img_recycleview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/user_divide_color"/>
 
     <View
         android:layout_width="wrap_content"
@@ -202,11 +221,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/img_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/application_icon_link"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:padding="5dp"
             />
 
     </RelativeLayout>
@@ -226,16 +247,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apply_approve_owner"/>
-        <TextView
-            android:layout_marginLeft="50dp"
-            android:id="@+id/tv_wo_owner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_gravity="center_vertical"
-            android:text="和人换购ishgh"
-            android:maxLines="1"
-            />
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/approver_recycleview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
     </LinearLayout>
@@ -245,6 +260,7 @@
         android:background="@color/user_divide_color"
         >
         <Button
+            android:id="@+id/btn_submit"
             android:layout_marginTop="60dp"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -257,5 +273,6 @@
             />
 
     </RelativeLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

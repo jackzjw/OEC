@@ -17,10 +17,12 @@ import com.luck.picture.lib.model.PictureConfig;
 import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
@@ -32,10 +34,10 @@ import shangchuan.com.oec.ui.apply.adapter.GridImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.FullyGridLayoutManager;
 import shangchuan.com.oec.util.LogUtil;
+import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.ActionSheetDialog;
 import shangchuan.com.oec.widget.LoadingView;
-import shangchuan.com.oec.widget.WheelDialogFragment;
 
 public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implements AddWoContract.View {
 
@@ -122,33 +124,26 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
         mParentName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              final  WheelDialogFragment weel = WheelDialogFragment.newInstance(parentArray);
-            weel.setWheelDialogListener(new WheelDialogFragment.OnWheelDialogListener() {
-                @Override
-                public void onClickRight(String value) {
-                    LogUtil.i("value="+value);
-                        mParentName.setText(value);
-                       mPresent.getChildData(value);
-                      weel.dismiss();
-                }
-            });
-                weel.show(getSupportFragmentManager(),"");
+                PickerUtil.getInstance().setOptionPick(CreateWorkOrderActivity.this,parentArray)
+                        .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                mParentName.setText(item);
+                                mPresent.getChildData(item);
+                            }
+                        });
             }
         });
         mChildName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final  WheelDialogFragment weel = WheelDialogFragment.newInstance(childArray);
-                weel.setWheelDialogListener(new WheelDialogFragment.OnWheelDialogListener() {
-
-                    @Override
-                    public void onClickRight(String value) {
-                        LogUtil.i("value="+value);
-                        mChildName.setText(value);
-                        weel.dismiss();
-                    }
-                });
-                weel.show(getSupportFragmentManager(),"");
+             PickerUtil.getInstance().setOptionPick(CreateWorkOrderActivity.this,childArray)
+                     .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                         @Override
+                         public void onOptionPicked(int index, String item) {
+                             mChildName.setText(item);
+                         }
+                     });
             }
         });
         //添加图片和视频
@@ -210,8 +205,8 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
 
     @Override
     public void showError(String msg) {
-         LoadingView.dismissProgress();
 
+         LoadingView.dismissProgress();
         ToastUtil.show(msg);
     }
 
@@ -238,12 +233,10 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
 
     @Override
     public void upLoadSuccess(String[] fileName) {
-
             this.filesName=fileName;
-
+        LogUtil.i(Arrays.toString(fileName));
         int bid=mPresent.getChildId(mChildName.getText().toString());
         mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,filesName);
-
     }
 
     @Override

@@ -41,11 +41,10 @@
                   android:layout_height="wrap_content"/>
               <TextView
                   android:id="@+id/overtime_start"
-                  android:text="2017-03-13 18:00"
-                  android:layout_gravity="center_vertical"
                   android:layout_marginLeft="50dp"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
+                  android:gravity="center|left"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
 
 
             </LinearLayout>
@@ -70,8 +69,9 @@
                     android:text="2017-03-13 21:00"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:gravity="left|center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
 
 
@@ -139,7 +139,7 @@
             android:layout_gravity="center_vertical"
             android:id="@+id/overtime_hours"
             android:textSize="14sp"
-            android:text="4"
+            android:hint="时长"
             android:layout_marginLeft="50dp"
             />
 
@@ -167,7 +167,7 @@
             android:layout_width="match_parent"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
-            android:text="今天加班很晚，回家加个鸡腿"
+            android:hint="加班说明"
             android:textSize="13sp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"

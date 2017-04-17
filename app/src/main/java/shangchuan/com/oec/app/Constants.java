@@ -18,5 +18,7 @@ public class Constants {
     public static final String CURRENT_TENANT_NAME="tenantname";
     public static final String USER_PASSWORD="pwd";
     public static final int REQUEST_CODE=11;
+    public static final int YEAR_MONTH_DAY=1;
+    public static final int YEAR_MONTH_DAY_HOUR=2;
 
 }
