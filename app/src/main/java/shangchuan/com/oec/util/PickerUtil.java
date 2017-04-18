@@ -46,6 +46,17 @@ public class PickerUtil {
        optionPicker.show();
        return optionPicker;
    }
+    public OptionPicker setOptionPickLabel(Activity activity,String[] data,String label){
+        OptionPicker optionPicker=new OptionPicker(activity,data);
+        optionPicker.setShadowVisible(false);
+        optionPicker.setLineVisible(true);
+        optionPicker.setTextSize(14);
+        optionPicker.setLabel(label);
+        optionPicker.setAnimationStyle(R.style.ActionSheetDialogAnimation);
+        optionPicker.show();
+        return optionPicker;
+    }
+
    public String getCurrentDate(int mode){
        Calendar c = Calendar.getInstance(Locale.CHINA);
        int year=c.get(Calendar.YEAR);
@@ -62,6 +73,7 @@ public class PickerUtil {
 
 
    }
+
 
 
 

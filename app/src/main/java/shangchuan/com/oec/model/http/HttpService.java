@@ -24,6 +24,8 @@ import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoListBean;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
+import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
+import shangchuan.com.oec.model.bean.WorkReportListBean;
 
 /**
  * Created by sg280 on 2017/3/6.
@@ -138,7 +140,13 @@ public interface HttpService {
      @FormUrlEncoded
      @POST("OA/report_save")
      Observable<HttpDataResult<WoSuccessBean>> addWorkReport(@FieldMap HashMap<String,Object> map,@Field("token") String token);
-
-
+     //周报、日报详情
+      @FormUrlEncoded
+      @POST("OA/report_info")
+      Observable<HttpDataResult<WorkReportDetailsBean>> getWorkReportDeatails(@Field("Id") int id,@Field("token") String token);
+      //周报、日报列表
+      @FormUrlEncoded
+      @POST("OA/report_list")
+      Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWorkReportList(@Field("SelectType") String type,@Field("Page") int page,@Field("token") String token);
 
 }

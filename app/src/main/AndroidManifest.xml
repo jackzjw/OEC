@@ -20,31 +20,31 @@
         <activity android:name=".base.BaseActivity"/>
         <activity android:name=".ui.home.activity.TotalBannerActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.CreateWorkOrderActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.CreateWorkOrderActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.ApplyOfficeActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.WorkOvertimeActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.WorkOvertimeActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.ApplyLeaveActivity"
-                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.ApplyLeaveActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity
             android:name=".ui.apply.activity.WorkOutsideActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.ReimburseActivity"
-                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.ReimburseActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.ApplyCommonActivity"
-                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.ApplyCommonActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.ApplyListActivity">
         </activity>
@@ -130,6 +130,8 @@
         <activity android:name=".ui.apply.activity.ModifyContactActivity">
         </activity>
         <activity android:name=".ui.apply.activity.ApproverActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ViewPagerActivity">
         </activity>
     </application>
 

@@ -13,6 +13,7 @@ public class AttchmentBean {
    private  String AttFileName ;
    private  String  AttDir;
    private  String OldAttFileName ;
+    private String Url;
 
     public int getId() {
         return Id;
@@ -68,5 +69,13 @@ public class AttchmentBean {
 
     public void setOldAttFileName(String oldAttFileName) {
         OldAttFileName = oldAttFileName;
+    }
+
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String url) {
+        Url = url;
     }
 }

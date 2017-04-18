@@ -23,11 +23,11 @@
         android:layout_height="80dp"
         android:background="@color/theme_divide_color"
         >
-   <ImageView
+   <shangchuan.com.oec.widget.CircleImageView
        android:id="@+id/user_avatar"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:src="@drawable/user_img_avatar"
+       android:src="@drawable/user_img_avatar01"
        android:layout_centerVertical="true"
        android:layout_marginLeft="15dp"/>
         <TextView
@@ -153,7 +153,12 @@
             android:paddingBottom="5dp"
             android:background="@android:color/transparent"
             android:layout_height="wrap_content"/>
-
+         <android.support.v7.widget.RecyclerView
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:id="@+id/img_recycleview"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
@@ -161,19 +166,11 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@color/user_divide_color"/>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/doc_recycleview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/application_icon_link"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            />
-
-    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -238,9 +235,10 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/theme_divide_color"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/process_recycleview"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

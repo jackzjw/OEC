@@ -20,5 +20,7 @@ public class Constants {
     public static final int REQUEST_CODE=11;
     public static final int YEAR_MONTH_DAY=1;
     public static final int YEAR_MONTH_DAY_HOUR=2;
+    public static final int IMAGE_TYPE=1;
+    public static final int VEDIO_TYPE=2;
 
 }

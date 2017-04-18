@@ -23,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.DateTimePicker;
+import cn.qqtheme.framework.picker.OptionPicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
@@ -112,6 +113,8 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
             }
         });
         mStart.setOnClickListener(this);
+        mEnd.setOnClickListener(this);
+        mDuration.setOnClickListener(this);
     }
     private void openMedia(int MediaType){
         if(selectMedia.size()==9){
@@ -161,6 +164,7 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
 
     @Override
     public void upLoadFileSuccess(String filename) {
+        LogUtil.i("filname="+filename);
         uploadData(filename);
     }
     private void uploadData(String filename){
@@ -212,10 +216,11 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
             ToastUtil.show("请添加责任人");
             return;
         }
-        LoadingView.showProgress(this);
         if(selectMedia.isEmpty()) {
+            LoadingView.showProgress(this);
             uploadData("");
         }else{
+            LoadingView.showProgress(this,"正在上传...");
             mPresent.upLoadFile(selectMedia);
 
         }
@@ -235,6 +240,23 @@ public class WorkOvertimeActivity extends BaseActivity<AddApplyPresent> implemen
                        mStart.setText(year+"-"+month+"-"+day+" "+hour+":00");
                    }
                    });
+                break;
+            case R.id.overtime_end:
+                PickerUtil.getInstance().setDateTimePick(this).setOnDateTimePickListener(new DateTimePicker.OnYearMonthDayTimePickListener() {
+                    @Override
+                    public void onDateTimePicked(String year, String month, String day, String hour, String minute) {
+                        mEnd.setText(year+"-"+month+"-"+day+" "+hour+":00");
+                    }
+                });
+                break;
+            case R.id.overtime_hours:
+                PickerUtil.getInstance().setOptionPickLabel(this,new String[]{"1","2","3","4","5","6","7","8"},"小时")
+                        .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                mDuration.setText(item);
+                            }
+                        });
                 break;
         }
 
