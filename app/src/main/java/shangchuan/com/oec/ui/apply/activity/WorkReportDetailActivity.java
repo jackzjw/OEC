@@ -57,10 +57,12 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     TextView mRecomend;
     @BindView(R.id.process_recycleview)
     RecyclerView ProcessRec;
+    private int mType;
 
-    public static Intent getInstance(Context context,int id){
+    public static Intent getInstance(Context context,int id,int type){
         Intent intent=new Intent(context,WorkReportDetailActivity.class);
         intent.putExtra("id",id);
+        intent.putExtra("type",type);
         return intent;
     }
 
@@ -77,6 +79,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
         initToolBar(mToolbar);
         Glides.getInstance().loadCircle(this, MySelfInfo.getInstance().getAvatar(),mUserAvater);
         int id=getIntent().getIntExtra("id",-1);
+        mType=getIntent().getIntExtra("type",0);
         LoadingView.showProgress(this);
         mPresent.getWrDetails(id);
     }

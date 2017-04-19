@@ -3,6 +3,8 @@ package shangchuan.com.oec.model.http;
 import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -147,6 +149,9 @@ public interface HttpService {
       //周报、日报列表
       @FormUrlEncoded
       @POST("OA/report_list")
-      Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWorkReportList(@Field("SelectType") String type,@Field("Page") int page,@Field("token") String token);
-
+      Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWorkReportList(@Field("SelectType") int type,@Field("Page") int page,@Field("token") String token);
+       //添加客户（含联系人）
+      @FormUrlEncoded
+      @POST("Customer/customer_save_all")
+       Observable<HttpDataResult<WoSuccessBean>> addClientContact(@FieldMap HashMap<String,Object> hashMap, @Body RequestBody jsonbody,@Field("token") String token);
 }

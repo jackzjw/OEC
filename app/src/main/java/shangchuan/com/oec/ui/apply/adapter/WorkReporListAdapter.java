@@ -26,9 +26,14 @@ import shangchuan.com.oec.widget.CircleImageView;
 public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdapter.ViewHolder> {
     private List<WorkReportListBean> mList;
     private Context mContext;
-    public WorkReporListAdapter(Context context, List<WorkReportListBean> list){
+    private int mType;
+    public WorkReporListAdapter(Context context, List<WorkReportListBean> list,int type){
         this.mList=list;
         this.mContext=context;
+        this.mType=type;
+    }
+    public void updateData(List<WorkReportListBean> list){
+        this.mList=list;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +43,7 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
             @Override
             public void onClick(View v) {
                 int id=mList.get(viewHolder.getAdapterPosition()).getId();
-                mContext.startActivity(WorkReportDetailActivity.getInstance(mContext,id));
+                mContext.startActivity(WorkReportDetailActivity.getInstance(mContext,id,mType));
             }
         });
         return viewHolder;
@@ -55,6 +60,12 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
             holder.mDuration.setText("日报日期 ("+CommonUtil.formatDate(mList.get(position).getStartDate())+")");
         }
         holder.mContent.setText(mList.get(position).getReportContent());
+        holder.mDate.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));
+        if(mList.get(position).getReportStatus()==0){
+            holder.redDot.setVisibility(View.VISIBLE);
+        }else {
+            holder.redDot.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -74,7 +85,8 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
         TextView mContent;
         @BindView(R.id.report_create_time)
         TextView mDate;
-
+         @BindView(R.id.red_dot)
+         TextView redDot;
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);

@@ -12,8 +12,6 @@ import com.luck.picture.lib.model.FunctionConfig;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.yalantis.ucrop.entity.LocalMedia;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import rx.functions.Action1;
@@ -114,8 +112,7 @@ public class CommonUtil {
 
     }
     public static String formatDate(String time){
-        SimpleDateFormat sdf=new SimpleDateFormat("MM/dd");
-        Date date=new Date(time);
-        return sdf.format(date);
+        String monthDay=time.substring(5,10).replace("-","/");
+        return monthDay;
     }
 }

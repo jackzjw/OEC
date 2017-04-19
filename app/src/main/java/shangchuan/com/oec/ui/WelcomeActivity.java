@@ -51,5 +51,7 @@ public class WelcomeActivity extends BaseActivity<LoginPresent> implements Login
     public void showError(String msg) {
 
         ToastUtil.show(msg);
+        startActivity(new Intent(this,LoginActivity.class));
+        finish();
     }
 }

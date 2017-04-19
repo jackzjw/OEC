@@ -3,14 +3,29 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <shangchuan.com.oec.widget.CircleImageView
+    <RelativeLayout
+        android:id="@+id/rel_avater"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/user_avater"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        />
+        android:layout_height="wrap_content">
+        <shangchuan.com.oec.widget.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_avater"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:id="@+id/red_dot"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="@drawable/shape_unread_red_circle_dot"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
     <LinearLayout
+        android:layout_toRightOf="@+id/rel_avater"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,15 +35,15 @@
             android:id="@+id/report_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:paddingTop="5dp"
             android:textStyle="bold"
-            android:text="鸭子[周报]"
+
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/report_duration"
-            android:text="周报日期 (03/03-04/03)"
+
             
             />
         <TextView
@@ -37,8 +52,8 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="end"
-            android:text="华东师范哈哈ihiu韩国i额u哦我韩国腿和人品和配合的合格红人馆iu"
-            android:padding="5dp"
+
+            android:paddingBottom="5dp"
             />
 
     </LinearLayout>
@@ -48,7 +63,7 @@
            android:id="@+id/report_create_time"
            android:layout_alignParentRight="true"
            android:layout_marginRight="15dp"
-           android:text="03/03"
-           android:layout_centerVertical="true"
+
+          android:layout_marginTop="10dp"
            />
 </RelativeLayout>

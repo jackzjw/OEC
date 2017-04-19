@@ -51,4 +51,5 @@ public interface ActivityComponent {
     void inject (WorkReportDetailActivity activity);
 
 
+
 }

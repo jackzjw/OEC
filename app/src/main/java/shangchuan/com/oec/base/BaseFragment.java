@@ -17,6 +17,7 @@ import shangchuan.com.oec.app.App;
 import shangchuan.com.oec.di.component.DaggerActivityComponent;
 import shangchuan.com.oec.di.component.FragmentComponent;
 import shangchuan.com.oec.di.module.ActivityModule;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/3/3.
@@ -75,11 +76,12 @@ protected FragmentComponent getFragmentComponent(){
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
+        LogUtil.i("destoryView");
         if(mPresent!=null){
             mPresent.deatchView();
         }
     }
+
 
     public abstract void loadData();
     public abstract int getResourcesLayout();

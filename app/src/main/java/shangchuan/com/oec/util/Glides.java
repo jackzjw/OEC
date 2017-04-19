@@ -75,9 +75,9 @@ public class Glides {
     public void load(Context context, String url, ImageView imageView) {
         Glide.with(context)
                 .load(url)
-                .placeholder(R.drawable.user_img_avatar)
-                .error(R.color.colorPrimary)
-                .crossFade()
+                .placeholder(R.drawable.user_img_avatar01)
+                .error(R.drawable.user_img_avatar01)
+              //  .crossFade()
                 .into(imageView);
     }
 

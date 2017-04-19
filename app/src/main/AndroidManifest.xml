@@ -54,7 +54,9 @@
         </activity>
         <activity android:name=".ui.apply.activity.WorkReportListActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.WorkReportDetailActivity">
+        <activity android:name=".ui.apply.activity.WorkReportDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
         <activity android:name=".ui.apply.activity.ClientListActivity">
         </activity>

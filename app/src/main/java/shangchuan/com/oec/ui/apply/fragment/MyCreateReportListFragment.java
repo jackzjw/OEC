@@ -1,47 +1,21 @@
 package shangchuan.com.oec.ui.apply.fragment;
 
-import java.util.List;
-
-import shangchuan.com.oec.R;
-import shangchuan.com.oec.base.BaseFragment;
-import shangchuan.com.oec.model.bean.OaItemBean;
-import shangchuan.com.oec.present.WorkReportListPresent;
-import shangchuan.com.oec.present.contact.OaListContract;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
- * Created by sg280 on 2017/3/14.
+ * Created by sg280 on 2017/4/19.
  */
 
-public class MyCreateReportListFragment extends BaseFragment<WorkReportListPresent> implements OaListContract.View {
+public class MyCreateReportListFragment extends BaseMyReportListFragment {
+
+    @Nullable
     @Override
-    public void loadData() {
-        if(!isPrepared||!isVisible) return;
-
-
-    }
-
-    @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_my_create_report_list;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
-    public void showContent(List<OaItemBean> bean) {
-
-    }
-
-    @Override
-    public void showMoreContent(List<OaItemBean> bean, int start, int end) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+           mType=1;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

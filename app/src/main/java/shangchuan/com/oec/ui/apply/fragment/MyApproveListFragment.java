@@ -1,30 +1,22 @@
 package shangchuan.com.oec.ui.apply.fragment;
 
-import shangchuan.com.oec.R;
-import shangchuan.com.oec.base.BaseFragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by sg280 on 2017/3/14.
  */
 
-public class MyApproveListFragment extends BaseFragment {
+public class MyApproveListFragment extends BaseMyReportListFragment {
+
+
+    @Nullable
     @Override
-    public void loadData() {
-
-    }
-
-    @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_my_approve_list;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+         mType=2;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
