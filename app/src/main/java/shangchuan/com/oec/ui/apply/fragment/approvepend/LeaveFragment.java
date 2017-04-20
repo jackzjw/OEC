@@ -1,38 +1,21 @@
 package shangchuan.com.oec.ui.apply.fragment.approvepend;
 
-import android.widget.TextView;
-
-import butterknife.BindView;
-import shangchuan.com.oec.R;
-import shangchuan.com.oec.base.BaseFragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by sg280 on 2017/3/23.
  */
 
-public class LeaveFragment extends BaseFragment {
-    @BindView(R.id.approvepend_type)
-    TextView mTextView;
+public class LeaveFragment extends BaseApproveListFragment {
+
+    @Nullable
     @Override
-    public void loadData() {
-        if(!isPrepared||!isVisible){
-            return;
-        }
-      mTextView.setText("请假");
-    }
-
-    @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_approvepend_overtime;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mType="请假";
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

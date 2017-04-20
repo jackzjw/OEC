@@ -14,10 +14,10 @@ import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
 public interface WorkReportDeatailsContract {
     interface View extends BaseView{
         void showContent(WorkReportDetailsBean bean);
-        void showImgUrls(List<String> urls);
+        void showImgUrls(List<AttchmentBean> urls);
         void showFileResourse(List<AttchmentBean> beanList);
     }
     interface Present extends BasePresent<View>{
-        void getWrDetails(int id);
+        void getWrDetails(int id,int type);
     }
 }

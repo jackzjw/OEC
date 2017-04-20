@@ -34,6 +34,7 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
     }
     @Override
     public void getApplyType(final String type) {
+        currentPage=1;
         Subscription subscriptions = mHelper.getApiSevice().getApplyTypes(SaveToken.mToken)
                 .flatMap(new Func1<HttpDataResult<List<OaTypeBean>>, Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>>>() {
                     @Override
@@ -54,7 +55,7 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
                 .compose(RxUtil.<OaBasicItemBean<OaItemBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean>(mView) {
                     @Override
                     public void onNext(OaBasicItemBean bean) {
-                           totalList.addAll(bean.getItems());
+                           totalList=bean.getItems();
                              mView.showContent(totalList);
                     }
                 });
@@ -63,7 +64,7 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
 
     @Override
     public void getMoreContent() {
-        Subscription subsrciption = mHelper.getApiSevice().getOaResult(classId, SaveToken.mToken, currentPage)
+        Subscription subsrciption = mHelper.getApiSevice().getOaResult(classId, SaveToken.mToken, currentPage++)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<OaItemBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<OaItemBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean>(mView) {
                     @Override

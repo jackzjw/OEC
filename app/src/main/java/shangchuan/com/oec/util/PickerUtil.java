@@ -33,7 +33,7 @@ public class PickerUtil {
         int month=c.get(Calendar.MONTH);
         int day=c.get(Calendar.DAY_OF_MONTH);
         int hour=c.get(Calendar.HOUR);
-        picker.setSelectedItem(year,month,day,hour,0);
+        picker.setSelectedItem(year,month+1,day,hour,0);
         picker.show();
         return picker;
     }

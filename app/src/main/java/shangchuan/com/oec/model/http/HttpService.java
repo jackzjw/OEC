@@ -10,6 +10,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
+import shangchuan.com.oec.model.bean.ApproveListBean;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
 import shangchuan.com.oec.model.bean.ContactListBean;
@@ -145,7 +146,7 @@ public interface HttpService {
      //周报、日报详情
       @FormUrlEncoded
       @POST("OA/report_info")
-      Observable<HttpDataResult<WorkReportDetailsBean>> getWorkReportDeatails(@Field("Id") int id,@Field("token") String token);
+      Observable<HttpDataResult<WorkReportDetailsBean>> getWorkReportDeatails(@Field("Id") int id,@Field("SelectType") int type,@Field("token") String token);
       //周报、日报列表
       @FormUrlEncoded
       @POST("OA/report_list")
@@ -154,4 +155,9 @@ public interface HttpService {
       @FormUrlEncoded
       @POST("Customer/customer_save_all")
        Observable<HttpDataResult<WoSuccessBean>> addClientContact(@FieldMap HashMap<String,Object> hashMap, @Body RequestBody jsonbody,@Field("token") String token);
+       //审批列表
+       @FormUrlEncoded
+       @POST("OA/approval_list")
+       Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> getApproveList(@Field("ClassId") int classid,@Field("Page") int page,@Field("token" ) String token);
+
 }

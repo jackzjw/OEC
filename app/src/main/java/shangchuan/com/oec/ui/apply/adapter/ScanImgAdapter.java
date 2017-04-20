@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
-import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.model.bean.AttchmentBean;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/4/18.
@@ -21,11 +25,11 @@ import shangchuan.com.oec.util.Glides;
 
 public class ScanImgAdapter extends RecyclerView.Adapter<ScanImgAdapter.ViewHolder> {
 
-    private List<String> urls;
+    private List<AttchmentBean> urls;
     private Context mContext;
     private OnItemClickListener mItemClickListener;
     private int mediaType=1;
-    public ScanImgAdapter(Context context,List<String> list){
+    public ScanImgAdapter(Context context,List<AttchmentBean> list){
         this.urls=list;
         this.mContext=context;
     }
@@ -42,8 +46,8 @@ public class ScanImgAdapter extends RecyclerView.Adapter<ScanImgAdapter.ViewHold
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String type=urls.get(viewHolder.getAdapterPosition()).split(".")[1];
-                if(type.equals("mp4")){
+
+                if(urls.get(viewHolder.getAdapterPosition()).getAttType().equals("mp4")){
                     mItemClickListener.imgClick(viewHolder.getAdapterPosition(), Constants.VEDIO_TYPE);
                 }else {
                     mItemClickListener.imgClick(viewHolder.getAdapterPosition(),Constants.IMAGE_TYPE);
@@ -55,12 +59,16 @@ public class ScanImgAdapter extends RecyclerView.Adapter<ScanImgAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glides.getInstance().load(mContext,urls.get(position),holder.img);
 
-           if(urls.get(position).split(".")[1].equals("mp4")){
-                holder.mPlay.setVisibility(View.VISIBLE);
-           }else {
-               holder.mPlay.setVisibility(View.GONE);
+        if(urls.get(position).getAttType().equals("mp4")){
+            LogUtil.i("mp4="+urls.get(position).getUrl());
+            Glide.with(mContext).load(urls.get(position).getUrl()).thumbnail(0.5f).into(holder.img);
+            holder.mPlay.setVisibility(View.VISIBLE);
+        }else {
+            Glide.with(mContext).load(urls.get(position).getUrl()).asBitmap().placeholder(R.drawable.user_img_avatar01)
+                    .error(R.drawable.user_img_avatar01).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img);
+       //     Glides.getInstance().load(mContext,urls.get(position).getUrl(),holder.img);
+            holder.mPlay.setVisibility(View.GONE);
            }
     }
 

@@ -1,40 +1,21 @@
 package shangchuan.com.oec.ui.apply.fragment.approvepend;
 
-import android.util.Log;
-import android.widget.TextView;
-
-import butterknife.BindView;
-import shangchuan.com.oec.R;
-import shangchuan.com.oec.base.BaseFragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
- * Created by sg280 on 2017/3/23.
+ * Created by sg280 on 2017/4/20.
  */
 
-public class OverTimeFragment extends BaseFragment {
-    @BindView(R.id.approvepend_type)
-    TextView mTextView;
+public class OverTimeFragment extends BaseApproveListFragment {
+
+    @Nullable
     @Override
-    public void loadData() {
-        if(!isPrepared||!isVisible){
-            return;
-        }
-        Log.e("mtextview","="+mTextView);
-        mTextView.setText("加班");
-    }
-
-    @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_approvepend_overtime;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mType="加班";
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -1,10 +1,13 @@
 package shangchuan.com.oec.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by sg280 on 2017/3/31.
  */
 
-public class AttchmentBean {
+public class AttchmentBean implements Parcelable {
 
    private  int Id ;
    private  int  TenantId ;
@@ -78,4 +81,61 @@ public class AttchmentBean {
     public void setUrl(String url) {
         Url = url;
     }
+
+    @Override
+    public String toString() {
+        return "AttchmentBean{" +
+                "Id=" + Id +
+                ", TenantId=" + TenantId +
+                ", OrderId=" + OrderId +
+                ", AttType='" + AttType + '\'' +
+                ", AttFileName='" + AttFileName + '\'' +
+                ", AttDir='" + AttDir + '\'' +
+                ", OldAttFileName='" + OldAttFileName + '\'' +
+                ", Url='" + Url + '\'' +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.Id);
+        dest.writeInt(this.TenantId);
+        dest.writeInt(this.OrderId);
+        dest.writeString(this.AttType);
+        dest.writeString(this.AttFileName);
+        dest.writeString(this.AttDir);
+        dest.writeString(this.OldAttFileName);
+        dest.writeString(this.Url);
+    }
+
+    public AttchmentBean() {
+    }
+
+    protected AttchmentBean(Parcel in) {
+        this.Id = in.readInt();
+        this.TenantId = in.readInt();
+        this.OrderId = in.readInt();
+        this.AttType = in.readString();
+        this.AttFileName = in.readString();
+        this.AttDir = in.readString();
+        this.OldAttFileName = in.readString();
+        this.Url = in.readString();
+    }
+
+    public static final Parcelable.Creator<AttchmentBean> CREATOR = new Parcelable.Creator<AttchmentBean>() {
+        @Override
+        public AttchmentBean createFromParcel(Parcel source) {
+            return new AttchmentBean(source);
+        }
+
+        @Override
+        public AttchmentBean[] newArray(int size) {
+            return new AttchmentBean[size];
+        }
+    };
 }

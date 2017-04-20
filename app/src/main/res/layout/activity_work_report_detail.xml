@@ -246,9 +246,8 @@
             <RelativeLayout
                 android:id="@+id/rel_approve"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="50dp"
+                android:layout_height="150dp"
+
                 >
 
                 <Button
@@ -256,11 +255,11 @@
                     android:id="@+id/send_msg"
                     android:layout_width="80dp"
                     android:layout_height="35dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:background="@drawable/shape_approve_adivse_baground_red"
                     android:text="发消息"
                     android:gravity="center"
-                    android:layout_marginLeft="70dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="30dp"
 
 
@@ -277,8 +276,9 @@
                     android:text="转他人处理"
                     android:gravity="center"
                     android:textColor="@color/apply_approve_advise_to_other_text"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                    android:layout_marginLeft="70dp"
+
                     android:layout_marginTop="30dp"
                     />
 
@@ -287,9 +287,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:hint="转他人处理时必须填写，其他操作选填"
-                    android:layout_marginTop="17dp"
-                    android:layout_alignParentTop="true"
+                    android:hint="处理结果：转他人处理时必须填写，其他操作选填"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+
                     android:layout_centerHorizontal="true"/>
 
 

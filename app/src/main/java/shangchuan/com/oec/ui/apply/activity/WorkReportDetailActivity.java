@@ -7,6 +7,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ import shangchuan.com.oec.present.contact.WorkReportDeatailsContract;
 import shangchuan.com.oec.ui.apply.adapter.RemarkAdapter;
 import shangchuan.com.oec.ui.apply.adapter.ScanImgAdapter;
 import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 import shangchuan.com.oec.widget.LoadingView;
@@ -57,6 +62,14 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     TextView mRecomend;
     @BindView(R.id.process_recycleview)
     RecyclerView ProcessRec;
+    @BindView(R.id.rel_approve)
+    RelativeLayout relApprove;
+    @BindView(R.id.et_message)
+    EditText Msg;
+    @BindView(R.id.send_msg)
+    Button mSendMsg;
+    @BindView(R.id.approve_to_other)
+    Button mToOther;
     private int mType;
 
     public static Intent getInstance(Context context,int id,int type){
@@ -80,8 +93,13 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
         Glides.getInstance().loadCircle(this, MySelfInfo.getInstance().getAvatar(),mUserAvater);
         int id=getIntent().getIntExtra("id",-1);
         mType=getIntent().getIntExtra("type",0);
+        //type=1表示我创建的工作报告详情，type=2表示审阅详情
+        if(mType==2) {
+            mToolbartRight.setVisibility(View.INVISIBLE);
+            relApprove.setVisibility(View.GONE);
+        }
         LoadingView.showProgress(this);
-        mPresent.getWrDetails(id);
+        mPresent.getWrDetails(id,mType);
     }
 
     @Override
@@ -99,6 +117,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
 
     @Override
     public void showContent(WorkReportDetailsBean bean) {
+        LoadingView.dismissProgress();
         mTitle.setText(bean.getReportTitle());
         mDate.setText(bean.getCreateTime());
         mStartTime.setText(bean.getStartDate());
@@ -114,7 +133,8 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     }
 
     @Override
-    public void showImgUrls(final List<String> urls) {
+    public void showImgUrls(final List<AttchmentBean> urls) {
+        LogUtil.i(urls.toString());
       ImgRec.setLayoutManager(new GridLayoutManager(this,4));
         ScanImgAdapter adapter = new ScanImgAdapter(this, urls);
         ImgRec.setAdapter(adapter);
@@ -123,10 +143,10 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
             public void imgClick(int position, int mediaType) {
                 if(mediaType== Constants.VEDIO_TYPE){
                     Intent openVideo = new Intent(Intent.ACTION_VIEW);
-                    openVideo.setDataAndType(Uri.parse(urls.get(position)), "video/*");
+                    openVideo.setDataAndType(Uri.parse(urls.get(position).getUrl()), "video/*");
                     startActivity(openVideo);
                 }else if(mediaType==Constants.IMAGE_TYPE){
-                     startActivity(ViewPagerActivity.getInstance(WorkReportDetailActivity.this,(ArrayList<String>)urls,position));
+                     startActivity(ViewPagerActivity.getInstance(WorkReportDetailActivity.this,(ArrayList<AttchmentBean>)urls,position));
                 }
             }
         });

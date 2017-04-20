@@ -40,7 +40,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
   private OrganizationListAdapter adapter;
 
   private int mpos=0;
-  private int tenantId;
+  private int tenantId=SharePreferenceUtil.getTenantId();
 
   @Override
     protected int getResourcesLayout() {

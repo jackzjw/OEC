@@ -2,6 +2,9 @@ package shangchuan.com.oec.model.http;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +16,7 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -88,6 +92,56 @@ public class RetrofitHelper {
         }
         return contentTypeFor;
     }
+    /**
+     * 下载文件
+     * @param url
+     * @param fileDir
+     * @param fileName
+     */
+    public static void downFile(String url, final String fileDir, final String fileName) {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call =okhttpclient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
+            }
 
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                InputStream is = null;
+                byte[] buf = new byte[2048];
+                int len = 0;
+                FileOutputStream fos = null;
+                makeRootDirectory(fileDir);
+                try {
+                    is = response.body().byteStream();
+                    File file = new File(fileDir, fileName);
+                    fos = new FileOutputStream(file);
+                    while ((len = is.read(buf)) != -1) {
+                        fos.write(buf, 0, len);
+                    }
+                    fos.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (is != null) is.close();
+                    if (fos != null) fos.close();
+                }
+            }
+        });
+    }
+    public static void makeRootDirectory(String filePath) {
+        File file = null;
+        try {
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+        } catch (Exception e) {
+
+        }
+    }
 }
