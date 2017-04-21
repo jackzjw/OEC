@@ -23,6 +23,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.DateTimePicker;
+import cn.qqtheme.framework.picker.FilePicker;
+import cn.qqtheme.framework.picker.OptionPicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
@@ -30,12 +32,13 @@ import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.present.AddApplyPresent;
 import shangchuan.com.oec.present.contact.AddApplyContract;
 import shangchuan.com.oec.ui.apply.adapter.DelApproverAdapter;
+import shangchuan.com.oec.ui.apply.adapter.FileListAdapter;
 import shangchuan.com.oec.ui.apply.adapter.GridImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.FullyGridLayoutManager;
 import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
-import shangchuan.com.oec.widget.ActionSheetDialog;
+import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
 
 public class ApplyCommonActivity extends BaseActivity<AddApplyPresent> implements AddApplyContract.View {
@@ -58,10 +61,15 @@ public class ApplyCommonActivity extends BaseActivity<AddApplyPresent> implement
     RecyclerView ImgRec;
     @BindView(R.id.approver_recycleview)
      RecyclerView ApproveRec;
+    @BindView(R.id.file_recycleview)
+    RecyclerView fileRec;
     private GridImgAdapter adapter;
     private List<LocalMedia> selectMedia = new ArrayList<>();
     private List<SelectOwnerBean> ownerList=new ArrayList<>();
     private int[] ownId;
+    private List<String> filePathList=new ArrayList<>();
+    private List<String> fileNameList=new ArrayList<>();
+    private FileListAdapter fileAdapter;
 
 
     @Override
@@ -88,17 +96,17 @@ public class ApplyCommonActivity extends BaseActivity<AddApplyPresent> implement
         mLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ActionSheetDialog(ApplyCommonActivity.this).builder().addSheetItem("选择图片", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        openMedia(LocalMediaLoader.TYPE_IMAGE);
-                    }
-                }).addSheetItem("选择视频", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                        openMedia(LocalMediaLoader.TYPE_VIDEO);
-                    }
-                }).show();
+                PickerUtil.getInstance().setOptionPick(ApplyCommonActivity.this,new String[]{"图片","视频","文件"})
+                        .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                switch (index){
+                                    case 0:        openMedia(LocalMediaLoader.TYPE_IMAGE); break;
+                                    case 1:        openMedia(LocalMediaLoader.TYPE_VIDEO); break;
+                                    case 2:           chooseFile();  break;
+                                }
+                            }
+                        });
             }
         });
         //添加审批人
@@ -120,6 +128,37 @@ public class ApplyCommonActivity extends BaseActivity<AddApplyPresent> implement
                        });
            }
        });
+        //文件列表
+        fileRec.setLayoutManager(new LinearLayoutManager(this));
+        fileRec.addItemDecoration(new DividerDecoration(this));
+        fileAdapter = new FileListAdapter(this, fileNameList, new FileListAdapter.DelFileClickListener() {
+            @Override
+            public void delClick(int position) {
+                fileNameList.remove(position);
+                filePathList.remove(position);
+                fileAdapter.notifyDataSetChanged();
+            }
+        });
+        fileRec.setAdapter(fileAdapter);
+    }
+    private void chooseFile(){
+
+        PickerUtil.getInstance().setFilePick(this)
+                .setOnFilePickListener(new FilePicker.OnFilePickListener() {
+                    @Override
+                    public void onFilePicked(String currentPath) {
+                        String docType=currentPath.substring(currentPath.lastIndexOf(".")+1,currentPath.length());
+                        if(docType.equals("doc")||docType.equals("xls")||docType.equals("pdf")){
+                            filePathList.add(currentPath);
+                            String name=currentPath.substring(currentPath.lastIndexOf("/")+1,currentPath.length());
+                            fileNameList.add(name);
+                            fileAdapter.notifyDataSetChanged();
+                        }else {
+                            ToastUtil.show("目前只支持doc、xls、pdf格式");
+                            return;
+                        }
+                    }
+                });
     }
     private void openMedia(int MediaType){
         if(selectMedia.size()==9){
@@ -226,12 +265,9 @@ public class ApplyCommonActivity extends BaseActivity<AddApplyPresent> implement
             return;
         }
         LoadingView.showProgress(this);
-        if(selectMedia.isEmpty()) {
-            uploadData("");
-        }else{
-            mPresent.upLoadFile(selectMedia);
+            mPresent.upLoadFile(selectMedia,filePathList);
 
-        }
+
 
     }
 }

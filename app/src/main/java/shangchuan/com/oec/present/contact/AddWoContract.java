@@ -16,14 +16,14 @@ public interface AddWoContract  {
         void showChildData(String[] childTitles);
         void showParentData(String[] parentTitles);
         void showSuccess();
-        void upLoadSuccess(String[] fileName);
+        void upLoadSuccess(String fileName);
     }
     interface Present extends BasePresent<View>{
         void getWoClassType();
         void getChildData(String parentTitle);
         int getChildId(String childTitles);
-        void submitWo(int bid,int flag,String orderTitle,String orderContent,int[] handlers,String[] filesName);
-        void upLoadFile(List<LocalMedia> selectMedia);
+        void submitWo(int bid,int flag,String orderTitle,String orderContent,int[] handlers,String filesName);
+        void upLoadFile(List<LocalMedia> selectMedia,List<String> fileList);
     }
 
 }

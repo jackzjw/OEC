@@ -54,21 +54,24 @@ public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements
     }
 
     @Override
-    public void upLoadFile(List<LocalMedia> selectMedia) {
+    public void upLoadFile(List<LocalMedia> selectMedia,List<String> filePaths) {
         MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (int i = 0; i < selectMedia.size(); i++) {
             String path;
-            String fileName;
             if (selectMedia.get(i).isCompressed()) {
                 path = selectMedia.get(i).getCompressPath();
-                 fileName=i+".jpg";
             } else {
                 path = selectMedia.get(i).getPath();
-                fileName=i+".mp4";
             }
+            String fileName=path.substring(path.lastIndexOf("/")+1,path.length());
             MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
            builder.addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)));
 
+        }
+        for(String path:filePaths){
+            String fileName=path.substring(path.lastIndexOf("/")+1,path.length());
+            MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
+            builder.addFormDataPart(MEDIA_TYPE.type(),fileName,RequestBody.create(MEDIA_TYPE,new File(path)));
         }
         mHelper.doMultiFile("Attachment/OA/", builder, new Callback() {
             @Override

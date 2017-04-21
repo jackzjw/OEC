@@ -2,6 +2,7 @@ package shangchuan.com.oec.present;
 
 import com.yalantis.ucrop.entity.LocalMedia;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,9 @@ import javax.inject.Inject;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import rx.Subscription;
 import shangchuan.com.oec.base.RxPresent;
@@ -33,8 +37,8 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
    private RetrofitHelper mHelper;
     private List<WoClassBean> mTotalList=new ArrayList<>();
      private List<String> childList=new ArrayList<>();
-    private String[] fileNames;
-    private String fileName;
+
+
     @Inject
     public AddWoPresent(RetrofitHelper helper){
         this.mHelper=helper;
@@ -104,7 +108,7 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
     }
 
     @Override
-    public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String[] filesName) {
+    public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String filesName) {
         HashMap<String,Object> hashMap=new HashMap<>();
         hashMap.put("ClassIdB",bid);
         hashMap.put("OrderFlag",flag);
@@ -126,20 +130,27 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
     }
 
     @Override
-    public void upLoadFile(List<LocalMedia> selectMedia) {
-        if(selectMedia.isEmpty()) return;
-        fileNames=new String[selectMedia.size()];
-        for(int i=0;i<selectMedia.size();i++){
+    public void upLoadFile(List<LocalMedia> selectMedia,List<String> filePaths) {
+
+        MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for (int i = 0; i < selectMedia.size(); i++) {
             String path;
-            String filename;
-            if(selectMedia.get(i).isCompressed()){
-                path=selectMedia.get(i).getCompressPath();
-                filename=i+".jpg";
-            }else {
-                path=selectMedia.get(i).getPath();
-                filename=i+".mp4";
+            if (selectMedia.get(i).isCompressed()) {
+                path = selectMedia.get(i).getCompressPath();
+            } else {
+                path = selectMedia.get(i).getPath();
             }
-            mHelper.doFile("Attachment/WO/", path,filename, new Callback() {
+            String fileName=path.substring(path.lastIndexOf("/")+1,path.length());
+            MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
+            builder.addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)));
+
+        }
+        for(String path:filePaths){
+           String fileName=path.substring(path.lastIndexOf("/")+1,path.length());
+            MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
+           builder.addFormDataPart(MEDIA_TYPE.type(),fileName,RequestBody.create(MEDIA_TYPE,new File(path)));
+        }
+            mHelper.doMultiFile("Attachment/WO/",builder, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     //    LoadingView.Dismiss();
@@ -149,17 +160,15 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
                 public void onResponse(Call call, Response response) throws IOException {
                     if(response.isSuccessful()){
                         //   LoadingView.Dismiss();
-                        fileName=response.body().string();
-                        LogUtil.i("返回值="+response.body().string());
-                        mView.upLoadSuccess(fileNames);
+                        mView.upLoadSuccess(response.body().string());
                     }else{
                         mView.showError(response.message());
                         LogUtil.i(response.message());
                     }
                 }
             });
-           fileNames[i]=fileName;
+
         }
 
-    }
+
 }

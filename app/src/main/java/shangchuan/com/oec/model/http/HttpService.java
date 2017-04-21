@@ -17,12 +17,14 @@ import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
+import shangchuan.com.oec.model.bean.NewsListBean;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.OaDetailsBean;
 import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
+import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoListBean;
@@ -67,7 +69,7 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("WO/wo_edit_save")
     Observable<HttpDataResult<WoSuccessBean>> modifyWorkOrder(@Field("Id") int id, @Field("ClassIdB") int classId,
-                                                              @Field("OrderFlag") int flag,@Field("OrderTitle") String orderTitle,@Field("OrderContent") String content,@Field("Handlers") int[] handler,@Field("AttFileName") String[] fileName );
+                                                              @Field("OrderFlag") int flag,@Field("OrderTitle") String orderTitle,@Field("OrderContent") String content,@Field("Handlers") int[] handler,@Field("AttFileName") String fileName );
     //删除工单
     @FormUrlEncoded
     @POST("WO/wo_del")
@@ -159,5 +161,13 @@ public interface HttpService {
        @FormUrlEncoded
        @POST("OA/approval_list")
        Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> getApproveList(@Field("ClassId") int classid,@Field("Page") int page,@Field("token" ) String token);
+       //公告列表
+       @FormUrlEncoded
+       @POST("Index/news_list")
+       Observable<HttpDataResult<OaBasicItemBean<NewsListBean>>>   getNewsList(@Field("Page") int page,@Field("Size") int size,@Field("token") String token);
+       //最新动态列表
+       @FormUrlEncoded
+       @POST("Index/job_list")
+       Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@Field("Page") int page,@Field("Size") int size,@Field("token") String token);
 
 }

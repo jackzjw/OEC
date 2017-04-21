@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity">
     <include layout="@layout/toolbar_layout"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -277,6 +278,11 @@
             android:layout_marginTop="5dp"
 
             ></android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:id="@+id/file_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
     </LinearLayout>

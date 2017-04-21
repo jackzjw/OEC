@@ -19,6 +19,6 @@ public interface AddApplyContract {
     }
     interface  Present extends BasePresent<View>{
         void submitData(HashMap<String,Object> map);
-        void upLoadFile(List<LocalMedia> medias);
+        void upLoadFile(List<LocalMedia> medias,List<String> fileList);
     }
 }

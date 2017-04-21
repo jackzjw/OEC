@@ -17,11 +17,11 @@ import com.luck.picture.lib.model.PictureConfig;
 import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.FilePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
@@ -30,13 +30,14 @@ import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.present.AddWoPresent;
 import shangchuan.com.oec.present.contact.AddWoContract;
 import shangchuan.com.oec.ui.apply.adapter.DelApproverAdapter;
+import shangchuan.com.oec.ui.apply.adapter.FileListAdapter;
 import shangchuan.com.oec.ui.apply.adapter.GridImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.FullyGridLayoutManager;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
-import shangchuan.com.oec.widget.ActionSheetDialog;
+import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
 
 public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implements AddWoContract.View {
@@ -61,19 +62,23 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     RecyclerView mRecyclerView;
     @BindView(R.id.rel_add_owner)
     RelativeLayout mAddOwner;
+    @BindView(R.id.file_recycleview)
+    RecyclerView fileRec;
     private String[] parentArray;
     private String[] childArray;
     private int flag;
     private int[] ownerId;
     @BindView(R.id.owner_recycleview)
     RecyclerView mOwnerRec;
-    private String[] filesName;
+
     @BindView(R.id.rel_link)
     RelativeLayout mRelLink;
     private GridImgAdapter adapter;
     private List<LocalMedia> selectMedia = new ArrayList<>();
     private List<SelectOwnerBean> ownerList=new ArrayList<>();
-
+    private List<String> filePathList=new ArrayList<>();
+    private List<String> fileNameList=new ArrayList<>();
+    private FileListAdapter fileAdapter;
     @Override
     protected int getResourcesLayout() {
         return R.layout.activity_create_work_order;
@@ -150,17 +155,18 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
         mRelLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ActionSheetDialog(CreateWorkOrderActivity.this).builder().addSheetItem("选择图片", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                          openMedia(LocalMediaLoader.TYPE_IMAGE);
-                    }
-                }).addSheetItem("选择视频", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
-                    @Override
-                    public void onClick(int which) {
-                      openMedia(LocalMediaLoader.TYPE_VIDEO);
-                    }
-                }).show();
+                PickerUtil.getInstance().setOptionPick(CreateWorkOrderActivity.this,new String[]{"图片","视频","文件"})
+                        .setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                switch (index){
+                                    case 0:        openMedia(LocalMediaLoader.TYPE_IMAGE); break;
+                                    case 1:        openMedia(LocalMediaLoader.TYPE_VIDEO); break;
+                                    case 2:           chooseFile();  break;
+                                }
+                            }
+                        });
+
             }
         });
         adapter.setOnItemClickListener(new GridImgAdapter.OnItemClickListener() {
@@ -168,6 +174,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
             public void onItemClick(int position, View v) {
                 // 这里可预览图片
                 PictureConfig.getPictureConfig().externalPicturePreview(CreateWorkOrderActivity.this, position, selectMedia);
+
             }
         });
         //添加审批人
@@ -177,7 +184,38 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
                 startActivityForResult(new Intent(CreateWorkOrderActivity.this,ApproverActivity.class), Constants.REQUEST_CODE);
             }
         });
+        //文件列表
+         fileRec.setLayoutManager(new LinearLayoutManager(this));
+        fileRec.addItemDecoration(new DividerDecoration(this));
+         fileAdapter = new FileListAdapter(this, fileNameList, new FileListAdapter.DelFileClickListener() {
+            @Override
+            public void delClick(int position) {
+                fileNameList.remove(position);
+                filePathList.remove(position);
+                fileAdapter.notifyDataSetChanged();
+            }
+        });
+        fileRec.setAdapter(fileAdapter);
 
+    }
+    private void chooseFile(){
+
+        PickerUtil.getInstance().setFilePick(this)
+                .setOnFilePickListener(new FilePicker.OnFilePickListener() {
+                    @Override
+                    public void onFilePicked(String currentPath) {
+                        String docType=currentPath.substring(currentPath.lastIndexOf(".")+1,currentPath.length());
+                        if(docType.equals("doc")||docType.equals("xls")||docType.equals("pdf")){
+                            filePathList.add(currentPath);
+                            String name=currentPath.substring(currentPath.lastIndexOf("/")+1,currentPath.length());
+                            fileNameList.add(name);
+                            fileAdapter.notifyDataSetChanged();
+                        }else {
+                            ToastUtil.show("目前只支持doc、xls、pdf格式");
+                            return;
+                        }
+                    }
+                });
     }
     private void openMedia(int MediaType){
         if(selectMedia.size()==9){
@@ -232,11 +270,11 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     }
 
     @Override
-    public void upLoadSuccess(String[] fileName) {
-            this.filesName=fileName;
-        LogUtil.i(Arrays.toString(fileName));
+    public void upLoadSuccess(String fileName) {
+
+        LogUtil.i(fileName);
         int bid=mPresent.getChildId(mChildName.getText().toString());
-        mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,filesName);
+        mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,fileName);
     }
 
     @Override
@@ -274,12 +312,8 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
             return;
         }
         LoadingView.showProgress(this);
-        if(selectMedia.isEmpty()){
-            int bid=mPresent.getChildId(mChildName.getText().toString());
-            mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,filesName);
-        }else {
-            mPresent.upLoadFile(selectMedia);
-        }
+            mPresent.upLoadFile(selectMedia,filePathList);
+
 
       //  int classBid=mPresent.getChildId(mChildName.getText().toString());
        // LoadingView.Show(this);

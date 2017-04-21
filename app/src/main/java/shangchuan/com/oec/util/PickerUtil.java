@@ -1,12 +1,17 @@
 package shangchuan.com.oec.util;
 
 import android.app.Activity;
+import android.os.Environment;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Locale;
 
 import cn.qqtheme.framework.picker.DateTimePicker;
+import cn.qqtheme.framework.picker.FilePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.util.FileUtils;
+import cn.qqtheme.framework.util.StorageUtils;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 
@@ -55,6 +60,19 @@ public class PickerUtil {
         optionPicker.setAnimationStyle(R.style.ActionSheetDialogAnimation);
         optionPicker.show();
         return optionPicker;
+    }
+    public FilePicker setFilePick(Activity activity){
+        FilePicker filePicker=new FilePicker(activity,FilePicker.FILE);
+        File file=null;
+        if(StorageUtils.externalMounted()){
+            file= Environment.getExternalStorageDirectory();
+        }else {
+            new RuntimeException("外置储存卡不可用");
+        }
+        filePicker.setRootPath(FileUtils.separator(file.getAbsolutePath()));
+        filePicker.setShowHideDir(false);
+        filePicker.show();
+        return filePicker;
     }
 
    public String getCurrentDate(int mode){
