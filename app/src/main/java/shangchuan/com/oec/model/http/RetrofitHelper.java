@@ -133,6 +133,13 @@ public class RetrofitHelper {
             }
         });
     }
+    public static void downFile(String url,Callback callback){
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Call call =okhttpclient.newCall(request);
+        call.enqueue(callback);
+    }
     public static void makeRootDirectory(String filePath) {
         File file = null;
         try {

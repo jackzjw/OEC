@@ -27,6 +27,7 @@ import shangchuan.com.oec.model.bean.OrganizeInfoBean;
 import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
+import shangchuan.com.oec.model.bean.WoDetailBean;
 import shangchuan.com.oec.model.bean.WoListBean;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
 import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
@@ -131,8 +132,9 @@ public interface HttpService {
     @POST("Common/user_list_bygroup")
     Observable<HttpDataResult<OrgBasicBean>> getGroupList(@Field("token") String token);
      //工单详情
-  //  @FormUrlEncoded
-   // @POST("WO/wo_info")
+    @FormUrlEncoded
+    @POST("WO/wo_info")
+    Observable<HttpDataResult<WoDetailBean>> getWoDetails(@Field("OrderId") int id,@Field("token") String token);
     //新增通用申请
     @FormUrlEncoded
     @POST("OA/oa_save")
@@ -169,5 +171,17 @@ public interface HttpService {
        @FormUrlEncoded
        @POST("Index/job_list")
        Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@Field("Page") int page,@Field("Size") int size,@Field("token") String token);
+       //工单处理结果
+       @FormUrlEncoded
+       @POST("W0/wo_deal")
+       Observable<HttpDataResult<WoSuccessBean>> woDealResult(@Field("ProcessResult") int result,@Field("OrderId") int orderId,@Field("Remark") String remark,@Field("Id") int id,@Field("token") String token);
+       //OA审核处理结果
+       @FormUrlEncoded
+       @POST("OA/oa_check")
+       Observable<HttpDataResult<WoSuccessBean>> oaDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") int toUserId,@Field("token") String token);
+       //工作报告审核处理结果
+       @FormUrlEncoded
+       @POST("OA/report_audit")
+       Observable<HttpDataResult<WoSuccessBean>>  wrDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") int toUserId,@Field("token") String token);
 
 }

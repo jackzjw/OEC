@@ -13,7 +13,7 @@ public class ProcessListBean {
     private String UserName;
     private int ToUserID;
     private String ToUserName;
-    private String  ProcessResult;
+    private int  ProcessResult;
     private String  ProcessResultName;
     private String  Remark;
     private String  CreateUserId;
@@ -83,11 +83,11 @@ public class ProcessListBean {
         ToUserName = toUserName;
     }
 
-    public String getProcessResult() {
+    public int getProcessResult() {
         return ProcessResult;
     }
 
-    public void setProcessResult(String processResult) {
+    public void setProcessResult(int processResult) {
         ProcessResult = processResult;
     }
 

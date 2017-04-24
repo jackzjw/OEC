@@ -82,6 +82,7 @@ public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()) {
+                    LogUtil.i(response.body().string());
                     mView.upLoadFileSuccess(response.body().string());
                 }else {
                     mView.showError(response.message());

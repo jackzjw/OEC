@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -72,7 +73,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     RecyclerView mOwnerRec;
 
     @BindView(R.id.rel_link)
-    RelativeLayout mRelLink;
+    ImageView mRelLink;
     private GridImgAdapter adapter;
     private List<LocalMedia> selectMedia = new ArrayList<>();
     private List<SelectOwnerBean> ownerList=new ArrayList<>();

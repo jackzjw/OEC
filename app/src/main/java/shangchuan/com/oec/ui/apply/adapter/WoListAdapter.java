@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.WoListBean;
+import shangchuan.com.oec.ui.apply.activity.WoDetailsActivity;
 import shangchuan.com.oec.util.CommonUtil;
 
 /**
@@ -32,9 +33,17 @@ public class WoListAdapter extends RecyclerView.Adapter<WoListAdapter.WoListView
             mList.addAll(bean);
     }
     @Override
-    public WoListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WoListViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View mview= LayoutInflater.from(mContext).inflate(R.layout.item_wo_list,parent,false);
-        return new WoListViewHolder(mview);
+        final WoListViewHolder viewHolder=new WoListViewHolder(mview);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id=mList.get(viewHolder.getAdapterPosition()).getId();
+                mContext.startActivity(WoDetailsActivity.getInstance(mContext,id));
+            }
+        });
+        return viewHolder;
     }
 
     @Override

@@ -2,11 +2,11 @@ package shangchuan.com.oec.ui.apply.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,18 +22,22 @@ import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.model.bean.AttchmentBean;
 import shangchuan.com.oec.model.bean.MySelfInfo;
+import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
 import shangchuan.com.oec.present.WorkReportDetailPresent;
 import shangchuan.com.oec.present.contact.WorkReportDeatailsContract;
-import shangchuan.com.oec.ui.apply.adapter.RemarkAdapter;
+import shangchuan.com.oec.ui.apply.adapter.DocumentAdapter;
 import shangchuan.com.oec.ui.apply.adapter.ScanImgAdapter;
+import shangchuan.com.oec.ui.apply.adapter.WrRemarkAdapter;
+import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CircleImageView;
+import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
 
-public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPresent> implements WorkReportDeatailsContract.View {
+public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPresent> implements WorkReportDeatailsContract.View,View.OnClickListener {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_title)
@@ -71,6 +75,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     @BindView(R.id.approve_to_other)
     Button mToOther;
     private int mType;
+    private int mId;
 
     public static Intent getInstance(Context context,int id,int type){
         Intent intent=new Intent(context,WorkReportDetailActivity.class);
@@ -88,18 +93,20 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     protected void initEventData() {
        mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         mToolbarTitle.setText("工作报告详情");
-        mToolbartRight.setText("撤回");
+
         initToolBar(mToolbar);
         Glides.getInstance().loadCircle(this, MySelfInfo.getInstance().getAvatar(),mUserAvater);
-        int id=getIntent().getIntExtra("id",-1);
+        mId=getIntent().getIntExtra("id",-1);
         mType=getIntent().getIntExtra("type",0);
         //type=1表示我创建的工作报告详情，type=2表示审阅详情
-        if(mType==2) {
-            mToolbartRight.setVisibility(View.INVISIBLE);
+        if(mType==1) {
+            mToolbartRight.setText("撤回");
             relApprove.setVisibility(View.GONE);
         }
+        mSendMsg.setOnClickListener(this);
+        mToOther.setOnClickListener(this);
         LoadingView.showProgress(this);
-        mPresent.getWrDetails(id,mType);
+        mPresent.getWrDetails(mId,mType);
     }
 
     @Override
@@ -125,7 +132,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
         mContent.setText(bean.getReportContent());
         mNextPlan.setText(bean.getReportPlan());
         mRecomend.setText(bean.getReportQuestion());
-        RemarkAdapter remarkAdapter = new RemarkAdapter(this, bean.getProcessList());
+        WrRemarkAdapter remarkAdapter = new WrRemarkAdapter(this, bean.getProcessList());
         ProcessRec.setLayoutManager(new LinearLayoutManager(this));
         ProcessRec.setAdapter(remarkAdapter);
 
@@ -142,9 +149,8 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
             @Override
             public void imgClick(int position, int mediaType) {
                 if(mediaType== Constants.VEDIO_TYPE){
-                    Intent openVideo = new Intent(Intent.ACTION_VIEW);
-                    openVideo.setDataAndType(Uri.parse(urls.get(position).getUrl()), "video/*");
-                    startActivity(openVideo);
+                    LoadingView.showProgress(WorkReportDetailActivity.this);
+                    mPresent.downloadFile(urls.get(position).getUrl());
                 }else if(mediaType==Constants.IMAGE_TYPE){
                      startActivity(ViewPagerActivity.getInstance(WorkReportDetailActivity.this,(ArrayList<AttchmentBean>)urls,position));
                 }
@@ -153,7 +159,75 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     }
 
     @Override
-    public void showFileResourse(List<AttchmentBean> beanList) {
+    public void showFileResourse(final List<AttchmentBean> beanList) {
+        LoadingView.dismissProgress();
+        DocumentAdapter documentAdapter=new DocumentAdapter(this,beanList);
+        DocRec.setLayoutManager(new LinearLayoutManager(this));
+        DocRec.addItemDecoration(new DividerDecoration(this));
+        DocRec.setAdapter(documentAdapter);
+        documentAdapter.setOnItemClickListener(new DocumentAdapter.OnItemClickListener() {
+            @Override
+            public void ItemClick(int position) {
+                LoadingView.showProgress(WorkReportDetailActivity.this);
+                mPresent.downloadFile(beanList.get(position).getUrl());
+            }
+        });
+    }
+
+    @Override
+    public void openFile(String filePath) {
+        LoadingView.dismissProgress();
+        startActivity(CommonUtil.openFile(filePath));
+    }
+
+    @Override
+    public void dealSuccess() {
+        LoadingView.dismissProgress();
+        ToastUtil.shortShow("处理成功");
+        finish();
+
+    }
+    private String msg(){
+        return Msg.getText().toString().trim();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.REQUEST_CODE&&resultCode==RESULT_OK){
+            ArrayList<SelectOwnerBean> ownerList = (ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
+            if(ownerList.size()>1){
+                ToastUtil.shortShow("只能转一人处理,请重新选择");
+                return;
+            }
+            if(ownerList.size()==0){
+                ToastUtil.shortShow("请选择处理人");
+                return;
+            }
+            LoadingView.showProgress(this);
+            mPresent.oaDealResult(mId,3,msg(),ownerList.get(0).getId());
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.send_msg:
+                if(TextUtils.isEmpty(msg())){
+                    ToastUtil.shortShow("请输入消息");
+                    return;
+                }
+                LoadingView.showProgress(this);
+                mPresent.oaDealResult(mId,2,msg(),0);
+                break;
+            case R.id.approve_to_other:
+                if(TextUtils.isEmpty(msg())) {
+                    ToastUtil.shortShow("请输入消息");
+                    return;
+                }
+                startActivityForResult(new Intent(this,ApproverActivity.class),Constants.REQUEST_CODE);
+                break;
+        }
 
     }
 }

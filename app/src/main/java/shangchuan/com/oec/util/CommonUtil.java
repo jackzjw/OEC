@@ -12,6 +12,7 @@ import com.luck.picture.lib.model.FunctionConfig;
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.yalantis.ucrop.entity.LocalMedia;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,10 +37,20 @@ public class CommonUtil {
     public static String orderStatus(int status){
         switch (status){
             case 0:   return "已撤销";
+
             case 1:   return  "待审核";
             case 2:   return   "已通过";
             case 3:   return  "已驳回";
 
+        }
+        return "没有此项";
+    }
+    public static String woStatus(int status){
+        switch (status){
+            case 0:  return "已撤销";
+            case 1:  return "待处理";
+            case 2:  return "处理中";
+            case 3:  return  "已完成";
         }
         return "没有此项";
     }
@@ -173,4 +184,75 @@ public class CommonUtil {
         }
         return sb.toString();
     }
+    //打开文本文件
+    public static Intent openFile(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) return null;
+        //取得扩展名
+        String end = file.getName().substring(file.getName().lastIndexOf(".") + 1, file.getName().length()).toLowerCase();
+        if (end.equals("mp4")) {
+            return getVideoFileIntent(filePath);
+        } else if (end.equals("doc")) {
+            return getWordFileIntent(filePath);
+        } else if (end.equals("xls")) {
+            return getExcelFileIntent(filePath);
+        } else if (end.equals("pdf")) {
+            return getPdfFileIntent(filePath);
+        } else {
+            return getAllIntent(filePath);
+        }
+    }
+        public static Intent getAllIntent( String param ) {
+
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(new File(param ));
+            intent.setDataAndType(uri,"*/*");
+            return intent;
+        }
+    //Android获取一个用于打开VIDEO文件的intent
+    public static Intent getVideoFileIntent( String param ) {
+
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("oneshot", 0);
+        intent.putExtra("configchange", 0);
+        Uri uri = Uri.fromFile(new File(param ));
+        intent.setDataAndType(uri, "video/*");
+        return intent;
+    }
+
+    //Android获取一个用于打开Excel文件的intent
+    public static Intent getExcelFileIntent( String param ){
+
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(new File(param ));
+        intent.setDataAndType(uri, "application/vnd.ms-excel");
+        return intent;
+    }
+    //Android获取一个用于打开Word文件的intent
+    public static Intent getWordFileIntent( String param ){
+
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(new File(param ));
+        intent.setDataAndType(uri, "application/msword");
+        return intent;
+    }
+    //Android获取一个用于打开PDF文件的intent
+    public static Intent getPdfFileIntent( String param ){
+        Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = Uri.fromFile(new File(param ));
+        intent.setDataAndType(uri, "application/pdf");
+        return intent;
+    }
+
+
+
 }

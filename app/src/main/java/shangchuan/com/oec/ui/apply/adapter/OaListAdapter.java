@@ -58,7 +58,7 @@ public class OaListAdapter extends RecyclerView.Adapter<OaListAdapter.TypeViewHo
             @Override
             public void onClick(View v) {
                 //跳到详情界面
-                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,mList.get(position).getId()));
+                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,mList.get(position).getId(),1));
             }
         });
     }

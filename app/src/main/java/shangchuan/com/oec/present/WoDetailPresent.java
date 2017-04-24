@@ -1,6 +1,5 @@
 package shangchuan.com.oec.present;
 
-import android.app.Activity;
 import android.os.Environment;
 
 import java.io.File;
@@ -20,69 +19,58 @@ import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.model.bean.AttchmentBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
+import shangchuan.com.oec.model.bean.WoDetailBean;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
-import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
-import shangchuan.com.oec.present.contact.WorkReportDeatailsContract;
+import shangchuan.com.oec.present.contact.WoDetailContract;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.RxUtil;
-import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
 import shangchuan.com.oec.widget.SaveToken;
 
 import static shangchuan.com.oec.model.http.RetrofitHelper.makeRootDirectory;
 
 /**
- * Created by sg280 on 2017/4/18.
+ * Created by sg280 on 2017/4/24.
  */
 
-public class WorkReportDetailPresent extends RxPresent<WorkReportDeatailsContract.View> implements WorkReportDeatailsContract.Present {
-    private RetrofitHelper mHelper;
-    private List<AttchmentBean> imgUrls = new ArrayList<>();
-    private List<AttchmentBean> docList = new ArrayList<>();
-    private Activity mActivity;
-
+public class WoDetailPresent extends RxPresent<WoDetailContract.View> implements WoDetailContract.Present {
+  private RetrofitHelper mHelper;
+    private List<AttchmentBean> mediaList=new ArrayList<>();
+    private List<AttchmentBean> textList=new ArrayList<>();
     @Inject
-    public WorkReportDetailPresent(RetrofitHelper helper, Activity activity) {
-        this.mHelper = helper;
-        this.mActivity = activity;
+    public WoDetailPresent(RetrofitHelper helper){
+        this.mHelper=helper;
     }
 
 
+
+
     @Override
-    public void getWrDetails(int id, int type) {
-        Subscription subscription = mHelper.getApiSevice().getWorkReportDeatails(id, type, SaveToken.mToken)
-                .compose(RxUtil.<HttpDataResult<WorkReportDetailsBean>>scheduleRxHelper())
-                .compose(RxUtil.<WorkReportDetailsBean>handleResult()).subscribe(new CommonSubscriber<WorkReportDetailsBean>(mView) {
+    public void getWoDetail(int id) {
+        Subscription subscription = mHelper.getApiSevice().getWoDetails(id, SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<WoDetailBean>>scheduleRxHelper())
+                .compose(RxUtil.<WoDetailBean>handleResult()).subscribe(new CommonSubscriber<WoDetailBean>(mView) {
                     @Override
-                    public void onNext(WorkReportDetailsBean bean) {
-                        mView.showContent(bean);
-                        for (AttchmentBean item : bean.getAttachmentList_new()) {
-                            if (item.getAttType().equals("jpg") || item.getAttType().equals("mp4")) {
-                                imgUrls.add(item);
-                            } else if (item.getAttType().equals("xls") || item.getAttType().equals("doc")
-                                    || item.getAttType().equals("pdf")) {
-                                docList.add(item);
-                            } else {
-                                ToastUtil.show("未知类型=" + item.getAttType());
+                    public void onNext(WoDetailBean bean) {
+                        for(AttchmentBean item:bean.getListA()){
+                            if(item.getAttType().equals("jpg")||item.getAttType().equals("mp4")){
+                                mediaList.add(item);
+                            }else if(item.getAttType().equals("doc")||item.getAttType().equals("xls")||item.getAttType().equals("pdf")){
+                                textList.add(item);
                             }
                         }
-
-                        if (!imgUrls.isEmpty()) {
-                            mView.showImgUrls(imgUrls);
-                        }
-                        if (!docList.isEmpty()) {
-                            mView.showFileResourse(docList);
-                        }
-
+                        mView.showMedias(mediaList);
+                        mView.showTexts(textList);
+                        mView.showContent(bean);
+                        mView.showRemark(bean.getListP());
                     }
                 });
         add(subscription);
     }
 
-
     @Override
-    public void downloadFile(String url) {
+    public void downLoadFile(String url) {
         final String  fileName=url.substring(url.lastIndexOf("/")+1,url.length());
         final String  fileDir= Environment.getExternalStorageDirectory()+ Constants.OEC_VEDIO_PATH;
         //如果之前已经下载过，则直接显示
@@ -129,16 +117,15 @@ public class WorkReportDetailPresent extends RxPresent<WorkReportDeatailsContrac
     }
 
     @Override
-    public void oaDealResult(int orderId, int resultId, String remark, int toUserId) {
-        Subscription subscription = mHelper.getApiSevice().wrDealResult(orderId, resultId, remark, toUserId, SaveToken.mToken)
+    public void dealWoResult(int result, int orderId, String remark, int otherId) {
+        Subscription subsrciption = mHelper.getApiSevice().woDealResult(result, orderId, remark, otherId, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override
                     public void onNext(WoSuccessBean bean) {
-                         mView.dealSuccess();
+                     mView.dealSuccess(bean);
                     }
                 });
-        add(subscription);
+        add(subsrciption);
     }
-
 }

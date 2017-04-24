@@ -293,15 +293,17 @@
         android:background="@color/user_divide_color"/>
 
     <RelativeLayout
-        android:id="@+id/rel_link"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/rel_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/application_icon_link"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:padding="5dp"
             />
 
     </RelativeLayout>

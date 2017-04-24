@@ -29,7 +29,23 @@ public class OaDetailsBean {
     private String  OrderTime;
     private String OrderAmount;
     private ArrayList<AttchmentBean> AttachmentList;
-    private ArrayList<ProcessBean> ProcessList;
+    private ArrayList<ProcessListBean> ProcessList;
+
+    public ArrayList<AttchmentBean> getAttachmentList() {
+        return AttachmentList;
+    }
+
+    public void setAttachmentList(ArrayList<AttchmentBean> attachmentList) {
+        AttachmentList = attachmentList;
+    }
+
+    public ArrayList<ProcessListBean> getProcessList() {
+        return ProcessList;
+    }
+
+    public void setProcessList(ArrayList<ProcessListBean> processList) {
+        ProcessList = processList;
+    }
 
     public boolean isSuccess() {
         return Success;
@@ -191,19 +207,5 @@ public class OaDetailsBean {
         OrderAmount = orderAmount;
     }
 
-    public ArrayList<AttchmentBean> getAttachmentList() {
-        return AttachmentList;
-    }
 
-    public void setAttachmentList(ArrayList<AttchmentBean> attachmentList) {
-        AttachmentList = attachmentList;
-    }
-
-    public ArrayList<ProcessBean> getProcessList() {
-        return ProcessList;
-    }
-
-    public void setProcessList(ArrayList<ProcessBean> processList) {
-        ProcessList = processList;
-    }
 }
