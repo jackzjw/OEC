@@ -59,7 +59,7 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
         }else {
             holder.mDuration.setText("日报日期 ("+CommonUtil.formatDate(mList.get(position).getStartDate())+")");
         }
-        holder.mContent.setText(mList.get(position).getReportContent());
+        holder.mContent.setText(mList.get(position).getReportTitle());
         holder.mDate.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));
         if(mList.get(position).getReportStatus()==0){
             holder.redDot.setVisibility(View.VISIBLE);

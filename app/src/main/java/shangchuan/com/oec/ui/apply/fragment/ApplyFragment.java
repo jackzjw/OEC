@@ -12,6 +12,7 @@ import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeActivity;
 import shangchuan.com.oec.ui.apply.activity.ApprovePendActivity;
+import shangchuan.com.oec.ui.apply.activity.AttendanceActivity;
 import shangchuan.com.oec.ui.apply.activity.ClientListActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkReportActivity;
@@ -98,7 +99,10 @@ public class ApplyFragment<T extends RxPresent> extends BaseFragment implements 
                 //工单列表
                 startActivity(new Intent(mActivity, WorkOfficeListActivity.class));
                 break;
-
+            case R.id.rb_work_check_work:
+                //考勤
+                startActivity(new Intent(mActivity, AttendanceActivity.class));
+                break;
 
         }
     }

@@ -2,7 +2,7 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         android:id="@+id/rel_deal_result"
         android:orientation="vertical"
         >
@@ -36,7 +36,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/shape_approve_adivse_baground_green"
                     android:gravity="center"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="@color/apply_approve_advise_pass_text"
                     android:layout_centerInParent="true"
                     />
@@ -46,12 +46,13 @@
                 android:id="@+id/rel_second"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/approve_turn_down"
                     android:layout_width="80dp"
                     android:layout_height="35dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:background="@drawable/shape_approve_adivse_baground_red"
                     android:gravity="center"
                     android:textColor="@color/apply_approve_advise_turn_down_text"
@@ -64,6 +65,7 @@
                 android:id="@+id/rel_third"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/approve_to_other"
@@ -74,7 +76,7 @@
                     android:text="转他人处理"
                     android:gravity="center"
                     android:textColor="@color/apply_approve_advise_to_other_text"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:layout_centerInParent="true"
                     />
 

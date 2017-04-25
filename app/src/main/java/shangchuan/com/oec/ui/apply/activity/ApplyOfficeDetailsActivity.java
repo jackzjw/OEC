@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -68,14 +68,14 @@ public class ApplyOfficeDetailsActivity extends BaseActivity<OaDetailsPresent> i
     RecyclerView docRecycleView;
     @BindView(R.id.img_recycleview)
     RecyclerView ImgRec;
-    @BindView(R.id.approve_to_other)
+    @BindView(R.id.approve_pass)
     TextView mTvPass;
     @BindView(R.id.approve_turn_down)
     TextView mTvReject;
     @BindView(R.id.approve_to_other)
     TextView mToOther;
     @BindView(R.id.rel_deal_result)
-    RelativeLayout mRelDealResult;
+    LinearLayout mRelDealResult;
     @BindView(R.id.et_msg)
     EditText mInputMsg;
     private int mId;
@@ -102,6 +102,8 @@ public static Intent newIntent(Context context,int id,int index){
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         mToolbartRight.setText("撤回");
         initToolBar(mToolbar);
+        mTvPass.setText("通过");
+        mTvReject.setText("驳回");
         mTvPass.setOnClickListener(this);
         mTvReject.setOnClickListener(this);
         mToOther.setOnClickListener(this);

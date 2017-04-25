@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+<LinearLayout
+    android:id="@+id/activity_attendance"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:orientation="vertical"
+    tools:context="shangchuan.com.oec.ui.apply.activity.AttendanceActivity">
+    <include layout="@layout/toolbar_layout"/>
+    <shangchuan.com.oec.widget.CalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/theme_divide_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注"
+            android:textSize="12sp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="10dp"
+            />
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:orientation="horizontal"
+               android:layout_gravity="center_vertical"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:layout_width="10dp"
+                   android:layout_height="10dp"
+                   android:layout_gravity="center_vertical"
+                   android:background="@drawable/shape_attendance_today_status"
+                   />
+               <TextView
+                   android:textSize="12sp"
+                   android:layout_marginLeft="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="今天"
+                   />
+           </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_attendance_leave_status"
+                />
+            <TextView
+                android:textSize="12sp"
+
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请假"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_attendance_reset_status"
+                />
+            <TextView
+                android:textSize="12sp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="节假日"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_attendance_later_status"
+                />
+            <TextView
+                android:textSize="12sp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="迟到"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_attendance_earily_status"
+                />
+            <TextView
+                android:textSize="12sp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="早退"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/theme_divide_color"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上班时间"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/start_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:textSize="15sp"
+            android:text="09:15"
+            android:layout_centerVertical="true"
+            />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_divide_color"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下班时间"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/end_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:textSize="15sp"
+            android:text="18:15"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/input_time"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="导入时间：2017-04-01 18:00"
+        android:background="@color/theme_divide_color"
+        />
+
+
+
+
+
+</LinearLayout>
+<LinearLayout
+    android:layout_alignParentBottom="true"
+android:layout_width="match_parent"
+android:layout_height="50dp"
+android:orientation="horizontal"
+    >
+<TextView
+    android:id="@+id/pre_month"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    android:text="上个月"
+    android:gravity="center"
+    />
+<TextView
+    android:id="@+id/next_month"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="match_parent"
+    android:text="下个月"
+    android:gravity="center"
+    />
+</LinearLayout>
+</RelativeLayout>

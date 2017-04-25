@@ -12,6 +12,7 @@ import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.WorkReportListBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.WorkReportContract;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
 import shangchuan.com.oec.widget.SaveToken;
@@ -39,6 +40,7 @@ public class WorkReportListPresent extends RxPresent<WorkReportContract.View> im
                 .compose(RxUtil.<OaBasicItemBean<WorkReportListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<WorkReportListBean>>(mView) {
                     @Override
                     public void onNext(OaBasicItemBean<WorkReportListBean> bean) {
+                        LogUtil.i(bean.getItems().toString());
                              mView.showContent(bean.getItems());
                              mTotalList=bean.getItems();
                     }

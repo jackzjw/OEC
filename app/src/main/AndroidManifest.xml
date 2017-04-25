@@ -54,9 +54,9 @@
         </activity>
         <activity android:name=".ui.apply.activity.WorkReportListActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.WorkReportDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".ui.apply.activity.WorkReportDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.ClientListActivity">
         </activity>
@@ -108,7 +108,9 @@
         </activity>
         <activity android:name=".ui.apply.activity.ApprovePendActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.ApplyOfficeDetailsActivity">
+        <activity
+            android:name=".ui.apply.activity.ApplyOfficeDetailsActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.WorkOfficeListActivity">
         </activity>
@@ -125,7 +127,9 @@
         </activity>
         <activity android:name=".ui.apply.activity.OaApproveDetailsActivity">
         </activity>
-        <activity android:name=".ui.apply.activity.WoDetailsActivity">
+        <activity
+            android:name=".ui.apply.activity.WoDetailsActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
         <activity android:name=".ui.apply.activity.ModifyClientDetailsActivity">
         </activity>
@@ -134,6 +138,8 @@
         <activity android:name=".ui.apply.activity.ApproverActivity">
         </activity>
         <activity android:name=".ui.apply.activity.ViewPagerActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.AttendanceActivity">
         </activity>
     </application>
 

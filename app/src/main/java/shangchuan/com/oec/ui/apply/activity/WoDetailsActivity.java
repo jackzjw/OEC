@@ -104,9 +104,9 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
         mTvSend.setText("发消息");
         mTvFinish.setText("完成");
         initToolBar(mToolbar);
-        mRelSend.setOnClickListener(this);
-        mRelFinish.setOnClickListener(this);
-        mRelToOther.setOnClickListener(this);
+        mTvSend.setOnClickListener(this);
+        mTvFinish.setOnClickListener(this);
+        mTvToOther.setOnClickListener(this);
         mId=getIntent().getIntExtra("id",-1);
         LoadingView.showProgress(this);
         mPresent.getWoDetail(mId);
@@ -127,9 +127,10 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     public void showContent(WoDetailBean bean) {
         if(bean.getReStatus()==1) mToolbartRight.setText("撤回");
         if(bean.getReStatus()==2) mToolbartRight.setText("重新提交");
-        if(bean.getDealStatus()==1){
-            mRelFinish.setVisibility(View.GONE);
-            mRelToOther.setVisibility(View.GONE);
+        //dealStatus=0可以转他人和待处理,1只能发消息
+        if(bean.getDealStatus()==0){
+            mRelFinish.setVisibility(View.VISIBLE);
+            mRelToOther.setVisibility(View.VISIBLE);
         }
         Glides.getInstance().loadCircle(this, MySelfInfo.getInstance().getAvatar(),mUserAvater);
         mUserTitle.setText(MySelfInfo.getInstance().getNickName()+"创建的工单");
@@ -140,12 +141,12 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
         mWoTitle.setText(bean.getOrderTitle());
         mContent.setText(bean.getOrderContent());
         if(bean.getOrderStatus()==0||bean.getOrderStatus()==3){//已撤销
-            mOrderStatus.setBackgroundColor(ContextCompat.getColor(this,R.color.wo_status_cancle_color));
+            mOrderStatus.setTextColor(ContextCompat.getColor(this,R.color.wo_status_cancle_color));
         }else if(bean.getOrderStatus()==1){//待处理
-            mOrderStatus.setBackgroundColor(ContextCompat.getColor(this,R.color.wo_status_wait_deal_color));
+            mOrderStatus.setTextColor(ContextCompat.getColor(this,R.color.wo_status_wait_deal_color));
 
         }else{//处理中
-            mOrderStatus.setBackgroundColor(ContextCompat.getColor(this,R.color.wo_status_dealing_color));
+            mOrderStatus.setTextColor(ContextCompat.getColor(this,R.color.wo_status_dealing_color));
         }
 
     }

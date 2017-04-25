@@ -113,4 +113,22 @@ public class WorkReportListBean {
     public void setIsHasAttachment(int isHasAttachment) {
         IsHasAttachment = isHasAttachment;
     }
+
+    @Override
+    public String toString() {
+        return "WorkReportListBean{" +
+                "Id=" + Id +
+                ", TenantId=" + TenantId +
+                ", UserID=" + UserID +
+                ", ReportType='" + ReportType + '\'' +
+                ", StartDate='" + StartDate + '\'' +
+                ", EndDate='" + EndDate + '\'' +
+                ", ReportTitle='" + ReportTitle + '\'' +
+                ", ReportStatus=" + ReportStatus +
+                ", ReportContent='" + ReportContent + '\'' +
+                ", ReportQuestion='" + ReportQuestion + '\'' +
+                ", IsHasAttachment=" + IsHasAttachment +
+                ", CreateTime='" + CreateTime + '\'' +
+                '}';
+    }
 }

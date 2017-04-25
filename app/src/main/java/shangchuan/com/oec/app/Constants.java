@@ -6,8 +6,8 @@ package shangchuan.com.oec.app;
 
 public class Constants {
 
-    public static final String BASE_URL="http://test.digiplus.cn:802/";
-    public static final String FILE_BASE_URL="http://test.digiplus.cn:804/FileOperate/UploadFile/";
+    public static final String BASE_URL="http://testapi.oec365.com/";
+    public static final String FILE_BASE_URL="http://testimg01.oec365.com/FileOperate/UploadFile/";
     public static final String USER_NICK_NAME="nick";
     public static final String USER_TELPHONE_NUMBER="tel";
     public static final String USER_AVATER="avater";

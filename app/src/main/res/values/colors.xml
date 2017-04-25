@@ -42,4 +42,9 @@
     <color name="wo_status_cancle_color">#2E3A4C</color>
     <color name="wo_status_dealing_color">#C9CED6</color>
     <color name="wo_status_wait_deal_color">#E23D40</color>
+    <color name="attendence_today_status_color">#40B8D8</color>
+    <color name="attendence_leave_status_color">#46CEA1</color>
+    <color name="attendence_rest_status_color">#C9CED6</color>
+    <color name="attendence_later_status_color">#E65752</color>
+    <color name="attendence_earily_status_color">#FDDD28</color>
 </resources>

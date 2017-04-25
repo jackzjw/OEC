@@ -11,6 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
 import shangchuan.com.oec.model.bean.ApproveListBean;
+import shangchuan.com.oec.model.bean.AttendanceListBean;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
 import shangchuan.com.oec.model.bean.ContactListBean;
@@ -183,5 +184,8 @@ public interface HttpService {
        @FormUrlEncoded
        @POST("OA/report_audit")
        Observable<HttpDataResult<WoSuccessBean>>  wrDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") int toUserId,@Field("token") String token);
-
+       //考勤列表
+       @FormUrlEncoded
+       @POST("OA/attendance_list")
+       Observable<HttpDataResult<OaBasicItemBean<AttendanceListBean>>> getAttendanceList(@Field("AttendanceDate") String date,@Field("Size") int size,@Field("token") String token);
 }

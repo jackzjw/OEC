@@ -42,7 +42,7 @@ public class RetrofitHelper {
         okhttpBuilder.connectTimeout(20, TimeUnit.SECONDS);
         okhttpBuilder.readTimeout(20, TimeUnit.SECONDS);
         okhttpBuilder.writeTimeout(20, TimeUnit.SECONDS);
-        okhttpBuilder.retryOnConnectionFailure(true);
+        okhttpBuilder.retryOnConnectionFailure(false);
         okhttpclient=okhttpBuilder.build();
     }
     public static HttpService getApiSevice(){

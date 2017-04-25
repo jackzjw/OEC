@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -74,6 +75,8 @@ public class CreateWorkReportActivity extends BaseActivity<AddWorkReportPresent>
     EditText mTitle;
     @BindView(R.id.file_recycleview)
     RecyclerView fileRec;
+    @BindView(R.id.ll_end_time)
+    LinearLayout mllEnd;
     private GridImgAdapter adapter;
     private List<LocalMedia> selectMedia = new ArrayList<>();
     private List<SelectOwnerBean> ownerList=new ArrayList<>();
@@ -305,6 +308,7 @@ public class CreateWorkReportActivity extends BaseActivity<AddWorkReportPresent>
                             @Override
                             public void onOptionPicked(int index, String item) {
                                 mType.setText(item);
+                            mllEnd.setVisibility(index==0?View.GONE:View.VISIBLE);
                             }
                         });
                 break;
