@@ -12,7 +12,7 @@ import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.ui.home.fragment.AlreadyReadBannerFragment;
-import shangchuan.com.oec.ui.home.fragment.TotalBannersFragment;
+import shangchuan.com.oec.ui.home.fragment.TotalBannerFragment;
 import shangchuan.com.oec.ui.home.fragment.UnreadBannerFragment;
 
 public class TotalBannerActivity extends BaseActivity implements View.OnClickListener{
@@ -29,7 +29,7 @@ public class TotalBannerActivity extends BaseActivity implements View.OnClickLis
     RadioButton mAlreadyBanner;
     @BindView(R.id.rb_banner_unread)
     RadioButton mUnreadBanner;
-    private TotalBannersFragment mTotalBannersFragment;
+    private TotalBannerFragment mBannersBaseFragment;
     private AlreadyReadBannerFragment mAlreadyReadBannerFragment;
     private UnreadBannerFragment mUnreadBannerFragment;
     private Fragment temp;
@@ -47,13 +47,13 @@ public class TotalBannerActivity extends BaseActivity implements View.OnClickLis
         mUnreadBanner.setOnClickListener(this);
         mBannerTotal.setOnClickListener(this);
         mAlreadyBanner.setOnClickListener(this);
-        mTotalBannersFragment=(TotalBannersFragment) getSupportFragmentManager().findFragmentByTag("total");
-        if(mTotalBannersFragment==null){
-            mTotalBannersFragment=new TotalBannersFragment();
+        mBannersBaseFragment =(TotalBannerFragment) getSupportFragmentManager().findFragmentByTag("total");
+        if(mBannersBaseFragment ==null){
+            mBannersBaseFragment =new TotalBannerFragment();
         }
          getSupportFragmentManager().beginTransaction().
-                 add(R.id.total_banners_fragment_container,mTotalBannersFragment,"total").commit();
-         temp=mTotalBannersFragment;
+                 add(R.id.total_banners_fragment_container, mBannersBaseFragment,"total").commit();
+         temp= mBannersBaseFragment;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class TotalBannerActivity extends BaseActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.rb_banner_total:
                 //全部
-               switchFragment(mTotalBannersFragment,"total");
+               switchFragment(mBannersBaseFragment,"total");
                 break;
             case R.id.rb_banner_already_read:
                 //已读

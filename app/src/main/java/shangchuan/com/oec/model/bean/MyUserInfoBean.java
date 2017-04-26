@@ -1,5 +1,7 @@
 package shangchuan.com.oec.model.bean;
 
+import java.util.ArrayList;
+
 /**
  * Created by sg280 on 2017/3/27.
  */
@@ -8,13 +10,13 @@ public class MyUserInfoBean {
     private int  LoginUserId;
     private String LoginUserTrueName;
     private String LoginUserNickName;
-    private String LoginRoleIdList;
+    private ArrayList<Integer> LoginRoleIdList;
     private int    LoginTenantId;
     private String LoginTenantName;
     private int    CurrentLoginId;
     private int    LoginIsAdmin;
     private String LastTime;
-    private String  TenantInfos     ;
+    private String TenantInfos ;
     private String      CreateTime ;
     private String      CreateUserName ;
     private String      UpdateTime ;
@@ -43,11 +45,11 @@ public class MyUserInfoBean {
         LoginUserNickName = loginUserNickName;
     }
 
-    public String getLoginRoleIdList() {
+    public ArrayList<Integer> getLoginRoleIdList() {
         return LoginRoleIdList;
     }
 
-    public void setLoginRoleIdList(String loginRoleIdList) {
+    public void setLoginRoleIdList(ArrayList<Integer> loginRoleIdList) {
         LoginRoleIdList = loginRoleIdList;
     }
 

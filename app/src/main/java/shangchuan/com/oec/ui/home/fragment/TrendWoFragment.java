@@ -10,11 +10,11 @@ import android.view.ViewGroup;
  * Created by sg280 on 2017/3/10.
  */
 
-public class AlreadyReadBannerFragment extends BannersBaseFragment {
+public class TrendWoFragment extends TrendBaseListFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       readStatus=1;
+        jobType=1;
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

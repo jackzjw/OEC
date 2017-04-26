@@ -18,6 +18,8 @@ import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
+import shangchuan.com.oec.model.bean.NewsClassifyBean;
+import shangchuan.com.oec.model.bean.NewsDetailsBean;
 import shangchuan.com.oec.model.bean.NewsListBean;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.OaDetailsBean;
@@ -171,7 +173,7 @@ public interface HttpService {
        //最新动态列表
        @FormUrlEncoded
        @POST("Index/job_list")
-       Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@Field("Page") int page,@Field("Size") int size,@Field("token") String token);
+       Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@FieldMap HashMap<String,Object> map,@Field("token") String token);
        //工单处理结果
        @FormUrlEncoded
        @POST("W0/wo_deal")
@@ -188,4 +190,18 @@ public interface HttpService {
        @FormUrlEncoded
        @POST("OA/attendance_list")
        Observable<HttpDataResult<OaBasicItemBean<AttendanceListBean>>> getAttendanceList(@Field("AttendanceDate") String date,@Field("Size") int size,@Field("token") String token);
+      //公告类型
+       @FormUrlEncoded
+       @POST("index/news_class")
+       Observable<HttpDataResult<List<NewsClassifyBean>>> getNewsClassify(@Field("token") String token);
+       //公告分类列表
+       @FormUrlEncoded
+       @POST("index/news_list")
+       Observable<HttpDataResult<OaBasicItemBean<NewsListBean>>>   getNewsLists(@Field("ClassId") int id,@Field("ReadStatus") int status,@Field("Page") int page,@Field("token") String token);
+       //公告详情
+       @FormUrlEncoded
+       @POST("index/news_info")
+       Observable<HttpDataResult<NewsDetailsBean>>  getNewsDetails(@Field("NewsId") int id,@Field("token") String token);
+        //动态列表
+
 }

@@ -46,7 +46,7 @@ public class AttendanceActivity extends BaseActivity<AttendancePresent> implemen
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         mToolbarRight.setText("导入");
       Calendar cal = Calendar.getInstance();
-        mToolbarTitle.setText(cal.get(Calendar.YEAR)+"年"+cal.get(Calendar.MONTH)+1+"月");
+        mToolbarTitle.setText(cal.get(Calendar.YEAR)+"年"+(cal.get(Calendar.MONTH)+1)+"月");
         initToolBar(mToolbar);
       LoadingView.showProgress(this);
       mPresent.getAttendanceList("");

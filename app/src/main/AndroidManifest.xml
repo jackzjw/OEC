@@ -141,6 +141,10 @@
         </activity>
         <activity android:name=".ui.apply.activity.AttendanceActivity">
         </activity>
+        <activity android:name=".ui.home.activity.BannerDetailsActivity">
+        </activity>
+        <activity android:name=".ui.home.activity.TrendsActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -9,7 +9,9 @@ import shangchuan.com.oec.ui.apply.fragment.BaseMyReportListFragment;
 import shangchuan.com.oec.ui.apply.fragment.OaListBaseFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.BaseApproveListFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.WoListBaseFragment;
+import shangchuan.com.oec.ui.home.fragment.BannersBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.HomeFragment;
+import shangchuan.com.oec.ui.home.fragment.TrendBaseListFragment;
 import shangchuan.com.oec.ui.team.fragment.TeamUserFragment;
 
 /**
@@ -26,5 +28,7 @@ public interface FragmentComponent {
     void inject(TeamUserFragment fragment);
     void inject(BaseMyReportListFragment fragment);
     void inject(BaseApproveListFragment fragment);
+    void inject(BannersBaseFragment fragment);
+    void inject(TrendBaseListFragment fragment);
 
 }

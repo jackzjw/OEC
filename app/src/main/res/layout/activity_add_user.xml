@@ -37,7 +37,7 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="5dp"
 
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
                         <TextView
 
 
@@ -49,10 +49,12 @@
                         <EditText
                             android:id="@+id/user_nick"
                             android:textSize="14sp"
-                            android:text="公司"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center_vertical"
+                            android:maxLength="20"
                             android:background="@android:color/transparent"
                             android:singleLine="true"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
 
@@ -67,21 +69,21 @@
                         android:layout_weight="1"
                         android:paddingLeft="15dp"
                         android:paddingTop="5dp"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
                         <TextView
 
                             android:text="@string/apply_contacts_name"
                             android:textSize="14sp"
-
+                            android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <EditText
                             android:id="@+id/common_title"
                             android:textSize="14sp"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
+                            android:layout_gravity="center_vertical"
                             android:background="@android:color/transparent"
                             android:singleLine="true"
+                            android:layout_marginLeft="15dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
@@ -133,7 +135,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -141,16 +143,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/team_user_gender"
+                    android:layout_gravity="center_vertical"
                     />
-                <EditText
+                <TextView
                     android:id="@+id/user_gender"
                     android:textSize="14sp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
+                   android:layout_marginLeft="15dp"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
+                    android:gravity="center_vertical|left"
+                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>
@@ -161,7 +165,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -169,16 +173,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/apply_contacts_department"
+                    android:layout_gravity="center_vertical"
                     />
                 <EditText
                     android:id="@+id/user_department"
                     android:textSize="14sp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
+                     android:layout_marginLeft="15dp"
+                    android:gravity="center"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
 
 
             </LinearLayout>
@@ -190,7 +195,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -198,21 +203,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/apply_contacts_job"
+                    android:layout_gravity="center_vertical"
                     />
                 <EditText
                     android:id="@+id/user_job"
                     android:textSize="14sp"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
+                    android:layout_marginLeft="15dp"
+                     android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -220,14 +226,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/team_user_tel"
+                    android:layout_gravity="center_vertical"
                     />
                 <EditText
                     android:id="@+id/user_tel"
                     android:textSize="14sp"
                     android:singleLine="true"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical"
                     android:background="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -236,7 +245,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -244,16 +253,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/team_user_password"
+                    android:layout_gravity="center_vertical"
                     />
                 <EditText
                     android:id="@+id/user_password"
                     android:textSize="14sp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
+                   android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -262,7 +272,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -270,6 +280,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/apply_contacts_email"
+                    android:layout_gravity="center_vertical"
                     />
                 <EditText
                     android:id="@+id/user_email"
@@ -278,8 +289,10 @@
                     android:focusableInTouchMode="true"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -297,13 +310,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/team_user_character"
                     />
-                <TextView
-                    android:id="@+id/user_character"
-                    android:text="admin,jack"
-                    android:textSize="14sp"
-                    android:singleLine="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+              <android.support.v7.widget.RecyclerView
+                  android:paddingLeft="15dp"
+                  android:paddingTop="5dp"
+                  android:paddingBottom="5dp"
+                  android:id="@+id/role_recycleview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

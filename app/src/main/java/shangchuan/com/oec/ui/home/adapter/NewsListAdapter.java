@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.NewsListBean;
+import shangchuan.com.oec.ui.home.activity.BannerDetailsActivity;
 import shangchuan.com.oec.util.CommonUtil;
 
 /**
@@ -28,15 +29,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         this.mContext=context;
         this.mList=list;
     }
+    public void updateData(List<NewsListBean> list){
+        this.mList=list;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(mContext).inflate(R.layout.item_banner_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        final ViewHolder viewHolder=new ViewHolder(view);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                  int id=mList.get(viewHolder.getAdapterPosition()).getId();
+                   mContext.startActivity(BannerDetailsActivity.getInstance(mContext,id,viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;

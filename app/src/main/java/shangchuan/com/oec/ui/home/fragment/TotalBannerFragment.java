@@ -7,14 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by sg280 on 2017/3/10.
+ * Created by sg280 on 2017/4/26.
  */
 
-public class AlreadyReadBannerFragment extends BannersBaseFragment {
+public class TotalBannerFragment extends BannersBaseFragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       readStatus=1;
+        readStatus=2;
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

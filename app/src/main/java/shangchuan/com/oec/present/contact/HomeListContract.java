@@ -15,6 +15,7 @@ public interface HomeListContract {
     interface View extends BaseView{
         void showNewsList(List<NewsListBean> bean);
         void showTrendsList(List<TrendsListBean> bean);
+        void updateReadStatus(int position);
     }
     interface Present extends BasePresent<View>{
         void getNewsList();

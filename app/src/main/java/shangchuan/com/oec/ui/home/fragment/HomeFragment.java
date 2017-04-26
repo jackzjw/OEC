@@ -22,6 +22,7 @@ import shangchuan.com.oec.present.HomeListPresent;
 import shangchuan.com.oec.present.contact.HomeListContract;
 import shangchuan.com.oec.ui.home.activity.SearchActivity;
 import shangchuan.com.oec.ui.home.activity.TotalBannerActivity;
+import shangchuan.com.oec.ui.home.activity.TrendsActivity;
 import shangchuan.com.oec.ui.home.adapter.NewsListAdapter;
 import shangchuan.com.oec.ui.home.adapter.TrendsListAdapter;
 import shangchuan.com.oec.util.DensityUtil;
@@ -50,7 +51,7 @@ public class HomeFragment extends BaseFragment<HomeListPresent> implements View.
     @BindView(R.id.btn_total_dynamics)
     Button mTotalDymics;
     private NewsListAdapter newsAdapter;
-
+    private boolean isCancleLoading;
 
     @Override
     public void loadData() {
@@ -74,12 +75,10 @@ public class HomeFragment extends BaseFragment<HomeListPresent> implements View.
     @OnClick(R.id.btn_total_banners)
     void toTotalActivity(){
         startActivity(new Intent(mActivity, TotalBannerActivity.class));
-
-
     }
     @OnClick(R.id.btn_total_dynamics)
     void toTotalDynamic(){
-
+         startActivity(new Intent(mActivity, TrendsActivity.class));
     }
 
     //点击加号
@@ -111,7 +110,8 @@ public class HomeFragment extends BaseFragment<HomeListPresent> implements View.
 
     @Override
     public void showNewsList(List<NewsListBean> bean) {
-           LoadingView.dismissProgress();
+        if(isCancleLoading) LoadingView.dismissProgress();
+        isCancleLoading=true;
         if(!bean.isEmpty()) mTotalBanners.setVisibility(View.VISIBLE);
         NewsRec.setLayoutManager(new LinearLayoutManager(mActivity));
         NewsRec.addItemDecoration(new DividerDecoration(mActivity));
@@ -121,11 +121,18 @@ public class HomeFragment extends BaseFragment<HomeListPresent> implements View.
 
     @Override
     public void showTrendsList(List<TrendsListBean> bean) {
-         //  LoadingView.dismissProgress();
+        if(isCancleLoading) LoadingView.dismissProgress();
+        isCancleLoading=true;
         if(!bean.isEmpty()) mTotalDymics.setVisibility(View.VISIBLE);
           TrendsRec.setLayoutManager(new LinearLayoutManager(mActivity));
           TrendsRec.addItemDecoration(new DividerDecoration(mActivity));
         TrendsListAdapter trendsAdapter = new TrendsListAdapter(mActivity, bean);
            TrendsRec.setAdapter(trendsAdapter);
+    }
+
+    @Override
+    public void updateReadStatus(int position) {
+        newsAdapter.notifyItemChanged(position);
+
     }
 }

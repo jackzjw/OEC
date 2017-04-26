@@ -47,7 +47,7 @@ public class Day {
     /**
      * 出勤状态的半径
      */
-    public int workStateR = 10;
+    public int workStateR = 5;
     /**
      * 字体在第几行
      */
@@ -165,6 +165,7 @@ public class Day {
         switch (backgroundStyle) {
             case 1:
                 paint.setStyle(Paint.Style.FILL);
+                paint.setColor(Color.parseColor("#00000000"));
                 break;
             case 2:
                 paint.setStyle(Paint.Style.STROKE);
@@ -177,7 +178,7 @@ public class Day {
                 break;
             case 5:
                 paint.setStyle(Paint.Style.FILL);
-                paint.setColor(Color.parseColor("#C9CED6"));
+                paint.setColor(0xFFECF1F4);
                 break;
         }
         //计算圆心的位置

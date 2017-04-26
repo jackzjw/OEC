@@ -29,7 +29,9 @@ public class TrendsListAdapter extends RecyclerView.Adapter<TrendsListAdapter.Vi
         this.mContext=context;
         this.mList=list;
     }
-
+   public void updateData(List<TrendsListBean> list){
+       this.mList=list;
+   }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mview= LayoutInflater.from(mContext).inflate(R.layout.item_dynimic_list,parent,false);

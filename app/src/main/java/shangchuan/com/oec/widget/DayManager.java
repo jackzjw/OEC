@@ -183,6 +183,7 @@ public class DayManager {
             day.location_y = 0;
             day.text = weeks[i];
             //设置日期颜色
+
             day.textClor = Color.parseColor("#C9CED6");
             days.add(day);
 
@@ -206,33 +207,35 @@ public class DayManager {
                 day.textClor = Color.WHITE;;
             } else if (i == select - 1) {
                 day.backgroundStyle = 2;
-                day.textClor = Color.BLACK;;
+                day.textClor = 0xFF8696A5;;
              //周末
             } else if(calendar.get(Calendar.DAY_OF_WEEK) == 1 || calendar.get(Calendar.DAY_OF_WEEK) == 7){
                 day.backgroundStyle=5;
+                day.textClor=0xFF8696A5;
             }else
             {
                 day.backgroundStyle = 1;
-                day.textClor=Color.BLACK;
+                day.textClor=0xFF8696A5;
 
             }
             //设置工作状态
             //迟到不早退
-            if (list.get(i+1).getArriveStatus()==0&&list.get(i+1).getLeaveStatus()==1) {
-                day.workState = 0;
-            } else if (list.get(i+1).getLeaveStatus()==0&&list.get(i+1).getArriveStatus()==1) {
-                   //早退不迟到
-                day.workState = 2;
-            } else if (list.get(i+1).getIsVacation()==0) {
-                //请假
-                day.workState = 3;
-            } else if(list.get(i+1).getArriveStatus()==0&&list.get(i+1).getLeaveStatus()==0){
-                //迟到又早退
-                day.workState=4;
-            }
-           else {
-                //正常
-                day.workState = 1;
+            if(!list.isEmpty()) {
+                if (list.get(i + 1).getArriveStatus() == 0 && list.get(i + 1).getLeaveStatus() == 1) {
+                    day.workState = 0;
+                } else if (list.get(i + 1).getLeaveStatus() == 0 && list.get(i + 1).getArriveStatus() == 1) {
+                    //早退不迟到
+                    day.workState = 2;
+                } else if (list.get(i + 1).getIsVacation() == 0) {
+                    //请假
+                    day.workState = 3;
+                } else if (list.get(i + 1).getArriveStatus() == 0 && list.get(i + 1).getLeaveStatus() == 0) {
+                    //迟到又早退
+                    day.workState = 4;
+                } else {
+                    //正常
+                    day.workState = 1;
+                }
             }
             days.add(day);
         }

@@ -1,12 +1,15 @@
 package shangchuan.com.oec.present;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import rx.Subscription;
+import rx.functions.Action1;
 import shangchuan.com.oec.base.RxPresent;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.NewsListBean;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
@@ -27,6 +30,17 @@ public class HomeListPresent extends RxPresent<HomeListContract.View> implements
     @Inject
     public HomeListPresent(RetrofitHelper helper){
         this.mHelper=helper;
+        registerEvent();
+    }
+    private void registerEvent() {
+        Subscription subscription = RxBus.getDefault().toDefaultObservable(Integer.class, new Action1<Integer>() {
+            @Override
+            public void call(Integer pos) {
+                mNewsList.get(pos).setReadStatus(1);
+                mView.updateReadStatus(pos);
+            }
+        });
+        add(subscription);
     }
     @Override
     public void getNewsList() {
@@ -36,6 +50,7 @@ public class HomeListPresent extends RxPresent<HomeListContract.View> implements
                     @Override
                     public void onNext(OaBasicItemBean<NewsListBean> bean) {
                         mNewsList = bean.getItems();
+                        mView.showNewsList(mNewsList);
                     }
                 });
      add(subscription);
@@ -45,14 +60,15 @@ public class HomeListPresent extends RxPresent<HomeListContract.View> implements
 
     @Override
     public void getTrendsList() {
-        Subscription subscription = mHelper.getApiSevice().getTrendsList(1, 5, SaveToken.mToken)
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("Page",1);
+        hashMap.put("Size",5);
+        Subscription subscription = mHelper.getApiSevice().getTrendsList(hashMap, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<TrendsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<TrendsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<TrendsListBean>>(mView) {
                     @Override
                     public void onNext(OaBasicItemBean<TrendsListBean> bean) {
                              mView.showTrendsList(bean.getItems());
-                             mView.showNewsList(mNewsList);
-
                     }
                 });
         add(subscription);
