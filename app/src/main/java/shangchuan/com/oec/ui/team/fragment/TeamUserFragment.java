@@ -75,8 +75,9 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
                 popupWindow.showAtLocation(mRecyclerView, Gravity.CENTER,0,0);
             }
         });
+        LogUtil.i("第一次");
         LoadingView.showProgress(mActivity);
-      mPresent.getUserList();
+             mPresent.getUserList();
     }
 
     @Override
@@ -91,6 +92,7 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
 
     @Override
     public void showError(String msg) {
+        LogUtil.i("调用了错误");
         LoadingView.dismissProgress();
         isMore=false;
         ToastUtil.show(msg);
@@ -98,7 +100,7 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
 
     @Override
     public void showContent(List<UserInfoBean> bean) {
-        LogUtil.i("首字母="+bean.toString());
+        LogUtil.i("调用了");
         mInfoBeanList=bean;
         LoadingView.dismissProgress();
         adapter.updateData(bean);

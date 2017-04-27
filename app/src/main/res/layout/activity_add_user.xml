@@ -11,7 +11,6 @@
     tools:context="shangchuan.com.oec.ui.apply.activity.AddClientActivity">
     <include layout="@layout/toolbar_layout"
         />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,13 +48,14 @@
                         <EditText
                             android:id="@+id/user_nick"
                             android:textSize="14sp"
+                            android:gravity="center_vertical|left"
                             android:layout_marginLeft="15dp"
                             android:layout_gravity="center_vertical"
                             android:maxLength="20"
                             android:background="@android:color/transparent"
                             android:singleLine="true"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="match_parent"/>
 
 
                     </LinearLayout>
@@ -78,14 +78,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <EditText
-                            android:id="@+id/common_title"
+                            android:id="@+id/user_name"
                             android:textSize="14sp"
                             android:layout_gravity="center_vertical"
                             android:background="@android:color/transparent"
                             android:singleLine="true"
+                            android:gravity="center_vertical"
                             android:layout_marginLeft="15dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="match_parent"/>
 
 
 
@@ -105,6 +106,7 @@
                     android:id="@+id/rel_add_owner"
                     >
                     <RelativeLayout
+                         android:id="@+id/rel_add_role"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -118,6 +120,7 @@
                             android:layout_centerHorizontal="true"
                             />
                         <TextView
+                            android:id="@+id/add_role_desc"
                             android:layout_below="@id/add_blue"
                             android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
@@ -175,11 +178,11 @@
                     android:text="@string/apply_contacts_department"
                     android:layout_gravity="center_vertical"
                     />
-                <EditText
+                <TextView
                     android:id="@+id/user_department"
                     android:textSize="14sp"
                      android:layout_marginLeft="15dp"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     android:background="@android:color/transparent"
                     android:singleLine="true"
                     android:layout_width="match_parent"
@@ -231,6 +234,7 @@
                 <EditText
                     android:id="@+id/user_tel"
                     android:textSize="14sp"
+                    android:numeric="integer"
                     android:singleLine="true"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
@@ -301,7 +305,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 >
@@ -310,13 +314,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/team_user_character"
                     />
-              <android.support.v7.widget.RecyclerView
-                  android:paddingLeft="15dp"
-                  android:paddingTop="5dp"
-                  android:paddingBottom="5dp"
-                  android:id="@+id/role_recycleview"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/role_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical|left"
+                    android:textSize="14sp"
+                    />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -340,5 +345,8 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+
+
 </LinearLayout>
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import dagger.Component;
 import shangchuan.com.oec.di.ActivityScope;
 import shangchuan.com.oec.di.module.ActivityModule;
+import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.ui.WelcomeActivity;
 import shangchuan.com.oec.ui.apply.activity.AddClientActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyCommonActivity;
@@ -22,6 +23,8 @@ import shangchuan.com.oec.ui.apply.activity.WorkOutsideActivity;
 import shangchuan.com.oec.ui.apply.activity.WorkOvertimeActivity;
 import shangchuan.com.oec.ui.apply.activity.WorkReportDetailActivity;
 import shangchuan.com.oec.ui.home.activity.BannerDetailsActivity;
+import shangchuan.com.oec.ui.team.activity.AddUserActivity;
+import shangchuan.com.oec.ui.team.activity.RoleListActivity;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
 import shangchuan.com.oec.ui.user.activity.OrganizationListActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
@@ -32,7 +35,7 @@ import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
 @ActivityScope
 @Component(dependencies = AppComponent.class,modules = ActivityModule.class)
 public interface ActivityComponent {
-
+    RetrofitHelper getHttpHelper();
     Activity getActivity();
     FragmentComponent fragmentComponent();
     void inject(LoginActivity activity);
@@ -55,6 +58,8 @@ public interface ActivityComponent {
     void inject(WoDetailsActivity activity);
     void inject(AttendanceActivity activity);
     void inject(BannerDetailsActivity activity);
+    void inject(AddUserActivity activity);
+    void inject(RoleListActivity activity);
 
 
 

@@ -145,6 +145,12 @@
         </activity>
         <activity android:name=".ui.home.activity.TrendsActivity">
         </activity>
+        <activity android:name=".ui.team.activity.RoleListActivity">
+        </activity>
+        <activity android:name=".ui.team.activity.GroupListActivity">
+        </activity>
+        <activity android:name=".ui.team.activity.AddGroupNodeActivity">
+        </activity>
     </application>
 
 </manifest>

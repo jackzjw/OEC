@@ -16,6 +16,7 @@ import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
 import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
+import shangchuan.com.oec.model.bean.GroupBasicBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
 import shangchuan.com.oec.model.bean.NewsClassifyBean;
@@ -27,6 +28,7 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
+import shangchuan.com.oec.model.bean.RoleListBean;
 import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
@@ -202,6 +204,23 @@ public interface HttpService {
        @FormUrlEncoded
        @POST("index/news_info")
        Observable<HttpDataResult<NewsDetailsBean>>  getNewsDetails(@Field("NewsId") int id,@Field("token") String token);
-        //动态列表
+        //新增用户
+        @FormUrlEncoded
+        @POST("User/user_save")
+        Observable<HttpDataResult<WoSuccessBean>> addUser(@FieldMap HashMap<String,Object> hashMap,@Field("token") String token);
+         //角色列表
+       @FormUrlEncoded
+       @POST("Role/RoleList")
+        Observable<HttpDataResult<OaBasicItemBean<RoleListBean>>> getRoleList(@Field("token") String token);
+       //组织架构列表
+      @FormUrlEncoded
+      @POST("Organization/group_list")
+      Observable<HttpDataResult<GroupBasicBean>>  getOrGroupList(@Field("token") String token);
+      //添加组织架构
+      @FormUrlEncoded
+      @POST("Organization/group_save")
+       Observable<HttpDataResult<WoSuccessBean>> addGroupNode(@Field("PId")int pid,@Field("GroupName") String name,@Field("Remark") String remark,@Field("token") String token);
+
+
 
 }

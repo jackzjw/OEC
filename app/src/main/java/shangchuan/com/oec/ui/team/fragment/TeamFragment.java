@@ -18,6 +18,8 @@ import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.ui.team.activity.AddOrganizeStructureActivity;
+import shangchuan.com.oec.ui.team.activity.AddUserActivity;
+import shangchuan.com.oec.util.ToastUtil;
 
 /**
  * Created by sg280 on 2017/3/7.
@@ -37,7 +39,7 @@ public class TeamFragment<T extends RxPresent> extends BaseFragment implements V
     @BindView(R.id.rg_team)
     RadioGroup mRadioGroup;
     private List<Fragment> mfragmentList;
-
+    private int currentPage;
     @Override
     public void loadData() {
         imgAddUser.setOnClickListener(this);
@@ -74,11 +76,13 @@ public class TeamFragment<T extends RxPresent> extends BaseFragment implements V
             public void onPageSelected(int position) {
                   switch (position){
                       case 0:  rbUser.setChecked(true);
-
+                             currentPage=position;
                           break;
                       case 1:  rbOrganize.setChecked(true);
+                             currentPage=position;
                           break;
                       case 2:  rbCharacter.setChecked(true);
+                          currentPage=2;
                           break;
                   }
             }
@@ -104,7 +108,14 @@ public class TeamFragment<T extends RxPresent> extends BaseFragment implements V
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.img_team_add_user:
-                startActivity(new Intent(mActivity, AddOrganizeStructureActivity.class));
+                if(currentPage==0) {
+                    startActivity(new Intent(mActivity, AddUserActivity.class));
+                }else if(currentPage==1){
+                    startActivity(new Intent(mActivity, AddOrganizeStructureActivity.class));
+
+                }else if(currentPage==2){
+                    ToastUtil.show("请在PC端添加角色");
+                }
                 break;
         }
     }
