@@ -14,7 +14,6 @@ import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.present.UserListPresent;
 import shangchuan.com.oec.present.contact.UserListContract;
 import shangchuan.com.oec.ui.team.adapter.SortAdapter;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -39,6 +38,7 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
         if(!isVisible||!isPrepared){
             return;
         }
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter=new SortAdapter(mActivity,mInfoBeanList);
         mRecyclerView.setAdapter(adapter);
@@ -75,7 +75,6 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
                 popupWindow.showAtLocation(mRecyclerView, Gravity.CENTER,0,0);
             }
         });
-        LogUtil.i("第一次");
         LoadingView.showProgress(mActivity);
              mPresent.getUserList();
     }
@@ -92,7 +91,6 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
 
     @Override
     public void showError(String msg) {
-        LogUtil.i("调用了错误");
         LoadingView.dismissProgress();
         isMore=false;
         ToastUtil.show(msg);
@@ -100,7 +98,6 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
 
     @Override
     public void showContent(List<UserInfoBean> bean) {
-        LogUtil.i("调用了");
         mInfoBeanList=bean;
         LoadingView.dismissProgress();
         adapter.updateData(bean);

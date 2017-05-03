@@ -6,7 +6,7 @@ package shangchuan.com.oec.app;
 
 public class Constants {
 
-    public static final String BASE_URL="http://testapi.oec365.com/";
+    public static final String BASE_URL="https://testapi.oec365.com/";
     public static final String FILE_BASE_URL="http://testimg01.oec365.com/FileOperate/UploadFile/";
     public static final String USER_NICK_NAME="nick";
     public static final String USER_TELPHONE_NUMBER="tel";
@@ -23,5 +23,6 @@ public class Constants {
     public static final int YEAR_MONTH_DAY_HOUR=2;
     public static final int IMAGE_TYPE=1;
     public static final int VEDIO_TYPE=2;
+    public static final String USER_AVATER_DIR_PATH="Img/UserHeadImg/";
 
 }

@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,8 @@ import shangchuan.com.oec.ui.apply.fragment.approvepend.LeaveFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.OutsideFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.OverTimeFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.ReimburseFragment;
+import shangchuan.com.oec.util.DensityUtil;
+import shangchuan.com.oec.widget.ApprovePendPopupWindow;
 
 public class ApprovePendActivity extends BaseActivity {
     @BindView(R.id.toolbar_img)
@@ -53,6 +57,14 @@ public class ApprovePendActivity extends BaseActivity {
         mFragmentList.add(new CommonFragment());
         mViewPager.setAdapter(new PendViewPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
+        toolbarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApprovePendPopupWindow popupWindow=new ApprovePendPopupWindow(ApprovePendActivity.this);
+                popupWindow.showAsDropDown(toolbarImg,  DensityUtil.dp2px(ApprovePendActivity.this,-150),
+                        DensityUtil.dp2px(ApprovePendActivity.this,20), Gravity.BOTTOM|Gravity.RIGHT);
+            }
+        });
     }
 
     @Override

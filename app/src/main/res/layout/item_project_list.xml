@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="60dp">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:src="@drawable/user_img_avatar"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/project_avater"
-        />
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="60dp"
+    >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/project_avater"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="方太直播购一期"
-            android:textStyle="bold"
-            android:textSize="15sp"
-
-            />
-        <TextView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="我i偶尔会沃尔沃何日我和日哦温柔i维吾尔hi哦我我二话 "
-            />
-        <LinearLayout
-            android:id="@+id/project_remark"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></LinearLayout>
-
-
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3/03"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:id="@+id/ll_project"
+        >
+        <ImageView
+            android:id="@+id/icon_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/application_icon_project"
+            android:layout_alignBottom="@+id/imageView"
+            />
+        <TextView
+            android:id="@+id/project_name"
+            android:layout_toRightOf="@+id/icon_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OEC"
+            android:layout_marginLeft="15dp"
+            android:textSize="14sp"
+            android:textColor="@color/theme_dark_text_color"
+            />
+        <TextView
+            android:layout_toRightOf="@+id/project_name"
+            android:id="@+id/task_tag"
+            android:layout_width="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/shape_unread_red_circle_dot"
+            />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="55dp"
+        android:layout_below="@+id/ll_project"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/holo_blue_light"/>
         />
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/home_news_arrow"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="15dp"
+    android:layout_centerVertical="true"
+    android:id="@+id/imageView"/>
+
+
+
 
 </RelativeLayout>

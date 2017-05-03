@@ -151,6 +151,12 @@
         </activity>
         <activity android:name=".ui.team.activity.AddGroupNodeActivity">
         </activity>
+        <activity android:name=".ui.apply.activity.ApprovePendListActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ProjectListActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.MyTaskActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -34,13 +34,14 @@
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
             />
-        <ImageView
+        <shangchuan.com.oec.widget.CircleImageView
+            android:id="@+id/user_avater"
             android:layout_toLeftOf="@+id/arrow"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:src="@drawable/user_img_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
 
             />
     </RelativeLayout>
@@ -154,12 +155,14 @@
                     android:layout_centerVertical="true"
                     android:id="@+id/string_admin"
                     />
-                <TextView
+                <EditText
                     android:id="@+id/user_job"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical|right"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"

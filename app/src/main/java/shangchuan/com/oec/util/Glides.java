@@ -5,6 +5,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import shangchuan.com.oec.R;
 
@@ -77,7 +78,7 @@ public class Glides {
                 .load(url)
                 .placeholder(R.drawable.user_img_avatar01)
                 .error(R.drawable.user_img_avatar01)
-              //  .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
 

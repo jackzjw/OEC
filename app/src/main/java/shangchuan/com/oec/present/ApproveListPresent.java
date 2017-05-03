@@ -35,7 +35,7 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
         this.mHelper=helper;
     }
     @Override
-    public void getApproveList(final String type) {
+    public void getApproveList(final String type, final int isAudit) {
 
         currentPage=1;
         Subscription subscription = mHelper.getApiSevice().getApplyTypes(SaveToken.mToken)
@@ -46,8 +46,7 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
                             for (OaTypeBean item : result.getData()) {
                                 if (type.equals(item.getClassName())) {
                                     classId = item.getId();
-                                        LogUtil.i("id="+classId);
-                                    return mHelper.getApiSevice().getApproveList(classId, currentPage++, SaveToken.mToken);
+                                    return mHelper.getApiSevice().getApproveList(classId,isAudit, currentPage++, SaveToken.mToken);
                                 }
                             }
                         }
@@ -66,8 +65,8 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
     }
 
     @Override
-    public void getMoreContent(String type) {
-        Subscription subscription = mHelper.getApiSevice().getApproveList(classId, currentPage++, SaveToken.mToken)
+    public void getMoreContent(String type,int isAudit) {
+        Subscription subscription = mHelper.getApiSevice().getApproveList(classId,isAudit, currentPage++, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<ApproveListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<ApproveListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<ApproveListBean>>(mView) {
                     @Override

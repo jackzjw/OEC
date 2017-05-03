@@ -11,6 +11,7 @@ import shangchuan.com.oec.ui.apply.activity.AddClientActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyCommonActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyLeaveActivity;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeDetailsActivity;
+import shangchuan.com.oec.ui.apply.activity.ApprovePendListActivity;
 import shangchuan.com.oec.ui.apply.activity.ApproverActivity;
 import shangchuan.com.oec.ui.apply.activity.AttendanceActivity;
 import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
@@ -28,6 +29,7 @@ import shangchuan.com.oec.ui.team.activity.RoleListActivity;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
 import shangchuan.com.oec.ui.user.activity.OrganizationListActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
+import shangchuan.com.oec.ui.user.activity.UserInfoActivity;
 
 /**
  * Created by sg280 on 2017/3/6.
@@ -60,7 +62,8 @@ public interface ActivityComponent {
     void inject(BannerDetailsActivity activity);
     void inject(AddUserActivity activity);
     void inject(RoleListActivity activity);
-
+    void inject(ApprovePendListActivity activity);
+    void inject(UserInfoActivity activity);
 
 
 }

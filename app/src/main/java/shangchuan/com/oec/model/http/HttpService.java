@@ -19,6 +19,7 @@ import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.GroupBasicBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
+import shangchuan.com.oec.model.bean.MyInfoBean;
 import shangchuan.com.oec.model.bean.NewsClassifyBean;
 import shangchuan.com.oec.model.bean.NewsDetailsBean;
 import shangchuan.com.oec.model.bean.NewsListBean;
@@ -167,7 +168,7 @@ public interface HttpService {
        //审批列表
        @FormUrlEncoded
        @POST("OA/approval_list")
-       Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> getApproveList(@Field("ClassId") int classid,@Field("Page") int page,@Field("token" ) String token);
+       Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> getApproveList(@Field("ClassId") int classid,@Field("IsAudit") int isAudit,@Field("Page") int page,@Field("token" ) String token);
        //公告列表
        @FormUrlEncoded
        @POST("Index/news_list")
@@ -220,7 +221,17 @@ public interface HttpService {
       @FormUrlEncoded
       @POST("Organization/group_save")
        Observable<HttpDataResult<WoSuccessBean>> addGroupNode(@Field("PId")int pid,@Field("GroupName") String name,@Field("Remark") String remark,@Field("token") String token);
-
-
+       //修改密码
+       @FormUrlEncoded
+       @POST("Common/user_pwd_edit")
+       Observable<HttpDataResult<WoSuccessBean>> modifyPwd(@Field("OldMD5UserPassword") String oldPwd,@Field("NewMD5UserPassword") String newPwd,@Field("token") String token);
+       //用户详情
+       @FormUrlEncoded
+       @POST("User/user_info")
+       Observable<HttpDataResult<MyInfoBean>> userInfoDetail(@Field("Id") int id,@Field("token") String token);
+       //修改用户详情
+        @FormUrlEncoded
+        @POST("User/user_edit_save")
+         Observable<HttpDataResult<WoSuccessBean>> modifyUserInfo(@FieldMap HashMap<String,Object> hashMap,@Field("token") String token);
 
 }

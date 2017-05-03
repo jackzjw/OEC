@@ -43,6 +43,7 @@ public class TrendsActivity extends BaseActivity {
         mToolbarImg.setImageResource(R.drawable.home_icon_news_search);
         mToolbarTitle.setText("全部动态");
         initToolBar(mToolbar);
+
         mFragmentList=new ArrayList<>();
         mFragmentList.add(new TotalTrendsFragment());
         mFragmentList.add(new TrendWoFragment());

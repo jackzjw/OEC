@@ -16,7 +16,7 @@ public interface ApproveListContract {
         void showMoreContent(List<ApproveListBean> bean,int start,int end);
     }
     interface Present extends BasePresent<View>{
-        void getApproveList(String type);
-        void getMoreContent(String type);
+        void getApproveList(String type,int isAudit);
+        void getMoreContent(String type,int isAudit);
     }
 }

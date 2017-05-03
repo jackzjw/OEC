@@ -8,23 +8,27 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
+import rx.Subscription;
+import rx.functions.Action1;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
-import shangchuan.com.oec.base.BaseFragment;
-import shangchuan.com.oec.base.RxPresent;
+import shangchuan.com.oec.base.SimpleFragment;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
+import shangchuan.com.oec.ui.user.activity.ModifyPwdActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
 import shangchuan.com.oec.ui.user.activity.UserInfoActivity;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.SharePreferenceUtil;
+import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 
 /**
  * Created by sg280 on 2017/3/7.
  */
 
-public class UserFragment<T extends RxPresent> extends BaseFragment implements View.OnClickListener{
+public class UserFragment extends SimpleFragment implements View.OnClickListener{
     @BindView(R.id.rel_switch_organize)
     RelativeLayout mSwitchOrganize;
     @BindView(R.id.rel_user_info)
@@ -39,19 +43,12 @@ public class UserFragment<T extends RxPresent> extends BaseFragment implements V
     TextView phoneNumber;
     @BindView(R.id.current_tenant_name)
     TextView mTenantName;
+    @BindView(R.id.rel_modify_password)
+    RelativeLayout mRelModifyPwd;
     private int REQUEST_CODE=1;
 
-    @Override
-    public void loadData() {
-        mSwitchOrganize.setOnClickListener(this);
-        mUserInfo.setOnClickListener(this);
-        mLogOff.setOnClickListener(this);
-        showUserInfo();
-
-
-    }
     private void showUserInfo(){
-     //   MySelfInfo.getInstance().getCache(mActivity);
+        MySelfInfo.getInstance().getCache(mActivity);
         Glide.with(mActivity).load(MySelfInfo.getInstance().getAvatar())
                        .error(R.drawable.user_img_avatar).into(userAvater);
             userNick.setText(MySelfInfo.getInstance().getNickName());
@@ -66,17 +63,6 @@ public class UserFragment<T extends RxPresent> extends BaseFragment implements V
 
 
     @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_user;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rel_switch_organize:
@@ -88,6 +74,9 @@ public class UserFragment<T extends RxPresent> extends BaseFragment implements V
             case R.id.tv_logoff:
                SharePreferenceUtil.setLogin(false);
                 startActivity(new Intent(mActivity, LoginActivity.class));
+                break;
+            case R.id.rel_modify_password:
+                startActivity(new Intent(mActivity, ModifyPwdActivity.class));
                 break;
         }
     }
@@ -105,6 +94,28 @@ public class UserFragment<T extends RxPresent> extends BaseFragment implements V
 
     @Override
     public void showError(String msg) {
+        ToastUtil.shortShow(msg);
+    }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_user;
+    }
+
+    @Override
+    protected void initEventAndData() {
+        mSwitchOrganize.setOnClickListener(this);
+        mUserInfo.setOnClickListener(this);
+        mLogOff.setOnClickListener(this);
+        mRelModifyPwd.setOnClickListener(this);
+        showUserInfo();
+        Subscription subscription = RxBus.getDefault().toDefaultObservable(String.class, new Action1<String>() {
+            @Override
+            public void call(String event) {
+                if("updateUserInfo".equals(event))
+                   showUserInfo();
+            }
+        });
+        add(subscription);
     }
 }
