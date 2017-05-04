@@ -12,7 +12,6 @@
     <include layout="@layout/toolbar_layout"
         />
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -31,8 +30,7 @@
 
                         android:orientation="horizontal">
                         <TextView
-
-                            android:text="项目名称"
+                            android:text="任务标题"
                             android:textSize="14sp"
                             android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"
@@ -61,17 +59,18 @@
                         android:orientation="horizontal">
                         <TextView
 
-                            android:text="备注"
+                            android:text="截至日期"
                             android:textSize="14sp"
-                             android:layout_gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
-                        <EditText
+                        <TextView
                             android:id="@+id/project_remark"
                             android:textSize="14sp"
                             android:layout_marginLeft="10dp"
                             android:background="@android:color/transparent"
                             android:singleLine="true"
+                            android:gravity="center_vertical|left"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="match_parent"/>
@@ -99,7 +98,6 @@
                         android:layout_centerInParent="true"
                         >
                         <ImageView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/add_blue"
@@ -111,7 +109,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="选择成员"
+                            android:text="添加负责人"
                             />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -119,13 +117,52 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
                 android:background="@color/theme_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:text="任务描述"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                 <EditText
+                     android:id="@+id/task_desc"
+                     android:paddingLeft="15dp"
+                     android:paddingTop="5dp"
+                     android:paddingRight="10dp"
+                     android:paddingBottom="5dp"
+                     android:background="@android:color/transparent"
+                     android:textSize="14sp"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"/>
 
+
+            </LinearLayout>
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ImageView
+                   android:id="@+id/img_link"
+                   android:layout_alignParentRight="true"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="10dp"
+                   android:padding="5dp"
+                   android:src="@drawable/application_icon_link"
+                   />
+
+
+           </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/theme_divide_color"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -136,15 +173,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="项目组成员"
+                    android:text="负责人"
                     android:layout_gravity="center_vertical"
                     />
-               <android.support.v7.widget.RecyclerView
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                   android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -164,8 +201,9 @@
                     android:textSize="14sp"
                     android:background="@drawable/shape_commit_work_order_button_bg"
                     />
-            </RelativeLayout>
 
+            </RelativeLayout>
 </LinearLayout>
+
 
 

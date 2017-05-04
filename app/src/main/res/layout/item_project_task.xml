@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <View
+            android:layout_width="2dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/home_text_light_green"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="15dp"
+            android:text="前端开发"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_news_arrow"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            />
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/task_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="+创建新任务"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/theme_divide_color"/>
+
+</LinearLayout>

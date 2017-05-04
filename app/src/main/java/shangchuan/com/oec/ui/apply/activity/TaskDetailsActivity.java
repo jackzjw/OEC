@@ -7,21 +7,25 @@ import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseActivity;
 
-public class AddProjectActivity extends BaseActivity {
+public class TaskDetailsActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.toolbar_right_title)
+    TextView mToolbartRight;
+
 
     @Override
     protected int getResourcesLayout() {
-        return R.layout.activity_add_project;
+        return R.layout.activity_project_details;
     }
 
     @Override
     protected void initEventData() {
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
-        mToolbarTitle.setText("创建新项目");
+        mToolbarTitle.setText("项目详情");
+        mToolbartRight.setText("修改");
         initToolBar(mToolbar);
     }
 

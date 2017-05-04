@@ -72,9 +72,9 @@
         </activity>
         <activity
             android:name=".ui.apply.activity.AddProjectActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.ProjectDetailsActivity">
+        <activity android:name=".ui.apply.activity.TaskDetailsActivity">
         </activity>
         <activity
             android:name=".ui.team.activity.AddUserActivity"
@@ -156,6 +156,12 @@
         <activity android:name=".ui.apply.activity.ProjectListActivity">
         </activity>
         <activity android:name=".ui.apply.activity.MyTaskActivity">
+        </activity>
+        <activity
+            android:name=".ui.apply.activity.AddTaskActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity android:name=".ui.apply.activity.ProjectDetailsActivity">
         </activity>
     </application>
 

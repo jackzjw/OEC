@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.SimpleActivity;
+import shangchuan.com.oec.ui.apply.fragment.project.MyLaunchFragment;
 import shangchuan.com.oec.ui.apply.fragment.project.MyResponseFragment;
 
 public class MyTaskActivity extends SimpleActivity {
@@ -40,7 +41,7 @@ public class MyTaskActivity extends SimpleActivity {
         initToolBar(mToolbar);
         mFragmentList=new ArrayList<>();
         mFragmentList.add(new MyResponseFragment());
-
+        mFragmentList.add(new MyLaunchFragment());
         mViewPager.setAdapter(new ListViewpagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
     }

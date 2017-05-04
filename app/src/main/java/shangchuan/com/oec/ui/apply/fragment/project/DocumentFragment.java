@@ -4,10 +4,10 @@ import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseFragment;
 
 /**
- * Created by sg280 on 2017/5/3.
+ * Created by sg280 on 2017/5/4.
  */
 
-public class MyResponseFragment extends BaseFragment {
+public class DocumentFragment extends BaseFragment {
     @Override
     public void loadData() {
 
@@ -15,7 +15,7 @@ public class MyResponseFragment extends BaseFragment {
 
     @Override
     public int getResourcesLayout() {
-        return R.layout.fragment_my_response;
+        return R.layout.fragment_document;
     }
 
     @Override

@@ -1,223 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_project_details"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="shangchuan.com.oec.ui.apply.activity.ProjectDetailsActivity">
+    android:layout_height="wrap_content"
+    tools:context="shangchuan.com.oec.ui.apply.activity.TaskDetailsActivity">
     <include layout="@layout/toolbar_layout"/>
-    <RelativeLayout
+    <ScrollView
+        android:layout_below="@+id/ll_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/theme_divide_color"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
         >
         <ImageView
-            android:id="@+id/user_avatar"
+            android:id="@+id/finish_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/user_img_avatar"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"/>
-        <TextView
-            android:id="@+id/user_report_type"
-            android:layout_toRightOf="@+id/user_avatar"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/application_button_finish_normal"
             android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="方太"
-            android:textStyle="bold"
-            android:singleLine="true"
-            android:textSize="14sp"
+
             />
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/user_avatar"
-            android:layout_below="@+id/user_report_type"
-            android:layout_marginTop="3dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="@string/apply_file_time"
-                />
-            <TextView
-                android:id="@+id/file_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017-03-15 11:00"
-                android:textSize="12sp"
-
-                />
-        </LinearLayout>
-    </RelativeLayout>
+            android:text="手机端不显示二级菜单"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/project_finish_background"
+        android:text="点击上方“口”完成任务"
+        android:textColor="@color/project_finish_text_color"
+        />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingLeft="15dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_leave_type"
-                android:textSize="13sp"
-                />
-            <TextView
-                android:id="@+id/project_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="2017-03-15 11:00"
-                android:singleLine="true"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/theme_divide_color"/>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:paddingTop="5dp"
-            android:paddingLeft="15dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_client"
-                android:textSize="13sp"
-                />
-            <TextView
-                android:id="@+id/client_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="2017-03-15 12:00"
-                android:singleLine="true"
-                />
-        </LinearLayout>
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/application_icon_avatar"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cast"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingLeft="15dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_project_name"
-                android:textSize="13sp"
-                android:id="@+id/textView"/>
-
-            <TextView
-                android:id="@+id/project_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="方太直播购"
-                android:singleLine="true"
-
-                />
-
-
-        </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/theme_divide_color"/>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:paddingTop="5dp"
-            android:paddingLeft="15dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_project_code"
-                android:textSize="13sp"
-                />
-            <TextView
-                android:id="@+id/project_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="2017-03-15 12:00"
-                android:singleLine="true"
-                />
-        </LinearLayout>
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/application_icon_time"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/finish_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-05-04"
+            android:textColor="@color/apply_wait_approve_text_color"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            />
     </LinearLayout>
-    <View
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/theme_divide_color"/>
+        android:layout_height="20dp"
+        android:background="@color/theme_divide_color"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical|left"
+        android:text="任务内容"
+        />
+    <TextView
+        android:id="@+id/task_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/task_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="20dp"
+       android:background="@color/theme_divide_color"
+       android:text="动态"
+       android:gravity="center_vertical|left"
 
+       />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reamrk_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_client_remark"
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:textSize="14sp"
+            android:id="@+id/input_remark"
+            android:layout_height="match_parent"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:id="@+id/btn_send"
             />
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/theme_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_responsibile_person"
-            />
-        <TextView
-            android:id="@+id/responsibile_person"
-            android:text="admin,jack"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

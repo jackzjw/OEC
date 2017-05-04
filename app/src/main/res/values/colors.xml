@@ -47,4 +47,7 @@
     <color name="attendence_rest_status_color">#C9CED6</color>
     <color name="attendence_later_status_color">#E65752</color>
     <color name="attendence_earily_status_color">#FDDD28</color>
+    <color name="project_finish_background">#FEF7E8</color>
+    <color name="project_finish_text_color">#F6B825</color>
+
 </resources>
