@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="60dp"
     >
@@ -30,6 +31,7 @@ android:layout_height="60dp"
             android:textColor="@color/theme_dark_text_color"
             />
         <TextView
+
             android:layout_toRightOf="@+id/project_name"
             android:id="@+id/task_tag"
             android:layout_width="5dp"
@@ -42,14 +44,17 @@ android:layout_height="60dp"
 
 
 
-    <TextView
+    <shangchuan.com.oec.widget.HorizontalProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="55dp"
         android:layout_below="@+id/ll_project"
         android:layout_marginRight="50dp"
-        android:background="@android:color/holo_blue_light"/>
+        app:zpb_bg_color="@color/theme_divide_color"
+        app:zpb_pb_color="@color/home_text_light_green"
+         />
         />
 <ImageView
     android:layout_width="wrap_content"

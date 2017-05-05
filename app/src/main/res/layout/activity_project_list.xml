@@ -58,8 +58,13 @@
         android:background="@color/theme_divide_color"
         android:gravity="center_vertical|left"
         android:paddingLeft="15dp"
+        android:textSize="12sp"
         android:text="参与项目"
         />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

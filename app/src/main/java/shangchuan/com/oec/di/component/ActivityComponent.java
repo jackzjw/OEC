@@ -18,6 +18,7 @@ import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkReportActivity;
 import shangchuan.com.oec.ui.apply.activity.ModifyClientDetailsActivity;
+import shangchuan.com.oec.ui.apply.activity.ProjectListActivity;
 import shangchuan.com.oec.ui.apply.activity.ReimburseActivity;
 import shangchuan.com.oec.ui.apply.activity.WoDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.WorkOutsideActivity;
@@ -64,6 +65,6 @@ public interface ActivityComponent {
     void inject(RoleListActivity activity);
     void inject(ApprovePendListActivity activity);
     void inject(UserInfoActivity activity);
-
+    void inject(ProjectListActivity activity);
 
 }

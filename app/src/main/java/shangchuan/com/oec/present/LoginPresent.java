@@ -12,6 +12,7 @@ import shangchuan.com.oec.model.bean.LoginInfoBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.LoginContract;
 import shangchuan.com.oec.util.LogUtil;
+import shangchuan.com.oec.util.MD5Util;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.util.SharePreferenceUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
@@ -32,8 +33,8 @@ public class LoginPresent extends RxPresent<LoginContract.View> implements Login
     }
     @Override
     public void login(String tel,String pwd){
-           LogUtil.i(tel+pwd);
-        Subscription subscription = mHelper.getApiSevice().login(tel, pwd).
+        String md5Pwd= MD5Util.getStringMD5(pwd+"OEC");
+        Subscription subscription = mHelper.getApiSevice().login(tel, md5Pwd).
                 compose(RxUtil.<HttpDataResult<LoginInfoBean>>scheduleRxHelper())
                 .compose(RxUtil.<LoginInfoBean>handleResult()).subscribe(
                         new CommonSubscriber<LoginInfoBean>(mView) {

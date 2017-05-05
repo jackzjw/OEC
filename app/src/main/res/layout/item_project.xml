@@ -14,11 +14,13 @@
             android:orientation="horizontal"
             >
             <ImageView
+                android:id="@+id/finish_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/application_button_finish_normal"
                 />
             <TextView
+                android:id="@+id/task_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="随便写点"

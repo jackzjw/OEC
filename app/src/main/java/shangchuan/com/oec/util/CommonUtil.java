@@ -145,7 +145,6 @@ public class CommonUtil {
         }catch (ParseException e){
             e.printStackTrace();
         }
-       LogUtil.i("秒="+t);
      //   long t = Long.parseLong(timeStr);
         long time = System.currentTimeMillis() - t;
         long mill = (long) Math.ceil(time /1000);//秒前

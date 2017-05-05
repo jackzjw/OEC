@@ -18,6 +18,9 @@ import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.GroupBasicBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
+import shangchuan.com.oec.model.bean.ProjectListBean;
+import shangchuan.com.oec.model.bean.ResultBean;
+import shangchuan.com.oec.model.bean.ResultListBean;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
 import shangchuan.com.oec.model.bean.MyInfoBean;
 import shangchuan.com.oec.model.bean.NewsClassifyBean;
@@ -30,6 +33,7 @@ import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
 import shangchuan.com.oec.model.bean.RoleListBean;
+import shangchuan.com.oec.model.bean.TaskListBean;
 import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
@@ -233,5 +237,13 @@ public interface HttpService {
         @FormUrlEncoded
         @POST("User/user_edit_save")
          Observable<HttpDataResult<WoSuccessBean>> modifyUserInfo(@FieldMap HashMap<String,Object> hashMap,@Field("token") String token);
+       //项目列表
+         @FormUrlEncoded
+         @POST("Project/project_list")
+         Observable<HttpDataResult<ResultListBean<ProjectListBean>>> projectList(@Field("ProStatus") int status, @Field("token") String token);
+          //我的任务
+          @FormUrlEncoded
+          @POST("Project/project_mytask")
+          Observable<HttpDataResult<ResultBean<OaBasicItemBean<TaskListBean>>>> getTaskList(@Field("TaskStatus") int statud,@Field("ProId") int id,@Field("token") String token);
 
 }
