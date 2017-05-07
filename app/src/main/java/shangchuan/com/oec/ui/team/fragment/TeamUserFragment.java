@@ -14,6 +14,7 @@ import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.present.UserListPresent;
 import shangchuan.com.oec.present.contact.UserListContract;
 import shangchuan.com.oec.ui.team.adapter.SortAdapter;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -77,6 +78,12 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
         });
         LoadingView.showProgress(mActivity);
              mPresent.getUserList();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtil.i("teamUserFragment="+isVisibleToUser);
     }
 
     @Override

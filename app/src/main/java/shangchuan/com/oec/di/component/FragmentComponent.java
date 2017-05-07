@@ -13,6 +13,7 @@ import shangchuan.com.oec.ui.apply.fragment.workofficelist.WoListBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.BannersBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.HomeFragment;
 import shangchuan.com.oec.ui.home.fragment.TrendBaseListFragment;
+import shangchuan.com.oec.ui.team.fragment.OrganizeFragment;
 import shangchuan.com.oec.ui.team.fragment.TeamUserFragment;
 
 /**
@@ -32,5 +33,6 @@ public interface FragmentComponent {
     void inject(BannersBaseFragment fragment);
     void inject(TrendBaseListFragment fragment);
     void inject(MyResponseFragment fragment);
+    void inject(OrganizeFragment fragment);
 
 }

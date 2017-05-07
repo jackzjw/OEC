@@ -13,6 +13,7 @@ import rx.Subscription;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.SimpleActivity;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.GroupListBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
@@ -96,8 +97,10 @@ public class AddOrganizeStructureActivity extends SimpleActivity {
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(this) {
                     @Override
                     public void onNext(WoSuccessBean bean) {
+
                         LoadingView.dismissProgress();
                          ToastUtil.shortShow("添加成功");
+                        RxBus.getDefault().post("addStructer");
                         finish();
                     }
                 });

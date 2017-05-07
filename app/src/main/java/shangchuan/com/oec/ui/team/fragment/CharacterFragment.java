@@ -2,6 +2,7 @@ package shangchuan.com.oec.ui.team.fragment;
 
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseFragment;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/3/8.
@@ -10,8 +11,17 @@ import shangchuan.com.oec.base.BaseFragment;
 public class CharacterFragment extends BaseFragment {
     @Override
     public void loadData() {
+        if(!isVisible||!isPrepared){
+            return;
+        }
 
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        LogUtil.i("CharacterFragment="+isVisibleToUser);
     }
 
     @Override

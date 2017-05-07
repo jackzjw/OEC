@@ -25,4 +25,12 @@ public class GroupBasicBean {
     public void setGroup_list(ArrayList<GroupListBean> group_list) {
         this.group_list = group_list;
     }
+
+    @Override
+    public String toString() {
+        return "GroupBasicBean{" +
+                "TenantName='" + TenantName + '\'' +
+                ", group_list=" + group_list +
+                '}';
+    }
 }

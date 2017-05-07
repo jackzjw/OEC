@@ -107,13 +107,13 @@ public class Day {
         //workState 0:迟到不早退，1：正常，2：早退不迟到，3：请假，4：迟到又早退，
         switch (workState) {
             case 0:
-                paint.setColor(Color.parseColor("#E65752"));
+                paint.setColor(0xFFE65752);
                 break;
             case 2:
-                paint.setColor(Color.parseColor("#FDDD28"));
+                paint.setColor(0xFFFDDD28);
                 break;
             case 3:
-                paint.setColor(Color.parseColor("#46CEA1"));
+                paint.setColor(0xff46CEA1);
                 break;
         }
         canvas.drawCircle(cx, xy, workStateR, paint);
@@ -169,11 +169,11 @@ public class Day {
                 break;
             case 2:
                 paint.setStyle(Paint.Style.STROKE);
-                paint.setColor(Color.parseColor("#40B8D8"));
+                paint.setColor(0xff40B8D8);
                 paint.setStrokeWidth(3);
                 break;
             case 3:
-                paint.setColor(Color.parseColor("#40B8D8"));
+                paint.setColor(0xff40B8D8);
                 paint.setStyle(Paint.Style.FILL);
                 break;
             case 5:

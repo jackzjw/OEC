@@ -62,7 +62,6 @@ public abstract class BaseFragment<T extends RxPresent> extends Fragment impleme
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        LogUtil.i("userVisibleHint"+isPrepared);
         //因为这个方法是先于onCreateView方法的，在viewpage滑动切换页面时，如果之前有isPrepared=true
         //就会加载数据，所以会重复加载，因此要先置于false状态;
         if(isVisibleToUser){
@@ -81,7 +80,6 @@ protected FragmentComponent getFragmentComponent(){
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LogUtil.i("destory view");
         if(mPresent!=null){
             mPresent.deatchView();
         }

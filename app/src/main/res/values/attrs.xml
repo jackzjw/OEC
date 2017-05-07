@@ -58,4 +58,13 @@
         <attr name="zpb_max" format="integer" />
         <attr name="zpb_progress" format="integer" />
     </declare-styleable>
+    <declare-styleable name="OrganizationView">
+        <attr name="zjw_text_color" format="color|reference"/>
+        <attr name="zjw_bg_color" format="color|reference"> </attr>
+        <attr name="zjw_rect_height" format="dimension|reference"/>
+        <attr name="zjw_rect_magin" format="dimension|reference"/>
+       <attr name="zjw_rect_margin_left" format="dimension|reference"/>
+        <attr name="zjw_text_size" format="dimension"/>
+
+    </declare-styleable>
 </resources>
