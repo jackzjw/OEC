@@ -7,7 +7,7 @@ package shangchuan.com.oec.model.bean;
 public class TrendsListBean {
 
     private int   Id;
-    private String   JobType;
+    private int   JobType;
     private String   JobTitle;
     private String   JobContent;
     private int   OrderId ;
@@ -22,11 +22,11 @@ public class TrendsListBean {
         Id = id;
     }
 
-    public String getJobType() {
+    public int getJobType() {
         return JobType;
     }
 
-    public void setJobType(String jobType) {
+    public void setJobType(int jobType) {
         JobType = jobType;
     }
 

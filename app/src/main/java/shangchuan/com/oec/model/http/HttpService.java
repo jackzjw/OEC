@@ -84,7 +84,7 @@ public interface HttpService {
     //删除工单
     @FormUrlEncoded
     @POST("WO/wo_del")
-    Observable<HttpDataResult<WoSuccessBean>> delWorkOrder(@Field("Id") int id);
+    Observable<HttpDataResult<WoSuccessBean>> delWorkOrder(@Field("Id") int id,@Field("token") String token);
     //保存处理结果
     @FormUrlEncoded
     @POST("WO/wo_deal")
@@ -97,8 +97,8 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("WO/wo_list")
     Observable<HttpDataResult<OaBasicItemBean<WoListBean>>>
-    getWoList(@Field("ClassIdA") int aid,@Field("ClassIdB") int bid,
-              @Field("OrderStatus") int ostatus,@Field("Status") int status,@Field("Page") int page,@Field("token") String token);
+    getWoList(@Field("ClassIdA") String aid,@Field("ClassIdB") String bid,
+              @Field("OrderStatus") String ostatus,@Field("Status") String status,@Field("Page") int page,@Field("token") String token);
 
     //获取客户列表
     @FormUrlEncoded

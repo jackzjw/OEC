@@ -31,7 +31,7 @@
         android:layout_below="@+id/banner_title"
         android:layout_marginTop="5dp"
         android:singleLine="true"
-        android:text="时候分配隔行如果ip恶化人工配合"
+
         />
     <ImageView
         android:layout_width="wrap_content"
@@ -49,6 +49,7 @@
         android:layout_toLeftOf="@+id/right_arrow"
         android:layout_centerVertical="true"
         android:text="2/24"
+        android:textSize="12sp"
         android:layout_marginRight="5dp"
         />
 

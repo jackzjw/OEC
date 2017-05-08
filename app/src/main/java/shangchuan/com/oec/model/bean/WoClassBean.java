@@ -6,23 +6,30 @@ package shangchuan.com.oec.model.bean;
 
 public class WoClassBean {
 
-    private int id;
-    private int pid;
+    private String id;
+    private String pid;
     private String className;
-
-    public int getId() {
+    public WoClassBean(){};
+    public WoClassBean(String className){
+        this.className=className;
+    }
+    public WoClassBean(String className,String id){
+        this.className=className;
+        this.id=id;
+    }
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 

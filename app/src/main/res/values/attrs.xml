@@ -67,4 +67,7 @@
         <attr name="zjw_text_size" format="dimension"/>
 
     </declare-styleable>
+    <declare-styleable name="MySpinnerView">
+        <attr name="zjw_default_text" format="string"/>
+    </declare-styleable>
 </resources>

@@ -128,4 +128,17 @@ public class WoDetailPresent extends RxPresent<WoDetailContract.View> implements
                 });
         add(subsrciption);
     }
+
+    @Override
+    public void delWorkOrder(int id) {
+        Subscription subscription=mHelper.getApiSevice().delWorkOrder(id,SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
+                .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
+                    @Override
+                    public void onNext(WoSuccessBean bean) {
+                      mView.delSuccess();
+                    }
+                });
+        add(subscription);
+    }
 }

@@ -20,8 +20,8 @@ public interface WoListContract  {
     }
     interface Present extends BasePresent<View>{
         void getClassName();
-        void getWoList(int aid,int bid,int orderStatus,int status);
-        void getMoreWoList(int aid,int bid,int orderStatus,int status);
-        void parentToChild(int pid);
+        void getWoList(String aid,String bid,String orderStatus,String status);
+        void getMoreWoList(String aid,String bid,String orderStatus,String status);
+        void parentToChild(String pid);
     }
 }

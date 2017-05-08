@@ -14,7 +14,7 @@ public class CreatedFragment extends WoListBaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-          mType=1;
+          mType="1";
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

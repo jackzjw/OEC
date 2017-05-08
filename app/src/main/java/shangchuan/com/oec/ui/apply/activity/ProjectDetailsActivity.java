@@ -1,5 +1,7 @@
 package shangchuan.com.oec.ui.apply.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +32,11 @@ public class ProjectDetailsActivity extends SimpleActivity {
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     private List<Fragment> mFragmentList;
+    public static Intent getInstance(Context context,int id){
+        Intent intent=new Intent(context,ProjectDetailsActivity.class);
+        intent.putExtra("id",id);
+        return intent;
+    }
     @Override
     public void showError(String msg) {
 

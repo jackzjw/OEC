@@ -84,6 +84,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     RelativeLayout mRelToOther;
     @BindView(R.id.approve_to_other)
     TextView mTvToOther;
+    private WoDetailBean mData;
     private int mId;
     public static Intent getInstance(Context context,int id){
         Intent intent=new Intent(context,WoDetailsActivity.class);
@@ -107,6 +108,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
         mTvSend.setOnClickListener(this);
         mTvFinish.setOnClickListener(this);
         mTvToOther.setOnClickListener(this);
+        mToolbartRight.setOnClickListener(this);
         mId=getIntent().getIntExtra("id",-1);
         LoadingView.showProgress(this);
         mPresent.getWoDetail(mId);
@@ -125,6 +127,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
 
     @Override
     public void showContent(WoDetailBean bean) {
+        this.mData=bean;
         if(bean.getReStatus()==1) mToolbartRight.setText("撤回");
         if(bean.getReStatus()==2) mToolbartRight.setText("重新提交");
         //dealStatus=0可以转他人和待处理,1只能发消息
@@ -203,6 +206,14 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
         ToastUtil.shortShow("操作成功");
         finish();
     }
+
+    @Override
+    public void delSuccess() {
+        LoadingView.dismissProgress();
+        ToastUtil.shortShow("撤销成功");
+        finish();
+    }
+
     private String msg(){
         return mInputMsg.getText().toString().trim();
     }
@@ -231,6 +242,16 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                     return;
                 }
                   startActivityForResult(new Intent(this,ApproverActivity.class),Constants.REQUEST_CODE);
+                break;
+            case R.id.toolbar_right_title:
+                if(mData==null) break;
+                if(mData.getReStatus()==1){
+                    LoadingView.showProgress(this);
+                    mPresent.delWorkOrder(mId);
+                }else if(mData.getReStatus()==2){
+                    //重新提交工单
+                     startActivity(ModifyWoDetailActivity.getInstance(this,mData));
+                }
                 break;
         }
     }

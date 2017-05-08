@@ -42,7 +42,6 @@
                         android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="鸭子的周报"
                         android:textStyle="bold"
                         android:singleLine="true"
                         android:textSize="14sp"
@@ -53,7 +52,6 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/user_avater"
                         android:layout_below="@+id/user_order_type"
-                        android:text="工单号：123333"
                         android:layout_marginLeft="15dp"
 
                         />
@@ -76,7 +74,6 @@
                             android:id="@+id/submit_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2017-03-15 11:00"
                             android:textSize="12sp"
 
                             />
@@ -106,7 +103,6 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
 
-                            android:text="售中/退货"
                             android:singleLine="true"
                             android:textStyle="bold"
                             />
@@ -135,7 +131,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:text="待审核"
                             android:textStyle="bold"
                             android:singleLine="true"
                             />
@@ -175,7 +170,6 @@
                     android:layout_below="@+id/title"
                     android:textStyle="bold"
                     android:textSize="14sp"
-                    android:text="客户已经买了其他品牌，申请无理由退货"
                     android:singleLine="true"
                     />
 
@@ -204,7 +198,6 @@
                     android:paddingTop="5dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp"
-                    android:text="《规划》指出，将建立标准统一、全国联网的社会保障管理信息系统，完善并简化转续流程，推行网上认证、网上办理转续，力争实现全国范围内社会保险待遇异地领取、直接结算，方便参保职工、失业和退休人员流动就业、异地生活。《规划》明确，未来将推动医疗保险、失业保险、工伤保险逐步实现省级统筹。结合社会平均工资和物价变动等因素，合理确定相关社会保险待遇水平。"
                     android:background="@android:color/transparent"
                     android:textSize="14sp"
                     android:textColor="@color/theme_dark_text_color"

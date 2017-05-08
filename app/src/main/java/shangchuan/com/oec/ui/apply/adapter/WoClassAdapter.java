@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.WoClassBean;
 
 /**
@@ -47,11 +48,10 @@ public class WoClassAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView==null) {
-            convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_spinner_item, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_wo_list_class_type, parent, false);
         }
 
-        TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
-        tv.setTextSize(13);
+        TextView tv = (TextView) convertView.findViewById(R.id.text1);
         tv.setText(mlist.get(position).getClassName());
         return convertView;
     }

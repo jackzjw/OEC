@@ -21,8 +21,8 @@ public interface AddWoContract  {
     interface Present extends BasePresent<View>{
         void getWoClassType();
         void getChildData(String parentTitle);
-        int getChildId(String childTitles);
-        void submitWo(int bid,int flag,String orderTitle,String orderContent,int[] handlers,String filesName);
+        String getChildId(String childTitles);
+        void submitWo(String bid,int flag,String orderTitle,String orderContent,int[] handlers,String filesName);
         void upLoadFile(List<LocalMedia> selectMedia,List<String> fileList);
     }
 

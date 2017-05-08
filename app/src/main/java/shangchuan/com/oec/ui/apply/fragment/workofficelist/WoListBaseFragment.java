@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,12 +17,11 @@ import shangchuan.com.oec.model.bean.WoListBean;
 import shangchuan.com.oec.present.WoListPresent;
 import shangchuan.com.oec.present.contact.WoListContract;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
-import shangchuan.com.oec.ui.apply.adapter.WoClassAdapter;
 import shangchuan.com.oec.ui.apply.adapter.WoListAdapter;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
+import shangchuan.com.oec.widget.MySpinnerView;
 
 /**
  * Created by sg280 on 2017/3/24.
@@ -37,85 +33,63 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
     @BindView(R.id.create_wo)
     TextView mCreateWO;
     @BindView(R.id.spinner1)
-    Spinner sParent;
+    MySpinnerView sParent;
     @BindView(R.id.spinner2)
-    Spinner spChild;
+    MySpinnerView spChild;
     @BindView(R.id.spinner3)
-    Spinner spStatus;
+    MySpinnerView spStatus;
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
     private List<WoClassBean> NameParentList=new ArrayList<>();
     private List<WoClassBean> NameChildList=new ArrayList<>();
-    private int parentId;
-    private int childId;
-    private int statusId;
-    protected int mType=0;
-    private WoClassAdapter parentAdapter;
-    private WoClassAdapter childAdapter;
-    private String[] statusArrays={"已撤销","待处理","处理中","已完成"};
-    private boolean isFirst=true;
+    private String parentId;
+    private String childId;
+    private String statusId;
+    protected String mType="0";
     private WoListAdapter contentAdapter;
     private boolean isLoadingMore;
-
+    private List<WoClassBean> statusList=new ArrayList<>();
 
     @Override
     public void loadData() {
         LoadingView.showProgress(mActivity);
         mPresent.getClassName();
-        parentAdapter=new WoClassAdapter(mActivity,NameParentList);
-        sParent.setAdapter(parentAdapter);
-        childAdapter = new WoClassAdapter(mActivity, NameChildList);
-        spChild.setAdapter(childAdapter);
-        sParent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mPresent.getWoList("","","",mType);
+
+         sParent.setSpinnerSelectListener(new MySpinnerView.SpinnerSelectListener() {
+             @Override
+             public void selected(int position) {
+                 parentId=NameParentList.get(position).getId();
+                 mPresent.parentToChild(parentId);
+                     LoadingView.showProgress(mActivity);
+                 mPresent.getWoList(parentId,childId,statusId,mType);
+             }
+         });
+      spChild.setSpinnerSelectListener(new MySpinnerView.SpinnerSelectListener() {
+          @Override
+          public void selected(int position) {
+              childId=NameChildList.get(position).getId();
+              LoadingView.showProgress(mActivity);
+              mPresent.getWoList(parentId,childId,statusId,mType);
+
+          }
+      });
+        statusList.add(new WoClassBean("状态",""));
+        statusList.add(new WoClassBean("已撤销","0"));
+        statusList.add(new WoClassBean("待处理","1"));
+        statusList.add(new WoClassBean("处理中","2"));
+        statusList.add(new WoClassBean("已完成","3"));
+       spStatus.setData(statusList);
+        spStatus.setSpinnerSelectListener(new MySpinnerView.SpinnerSelectListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                parentId=NameParentList.get(position).getId();
-                mPresent.parentToChild(parentId);
-                LogUtil.i("父类");
-              //  LoadingView.Show(mActivity);
-               // LoadingView.showProgress(mActivity);
+            public void selected(int position) {
+
+                statusId=statusList.get(position).getId();
+                LoadingView.showProgress(mActivity);
                 mPresent.getWoList(parentId,childId,statusId,mType);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
-        spChild.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                childId=NameChildList.get(position).getId();
-                  //   LoadingView.Show(mActivity);
-                LogUtil.i("子类");
 
-            //    LoadingView.showProgress(mActivity);
-                mPresent.getWoList(parentId,childId,statusId,mType);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(mActivity,R.layout.item_wo_list_class_type, statusArrays);
-         spStatus.setAdapter(statusAdapter);
-         spStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            statusId=position;
-            LogUtil.i("状态类");
-      //   LoadingView.showProgress(mActivity);
-           mPresent.getWoList(parentId,childId,statusId,mType);
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    });
         mCreateWO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,24 +117,22 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     @Override
     public void showParentName(List<WoClassBean> bean) {
-        if(bean.isEmpty()) return;
+        WoClassBean classBean=new WoClassBean("父类别","");
+        bean.add(0,classBean);
+           NameParentList=bean;
            parentId=bean.get(0).getId();
-           parentAdapter.updateData(bean);
+           sParent.setData(bean);
 
 
     }
 
     @Override
     public void showChildName(List<WoClassBean> Bean) {
-        if(Bean.isEmpty()) return;
+        WoClassBean classBean=new WoClassBean("子类别","");
+        Bean.add(0,classBean);
+        NameChildList=Bean;
         childId=Bean.get(0).getId();
-        childAdapter.updateData(Bean);
-        if(isFirst){
-            LogUtil.i("第一次");
-            isFirst=false;
-            mPresent.getWoList(parentId,childId,statusId,mType);
-        }
-
+        spChild.setData(Bean);
     }
 
     @Override

@@ -1,12 +1,13 @@
 package shangchuan.com.oec.model.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by sg280 on 2017/4/24.
  */
 
-public class WoDetailBean {
+public class WoDetailBean implements Serializable{
     private int Id ;
     private int ClassId  ;
     private String ClassNameA ;

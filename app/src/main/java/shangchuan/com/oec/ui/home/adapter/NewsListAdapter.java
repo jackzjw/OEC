@@ -49,7 +49,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-          holder.mTitle.setText(mList.get(position).getNewsTitle());
+          holder.mTitle.setText(mList.get(position).getClassName());
           holder.mContent.setText(mList.get(position).getInfo());
           holder.mStatus.setImageResource(mList.get(position).getReadStatus()==0?R.drawable.home_icon_news_unread:R.drawable.home_icon_news_read);
           holder.mDate.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));

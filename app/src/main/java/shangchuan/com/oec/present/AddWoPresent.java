@@ -56,10 +56,10 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
                         List<String> parentsClass=new ArrayList<String>();
                         for (WoClassBean item:bean.getClassInfo()
                              ) {
-                            if(item.getPid()==0){
+                            if(item.getPid().equals("0")){
                                 parentsClass.add(item.getClassName());
                             }
-                            if(item.getPid()==1){
+                            if(item.getPid().equals("1")){
                                 childList.add(item.getClassName());
                             }
                         }
@@ -72,7 +72,7 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
         add(subscription);
 
     }
-    private int pid;
+    private String pid;
     @Override
     public void getChildData(String parentTitle) {
          //根据父类型id取出对应子类型的名字集合
@@ -96,19 +96,19 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
     }
 
     @Override
-    public int getChildId(String childTitles) {
+    public String getChildId(String childTitles) {
         //上传时根据子类型名字取出id
         for (WoClassBean item:mTotalList
                 ) {
-        if(item.getClassName()==childTitles){
+        if(item.getClassName().equals(childTitles)){
             return item.getId();
         }
         }
-        return 0;
+        return "";
     }
 
     @Override
-    public void submitWo(int bid, int flag, String orderTitle, String orderContent, int[] handlers, String filesName) {
+    public void submitWo(String bid, int flag, String orderTitle, String orderContent, int[] handlers, String filesName) {
         HashMap<String,Object> hashMap=new HashMap<>();
         hashMap.put("ClassIdB",bid);
         hashMap.put("OrderFlag",flag);

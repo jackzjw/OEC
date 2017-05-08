@@ -92,7 +92,7 @@ public class AddOrganizeStructureActivity extends SimpleActivity {
             return;
         }
         LoadingView.showProgress(this);
-        Subscription subscription = getActivityComponent().getHttpHelper().getApiSevice().addGroupNode(bean.getPId(), name, remark, SaveToken.mToken)
+        Subscription subscription = getActivityComponent().getHttpHelper().getApiSevice().addGroupNode(bean.getId(), name, remark, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(this) {
                     @Override

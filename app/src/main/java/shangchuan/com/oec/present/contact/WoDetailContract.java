@@ -21,10 +21,12 @@ public interface WoDetailContract {
         void openFile(String filePath);
         void showRemark(List<ProcessListBean> remarks);
         void dealSuccess(WoSuccessBean bean);
+        void delSuccess();
     }
     interface Present extends BasePresent<View>{
         void getWoDetail(int id);
         void downLoadFile(String url);
         void dealWoResult(int result,int orderId,String remark,int otherId);
+        void delWorkOrder(int id);
     }
 }

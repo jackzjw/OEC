@@ -81,9 +81,9 @@ public class TrendsActivity extends BaseActivity {
                 case 0:
                     return "全部";
                 case 1:
-                    return "办公";
-                case 2:
                     return "工单";
+                case 2:
+                    return "办公";
             }
             return super.getPageTitle(0);
         }

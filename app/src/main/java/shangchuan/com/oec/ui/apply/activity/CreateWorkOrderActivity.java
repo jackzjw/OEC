@@ -43,7 +43,7 @@ import shangchuan.com.oec.widget.LoadingView;
 
 public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implements AddWoContract.View {
 
-@BindView(R.id.toolbar_title)
+   @BindView(R.id.toolbar_title)
     TextView mToolBarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -71,7 +71,6 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     private int[] ownerId;
     @BindView(R.id.owner_recycleview)
     RecyclerView mOwnerRec;
-
     @BindView(R.id.rel_link)
     ImageView mRelLink;
     private GridImgAdapter adapter;
@@ -274,7 +273,7 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     public void upLoadSuccess(String fileName) {
 
         LogUtil.i(fileName);
-        int bid=mPresent.getChildId(mChildName.getText().toString());
+        String bid=mPresent.getChildId(mChildName.getText().toString());
         mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,fileName);
     }
 

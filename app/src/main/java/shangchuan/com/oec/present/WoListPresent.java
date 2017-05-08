@@ -49,13 +49,12 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
                     public void onNext(WoClassBasicBean bean) {
                              totalClassList.addAll(bean.getClassInfo());
                         ArrayList<WoClassBean> parentlist = new ArrayList<WoClassBean>();
-                                 int parentid=bean.getClassInfo().get(0).getId();
                         for (WoClassBean item:bean.getClassInfo()
                              ) {
-                            if(item.getPid()==0){
+                            if(item.getPid().equals("0")){
                                 parentlist.add(item);
                             }
-                            if(item.getPid()==1){
+                            if(item.getPid().equals("1")){
                                 childlist.add(item);
                             }
 
@@ -71,7 +70,7 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
     }
 
     @Override
-    public void getWoList(int aid, int bid, int orderStatus,int status) {
+    public void getWoList(String aid, String bid, String orderStatus,String status) {
         currentPage=1;
         Subscription subscription = mHelper.getApiSevice().getWoList(aid, bid, orderStatus, status, currentPage++, SaveToken.mToken)
               .compose(RxUtil.<HttpDataResult<OaBasicItemBean<WoListBean>>>scheduleRxHelper())
@@ -87,7 +86,7 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
     }
 
     @Override
-    public void getMoreWoList(int aid, int bid, int orderStatus, int status) {
+    public void getMoreWoList(String aid, String bid, String orderStatus, String status) {
         Subscription subscription = mHelper.getApiSevice().getWoList(aid, bid, orderStatus, status, currentPage++, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<WoListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<WoListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<WoListBean>>(mView) {
@@ -101,11 +100,11 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
     }
 
     @Override
-    public void parentToChild(int pid) {
+    public void parentToChild(String pid) {
            childlist.clear();
         for (WoClassBean item:totalClassList
              ) {
-            if(item.getPid()==pid){
+            if(item.getPid().equals(pid)){
                 childlist.add(item);
             }
         }

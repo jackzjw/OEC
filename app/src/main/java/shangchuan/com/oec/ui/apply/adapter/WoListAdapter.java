@@ -51,8 +51,8 @@ public class WoListAdapter extends RecyclerView.Adapter<WoListAdapter.WoListView
         holder.orderFlag.setImageResource(CommonUtil.orderFlag(mList.get(position).getOrderFlag()));
         holder.orderTitle.setText(mList.get(position).getOrderTitle());
         holder.orderType.setText(mList.get(position).getClassNameA()+" - "+mList.get(position).getClassNameB());
-        holder.orderDate.setText(mList.get(position).getCreateTime());
-
+        holder.orderDate.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));
+        holder.mStatus.setText(CommonUtil.woStatus(mList.get(position).getOrderStatus()));
     }
 
     @Override
@@ -69,6 +69,8 @@ public class WoListAdapter extends RecyclerView.Adapter<WoListAdapter.WoListView
         TextView orderType;
         @BindView(R.id.tv_apply_time)
         TextView orderDate;
+        @BindView(R.id.status)
+        TextView mStatus;
         public WoListViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
