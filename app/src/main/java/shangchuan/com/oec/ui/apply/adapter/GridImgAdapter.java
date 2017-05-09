@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/4/7.
@@ -76,7 +77,7 @@ public class GridImgAdapter extends RecyclerView.Adapter<GridImgAdapter.ViewHold
             // 原图
             path = media.getPath();
         }
-
+        LogUtil.i("path="+path);
         switch (type) {
             case 1:
                 // 图片

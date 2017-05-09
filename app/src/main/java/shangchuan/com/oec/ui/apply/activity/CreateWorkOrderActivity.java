@@ -18,6 +18,7 @@ import com.luck.picture.lib.model.PictureConfig;
 import com.yalantis.ucrop.entity.LocalMedia;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,6 +41,7 @@ import shangchuan.com.oec.util.PickerUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
+import shangchuan.com.oec.widget.SaveToken;
 
 public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implements AddWoContract.View {
 
@@ -105,25 +107,12 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                switch (checkedId){
-                   case R.id.rb_red:
-                       flag=1;
-                       break;
-                   case R.id.rb_blue:
-                       flag=2;
-                       break;
-                   case R.id.rb_green:
-                       flag=3;
-                       break;
-                   case R.id.yellow:
-                       flag=4;
-                       break;
-                   case R.id.purple:
-                       flag=5;
-                       break;
+                   case R.id.rb_red:   flag=1; break;
+                   case R.id.rb_blue:  flag=2; break;
+                   case R.id.rb_green: flag=3; break;
+                   case R.id.yellow:   flag=4; break;
+                   case R.id.purple:   flag=5; break;
                }
-
-
-
             }
         });
         mParentName.setOnClickListener(new View.OnClickListener() {
@@ -272,9 +261,25 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
     @Override
     public void upLoadSuccess(String fileName) {
 
-        LogUtil.i(fileName);
         String bid=mPresent.getChildId(mChildName.getText().toString());
-        mPresent.submitWo(bid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,fileName);
+        HashMap<String,Object> hashMap=new HashMap<>();
+        hashMap.put("ClassIdB",bid);
+        hashMap.put("OrderFlag",flag);
+        hashMap.put("OrderTitle",mTitle.getText().toString());
+        hashMap.put("OrderContent",mContent.getText().toString());
+        for(int id:ownerId){
+            hashMap.put("Handlers",id);
+            LogUtil.i("Handlers="+id);
+        }
+        hashMap.put("AttFileName",fileName);
+        LogUtil.i("filename="+fileName);
+        LogUtil.i("ClassIdB="+bid);
+        LogUtil.i("OrderFlag="+flag);
+        LogUtil.i("OrderTitle="+mTitle.getText().toString());
+        LogUtil.i("OrderContent="+mContent.getText().toString());
+
+        hashMap.put("token", SaveToken.mToken);
+        mPresent.submitWo(hashMap);
     }
 
     @Override
@@ -313,12 +318,5 @@ public class CreateWorkOrderActivity extends BaseActivity<AddWoPresent> implemen
         }
         LoadingView.showProgress(this);
             mPresent.upLoadFile(selectMedia,filePathList);
-
-
-      //  int classBid=mPresent.getChildId(mChildName.getText().toString());
-       // LoadingView.Show(this);
-      //  mPresent.submitWo(classBid,flag,mTitle.getText().toString(),mContent.getText().toString(),ownerId,files);
-
-
     }
 }

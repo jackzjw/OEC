@@ -108,17 +108,9 @@ public class AddWoPresent extends RxPresent<AddWoContract.View> implements AddWo
     }
 
     @Override
-    public void submitWo(String bid, int flag, String orderTitle, String orderContent, int[] handlers, String filesName) {
-        HashMap<String,Object> hashMap=new HashMap<>();
-        hashMap.put("ClassIdB",bid);
-        hashMap.put("OrderFlag",flag);
-        hashMap.put("OrderTitle",orderTitle);
-        hashMap.put("OrderContent",orderContent);
-        for(int id:handlers){
-            hashMap.put("Handlers",id);
-        }
-        hashMap.put("AttFileName",filesName);
-        Subscription subscription = mHelper.getApiSevice().submitWorkOrder(hashMap,SaveToken.mToken)
+    public void submitWo(HashMap<String,Object> hashMap) {
+
+        Subscription subscription = mHelper.getApiSevice().submitWorkOrder(hashMap)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override

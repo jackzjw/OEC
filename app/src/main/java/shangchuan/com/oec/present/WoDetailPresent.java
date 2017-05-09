@@ -117,7 +117,7 @@ public class WoDetailPresent extends RxPresent<WoDetailContract.View> implements
     }
 
     @Override
-    public void dealWoResult(int result, int orderId, String remark, int otherId) {
+    public void dealWoResult(int result, int orderId, String remark, String otherId) {
         Subscription subsrciption = mHelper.getApiSevice().woDealResult(result, orderId, remark, otherId, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {

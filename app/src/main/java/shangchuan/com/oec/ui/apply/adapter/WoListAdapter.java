@@ -40,7 +40,7 @@ public class WoListAdapter extends RecyclerView.Adapter<WoListAdapter.WoListView
             @Override
             public void onClick(View v) {
                 int id=mList.get(viewHolder.getAdapterPosition()).getId();
-                mContext.startActivity(WoDetailsActivity.getInstance(mContext,id));
+                mContext.startActivity(WoDetailsActivity.getInstance(mContext,id,viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;

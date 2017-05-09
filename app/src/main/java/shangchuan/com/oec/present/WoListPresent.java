@@ -6,12 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Subscription;
+import rx.functions.Action1;
 import shangchuan.com.oec.base.RxPresent;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.WoClassBasicBean;
 import shangchuan.com.oec.model.bean.WoClassBean;
 import shangchuan.com.oec.model.bean.WoListBean;
+import shangchuan.com.oec.model.event.DealEvent;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.WoListContract;
 import shangchuan.com.oec.util.LogUtil;
@@ -109,6 +112,22 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
             }
         }
           mView.showChildName(childlist);
+    }
+//注册事件观察者，当详情处理后（撤销、完成和转他人处理）
+    //撤销：0，待处理：1，已完成：2
+    @Override
+    public void registerEvent() {
+        RxBus.getDefault().toDefaultObservable(DealEvent.class, new Action1<DealEvent>() {
+            @Override
+            public void call(DealEvent event) {
+                if(event.getStatus()==0){
+                 contentList.get(event.getPosition()).setOrderStatus(0);
+                }else if(event.getStatus()==2){
+                    contentList.get(event.getPosition()).setOrderStatus(3);
+                }
+              mView.refreshStatus(event.getPosition());
+            }
+        });
     }
 
 

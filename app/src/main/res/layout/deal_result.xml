@@ -2,7 +2,7 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:id="@+id/rel_deal_result"
         android:orientation="vertical"
         >
@@ -20,7 +20,7 @@
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
@@ -29,6 +29,7 @@
                 android:id="@+id/rel_first"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/approve_pass"
@@ -82,4 +83,7 @@
 
             </RelativeLayout>
         </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
     </LinearLayout>

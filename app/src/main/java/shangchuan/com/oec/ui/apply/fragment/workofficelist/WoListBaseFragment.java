@@ -52,10 +52,14 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     @Override
     public void loadData() {
-        LoadingView.showProgress(mActivity);
+        if(!isVisible||!isPrepared){
+            return;
+        }
+       LoadingView.showProgress(mActivity);
         mPresent.getClassName();
         mPresent.getWoList("","","",mType);
-
+        //注册事件观察者
+        mPresent.registerEvent();
          sParent.setSpinnerSelectListener(new MySpinnerView.SpinnerSelectListener() {
              @Override
              public void selected(int position) {
@@ -170,5 +174,8 @@ public abstract class WoListBaseFragment extends BaseFragment<WoListPresent> imp
 
     }
 
-
+    @Override
+    public void refreshStatus(int position) {
+        contentAdapter.notifyItemChanged(position);
+    }
 }

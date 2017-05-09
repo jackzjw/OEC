@@ -75,7 +75,7 @@ public interface HttpService {
     //创建工单
     @FormUrlEncoded
     @POST("WO/wo_save")
-    Observable<HttpDataResult<WoSuccessBean>> submitWorkOrder(@FieldMap HashMap<String,Object> map,@Field("token") String token );
+    Observable<HttpDataResult<WoSuccessBean>> submitWorkOrder(@FieldMap HashMap<String,Object> map );
     // 修改工单
     @FormUrlEncoded
     @POST("WO/wo_edit_save")
@@ -184,7 +184,7 @@ public interface HttpService {
        //工单处理结果
        @FormUrlEncoded
        @POST("W0/wo_deal")
-       Observable<HttpDataResult<WoSuccessBean>> woDealResult(@Field("ProcessResult") int result,@Field("OrderId") int orderId,@Field("Remark") String remark,@Field("Id") int id,@Field("token") String token);
+       Observable<HttpDataResult<WoSuccessBean>> woDealResult(@Field("ProcessResult") int result,@Field("OrderId") int orderId,@Field("Remark") String remark,@Field("Id") String id,@Field("token") String token);
        //OA审核处理结果
        @FormUrlEncoded
        @POST("OA/oa_check")

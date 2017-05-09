@@ -10,35 +10,21 @@
     tools:context="shangchuan.com.oec.ui.apply.activity.WorkOfficeListActivity">
   <include layout="@layout/toolbar_layout"/>
     <android.support.design.widget.TabLayout
+
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/theme_divide_color"
         app:tabIndicatorColor="@color/home_text_light_green"
         app:tabMode="fixed"
+        app:tabGravity="center"
+        app:tabMinWidth="100dp"
         app:tabSelectedTextColor="@color/home_text_light_green"
         app:tabTextColor="@color/theme_dark_text_color"
         android:id="@+id/tablayout"
-        >
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_pending"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="待处理"
-            />
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_created"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="已创建"/>
-        <android.support.design.widget.TabItem
-            android:id="@+id/tab_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="全部"
-            />
-    </android.support.design.widget.TabLayout>
-    <FrameLayout
-        android:id="@+id/fragment_container"
+        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
 </LinearLayout>

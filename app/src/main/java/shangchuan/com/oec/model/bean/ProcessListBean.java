@@ -1,10 +1,13 @@
 package shangchuan.com.oec.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by sg280 on 2017/4/18.
  */
 
-public class ProcessListBean {
+public class ProcessListBean implements Parcelable {
 
     private int Id;
     private int TenantId;
@@ -114,4 +117,55 @@ public class ProcessListBean {
     public void setCreateUserId(String createUserId) {
         CreateUserId = createUserId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.Id);
+        dest.writeInt(this.TenantId);
+        dest.writeInt(this.ReportId);
+        dest.writeInt(this.UserID);
+        dest.writeString(this.UserName);
+        dest.writeInt(this.ToUserID);
+        dest.writeString(this.ToUserName);
+        dest.writeInt(this.ProcessResult);
+        dest.writeString(this.ProcessResultName);
+        dest.writeString(this.Remark);
+        dest.writeString(this.CreateUserId);
+        dest.writeString(this.CreateTime);
+    }
+
+    public ProcessListBean() {
+    }
+
+    protected ProcessListBean(Parcel in) {
+        this.Id = in.readInt();
+        this.TenantId = in.readInt();
+        this.ReportId = in.readInt();
+        this.UserID = in.readInt();
+        this.UserName = in.readString();
+        this.ToUserID = in.readInt();
+        this.ToUserName = in.readString();
+        this.ProcessResult = in.readInt();
+        this.ProcessResultName = in.readString();
+        this.Remark = in.readString();
+        this.CreateUserId = in.readString();
+        this.CreateTime = in.readString();
+    }
+
+    public static final Parcelable.Creator<ProcessListBean> CREATOR = new Parcelable.Creator<ProcessListBean>() {
+        @Override
+        public ProcessListBean createFromParcel(Parcel source) {
+            return new ProcessListBean(source);
+        }
+
+        @Override
+        public ProcessListBean[] newArray(int size) {
+            return new ProcessListBean[size];
+        }
+    };
 }

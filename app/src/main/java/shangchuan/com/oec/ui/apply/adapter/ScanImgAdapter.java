@@ -59,9 +59,8 @@ public class ScanImgAdapter extends RecyclerView.Adapter<ScanImgAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+             LogUtil.i("url="+urls.get(position).getUrl());
         if(urls.get(position).getAttType().equals("mp4")){
-            LogUtil.i("mp4="+urls.get(position).getUrl());
             Glide.with(mContext).load(urls.get(position).getUrl()).thumbnail(0.5f).into(holder.img);
             holder.mPlay.setVisibility(View.VISIBLE);
         }else {

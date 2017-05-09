@@ -2,10 +2,14 @@ package shangchuan.com.oec.ui.apply.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import shangchuan.com.oec.R;
@@ -24,9 +28,10 @@ public class WorkOfficeListActivity extends BaseActivity{
     Toolbar mToolbar;
     @BindView(R.id.tablayout)
     TabLayout mTabLayout;
-    private PendingFragment mWoListBaseFragment;
-    private CreatedFragment mCreatedFragment;
-    private TotalFragment mTotalFragment;
+    @BindView(R.id.viewpager)
+    ViewPager mViewPager;
+    private ArrayList<Fragment> mFragmentList;
+
 
     @Override
     protected int getResourcesLayout() {
@@ -39,68 +44,12 @@ public class WorkOfficeListActivity extends BaseActivity{
         toolbarImg.setImageResource(R.drawable.home_icon_news_search);
         mToolbarTitle.setText("工单列表");
         initToolBar(mToolbar);
-
-        mWoListBaseFragment =(PendingFragment) getSupportFragmentManager().findFragmentByTag("first");
-        if(mWoListBaseFragment ==null){
-            mWoListBaseFragment =new PendingFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.fragment_container, mWoListBaseFragment,"pending");
-            transaction.commit();
-        }
-      mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-          @Override
-          public void onTabSelected(TabLayout.Tab tab) {
-              if(tab.getPosition()==0){
-                  switchFragment(mWoListBaseFragment,"pending");
-
-              }else if(tab.getPosition()==1){
-                  mCreatedFragment=(CreatedFragment)getSupportFragmentManager().findFragmentByTag("created");
-                  if(mCreatedFragment==null){
-                      mCreatedFragment=new CreatedFragment();
-                  }
-                  switchFragment(mCreatedFragment,"created");
-              }else {
-                  mTotalFragment=(TotalFragment)getSupportFragmentManager().findFragmentByTag("total");
-                  if(mTotalFragment==null){
-                      mTotalFragment=new TotalFragment();
-                  }
-                  switchFragment(mTotalFragment,"total");
-              }
-          }
-
-          @Override
-          public void onTabUnselected(TabLayout.Tab tab) {
-
-          }
-
-          @Override
-          public void onTabReselected(TabLayout.Tab tab) {
-
-          }
-      });
-    }
-    private void switchFragment(Fragment f, String tagname){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        hideFragment(transaction);
-        if(f.isAdded()){
-            transaction.show(f).commit();
-        }else {
-            transaction.add(R.id.fragment_container,f,tagname).commit();
-        }
-
-
-    }
-    private void hideFragment(FragmentTransaction transaction){
-        if(mWoListBaseFragment !=null&& mWoListBaseFragment.isAdded()){
-            transaction.hide(mWoListBaseFragment);
-        }
-        if(mCreatedFragment!=null&&mCreatedFragment.isAdded()){
-            transaction.hide(mCreatedFragment);
-        }
-        if(mTotalFragment!=null&&mTotalFragment.isAdded()){
-            transaction.hide(mTotalFragment);
-        }
-
+        mFragmentList = new ArrayList<>();
+        mFragmentList.add(new PendingFragment());
+        mFragmentList.add(new CreatedFragment());
+        mFragmentList.add(new TotalFragment());
+        mViewPager.setAdapter(new WoListViewPagerAdapter(getSupportFragmentManager()));
+        mTabLayout.setupWithViewPager(mViewPager);
     }
     @Override
     protected void initInject() {
@@ -111,5 +60,32 @@ public class WorkOfficeListActivity extends BaseActivity{
     @Override
     public void showError(String msg) {
 
+    }
+    class WoListViewPagerAdapter extends FragmentPagerAdapter {
+        public WoListViewPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position){
+                case 0:
+                    return "待处理";
+                case 1:
+                    return "已创建";
+                case 2:
+                    return "全部";
+            }
+            return super.getPageTitle(0);
+        }
     }
 }

@@ -2,6 +2,7 @@ package shangchuan.com.oec.present.contact;
 
 import com.yalantis.ucrop.entity.LocalMedia;
 
+import java.util.HashMap;
 import java.util.List;
 
 import shangchuan.com.oec.base.BasePresent;
@@ -22,7 +23,7 @@ public interface AddWoContract  {
         void getWoClassType();
         void getChildData(String parentTitle);
         String getChildId(String childTitles);
-        void submitWo(String bid,int flag,String orderTitle,String orderContent,int[] handlers,String filesName);
+        void submitWo(HashMap<String,Object> hashMap);
         void upLoadFile(List<LocalMedia> selectMedia,List<String> fileList);
     }
 

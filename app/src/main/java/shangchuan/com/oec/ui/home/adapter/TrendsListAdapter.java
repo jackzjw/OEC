@@ -48,7 +48,7 @@ public class TrendsListAdapter extends RecyclerView.Adapter<TrendsListAdapter.Vi
                 int id=mList.get(position).getId();
                 switch (jobType){
                     case 1://工单
-                        mContext.startActivity(WoDetailsActivity.getInstance(mContext,id));
+                        mContext.startActivity(WoDetailsActivity.getInstance(mContext,id,position));
                         break;
                     case 2://办公申请
                         //传的2表示从审核跳转过去的

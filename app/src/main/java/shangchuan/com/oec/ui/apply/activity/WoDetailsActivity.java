@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,12 +22,13 @@ import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.AttchmentBean;
-import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.model.bean.ProcessListBean;
 import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.model.bean.WoDetailBean;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
+import shangchuan.com.oec.model.event.DealEvent;
 import shangchuan.com.oec.present.WoDetailPresent;
 import shangchuan.com.oec.present.contact.WoDetailContract;
 import shangchuan.com.oec.ui.apply.adapter.DocumentAdapter;
@@ -84,11 +86,19 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     RelativeLayout mRelToOther;
     @BindView(R.id.approve_to_other)
     TextView mTvToOther;
+    @BindView(R.id.rel_deal_result)
+    LinearLayout mDealResult;
+    private int dealType;
     private WoDetailBean mData;
     private int mId;
-    public static Intent getInstance(Context context,int id){
+    private RemarkAdapter remarkAdapter;
+    private List<ProcessListBean> remarkList=new ArrayList<>();
+    private int mPos;
+
+    public static Intent getInstance(Context context,int id,int position){
         Intent intent=new Intent(context,WoDetailsActivity.class);
         intent.putExtra("id",id);
+        intent.putExtra("position",position);
         return intent;
     }
 
@@ -102,14 +112,14 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     protected void initEventData() {
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         mToolbarTitle.setText("工单详情");
-        mTvSend.setText("发消息");
-        mTvFinish.setText("完成");
+
         initToolBar(mToolbar);
         mTvSend.setOnClickListener(this);
         mTvFinish.setOnClickListener(this);
         mTvToOther.setOnClickListener(this);
         mToolbartRight.setOnClickListener(this);
         mId=getIntent().getIntExtra("id",-1);
+        mPos=getIntent().getIntExtra("position",-1);
         LoadingView.showProgress(this);
         mPresent.getWoDetail(mId);
     }
@@ -128,16 +138,28 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     @Override
     public void showContent(WoDetailBean bean) {
         this.mData=bean;
-        if(bean.getReStatus()==1) mToolbartRight.setText("撤回");
-        if(bean.getReStatus()==2) mToolbartRight.setText("重新提交");
-        //dealStatus=0可以转他人和待处理,1只能发消息
-        if(bean.getDealStatus()==0){
+        mTvSend.setText("发消息");
+        mTvFinish.setText("完成");
+        //dealStatus=0可以转他人和待处理和发消息,1只能发消息
+        if(bean.getReStatus()==1) {
+            mToolbartRight.setText("撤回");
+            mRelSend.setVisibility(View.VISIBLE);
+        }else if(bean.getDealStatus()==1){
+            mRelSend.setVisibility(View.VISIBLE);
+        }
+        else if(bean.getReStatus()==2) {
+            mToolbartRight.setText("重新提交");
+            mDealResult.setVisibility(View.GONE);
+        }else {
             mRelFinish.setVisibility(View.VISIBLE);
             mRelToOther.setVisibility(View.VISIBLE);
+            mRelSend.setVisibility(View.VISIBLE);
         }
-        Glides.getInstance().loadCircle(this, MySelfInfo.getInstance().getAvatar(),mUserAvater);
-        mUserTitle.setText(MySelfInfo.getInstance().getNickName()+"创建的工单");
+
+        Glides.getInstance().loadCircle(this,bean.getCreateAvatar(),mUserAvater);
+        mUserTitle.setText(bean.getCreateUserName()+"创建的工单");
         mSubmitDate.setText(bean.getCreateTime());
+        mOrderNum.setText("工单号："+bean.getOrderNo());
         mSubmitType.setText(bean.getClassNameA()+"/"+bean.getClassNameB());
         mFlag.setImageResource(CommonUtil.orderFlag(bean.getOrderFlag()));
         mOrderStatus.setText(CommonUtil.woStatus(bean.getOrderStatus()));
@@ -195,22 +217,41 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
 
     @Override
     public void showRemark(List<ProcessListBean> remarks) {
+        remarkList=remarks;
         LoadingView.dismissProgress();
         mRemarkRec.setLayoutManager(new LinearLayoutManager(this));
-        mRemarkRec.setAdapter(new RemarkAdapter(this,remarks));
+        remarkAdapter=new RemarkAdapter(this,remarks);
+        mRemarkRec.setAdapter(remarkAdapter);
     }
 
     @Override
     public void dealSuccess(WoSuccessBean bean) {
          LoadingView.dismissProgress();
-        ToastUtil.shortShow("操作成功");
-        finish();
+          if(dealType==1){
+              //发消息成功
+              ProcessListBean item=new ProcessListBean();
+              item.setRemark(msg());
+              item.setProcessResult(1);
+              remarkList.add(item);
+              remarkAdapter.notifyItemInserted(remarkList.size()-1);
+              mTvSend.setText("");
+          }else if(dealType==2){//完成
+              ToastUtil.shortShow("操作成功");
+              RxBus.getDefault().post(new DealEvent(2,mPos));
+              finish();
+          }else {
+              ToastUtil.shortShow("操作成功");
+              finish();
+          }
+
+
     }
 
     @Override
     public void delSuccess() {
         LoadingView.dismissProgress();
         ToastUtil.shortShow("撤销成功");
+        RxBus.getDefault().post(new DealEvent(0,mPos));
         finish();
     }
 
@@ -228,12 +269,14 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                  return;
              }
                 LoadingView.showProgress(this);
-                mPresent.dealWoResult(1,mId,msg(),0);
+                mPresent.dealWoResult(1,mId,msg(),"");
+                dealType=1;
                 break;
             //完成:2
             case R.id.approve_turn_down:
                 LoadingView.showProgress(this);
-                mPresent.dealWoResult(2,mId,"",0);
+                mPresent.dealWoResult(2,mId,"","");
+                dealType=2;
                 break;
             //转他人处理:3
             case R.id.approve_to_other:
@@ -241,6 +284,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                     ToastUtil.shortShow("请输入消息");
                     return;
                 }
+
                   startActivityForResult(new Intent(this,ApproverActivity.class),Constants.REQUEST_CODE);
                 break;
             case R.id.toolbar_right_title:
@@ -270,7 +314,8 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                 return;
             }
             LoadingView.showProgress(this);
-            mPresent.dealWoResult(3,mId,msg(),ownerList.get(0).getId());
+            dealType=3;
+            mPresent.dealWoResult(3,mId,msg(),ownerList.get(0).getId()+"");
         }
 
     }

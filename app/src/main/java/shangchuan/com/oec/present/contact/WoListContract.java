@@ -17,11 +17,13 @@ public interface WoListContract  {
         void showChildName(List<WoClassBean> Bean);
         void showContentList(List<WoListBean> bean);
         void showMoreContent(List<WoListBean> bean,int start,int end);
+        void refreshStatus(int position);
     }
     interface Present extends BasePresent<View>{
         void getClassName();
         void getWoList(String aid,String bid,String orderStatus,String status);
         void getMoreWoList(String aid,String bid,String orderStatus,String status);
         void parentToChild(String pid);
+        void registerEvent();
     }
 }

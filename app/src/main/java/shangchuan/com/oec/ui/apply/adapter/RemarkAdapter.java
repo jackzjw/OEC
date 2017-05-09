@@ -35,23 +35,25 @@ public class RemarkAdapter extends RecyclerView.Adapter<RemarkAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if(mList.get(position).getProcessResult()==1){
+            holder.mRemark.setVisibility(View.VISIBLE);
+            holder.mRemark.setText(mList.get(position).getRemark());
+        }else {
+            holder.mRemark.setVisibility(View.GONE);
+        }
         switch (mList.get(position).getProcessResult()){
             case 0:
                 holder.mUserName.setText(mList.get(position).getUserName()+"通过了你的请求");
                 break;
             case 1://发消息
                 holder.mUserName.setText(mList.get(position).getUserName()+"发送了以下消息：");
-                holder.mRemark.setVisibility(View.VISIBLE);
-                holder.mRemark.setText(mList.get(position).getRemark());
                 break;
             case 2://通过
-                holder.mUserName.setText(mList.get(position).getUserName()+"通过了您的申请");
-                holder.mRemark.setVisibility(View.GONE);
+                holder.mUserName.setText(mList.get(position).getUserName()+"通过了你的申请");
                 break;
             case 3://转他人处理
                 holder.mUserName.setText(mList.get(position).getUserName()+"转给");
                 holder.mResultName.setText(mList.get(position).getToUserName()+"处理");
-                holder.mRemark.setVisibility(View.GONE);
                 break;
         }
         holder.mCreateTime.setText(mList.get(position).getCreateTime());

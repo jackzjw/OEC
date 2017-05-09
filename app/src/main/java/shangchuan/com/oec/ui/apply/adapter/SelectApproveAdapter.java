@@ -65,14 +65,14 @@ public class SelectApproveAdapter extends RecyclerView.Adapter<SelectApproveAdap
         secondAdapter.setOwnerListener(new ApproverSecondAdapter.OnSelectOwnerListener() {
             @Override
             public void selectedOwnerClick(int position) {
-                LogUtil.i("添加审批人="+userList.get(position).getId());
-                selectMap.put(userList.get(position).getId(),userList.get(position).getUserTrueName());
+                LogUtil.i("添加审批人="+userList.get(position).getUserId());
+                selectMap.put(userList.get(position).getUserId(),userList.get(position).getUserTrueName());
             }
 
             @Override
             public void cancleOwnerClick(int position) {
                 LogUtil.i("取消审批人="+userList.get(position).getId());
-                selectMap.remove(userList.get(position).getId());
+                selectMap.remove(userList.get(position).getUserId());
             }
         });
     }
