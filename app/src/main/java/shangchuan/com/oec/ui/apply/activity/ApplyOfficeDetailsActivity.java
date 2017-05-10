@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,15 +21,18 @@ import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.AttchmentBean;
+import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.model.bean.OaDetailsBean;
 import shangchuan.com.oec.model.bean.ProcessListBean;
 import shangchuan.com.oec.model.bean.SelectOwnerBean;
+import shangchuan.com.oec.model.event.DealEvent;
 import shangchuan.com.oec.present.OaDetailsPresent;
 import shangchuan.com.oec.present.contact.OaDetailsContract;
 import shangchuan.com.oec.ui.apply.adapter.DocumentAdapter;
+import shangchuan.com.oec.ui.apply.adapter.OaRemarkAdapter;
 import shangchuan.com.oec.ui.apply.adapter.ScanImgAdapter;
-import shangchuan.com.oec.ui.apply.adapter.WrRemarkAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
 import shangchuan.com.oec.util.SharePreferenceUtil;
@@ -74,17 +78,33 @@ public class ApplyOfficeDetailsActivity extends BaseActivity<OaDetailsPresent> i
     TextView mTvReject;
     @BindView(R.id.approve_to_other)
     TextView mToOther;
-    @BindView(R.id.rel_deal_result)
-    LinearLayout mRelDealResult;
+    @BindView(R.id.rel_first)
+    RelativeLayout relSend;
+    @BindView(R.id.rel_second)
+    RelativeLayout mRelTurnDown;
+    @BindView(R.id.rel_third)
+    RelativeLayout mRelToOther;
     @BindView(R.id.et_msg)
     EditText mInputMsg;
+    @BindView(R.id.rel_deal_result)
+    LinearLayout mDealResult;
+
     private int mId;
+    private int mIndex;
+    private List<ProcessListBean> remarkList=new ArrayList<>();
+    private OaRemarkAdapter remarkAdapter;
+    private int dealType;
+    private ArrayList<SelectOwnerBean> ownerList;
+    private int mPos;
+    private OaDetailsBean mData;
 
     //index用来确认是从审核列表跳过来的还是从我的申请列表跳过来的；index=1表示从申请列表跳过来，2：审核列表
-public static Intent newIntent(Context context,int id,int index){
+    //position用来刷新处理后的状态
+public static Intent newIntent(Context context,int id,int index,int position){
     Intent intent =new Intent(context,ApplyOfficeDetailsActivity.class);
     intent.putExtra("id",id);
     intent.putExtra("index",index);
+    intent.putExtra("position",position);
     return  intent;
 }
 
@@ -96,14 +116,21 @@ public static Intent newIntent(Context context,int id,int index){
 
     @Override
     protected void initEventData() {
-        if(getIntent().getIntExtra("index",0)==1){
-            mRelDealResult.setVisibility(View.GONE);
+        mIndex=getIntent().getIntExtra("index",0);
+        mPos=getIntent().getIntExtra("position",-1);
+        if(mIndex==2){
+            mRelTurnDown.setVisibility(View.VISIBLE);
+            mRelToOther.setVisibility(View.VISIBLE);
+            relSend.setVisibility(View.VISIBLE);
+            mTvPass.setText("通过");
+            mTvReject.setText("驳回");
+        }else {
+             mDealResult.setVisibility(View.GONE);
         }
+
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
-        mToolbartRight.setText("撤回");
         initToolBar(mToolbar);
-        mTvPass.setText("通过");
-        mTvReject.setText("驳回");
+       mToolbartRight.setOnClickListener(this);
         mTvPass.setOnClickListener(this);
         mTvReject.setOnClickListener(this);
         mToOther.setOnClickListener(this);
@@ -128,7 +155,13 @@ public static Intent newIntent(Context context,int id,int index){
 
     @Override
     public void showContent(OaDetailsBean bean) {
+        this.mData=bean;
         LoadingView.dismissProgress();
+        if(mIndex==1&&bean.getOrderStatus()==0){
+            mToolbartRight.setText("重新提交");
+        }else if(mIndex==1){
+            mToolbartRight.setText("撤回");
+        }
         mToolbarTitle.setText(bean.getOrderType()+"详情");
         Glides.getInstance().load(this, SharePreferenceUtil.getUserAvater(),mUserAvater);
         mOrderTitle.setText(bean.getOrderTitle());
@@ -194,22 +227,50 @@ public static Intent newIntent(Context context,int id,int index){
 
     @Override
     public void showRemark(List<ProcessListBean> bean) {
+         remarkList=bean;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(new WrRemarkAdapter(this,bean));
+        remarkAdapter=new OaRemarkAdapter(this,remarkList);
+        mRecyclerView.setAdapter(remarkAdapter);
 
     }
 
     @Override
     public void dealSuccess() {
            LoadingView.dismissProgress();
-        ToastUtil.shortShow("处理成功");
+            ProcessListBean item = new ProcessListBean();
+            item.setRemark(msg());
+            item.setUserName(MySelfInfo.getInstance().getTrueName());
+            item.setProcessResult(dealType);
+          if(dealType==3) item.setToUserName(ownerList.get(0).getOwnerName());
+            mInputMsg.setText("");
+          remarkList.add(item);
+          remarkAdapter.notifyItemInserted(remarkList.size() - 1);
+        if(dealType==4) {
+            RxBus.getDefault().post(new DealEvent(3, mPos));
+        }else
+        if(dealType==3){
+            RxBus.getDefault().post(new DealEvent(1, mPos));
+        }
+        else {
+            RxBus.getDefault().post(new DealEvent(dealType, mPos));
+
+        }
+
+    }
+
+    @Override
+    public void deleteSucc() {
+        //撤回成功
+        LoadingView.dismissProgress();
+        RxBus.getDefault().post(new DealEvent(0, mPos));
+         finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.REQUEST_CODE&&resultCode==RESULT_OK){
-            ArrayList<SelectOwnerBean> ownerList = (ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
+           ownerList = (ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
             if(ownerList.size()>1){
                 ToastUtil.shortShow("只能转一人处理,请重新选择");
                 return;
@@ -218,25 +279,28 @@ public static Intent newIntent(Context context,int id,int index){
                 ToastUtil.shortShow("请选择处理人");
                 return;
             }
-            LoadingView.showProgress(this);
-            mPresent.dealOaCheck(mId,3,msg(),ownerList.get(0).getId());
+            LoadingView.showProgress(this);//转他人=3
+            mPresent.dealOaCheck(mId,3,msg(),ownerList.get(0).getId()+"");
+            dealType=3;
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.approve_pass:
+            case R.id.approve_pass://通过=2
                  LoadingView.showProgress(this);
-                mPresent.dealOaCheck(mId,1,msg(),0);
+                mPresent.dealOaCheck(mId,2,msg(),"");
+                dealType=2;
                 break;
-            case R.id.approve_turn_down:
+            case R.id.approve_turn_down://驳回=4
                 if(TextUtils.isEmpty(msg())){
                     ToastUtil.shortShow("请填写审批意见");
                     return;
                 }
                  LoadingView.showProgress(this);
-                mPresent.dealOaCheck(mId,2,msg(),0);
+                mPresent.dealOaCheck(mId,4,msg(),"");
+                dealType=4;
                 break;
             case R.id.approve_to_other:
                 if(TextUtils.isEmpty(msg())){
@@ -245,6 +309,15 @@ public static Intent newIntent(Context context,int id,int index){
                 }
                   startActivityForResult(new Intent(this,ApproverActivity.class),Constants.REQUEST_CODE);
                 break;
+            case R.id.toolbar_right_title:
+                 //重新提交
+                if(mData.getOrderStatus()==0){
+
+                }else {
+                    //撤回
+                    LoadingView.showProgress(this);
+                    mPresent.deleteOa(mId);
+                }
 
 
         }

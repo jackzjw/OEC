@@ -53,6 +53,7 @@ public class OrganizationListPresent extends RxPresent<OrganizationListContract.
                     public void onNext(CharactersTokenBean bean) {
                         MySelfInfo.getInstance().setTenantId(tenantId);
                         MySelfInfo.getInstance().setNickName(bean.getUserinfo().getLoginUserNickName());
+                        MySelfInfo.getInstance().setTrueName(bean.getUserinfo().getLoginUserTrueName());
                         MySelfInfo.getInstance().setAvatar(bean.getUserinfo().getLoginAvatar());
                         MySelfInfo.getInstance().setTenantName(bean.getUserinfo().getLoginTenantName());
                         MySelfInfo.getInstance().writeToCache(App.getInstance());

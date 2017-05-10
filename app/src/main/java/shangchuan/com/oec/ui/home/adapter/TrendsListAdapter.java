@@ -52,7 +52,7 @@ public class TrendsListAdapter extends RecyclerView.Adapter<TrendsListAdapter.Vi
                         break;
                     case 2://办公申请
                         //传的2表示从审核跳转过去的
-                        mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,2));
+                        mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,2,position));
                         break;
                     case 3://工作报告
                         //2表示审阅

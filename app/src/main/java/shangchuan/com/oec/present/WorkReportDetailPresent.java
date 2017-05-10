@@ -129,13 +129,26 @@ public class WorkReportDetailPresent extends RxPresent<WorkReportDeatailsContrac
     }
 
     @Override
-    public void oaDealResult(int orderId, int resultId, String remark, int toUserId) {
+    public void oaDealResult(int orderId, int resultId, String remark, String toUserId) {
         Subscription subscription = mHelper.getApiSevice().wrDealResult(orderId, resultId, remark, toUserId, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override
                     public void onNext(WoSuccessBean bean) {
                          mView.dealSuccess();
+                    }
+                });
+        add(subscription);
+    }
+
+    @Override
+    public void delWR(int id) {
+        Subscription subscription = mHelper.getApiSevice().delWR(id,SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
+                .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
+                    @Override
+                    public void onNext(WoSuccessBean bean) {
+                        mView.deleteSucc();
                     }
                 });
         add(subscription);

@@ -1,12 +1,15 @@
 package shangchuan.com.oec.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by sg280 on 2017/4/18.
  */
 
-public class WorkReportDetailsBean {
+public class WorkReportDetailsBean implements Parcelable {
 
     private int Id;
     private int TenantId;
@@ -143,4 +146,61 @@ public class WorkReportDetailsBean {
     public void setAttachmentList_new(ArrayList<AttchmentBean> attachmentList_new) {
         AttachmentList_new = attachmentList_new;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.Id);
+        dest.writeInt(this.TenantId);
+        dest.writeInt(this.UserID);
+        dest.writeString(this.ReportType);
+        dest.writeString(this.StartDate);
+        dest.writeString(this.EndDate);
+        dest.writeString(this.ReportTitle);
+        dest.writeString(this.ReportContent);
+        dest.writeString(this.ReportPlan);
+        dest.writeString(this.ReportQuestion);
+        dest.writeString(this.Attachment);
+        dest.writeString(this.ToUserID);
+        dest.writeTypedList(this.ProcessList);
+        dest.writeTypedList(this.AttachmentList_new);
+        dest.writeString(this.CreateTime);
+    }
+
+    public WorkReportDetailsBean() {
+    }
+
+    protected WorkReportDetailsBean(Parcel in) {
+        this.Id = in.readInt();
+        this.TenantId = in.readInt();
+        this.UserID = in.readInt();
+        this.ReportType = in.readString();
+        this.StartDate = in.readString();
+        this.EndDate = in.readString();
+        this.ReportTitle = in.readString();
+        this.ReportContent = in.readString();
+        this.ReportPlan = in.readString();
+        this.ReportQuestion = in.readString();
+        this.Attachment = in.readString();
+        this.ToUserID = in.readString();
+        this.ProcessList = in.createTypedArrayList(ProcessListBean.CREATOR);
+        this.AttachmentList_new = in.createTypedArrayList(AttchmentBean.CREATOR);
+        this.CreateTime = in.readString();
+    }
+
+    public static final Parcelable.Creator<WorkReportDetailsBean> CREATOR = new Parcelable.Creator<WorkReportDetailsBean>() {
+        @Override
+        public WorkReportDetailsBean createFromParcel(Parcel source) {
+            return new WorkReportDetailsBean(source);
+        }
+
+        @Override
+        public WorkReportDetailsBean[] newArray(int size) {
+            return new WorkReportDetailsBean[size];
+        }
+    };
 }

@@ -14,10 +14,12 @@ public interface OaListContract {
     interface View extends BaseView{
         void showContent(List<OaItemBean> bean);
         void showMoreContent(List<OaItemBean> bean,int start,int end);
+        void refreshStatus(int position);
 
     }
     interface  Present extends BasePresent<View>{
         void getApplyType(String type);
         void getMoreContent();
+        void registerEvent();
     }
 }

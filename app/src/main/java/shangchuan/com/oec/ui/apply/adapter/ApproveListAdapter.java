@@ -42,7 +42,7 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
             @Override
             public void onClick(View v) {
                 int id=mList.get(viewHolder.getAdapterPosition()).getId();
-                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,2));
+                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,2,viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;

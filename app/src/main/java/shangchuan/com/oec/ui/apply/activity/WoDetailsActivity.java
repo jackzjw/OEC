@@ -36,6 +36,7 @@ import shangchuan.com.oec.ui.apply.adapter.RemarkAdapter;
 import shangchuan.com.oec.ui.apply.adapter.ScanImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 import shangchuan.com.oec.widget.DividerDecoration;
@@ -256,7 +257,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
     }
 
     private String msg(){
-        return mInputMsg.getText().toString().trim();
+        return mInputMsg.getText().toString();
     }
 
     @Override
@@ -269,6 +270,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                  return;
              }
                 LoadingView.showProgress(this);
+                LogUtil.i("消息="+msg());
                 mPresent.dealWoResult(1,mId,msg(),"");
                 dealType=1;
                 break;

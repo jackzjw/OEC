@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +21,7 @@ import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.model.bean.AttchmentBean;
 import shangchuan.com.oec.model.bean.MySelfInfo;
+import shangchuan.com.oec.model.bean.ProcessListBean;
 import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.model.bean.WorkReportDetailsBean;
 import shangchuan.com.oec.present.WorkReportDetailPresent;
@@ -66,16 +66,23 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     TextView mRecomend;
     @BindView(R.id.process_recycleview)
     RecyclerView ProcessRec;
-    @BindView(R.id.rel_approve)
-    RelativeLayout relApprove;
-    @BindView(R.id.et_message)
+     @BindView(R.id.rel_first)
+    RelativeLayout mRelSendMsg;
+    @BindView(R.id.et_msg)
     EditText Msg;
-    @BindView(R.id.send_msg)
-    Button mSendMsg;
+    @BindView(R.id.approve_pass)
+    TextView mSendMsg;
     @BindView(R.id.approve_to_other)
-    Button mToOther;
+    TextView mToOther;
+    @BindView(R.id.rel_third)
+    RelativeLayout mRelToOther;
     private int mType;
     private int mId;
+    private WrRemarkAdapter remarkAdapter;
+    private List<ProcessListBean> remarkList=new ArrayList<>();
+    private int dealType;
+    private ArrayList<SelectOwnerBean> ownerList;
+    private WorkReportDetailsBean mData;
 
     public static Intent getInstance(Context context,int id,int type){
         Intent intent=new Intent(context,WorkReportDetailActivity.class);
@@ -101,10 +108,14 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
         //type=1表示我创建的工作报告详情，type=2表示审阅详情
         if(mType==1) {
             mToolbartRight.setText("撤回");
-            relApprove.setVisibility(View.GONE);
+        }else {
+            mRelToOther.setVisibility(View.VISIBLE);
         }
+        mRelSendMsg.setVisibility(View.VISIBLE);
+        mSendMsg.setText("发消息");
         mSendMsg.setOnClickListener(this);
         mToOther.setOnClickListener(this);
+        mToolbartRight.setOnClickListener(this);
         LoadingView.showProgress(this);
         mPresent.getWrDetails(mId,mType);
     }
@@ -124,6 +135,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
 
     @Override
     public void showContent(WorkReportDetailsBean bean) {
+        mData=bean;
         LoadingView.dismissProgress();
         mTitle.setText(bean.getReportTitle());
         mDate.setText(bean.getCreateTime());
@@ -132,7 +144,9 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
         mContent.setText(bean.getReportContent());
         mNextPlan.setText(bean.getReportPlan());
         mRecomend.setText(bean.getReportQuestion());
-        WrRemarkAdapter remarkAdapter = new WrRemarkAdapter(this, bean.getProcessList());
+        mEndTime.setText("-");
+        this.remarkList=bean.getProcessList();
+         remarkAdapter = new WrRemarkAdapter(this,remarkList);
         ProcessRec.setLayoutManager(new LinearLayoutManager(this));
         ProcessRec.setAdapter(remarkAdapter);
 
@@ -182,11 +196,24 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
 
     @Override
     public void dealSuccess() {
-        LoadingView.dismissProgress();
-        ToastUtil.shortShow("处理成功");
-        finish();
-
+            LoadingView.dismissProgress();
+            ProcessListBean item = new ProcessListBean();
+            item.setRemark(msg());
+            item.setUserName(MySelfInfo.getInstance().getTrueName());
+            item.setProcessResult(dealType);
+            if(dealType==3) item.setToUserName(ownerList.get(0).getOwnerName());
+            remarkList.add(item);
+            remarkAdapter.notifyItemInserted(remarkList.size() - 1);
+            Msg.setText("");
     }
+
+    @Override
+    public void deleteSucc() {
+        //撤回成功,跳转到修改界面
+        LoadingView.dismissProgress();
+        startActivity(ModifyWRDetailActivity.getInstance(this,mData));
+    }
+
     private String msg(){
         return Msg.getText().toString().trim();
     }
@@ -194,7 +221,7 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.REQUEST_CODE&&resultCode==RESULT_OK){
-            ArrayList<SelectOwnerBean> ownerList = (ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
+     ownerList = (ArrayList<SelectOwnerBean>) data.getSerializableExtra("ownerlist");
             if(ownerList.size()>1){
                 ToastUtil.shortShow("只能转一人处理,请重新选择");
                 return;
@@ -204,7 +231,8 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
                 return;
             }
             LoadingView.showProgress(this);
-            mPresent.oaDealResult(mId,3,msg(),ownerList.get(0).getId());
+            mPresent.oaDealResult(mId,3,msg(),ownerList.get(0).getId()+"");
+            dealType=3;
         }
 
     }
@@ -212,13 +240,14 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.send_msg:
+            case R.id.approve_pass:
                 if(TextUtils.isEmpty(msg())){
                     ToastUtil.shortShow("请输入消息");
                     return;
                 }
                 LoadingView.showProgress(this);
-                mPresent.oaDealResult(mId,2,msg(),0);
+                mPresent.oaDealResult(mId,2,msg(),"0");
+                dealType=2;
                 break;
             case R.id.approve_to_other:
                 if(TextUtils.isEmpty(msg())) {
@@ -226,6 +255,13 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
                     return;
                 }
                 startActivityForResult(new Intent(this,ApproverActivity.class),Constants.REQUEST_CODE);
+
+                break;
+            case R.id.toolbar_right_title:
+                //撤回
+                LoadingView.showProgress(this);
+                mPresent.delWR(mId);
+
                 break;
         }
 

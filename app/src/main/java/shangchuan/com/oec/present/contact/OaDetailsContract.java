@@ -20,10 +20,12 @@ public interface OaDetailsContract  {
         void openFile(String filePath);
         void showRemark(List<ProcessListBean> bean);
         void dealSuccess();
+        void deleteSucc();
     }
     interface Present extends BasePresent<View>{
         void getData(int id);
         void downloadFile(String url);
-        void dealOaCheck(int orderId,int result,String remark,int toUserId);
+        void dealOaCheck(int orderId,int result,String remark,String toUserId);
+        void deleteOa(int id);
     }
 }

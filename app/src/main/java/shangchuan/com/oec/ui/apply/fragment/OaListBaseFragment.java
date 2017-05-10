@@ -14,6 +14,7 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.present.OaListPresent;
 import shangchuan.com.oec.present.contact.OaListContract;
 import shangchuan.com.oec.ui.apply.adapter.OaListAdapter;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -67,6 +68,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
                 mPresent.getApplyType(mType);
             }
         });
+        mPresent.registerEvent();
     }
 
     @Override
@@ -108,6 +110,11 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
         adapter.notifyItemRangeInserted(start,end);
     }
 
+    @Override
+    public void refreshStatus(int position) {
+        LogUtil.i("refresh="+position);
+          adapter.notifyItemChanged(position);
+    }
 
 
 }

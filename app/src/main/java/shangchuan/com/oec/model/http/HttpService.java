@@ -165,6 +165,10 @@ public interface HttpService {
       @FormUrlEncoded
       @POST("OA/report_list")
       Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWorkReportList(@Field("SelectType") int type,@Field("Page") int page,@Field("token") String token);
+      //工作报告删除
+       @FormUrlEncoded
+       @POST("OA/report_del")
+       Observable<HttpDataResult<WoSuccessBean>> delWR(@Field("Id") int id,@Field("token") String token);
        //添加客户（含联系人）
       @FormUrlEncoded
       @POST("Customer/customer_save_all")
@@ -188,11 +192,11 @@ public interface HttpService {
        //OA审核处理结果
        @FormUrlEncoded
        @POST("OA/oa_check")
-       Observable<HttpDataResult<WoSuccessBean>> oaDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") int toUserId,@Field("token") String token);
+       Observable<HttpDataResult<WoSuccessBean>> oaDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") String toUserId,@Field("token") String token);
        //工作报告审核处理结果
        @FormUrlEncoded
        @POST("OA/report_audit")
-       Observable<HttpDataResult<WoSuccessBean>>  wrDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") int toUserId,@Field("token") String token);
+       Observable<HttpDataResult<WoSuccessBean>>  wrDealResult(@Field("OrderId") int orderId,@Field("ProcessResult") int resultId,@Field("Remark") String remark,@Field("ToUserId") String toUserId,@Field("token") String token);
        //考勤列表
        @FormUrlEncoded
        @POST("OA/attendance_list")
@@ -245,5 +249,8 @@ public interface HttpService {
           @FormUrlEncoded
           @POST("Project/project_mytask")
           Observable<HttpDataResult<ResultBean<OaBasicItemBean<TaskListBean>>>> getTaskList(@Field("TaskStatus") int statud,@Field("ProId") int id,@Field("token") String token);
-
+          //删除Oa
+          @FormUrlEncoded
+          @POST("OA/oa_del")
+          Observable<HttpDataResult<WoSuccessBean>> deleteOa(@Field("Id") int id,@Field("token") String token);
 }

@@ -18,11 +18,13 @@ public interface WorkReportDeatailsContract {
         void showFileResourse(List<AttchmentBean> beanList);
         void openFile(String filePath);
         void dealSuccess();
+        void deleteSucc();
 
     }
     interface Present extends BasePresent<View>{
         void getWrDetails(int id,int type);
         void downloadFile(String url);
-        void oaDealResult(int orderId,int resultId,String remark,int toUserId);
+        void oaDealResult(int orderId,int resultId,String remark,String toUserId);
+        void delWR(int id);
     }
 }

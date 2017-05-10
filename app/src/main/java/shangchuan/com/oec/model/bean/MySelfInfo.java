@@ -22,6 +22,15 @@ public class MySelfInfo {
     private boolean islogin;
     private String phone;
     private String pwd;
+    private String trueName;
+
+    public String getTrueName() {
+        return trueName;
+    }
+
+    public void setTrueName(String trueName) {
+        this.trueName = trueName;
+    }
 
     public String getPwd() {
         return pwd;

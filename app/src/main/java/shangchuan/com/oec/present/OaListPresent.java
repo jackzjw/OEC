@@ -7,12 +7,15 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import shangchuan.com.oec.base.RxPresent;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
+import shangchuan.com.oec.model.event.DealEvent;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.OaListContract;
 import shangchuan.com.oec.util.RxUtil;
@@ -75,4 +78,17 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
                 });
             add(subsrciption);
     }
+//申请状态ID（0-已撤销，1-待审核，2-已通过，3-已驳回）
+    @Override
+    public void registerEvent() {
+        Subscription subscription=RxBus.getDefault().toDefaultObservable(DealEvent.class, new Action1<DealEvent>() {
+            @Override
+            public void call(DealEvent event) {
+                    totalList.get(event.getPosition()).setOrderStatus(event.getStatus());
+                    mView.refreshStatus(event.getPosition());
+            }
+        });
+        add(subscription);
+    }
+
 }

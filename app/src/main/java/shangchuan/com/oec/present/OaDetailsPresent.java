@@ -123,13 +123,26 @@ public class OaDetailsPresent extends RxPresent<OaDetailsContract.View> implemen
     }
 
     @Override
-    public void dealOaCheck(int orderId, int result, String remark, int toUserId) {
+    public void dealOaCheck(int orderId, int result, String remark, String toUserId) {
         Subscription subscription = mHelper.getApiSevice().oaDealResult(orderId, result, remark, toUserId, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
                 .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
                     @Override
                     public void onNext(WoSuccessBean bean) {
                          mView.dealSuccess();
+                    }
+                });
+        add(subscription);
+    }
+
+    @Override
+    public void deleteOa(int id) {
+        Subscription subscription = mHelper.getApiSevice().deleteOa(id, SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<WoSuccessBean>>scheduleRxHelper())
+                .compose(RxUtil.<WoSuccessBean>handleResult()).subscribe(new CommonSubscriber<WoSuccessBean>(mView) {
+                    @Override
+                    public void onNext(WoSuccessBean bean) {
+                        mView.deleteSucc();
                     }
                 });
         add(subscription);
