@@ -1,6 +1,7 @@
 package shangchuan.com.oec.ui.apply.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
-import shangchuan.com.oec.model.bean.ApproveListBean;
 import shangchuan.com.oec.model.bean.MySelfInfo;
+import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeDetailsActivity;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
@@ -26,12 +27,12 @@ import shangchuan.com.oec.widget.CircleImageView;
 public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<ApproveListBean> mList;
-    public ApproveListAdapter(Context context,List<ApproveListBean> list){
+    private List<OaItemBean> mList;
+    public ApproveListAdapter(Context context,List<OaItemBean> list){
         this.mContext=context;
         this.mList=list;
     }
-    public void updateData(List<ApproveListBean> bean){
+    public void updateData(List<OaItemBean> bean){
         this.mList=bean;
     }
     @Override
@@ -53,6 +54,12 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
         Glides.getInstance().loadCircle(mContext, MySelfInfo.getInstance().getAvatar(),holder.mUserAvater);
         holder.mTitle.setText(mList.get(position).getOrderTitle());
         holder.mDesc.setText(mList.get(position).getOrderContent());
+        holder.mStatus.setText(CommonUtil.orderStatus(mList.get(position).getOrderStatus()));
+        if(mList.get(position).getOrderStatus()==1){
+            holder.mStatus.setTextColor(ContextCompat.getColor(mContext,R.color.apply_wait_approve_text_color));
+        }else {
+            holder.mStatus.setTextColor(ContextCompat.getColor(mContext,R.color.theme_dark_text_color));
+        }
         holder.mDate.setText(CommonUtil.getStandardDate(mList.get(position).getCreateTime()));
     }
 
@@ -71,6 +78,8 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
         TextView mDesc;
         @BindView(R.id.tv_approve_time)
         TextView mDate;
+        @BindView(R.id.tv_wo_status)
+        TextView mStatus;
 
 
         public ViewHolder(View itemView) {

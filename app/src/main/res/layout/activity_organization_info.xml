@@ -13,7 +13,7 @@
         android:layout_height="120dp"
         android:background="@color/theme_divide_color"
         >
-        <ImageView
+        <shangchuan.com.oec.widget.CircleImageView
             android:id="@+id/user_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,6 @@
             android:id="@+id/user_report_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="方太"
             android:textStyle="bold"
             android:singleLine="true"
             android:textSize="14sp"
@@ -55,7 +54,6 @@
                 android:id="@+id/organize_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="304932"
                 android:textSize="12sp"
 
                 />
@@ -102,7 +100,6 @@
             android:layout_marginRight="10dp"
             android:singleLine="true"
             android:layout_centerVertical="true"
-            android:text="黄浦区高雄路2号3A"
             android:ellipsize="end"
             />
     </RelativeLayout>
@@ -127,7 +124,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:text="13939383332"
             />
     </RelativeLayout>
     <View
@@ -155,7 +151,6 @@
             android:layout_marginLeft="50dp"
             android:paddingRight="10dp"
             android:layout_centerVertical="true"
-            android:text="2月13号，一名朝鲜籍男子在吉隆坡国际机场死亡。(朝马双方就尸检、调查等问题互相指责，并采取驱逐对方大使，禁止本国境内对方公民离境等措施，两国外交关系一度趋紧。"
             />
     </RelativeLayout>
     <View
@@ -180,7 +175,6 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/member_arrow"
             android:padding="5dp"
-            android:text="20"
             />
         <ImageView
             android:id="@+id/member_arrow"

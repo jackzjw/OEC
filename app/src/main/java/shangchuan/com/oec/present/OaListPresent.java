@@ -15,7 +15,7 @@ import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
 import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
-import shangchuan.com.oec.model.event.DealEvent;
+import shangchuan.com.oec.model.event.WithDrawEvent;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.OaListContract;
 import shangchuan.com.oec.util.RxUtil;
@@ -81,10 +81,10 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
 //申请状态ID（0-已撤销，1-待审核，2-已通过，3-已驳回）
     @Override
     public void registerEvent() {
-        Subscription subscription=RxBus.getDefault().toDefaultObservable(DealEvent.class, new Action1<DealEvent>() {
+        Subscription subscription=RxBus.getDefault().toDefaultObservable(WithDrawEvent.class, new Action1<WithDrawEvent>() {
             @Override
-            public void call(DealEvent event) {
-                    totalList.get(event.getPosition()).setOrderStatus(event.getStatus());
+            public void call(WithDrawEvent event) {
+                    totalList.get(event.getPosition()).setOrderStatus(0);
                     mView.refreshStatus(event.getPosition());
             }
         });

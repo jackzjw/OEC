@@ -94,6 +94,7 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
 
     @Override
     public void showContent(List<OaItemBean> bean) {
+        LogUtil.i(bean.toString());
        LoadingView.dismissProgress();
         if(mRefreshLayout.isRefreshing()){
             mRefreshLayout.setRefreshing(false);

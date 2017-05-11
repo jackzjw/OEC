@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseActivity;
-import shangchuan.com.oec.model.bean.ApproveListBean;
+import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.present.ApproveListPresent;
 import shangchuan.com.oec.present.contact.ApproveListContract;
 import shangchuan.com.oec.ui.apply.adapter.ApproveListAdapter;
@@ -28,7 +28,7 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
     Toolbar mToolbar;
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
-    private int isAudit=0;
+    private int isAudit=1;
      private String mType;
     private boolean isMore;
     private ApproveListAdapter adapter;
@@ -55,7 +55,7 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
         mPresent.getApproveList(mType,isAudit);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerDecoration(this));
-        adapter=new ApproveListAdapter(this,new ArrayList<ApproveListBean>());
+        adapter=new ApproveListAdapter(this,new ArrayList<OaItemBean>());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -87,17 +87,22 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
     }
 
     @Override
-    public void showContent(List<ApproveListBean> bean) {
+    public void showContent(List<OaItemBean> bean) {
         LoadingView.dismissProgress();
         adapter.updateData(bean);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showMoreContent(List<ApproveListBean> bean, int start, int end) {
+    public void showMoreContent(List<OaItemBean> bean, int start, int end) {
         isMore=false;
         LoadingView.dismissProgress();
         adapter.updateData(bean);
         adapter.notifyItemRangeInserted(start,end);
+    }
+
+    @Override
+    public void refreshStatus(int pos, boolean isDel) {
+
     }
 }

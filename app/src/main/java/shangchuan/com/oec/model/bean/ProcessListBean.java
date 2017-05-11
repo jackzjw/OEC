@@ -168,4 +168,22 @@ public class ProcessListBean implements Parcelable {
             return new ProcessListBean[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "ProcessListBean{" +
+                "Id=" + Id +
+                ", TenantId=" + TenantId +
+                ", ReportId=" + ReportId +
+                ", UserID=" + UserID +
+                ", UserName='" + UserName + '\'' +
+                ", ToUserID=" + ToUserID +
+                ", ToUserName='" + ToUserName + '\'' +
+                ", ProcessResult=" + ProcessResult +
+                ", ProcessResultName='" + ProcessResultName + '\'' +
+                ", Remark='" + Remark + '\'' +
+                ", CreateUserId='" + CreateUserId + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                '}';
+    }
 }

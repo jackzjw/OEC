@@ -10,7 +10,6 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import rx.Observable;
-import shangchuan.com.oec.model.bean.ApproveListBean;
 import shangchuan.com.oec.model.bean.AttendanceListBean;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
@@ -18,9 +17,6 @@ import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.GroupBasicBean;
 import shangchuan.com.oec.model.bean.HttpDataResult;
-import shangchuan.com.oec.model.bean.ProjectListBean;
-import shangchuan.com.oec.model.bean.ResultBean;
-import shangchuan.com.oec.model.bean.ResultListBean;
 import shangchuan.com.oec.model.bean.LoginInfoBean;
 import shangchuan.com.oec.model.bean.MyInfoBean;
 import shangchuan.com.oec.model.bean.NewsClassifyBean;
@@ -32,7 +28,11 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
+import shangchuan.com.oec.model.bean.ProjectListBean;
+import shangchuan.com.oec.model.bean.ResultBean;
+import shangchuan.com.oec.model.bean.ResultListBean;
 import shangchuan.com.oec.model.bean.RoleListBean;
+import shangchuan.com.oec.model.bean.TanentInfoBean;
 import shangchuan.com.oec.model.bean.TaskListBean;
 import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
@@ -68,7 +68,12 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("OA/oa_list")
     Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>>  getOaResult(@Field("ClassId") int id, @Field("token") String token, @Field("Page") int page);
-    //办公详情
+    //办公申请关键字搜索
+    @FormUrlEncoded
+    @POST("OA/oa_list")
+    Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>>  getOaKeyWord(@Field("SearchKey") String keyword, @Field("token") String token, @Field("Page") int page);
+
+ //办公详情
     @FormUrlEncoded
     @POST("OA/oa_info")
     Observable<HttpDataResult<OaDetailsBean>>   getOaDetailsResult(@Field("Id") int id,@Field("token") String token);
@@ -99,7 +104,10 @@ public interface HttpService {
     Observable<HttpDataResult<OaBasicItemBean<WoListBean>>>
     getWoList(@Field("ClassIdA") String aid,@Field("ClassIdB") String bid,
               @Field("OrderStatus") String ostatus,@Field("Status") String status,@Field("Page") int page,@Field("token") String token);
-
+     //获取工单关键字列表
+     @FormUrlEncoded
+     @POST("WO/wo_list")
+   Observable<HttpDataResult<OaBasicItemBean<WoListBean>>> getWoKeyWord(@Field("KeyWord") String keyword,@Field("Page") int page,@Field("token") String token);
     //获取客户列表
     @FormUrlEncoded
     @POST("Customer/customer_list")
@@ -165,7 +173,12 @@ public interface HttpService {
       @FormUrlEncoded
       @POST("OA/report_list")
       Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWorkReportList(@Field("SelectType") int type,@Field("Page") int page,@Field("token") String token);
-      //工作报告删除
+      //获取周报、日报关键字列表
+      @FormUrlEncoded
+      @POST("OA/report_list")
+      Observable<HttpDataResult<OaBasicItemBean<WorkReportListBean>>> getWRKeyWord(@Field("KeyWord") String keyword,@Field("Page") int page,@Field("token") String token);
+
+       //工作报告删除
        @FormUrlEncoded
        @POST("OA/report_del")
        Observable<HttpDataResult<WoSuccessBean>> delWR(@Field("Id") int id,@Field("token") String token);
@@ -176,7 +189,7 @@ public interface HttpService {
        //审批列表
        @FormUrlEncoded
        @POST("OA/approval_list")
-       Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> getApproveList(@Field("ClassId") int classid,@Field("IsAudit") int isAudit,@Field("Page") int page,@Field("token" ) String token);
+       Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>> getApproveList(@Field("ClassId") int classid,@Field("IsAudit") int isAudit,@Field("Page") int page,@Field("token" ) String token);
        //公告列表
        @FormUrlEncoded
        @POST("Index/news_list")
@@ -253,4 +266,10 @@ public interface HttpService {
           @FormUrlEncoded
           @POST("OA/oa_del")
           Observable<HttpDataResult<WoSuccessBean>> deleteOa(@Field("Id") int id,@Field("token") String token);
+          //机构信息
+          @FormUrlEncoded
+          @POST("Tenant/tenant_info")
+           Observable<HttpDataResult<ResultBean<TanentInfoBean>>> getTanentInfo(@Field("token") String token);
+
+
 }

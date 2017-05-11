@@ -17,6 +17,7 @@ import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.ui.user.activity.LoginActivity;
 import shangchuan.com.oec.ui.user.activity.ModifyPwdActivity;
+import shangchuan.com.oec.ui.user.activity.OrganizationInfoActivity;
 import shangchuan.com.oec.ui.user.activity.SwitchOrganizationActivity;
 import shangchuan.com.oec.ui.user.activity.UserInfoActivity;
 import shangchuan.com.oec.util.LogUtil;
@@ -45,6 +46,8 @@ public class UserFragment extends SimpleFragment implements View.OnClickListener
     TextView mTenantName;
     @BindView(R.id.rel_modify_password)
     RelativeLayout mRelModifyPwd;
+    @BindView(R.id.rel_organize_info)
+    RelativeLayout mRelTanentInfo;
     private int REQUEST_CODE=1;
 
     private void showUserInfo(){
@@ -78,6 +81,9 @@ public class UserFragment extends SimpleFragment implements View.OnClickListener
             case R.id.rel_modify_password:
                 startActivity(new Intent(mActivity, ModifyPwdActivity.class));
                 break;
+            case R.id.rel_organize_info:
+                startActivity(new Intent(mActivity, OrganizationInfoActivity.class));
+                break;
         }
     }
 
@@ -108,6 +114,7 @@ public class UserFragment extends SimpleFragment implements View.OnClickListener
         mUserInfo.setOnClickListener(this);
         mLogOff.setOnClickListener(this);
         mRelModifyPwd.setOnClickListener(this);
+        mRelTanentInfo.setOnClickListener(this);
         showUserInfo();
         Subscription subscription = RxBus.getDefault().toDefaultObservable(String.class, new Action1<String>() {
             @Override

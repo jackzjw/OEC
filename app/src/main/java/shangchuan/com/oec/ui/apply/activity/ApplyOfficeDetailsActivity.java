@@ -23,11 +23,11 @@ import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.AttchmentBean;
-import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.model.bean.OaDetailsBean;
 import shangchuan.com.oec.model.bean.ProcessListBean;
 import shangchuan.com.oec.model.bean.SelectOwnerBean;
-import shangchuan.com.oec.model.event.DealEvent;
+import shangchuan.com.oec.model.event.OaDealEvent;
+import shangchuan.com.oec.model.event.WithDrawEvent;
 import shangchuan.com.oec.present.OaDetailsPresent;
 import shangchuan.com.oec.present.contact.OaDetailsContract;
 import shangchuan.com.oec.ui.apply.adapter.DocumentAdapter;
@@ -35,6 +35,7 @@ import shangchuan.com.oec.ui.apply.adapter.OaRemarkAdapter;
 import shangchuan.com.oec.ui.apply.adapter.ScanImgAdapter;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.SharePreferenceUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CircleImageView;
@@ -118,19 +119,11 @@ public static Intent newIntent(Context context,int id,int index,int position){
     protected void initEventData() {
         mIndex=getIntent().getIntExtra("index",0);
         mPos=getIntent().getIntExtra("position",-1);
-        if(mIndex==2){
-            mRelTurnDown.setVisibility(View.VISIBLE);
-            mRelToOther.setVisibility(View.VISIBLE);
-            relSend.setVisibility(View.VISIBLE);
-            mTvPass.setText("通过");
-            mTvReject.setText("驳回");
-        }else {
-             mDealResult.setVisibility(View.GONE);
-        }
+
 
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         initToolBar(mToolbar);
-       mToolbartRight.setOnClickListener(this);
+        mToolbartRight.setOnClickListener(this);
         mTvPass.setOnClickListener(this);
         mTvReject.setOnClickListener(this);
         mToOther.setOnClickListener(this);
@@ -155,6 +148,7 @@ public static Intent newIntent(Context context,int id,int index,int position){
 
     @Override
     public void showContent(OaDetailsBean bean) {
+        LogUtil.i(bean.toString());
         this.mData=bean;
         LoadingView.dismissProgress();
         if(mIndex==1&&bean.getOrderStatus()==0){
@@ -170,11 +164,23 @@ public static Intent newIntent(Context context,int id,int index,int position){
         mEndTime.setText(bean.getEndTime());
         mDuration.setText(bean.getOrderPeriod());
         mStatus.setText(CommonUtil.orderStatus(bean.getOrderStatus()));
-        //2：已通过 3：已驳回
+        //2：已通过 3：已驳回 0:已撤销 1：待审核
+        int status=bean.getOrderStatus();
+        if(status==1){
+            mRelTurnDown.setVisibility(View.VISIBLE);
+            mRelToOther.setVisibility(View.VISIBLE);
+            relSend.setVisibility(View.VISIBLE);
+            mTvPass.setText("通过");
+            mTvReject.setText("驳回");
+        }else
         if(bean.getOrderStatus()==2){
              imgStatus.setImageResource(R.drawable.application_img_pass);
+            mDealResult.setVisibility(View.GONE);
         }else if(bean.getOrderStatus()==3){
             imgStatus.setImageResource(R.drawable.application_img_reject);
+            mDealResult.setVisibility(View.GONE);
+        }else {
+            mDealResult.setVisibility(View.GONE);
         }
         mContent.setText(bean.getOrderContent());
 
@@ -236,25 +242,19 @@ public static Intent newIntent(Context context,int id,int index,int position){
 
     @Override
     public void dealSuccess() {
+        //2:通过 3:转他人处理 4:驳回
            LoadingView.dismissProgress();
-            ProcessListBean item = new ProcessListBean();
-            item.setRemark(msg());
-            item.setUserName(MySelfInfo.getInstance().getTrueName());
-            item.setProcessResult(dealType);
-          if(dealType==3) item.setToUserName(ownerList.get(0).getOwnerName());
-            mInputMsg.setText("");
-          remarkList.add(item);
-          remarkAdapter.notifyItemInserted(remarkList.size() - 1);
         if(dealType==4) {
-            RxBus.getDefault().post(new DealEvent(3, mPos));
-        }else
-        if(dealType==3){
-            RxBus.getDefault().post(new DealEvent(1, mPos));
+            RxBus.getDefault().post(new OaDealEvent(3, mPos));
         }
-        else {
-            RxBus.getDefault().post(new DealEvent(dealType, mPos));
-
+        else if(dealType==3) {//转他人处理后退要删除该item
+            OaDealEvent event = new OaDealEvent(dealType, mPos);
+            event.setDelete(true);
+            RxBus.getDefault().post(event);
+        }else {
+            RxBus.getDefault().post(new OaDealEvent(dealType, mPos));
         }
+        finish();
 
     }
 
@@ -262,7 +262,7 @@ public static Intent newIntent(Context context,int id,int index,int position){
     public void deleteSucc() {
         //撤回成功
         LoadingView.dismissProgress();
-        RxBus.getDefault().post(new DealEvent(0, mPos));
+        RxBus.getDefault().post(new WithDrawEvent(mPos));
          finish();
     }
 
@@ -312,13 +312,14 @@ public static Intent newIntent(Context context,int id,int index,int position){
             case R.id.toolbar_right_title:
                  //重新提交
                 if(mData.getOrderStatus()==0){
+                   //要写五个界面，好烦
 
                 }else {
                     //撤回
                     LoadingView.showProgress(this);
                     mPresent.deleteOa(mId);
                 }
-
+                break;
 
         }
 

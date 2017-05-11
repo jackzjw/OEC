@@ -7,12 +7,15 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import shangchuan.com.oec.base.RxPresent;
-import shangchuan.com.oec.model.bean.ApproveListBean;
+import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.OaBasicItemBean;
+import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
+import shangchuan.com.oec.model.event.OaDealEvent;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.ApproveListContract;
 import shangchuan.com.oec.util.LogUtil;
@@ -29,7 +32,7 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
     private RetrofitHelper mHelper;
     private int classId;
     private int currentPage=1;
-    private List<ApproveListBean> mTotalList=new ArrayList<>();
+    private List<OaItemBean> mTotalList=new ArrayList<>();
     @Inject
     public ApproveListPresent(RetrofitHelper helper){
         this.mHelper=helper;
@@ -39,9 +42,9 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
 
         currentPage=1;
         Subscription subscription = mHelper.getApiSevice().getApplyTypes(SaveToken.mToken)
-                .flatMap(new Func1<HttpDataResult<List<OaTypeBean>>, Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>>>() {
+                .flatMap(new Func1<HttpDataResult<List<OaTypeBean>>, Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>>>() {
                     @Override
-                    public Observable<HttpDataResult<OaBasicItemBean<ApproveListBean>>> call(HttpDataResult<List<OaTypeBean>> result) {
+                    public Observable<HttpDataResult<OaBasicItemBean<OaItemBean>>> call(HttpDataResult<List<OaTypeBean>> result) {
                         if (result.getStatus() == 200) {
                             for (OaTypeBean item : result.getData()) {
                                 if (type.equals(item.getClassName())) {
@@ -52,10 +55,10 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
                         }
                         return null;
                     }
-                }).compose(RxUtil.<HttpDataResult<OaBasicItemBean<ApproveListBean>>>scheduleRxHelper())
-                .compose(RxUtil.<OaBasicItemBean<ApproveListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<ApproveListBean>>(mView) {
+                }).compose(RxUtil.<HttpDataResult<OaBasicItemBean<OaItemBean>>>scheduleRxHelper())
+                .compose(RxUtil.<OaBasicItemBean<OaItemBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<OaItemBean>>(mView) {
                     @Override
-                    public void onNext(OaBasicItemBean<ApproveListBean> bean) {
+                    public void onNext(OaBasicItemBean<OaItemBean> bean) {
                         LogUtil.i(bean.getItems().toString());
                                 mTotalList=bean.getItems();
                               mView.showContent(mTotalList);
@@ -67,14 +70,26 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
     @Override
     public void getMoreContent(String type,int isAudit) {
         Subscription subscription = mHelper.getApiSevice().getApproveList(classId,isAudit, currentPage++, SaveToken.mToken)
-                .compose(RxUtil.<HttpDataResult<OaBasicItemBean<ApproveListBean>>>scheduleRxHelper())
-                .compose(RxUtil.<OaBasicItemBean<ApproveListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<ApproveListBean>>(mView) {
+                .compose(RxUtil.<HttpDataResult<OaBasicItemBean<OaItemBean>>>scheduleRxHelper())
+                .compose(RxUtil.<OaBasicItemBean<OaItemBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<OaItemBean>>(mView) {
                     @Override
-                    public void onNext(OaBasicItemBean<ApproveListBean> bean) {
+                    public void onNext(OaBasicItemBean<OaItemBean> bean) {
                         mTotalList.addAll(bean.getItems());
                         mView.showMoreContent(mTotalList, mTotalList.size(), mTotalList.size() + bean.getSize());
                     }
                 });
+        add(subscription);
+    }
+    //申请状态ID（0-已撤销，1-待审核，2-已通过，3-已驳回）
+
+    public void registerEvent() {
+        Subscription subscription= RxBus.getDefault().toDefaultObservable(OaDealEvent.class, new Action1<OaDealEvent>() {
+            @Override
+            public void call(OaDealEvent event) {
+                mTotalList.get(event.getPosition()).setOrderStatus(event.getStatus());
+                mView.refreshStatus(event.getPosition(),event.isDelete());
+            }
+        });
         add(subscription);
     }
 }

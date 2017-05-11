@@ -37,7 +37,7 @@ public class OaRemarkAdapter extends RecyclerView.Adapter<OaRemarkAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         //2：通过，3：转他人阅读 4：驳回
         int processResult=mList.get(position).getProcessResult();
-        if(processResult==2) {
+        if(processResult==2||processResult==0) {
             holder.mRemark.setVisibility(View.GONE);
         }else {
             holder.mRemark.setVisibility(View.VISIBLE);
@@ -46,13 +46,13 @@ public class OaRemarkAdapter extends RecyclerView.Adapter<OaRemarkAdapter.ViewHo
         }
         String userName=mList.get(position).getUserName();
         switch (processResult){
+            case 0:holder.mUserName.setText(userName+"已阅读你的申请");break;
             case 4: holder.mUserName.setText(userName+"驳回了你的申请"); break;
             case 2: holder.mUserName.setText(userName+"通过了你的申请"); break;
             case 3:
                 holder.mUserName.setText(userName+"转给");
                 holder.mResultName.setText(mList.get(position).getToUserName()+"处理");
                 break;
-
         }
         holder.mCreateTime.setText(mList.get(position).getCreateTime());
     }

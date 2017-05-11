@@ -16,14 +16,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="加班待审批"
+            android:text="加班已审批"
             android:layout_marginTop="20dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/leave_approve"
-            android:text="请假待审批"
+            android:text="请假已审批"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/outside_approve"
-            android:text="外勤/出差待审批"
+            android:text="外勤/出差已审批"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/reimburse_approve"
-            android:text="报销待审批"
+            android:text="报销已审批"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/common_approve"
-            android:text="通用待审批"
+            android:text="通用已审批"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             />

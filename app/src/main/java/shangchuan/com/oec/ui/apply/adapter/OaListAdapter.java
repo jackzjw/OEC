@@ -46,7 +46,7 @@ public class OaListAdapter extends RecyclerView.Adapter<OaListAdapter.TypeViewHo
           holder.mDesc.setText(mList.get(position).getOrderContent());
         Glides.getInstance().loadCircle(mContext,SharePreferenceUtil.getUserAvater(),holder.user_avater);
         holder.mtype.setText(mList.get(position).getOrderTitle());
-        holder.mTime.setText(mList.get(position).getOrderTime());
+       holder.mTime.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));
         int status=mList.get(position).getOrderStatus();
         holder.mStatus.setText(CommonUtil.orderStatus(status));
         if(status==1){

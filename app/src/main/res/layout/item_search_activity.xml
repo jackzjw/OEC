@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+           android:id="@+id/ll_search_category"
+             android:visibility="gone"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView
@@ -85,7 +89,7 @@
         android:layout_height="1dp"
         android:background="@color/theme_divide_color"/>
     <LinearLayout
-        android:id="@+id/ll_team"
+        android:id="@+id/ll_work_report"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -100,7 +104,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="团队"
+            android:text="工作报告"
             android:textSize="17sp"
             android:textColor="@color/home_search_team_text_color"
             android:layout_marginLeft="10dp"

@@ -207,5 +207,31 @@ public class OaDetailsBean {
         OrderAmount = orderAmount;
     }
 
-
+    @Override
+    public String toString() {
+        return "OaDetailsBean{" +
+                "Success=" + Success +
+                ", Id=" + Id +
+                ", TenantId=" + TenantId +
+                ", UserId=" + UserId +
+                ", ClassId=" + ClassId +
+                ", OrderType='" + OrderType + '\'' +
+                ", StartTime='" + StartTime + '\'' +
+                ", EndTime='" + EndTime + '\'' +
+                ", OrderPeriod='" + OrderPeriod + '\'' +
+                ", OrderTitle='" + OrderTitle + '\'' +
+                ", OrderContent='" + OrderContent + '\'' +
+                ", OrderStatus=" + OrderStatus +
+                ", Destination='" + Destination + '\'' +
+                ", Companion='" + Companion + '\'' +
+                ", CustomerId='" + CustomerId + '\'' +
+                ", CustomerName='" + CustomerName + '\'' +
+                ", ProjectId='" + ProjectId + '\'' +
+                ", ProjectName='" + ProjectName + '\'' +
+                ", OrderTime='" + OrderTime + '\'' +
+                ", OrderAmount='" + OrderAmount + '\'' +
+                ", AttachmentList=" + AttachmentList +
+                ", ProcessList=" + ProcessList +
+                '}';
+    }
 }

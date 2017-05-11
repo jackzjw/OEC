@@ -9,11 +9,10 @@ import java.util.List;
 import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseFragment;
-import shangchuan.com.oec.model.bean.ApproveListBean;
+import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.present.ApproveListPresent;
 import shangchuan.com.oec.present.contact.ApproveListContract;
 import shangchuan.com.oec.ui.apply.adapter.ApproveListAdapter;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -29,19 +28,18 @@ public abstract class BaseApproveListFragment extends BaseFragment<ApproveListPr
     private ApproveListAdapter adapter;
     protected String mType="加班";
     //isAudit：1表示已审阅，0：待审
-    private int isAudit=1;
+    private int isAudit=0;
     private boolean isMore;
     @Override
     public void loadData() {
         if(!isPrepared||!isVisible){
             return;
         }
-        LogUtil.i("show");
         LoadingView.showProgress(mActivity);
         mPresent.getApproveList(mType,isAudit);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
-        adapter=new ApproveListAdapter(mActivity,new ArrayList<ApproveListBean>());
+        adapter=new ApproveListAdapter(mActivity,new ArrayList<OaItemBean>());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -58,6 +56,7 @@ public abstract class BaseApproveListFragment extends BaseFragment<ApproveListPr
                 }
             }
         });
+        mPresent.registerEvent();
 
     }
 
@@ -79,18 +78,27 @@ public abstract class BaseApproveListFragment extends BaseFragment<ApproveListPr
     }
 
     @Override
-    public void showContent(List<ApproveListBean> bean) {
-        LogUtil.i("dismiss");
+    public void showContent(List<OaItemBean> bean) {
+
         LoadingView.dismissProgress();
         adapter.updateData(bean);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showMoreContent(List<ApproveListBean> bean, int start, int end) {
+    public void showMoreContent(List<OaItemBean> bean, int start, int end) {
         isMore=false;
         LoadingView.dismissProgress();
         adapter.updateData(bean);
         adapter.notifyItemRangeInserted(start,end);
+    }
+
+    @Override
+    public void refreshStatus(int pos,boolean isDel) {
+        if(isDel){
+            adapter.notifyItemRemoved(pos);
+        }else {
+            adapter.notifyItemChanged(pos);
+        }
     }
 }

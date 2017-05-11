@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@drawable/team_charact"
+       android:id="@+id/character"
+       />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="角色"
-        />
+        android:layout_below="@+id/character"
+        android:text="请登录PC端维护角色权限"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
 
-</LinearLayout>
+        />
+    </RelativeLayout>
+</RelativeLayout>

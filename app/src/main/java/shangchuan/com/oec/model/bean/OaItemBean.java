@@ -26,6 +26,15 @@ public class OaItemBean {
     private String   OrderAmount;
     private String  Handler;
     private String  Attachments;
+    private String CreateTime;
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public int getId() {
         return Id;
@@ -211,5 +220,7 @@ public class OaItemBean {
                 ", Handler='" + Handler + '\'' +
                 ", Attachments='" + Attachments + '\'' +
                 '}';
+
+
     }
 }
