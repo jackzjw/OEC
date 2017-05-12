@@ -1,12 +1,10 @@
 package shangchuan.com.oec.widget;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +18,7 @@ import java.util.List;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.WoClassBean;
 import shangchuan.com.oec.ui.apply.adapter.WoClassAdapter;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/5/8.
@@ -72,21 +71,12 @@ public class MySpinnerView extends LinearLayout{
          listView=(ListView)view.findViewById(R.id.listview);
         listView.setAdapter(adapter);
         // 实例化一个PopuWindow对象
-        popupWindow = new PopupWindow();
-        // 设置弹框的宽度为布局文件的宽
-        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 高度设置的300
-        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0xffffff));
-        // 设置点击弹框外部，弹框消失
-        popupWindow.setOutsideTouchable(true);
-        // 设置焦点
-        popupWindow.setFocusable(true);
+        popupWindow = new SpinnerPopupWindow(mContext);
         // 设置所在布局
         popupWindow.setContentView(view);
         // 设置弹框出现的位置，在v的正下方横轴偏移textview的宽度
-        popupWindow.showAsDropDown(v,-getWidth(), 0);
+        LogUtil.i("宽度="+(-getWidth()));
+        popupWindow.showAsDropDown(v,-mSpinnerContent.getWidth(), 0);
          listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              @Override
              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

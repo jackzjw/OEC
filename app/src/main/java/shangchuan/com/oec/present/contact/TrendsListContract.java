@@ -16,7 +16,7 @@ public interface TrendsListContract {
         void showMoreContent(List<TrendsListBean> bean,int start,int end);
     }
     interface Present extends BasePresent<View>{
-        void getTrendList(int jobType);
-        void getMoreTrend(int jobType);
+        void getTrendList(String jobType,String keyword);
+        void getMoreTrend(String jobType,String keyword);
     }
 }

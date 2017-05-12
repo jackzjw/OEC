@@ -130,5 +130,18 @@ public class WoListPresent extends RxPresent<WoListContract.View> implements WoL
         });
     }
 
+    @Override
+    public void searchWoList(String keyword) {
+        Subscription subscription=mHelper.getApiSevice().getWoKeyWord(keyword,1,SaveToken.mToken)
+                .compose(RxUtil.<HttpDataResult<OaBasicItemBean<WoListBean>>>scheduleRxHelper())
+                .compose(RxUtil.<OaBasicItemBean<WoListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<WoListBean>>(mView) {
+                    @Override
+                    public void onNext(OaBasicItemBean<WoListBean> bean) {
+                        mView.searchResult(bean.getItems());
+                    }
+                });
+        add(subscription);
+    }
+
 
 }

@@ -18,11 +18,19 @@ public class MySelfInfo {
     private String avatar;      // 头像
      private int tenantId ;   // 机构ID
     private String tenantName;//机构名称
-
+    private int currentTenantId;
     private boolean islogin;
     private String phone;
     private String pwd;
     private String trueName;
+
+    public int getCurrentTenantId() {
+        return currentTenantId;
+    }
+
+    public void setCurrentTenantId(int currentTenantId) {
+        this.currentTenantId = currentTenantId;
+    }
 
     public String getTrueName() {
         return trueName;
@@ -118,9 +126,11 @@ public class MySelfInfo {
         editor.putInt(Constants.CURRENT_TENANT_ID, tenantId);
         editor.putString(Constants.USER_NICK_NAME, nickName);
         editor.putString(Constants.USER_AVATER, avatar);
+        editor.putString(Constants.USER_PASSWORD,pwd);
         editor.putString(Constants.USER_TELPHONE_NUMBER, phone);
         editor.putString(Constants.CURRENT_TENANT_NAME,tenantName);
         editor.putBoolean(Constants.IS_LOGIN, islogin);
+        editor.putInt(Constants.CURRENT_LOGIN_ID,currentTenantId);
         editor.apply();
     }
 
@@ -143,6 +153,7 @@ public class MySelfInfo {
         islogin=sharedata.getBoolean(Constants.IS_LOGIN, false);
         tenantName=sharedata.getString(Constants.CURRENT_TENANT_NAME,"");
         pwd=sharedata.getString(Constants.USER_PASSWORD,"");
+        currentTenantId=sharedata.getInt(Constants.CURRENT_LOGIN_ID,0);
 //sdfsefs
     }
 

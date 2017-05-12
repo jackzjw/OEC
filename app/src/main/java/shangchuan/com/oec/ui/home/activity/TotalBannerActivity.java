@@ -1,5 +1,6 @@
 package shangchuan.com.oec.ui.home.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -44,6 +45,12 @@ public class TotalBannerActivity extends BaseActivity implements View.OnClickLis
         toolbarSearch.setImageResource(R.drawable.home_icon_news_search);
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         initToolBar(mToolbar);
+        toolbarSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TotalBannerActivity.this,SearchBannerActivity.class));
+            }
+        });
         mUnreadBanner.setOnClickListener(this);
         mBannerTotal.setOnClickListener(this);
         mAlreadyBanner.setOnClickListener(this);

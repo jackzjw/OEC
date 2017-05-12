@@ -41,11 +41,11 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
         }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
         adapter=new OaListAdapter(mActivity,new ArrayList<OaItemBean>());
         mRecyclerView.setAdapter(adapter);
         LoadingView.showProgress(mActivity);
         mPresent.getApplyType(mType);
-       mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -115,6 +115,11 @@ public class OaListBaseFragment extends BaseFragment<OaListPresent> implements O
     public void refreshStatus(int position) {
         LogUtil.i("refresh="+position);
           adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void searchResult(List<OaItemBean> bean) {
+
     }
 
 

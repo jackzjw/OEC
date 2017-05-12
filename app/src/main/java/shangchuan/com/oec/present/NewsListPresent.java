@@ -60,9 +60,9 @@ public class NewsListPresent extends RxPresent<NewListContract.View> implements 
     }
 
     @Override
-    public void getNewsList(int classId, int status) {
+    public void getNewsList(String classId, int status,String keyword) {
          currentPage=1;
-        Subscription subscription = mHelper.getApiSevice().getNewsLists(classId, status, currentPage++, SaveToken.mToken)
+        Subscription subscription = mHelper.getApiSevice().getNewsLists(classId, status, currentPage++,keyword, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<NewsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<NewsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<NewsListBean>>(mView) {
                     @Override
@@ -76,8 +76,8 @@ public class NewsListPresent extends RxPresent<NewListContract.View> implements 
     }
 
     @Override
-    public void getMoreNews(int classid, int status) {
-        Subscription subscription = mHelper.getApiSevice().getNewsLists(classid, status, currentPage++, SaveToken.mToken)
+    public void getMoreNews(String classid, int status,String keyword) {
+        Subscription subscription = mHelper.getApiSevice().getNewsLists(classid, status, currentPage++,keyword, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<NewsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<NewsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<NewsListBean>>(mView) {
                     @Override

@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rel_rel_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/user_phone_number_bg_color"
+        >
+        <RelativeLayout
+            android:id="@+id/rel_search"
+            android:layout_width="340dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_home_search_background"
+            android:gravity="center"
+            android:layout_height="32dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/fadajing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/home_search_icon"
+                    />
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="搜索用户"
+                    android:layout_toRightOf="@id/fadajing"
+                    />
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
         <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/rel_rel_search"
             android:id="@+id/recycleview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
@@ -12,8 +50,10 @@
             android:id="@+id/sideBar"
             android:layout_width="30dp"
             android:layout_height="400dp"
-            android:layout_gravity="right|center_vertical"
+           android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
             />
-    </FrameLayout>
+    </RelativeLayout>
 
 

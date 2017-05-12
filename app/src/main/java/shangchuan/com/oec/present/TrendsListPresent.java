@@ -1,7 +1,6 @@
 package shangchuan.com.oec.present;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,14 +30,9 @@ public class TrendsListPresent extends RxPresent<TrendsListContract.View> implem
         this.mHelper=helper;
     }
     @Override
-    public void getTrendList(int jobType) {
+    public void getTrendList(String jobType,String keyword) {
         currentPage=1;
-        HashMap<String,Object> hashMap=new HashMap<>();
-        if(jobType==1||jobType==2){
-            hashMap.put("JobType",jobType);
-        }
-        hashMap.put("Page",currentPage++);
-        Subscription subscription = mHelper.getApiSevice().getTrendsList(hashMap, SaveToken.mToken)
+        Subscription subscription = mHelper.getApiSevice().getTrendsList(jobType,keyword, currentPage++,"10",SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<TrendsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<TrendsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<TrendsListBean>>(mView) {
                     @Override
@@ -52,13 +46,9 @@ public class TrendsListPresent extends RxPresent<TrendsListContract.View> implem
     }
 
     @Override
-    public void getMoreTrend(int jobType) {
-        HashMap<String,Object> hashMap=new HashMap<>();
-        if(jobType==1||jobType==2){
-            hashMap.put("JobType",jobType);
-        }
-        hashMap.put("Page",currentPage++);
-        Subscription subscription = mHelper.getApiSevice().getTrendsList(hashMap, SaveToken.mToken)
+    public void getMoreTrend(String jobType,String keyword) {
+
+        Subscription subscription = mHelper.getApiSevice().getTrendsList(jobType,keyword,currentPage++,"10", SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<TrendsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<TrendsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<TrendsListBean>>(mView) {
                     @Override

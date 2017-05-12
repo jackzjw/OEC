@@ -18,6 +18,7 @@ public interface WoListContract  {
         void showContentList(List<WoListBean> bean);
         void showMoreContent(List<WoListBean> bean,int start,int end);
         void refreshStatus(int position);
+        void searchResult(List<WoListBean> bean);
     }
     interface Present extends BasePresent<View>{
         void getClassName();
@@ -25,5 +26,6 @@ public interface WoListContract  {
         void getMoreWoList(String aid,String bid,String orderStatus,String status);
         void parentToChild(String pid);
         void registerEvent();
+        void searchWoList(String keyword);
     }
 }

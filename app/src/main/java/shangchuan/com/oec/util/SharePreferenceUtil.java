@@ -49,6 +49,12 @@ public class SharePreferenceUtil {
     public static void setTenantId(int tenantId){
         getAppSp().edit().putInt(Constants.CURRENT_TENANT_ID,tenantId).commit();
     }
+    public static void  setCurrentLoginId(int currentId){
+        getAppSp().edit().putInt(Constants.CURRENT_LOGIN_ID,currentId).commit();
+    }
+    public static int getCurrentLoginId(){
+        return getAppSp().getInt(Constants.CURRENT_LOGIN_ID,0);
+    }
     public static int getTenantId(){
         return getAppSp().getInt(Constants.CURRENT_TENANT_ID,0);
     }

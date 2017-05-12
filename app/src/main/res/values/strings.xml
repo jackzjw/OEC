@@ -20,7 +20,7 @@
     <string name="user_about">关于</string>
     <string name="user_drop_out">退出登录</string>
     <!--首页-->
-    <string name="home_search_text">搜索工单/办公申请/工作报告等</string>
+    <string name="home_search_text">搜索工单/办公申请/团队等</string>
     <string name="home_banner">公告</string>
     <string name="home_total_banners">全部公告</string>
     <string name="home_total_dynamics">全部动态</string>

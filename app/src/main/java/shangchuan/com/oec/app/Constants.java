@@ -14,6 +14,7 @@ public class Constants {
     public static final String IS_LOGIN="login";
     public static final String USER_ID="userid";
     public static final String CURRENT_TENANT_ID="tenantid";
+    public static final String CURRENT_LOGIN_ID="currentid";
     public static final String SHAREPREFERENCE_NAME="my_sp";
     public static final String CURRENT_TENANT_NAME="tenantname";
     public static final String USER_PASSWORD="pwd";
@@ -23,6 +24,7 @@ public class Constants {
     public static final int YEAR_MONTH_DAY_HOUR=2;
     public static final int IMAGE_TYPE=1;
     public static final int VEDIO_TYPE=2;
+
     public static final String USER_AVATER_DIR_PATH="Img/UserHeadImg/";
 
 }

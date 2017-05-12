@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
+import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
 import shangchuan.com.oec.present.OrganizationListPresent;
 import shangchuan.com.oec.present.contact.OrganizationListContract;
@@ -93,7 +94,7 @@ public class OrganizationListActivity extends BaseActivity<OrganizationListPrese
         SharePreferenceUtil.setTenantId(tenantId);
         //发进入机构请求
         LoadingView.showProgress(this);
-        mPresent.enterTenant(SharePreferenceUtil.getUserId(),tenantId);
+        mPresent.enterTenant(MySelfInfo.getInstance().getUserId(),tenantId);
         LogUtil.i("tenantId="+tenantId);
         btnSure.setEnabled(false);
 

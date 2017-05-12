@@ -20,7 +20,7 @@ public interface NewListContract {
     }
     interface Present extends BasePresent<View>{
         void getNewsClassify();
-        void getNewsList(int classId,int status);
-        void getMoreNews(int classid,int status);
+        void getNewsList(String classId,int status,String keyword);
+        void getMoreNews(String classid,int status,String keyword);
     }
 }

@@ -24,6 +24,7 @@ import shangchuan.com.oec.app.Constants;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.component.RxBus;
 import shangchuan.com.oec.model.bean.AttchmentBean;
+import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.model.bean.ProcessListBean;
 import shangchuan.com.oec.model.bean.SelectOwnerBean;
 import shangchuan.com.oec.model.bean.WoDetailBean;
@@ -232,10 +233,11 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
               //发消息成功
               ProcessListBean item=new ProcessListBean();
               item.setRemark(msg());
+              item.setUserName(MySelfInfo.getInstance().getNickName());
               item.setProcessResult(1);
               remarkList.add(item);
               remarkAdapter.notifyItemInserted(remarkList.size()-1);
-              mTvSend.setText("");
+              mInputMsg.setText("");
           }else if(dealType==2){//完成
               ToastUtil.shortShow("操作成功");
               RxBus.getDefault().post(new DealEvent(2,mPos));
@@ -272,6 +274,7 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
                 LoadingView.showProgress(this);
                 LogUtil.i("消息="+msg());
                 mPresent.dealWoResult(1,mId,msg(),"");
+                LogUtil.i("mId="+mId+"消息="+msg());
                 dealType=1;
                 break;
             //完成:2

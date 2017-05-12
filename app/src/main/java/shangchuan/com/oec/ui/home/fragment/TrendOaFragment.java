@@ -14,7 +14,7 @@ public class TrendOaFragment extends TrendBaseListFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         jobType=2;
+         jobType="2";
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

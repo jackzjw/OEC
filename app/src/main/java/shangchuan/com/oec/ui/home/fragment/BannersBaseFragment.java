@@ -34,8 +34,6 @@ public abstract class BannersBaseFragment extends BaseFragment<NewsListPresent> 
     private int classId;
     @Override
     public void loadData() {
-
-
         LoadingView.showProgress(mActivity);
          mPresent.getNewsClassify();
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -48,7 +46,7 @@ public abstract class BannersBaseFragment extends BaseFragment<NewsListPresent> 
                     if(!isLoadingMore){
                         isLoadingMore=true;
                         LoadingView.showProgress(mActivity);
-                        mPresent.getMoreNews(classId,readStatus);
+                        mPresent.getMoreNews(classId+"",readStatus,"");
                     }
                 }
 
@@ -110,14 +108,14 @@ public abstract class BannersBaseFragment extends BaseFragment<NewsListPresent> 
         mTabLayout.getTabAt(0).select();
          classId=bean.getList().get(0).getId();
         LoadingView.showProgress(mActivity);
-        mPresent.getNewsList(classId,readStatus);
+        mPresent.getNewsList(classId+"",readStatus,"");
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 LogUtil.i(""+classId);
                 LoadingView.showProgress(mActivity);
                 classId=(int)tab.getTag();
-                mPresent.getNewsList(classId,readStatus);
+                mPresent.getNewsList(classId+"",readStatus,"");
             }
 
             @Override

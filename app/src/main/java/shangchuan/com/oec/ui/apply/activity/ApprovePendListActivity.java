@@ -50,7 +50,7 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         initToolBar(mToolbar);
         mType=getIntent().getStringExtra("type");
-        mToolbarTitle.setText(mType+"待审批");
+        mToolbarTitle.setText(mType+"已审批");
         LoadingView.showProgress(this);
         mPresent.getApproveList(mType,isAudit);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -1,5 +1,9 @@
 package shangchuan.com.oec.ui.team.fragment;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.RelativeLayout;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -8,6 +12,7 @@ import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.model.bean.RectDeptBean;
 import shangchuan.com.oec.present.GroupListPresent;
 import shangchuan.com.oec.present.contact.GroupListContract;
+import shangchuan.com.oec.ui.home.activity.SearchActivity;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.LoadingView;
@@ -22,7 +27,8 @@ import static shangchuan.com.oec.widget.LoadingView.dismissProgress;
 public class OrganizeFragment extends BaseFragment<GroupListPresent> implements GroupListContract.View {
   @BindView(R.id.organize_view)
   OrganizationView mOrgView;
-
+    @BindView(R.id.rel_search)
+    RelativeLayout mRelSearch;
 
     @Override
     public void showError(String msg) {
@@ -41,6 +47,12 @@ public class OrganizeFragment extends BaseFragment<GroupListPresent> implements 
         if(!isVisible||!isPrepared){
             return;
         }
+        mRelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, SearchActivity.class));
+            }
+        });
            LoadingView.showProgress(mActivity);
         mPresent.getGroupList();
         //添加组织结构监听

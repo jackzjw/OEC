@@ -3,16 +3,16 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <include layout="@layout/search_layout"/>
     <ViewStub
         android:id="@+id/view_stub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout="@layout/search_empty"
         />
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recycleview"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

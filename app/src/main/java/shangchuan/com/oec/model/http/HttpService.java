@@ -59,7 +59,7 @@ public interface HttpService {
      //进入机构
     @FormUrlEncoded
     @POST("HOME/tenant_choose")
-    Observable<HttpDataResult<CharactersTokenBean>> enterTenant(@Field("UserId") int userId, @Field("TenantId") int tenantId, @Field("token") String token);
+    Observable<HttpDataResult<CharactersTokenBean>> enterTenant(@Field("UserId") int userId, @Field("TenantId") int tenantId,@Field("CurrentLoginId")int loginId, @Field("token") String token);
     //办公申请类型
     @FormUrlEncoded
     @POST("OA/oa_class")
@@ -197,10 +197,10 @@ public interface HttpService {
        //最新动态列表
        @FormUrlEncoded
        @POST("Index/job_list")
-       Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@FieldMap HashMap<String,Object> map,@Field("token") String token);
+       Observable<HttpDataResult<OaBasicItemBean<TrendsListBean>>> getTrendsList(@Field("JobType") String type,@Field("KeyWord") String keyword,@Field("Page") int page,@Field("Size") String size,@Field("token") String token);
        //工单处理结果
        @FormUrlEncoded
-       @POST("W0/wo_deal")
+       @POST("WO/wo_deal")
        Observable<HttpDataResult<WoSuccessBean>> woDealResult(@Field("ProcessResult") int result,@Field("OrderId") int orderId,@Field("Remark") String remark,@Field("Id") String id,@Field("token") String token);
        //OA审核处理结果
        @FormUrlEncoded
@@ -221,7 +221,7 @@ public interface HttpService {
        //公告分类列表
        @FormUrlEncoded
        @POST("index/news_list")
-       Observable<HttpDataResult<OaBasicItemBean<NewsListBean>>>   getNewsLists(@Field("ClassId") int id,@Field("ReadStatus") int status,@Field("Page") int page,@Field("token") String token);
+       Observable<HttpDataResult<OaBasicItemBean<NewsListBean>>>   getNewsLists(@Field("ClassId") String id,@Field("ReadStatus") int status,@Field("Page") int page,@Field("KeyWord") String keyword,@Field("token") String token);
        //公告详情
        @FormUrlEncoded
        @POST("index/news_info")

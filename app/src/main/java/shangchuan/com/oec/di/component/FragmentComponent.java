@@ -7,6 +7,8 @@ import shangchuan.com.oec.di.FragmentScope;
 import shangchuan.com.oec.ui.apply.fragment.BaseClientListFragment;
 import shangchuan.com.oec.ui.apply.fragment.BaseMyReportListFragment;
 import shangchuan.com.oec.ui.apply.fragment.OaListBaseFragment;
+import shangchuan.com.oec.ui.apply.fragment.SearchOaFragment;
+import shangchuan.com.oec.ui.apply.fragment.SearchWoFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.BaseApproveListFragment;
 import shangchuan.com.oec.ui.apply.fragment.project.MyResponseFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.WoListBaseFragment;
@@ -14,6 +16,7 @@ import shangchuan.com.oec.ui.home.fragment.BannersBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.HomeFragment;
 import shangchuan.com.oec.ui.home.fragment.TrendBaseListFragment;
 import shangchuan.com.oec.ui.team.fragment.OrganizeFragment;
+import shangchuan.com.oec.ui.team.fragment.SearchUserFragment;
 import shangchuan.com.oec.ui.team.fragment.TeamUserFragment;
 
 /**
@@ -34,5 +37,8 @@ public interface FragmentComponent {
     void inject(TrendBaseListFragment fragment);
     void inject(MyResponseFragment fragment);
     void inject(OrganizeFragment fragment);
+    void inject(SearchUserFragment fragment);
+    void inject(SearchOaFragment fragment);
+    void inject(SearchWoFragment fragment);
 
 }

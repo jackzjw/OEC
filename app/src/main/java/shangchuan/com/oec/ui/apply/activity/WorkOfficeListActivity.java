@@ -1,11 +1,13 @@
 package shangchuan.com.oec.ui.apply.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.CreatedFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.PendingFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.TotalFragment;
+import shangchuan.com.oec.ui.home.activity.SearchActivity;
 
 public class WorkOfficeListActivity extends BaseActivity{
 
@@ -44,6 +47,12 @@ public class WorkOfficeListActivity extends BaseActivity{
         toolbarImg.setImageResource(R.drawable.home_icon_news_search);
         mToolbarTitle.setText("工单列表");
         initToolBar(mToolbar);
+        toolbarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WorkOfficeListActivity.this, SearchActivity.class));
+            }
+        });
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new PendingFragment());
         mFragmentList.add(new CreatedFragment());

@@ -1,11 +1,13 @@
 package shangchuan.com.oec.ui.home.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +45,12 @@ public class TrendsActivity extends BaseActivity {
         mToolbarImg.setImageResource(R.drawable.home_icon_news_search);
         mToolbarTitle.setText("全部动态");
         initToolBar(mToolbar);
-
+          mToolbarImg.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  startActivity(new Intent(TrendsActivity.this,SearchTrendActivity.class));
+              }
+          });
         mFragmentList=new ArrayList<>();
         mFragmentList.add(new TotalTrendsFragment());
         mFragmentList.add(new TrendWoFragment());

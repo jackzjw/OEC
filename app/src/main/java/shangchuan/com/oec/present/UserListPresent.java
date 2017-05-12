@@ -15,7 +15,6 @@ import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.UserListContract;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.HanziToPinyin;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.PinyinComparator;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
@@ -38,14 +37,13 @@ public class UserListPresent extends RxPresent<UserListContract.View> implements
 
 
     @Override
-    public void getUserList() {
+    public void getUserList(String keyword) {
         currentPage=1;
-        Subscription subscription = mHelper.getApiSevice().getUserList("", currentPage++, SaveToken.mToken)
+        Subscription subscription = mHelper.getApiSevice().getUserList(keyword, currentPage++, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<UserInfoBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<UserInfoBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<UserInfoBean>>(mView) {
                     @Override
                     public void onNext(OaBasicItemBean<UserInfoBean> bean) {
-                           LogUtil.i(bean.getItems().toString());
                               mTotalList=setFirstLetter(bean.getItems());
                               mView.showContent(mTotalList);
                     }
@@ -75,4 +73,5 @@ public class UserListPresent extends RxPresent<UserListContract.View> implements
                 });
         add(subscription);
     }
+
 }

@@ -290,7 +290,7 @@ public static Intent newIntent(Context context,int id,int index,int position){
         switch (v.getId()){
             case R.id.approve_pass://通过=2
                  LoadingView.showProgress(this);
-                mPresent.dealOaCheck(mId,2,msg(),"");
+                mPresent.dealOaCheck(mId,2,msg(),"0");
                 dealType=2;
                 break;
             case R.id.approve_turn_down://驳回=4
@@ -299,7 +299,7 @@ public static Intent newIntent(Context context,int id,int index,int position){
                     return;
                 }
                  LoadingView.showProgress(this);
-                mPresent.dealOaCheck(mId,4,msg(),"");
+                mPresent.dealOaCheck(mId,4,msg(),"0");
                 dealType=4;
                 break;
             case R.id.approve_to_other:

@@ -9,54 +9,38 @@
     android:layout_height="45dp"
     android:background="@color/theme_divide_color"
     android:orientation="horizontal"
+
     >
-     <LinearLayout
-         android:layout_width="0dp"
-         android:layout_weight="1"
-         android:layout_height="match_parent"
-         android:orientation="horizontal"
-         android:gravity="center"
-         >
+
          <shangchuan.com.oec.widget.MySpinnerView
              android:id="@+id/spinner1"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:layout_height="match_parent"
+             android:gravity="center"
 
              ></shangchuan.com.oec.widget.MySpinnerView>
-
-
-     </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
         <shangchuan.com.oec.widget.MySpinnerView
             android:id="@+id/spinner2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             ></shangchuan.com.oec.widget.MySpinnerView>
 
 
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
+
         <shangchuan.com.oec.widget.MySpinnerView
             android:id="@+id/spinner3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
             ></shangchuan.com.oec.widget.MySpinnerView>
 
 
-    </LinearLayout>
+
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"

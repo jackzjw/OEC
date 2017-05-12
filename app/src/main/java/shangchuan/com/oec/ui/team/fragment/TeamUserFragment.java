@@ -1,8 +1,11 @@
 package shangchuan.com.oec.ui.team.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.present.UserListPresent;
 import shangchuan.com.oec.present.contact.UserListContract;
+import shangchuan.com.oec.ui.home.activity.SearchActivity;
 import shangchuan.com.oec.ui.team.adapter.SortAdapter;
 import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
@@ -31,9 +35,12 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
     SideBar mSideBar;
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.rel_search)
+    RelativeLayout mRelSearch;
     private SortAdapter adapter;
     private boolean isMore;
     private List<UserInfoBean> mInfoBeanList=new ArrayList<UserInfoBean>();
+
     @Override
     public void loadData() {
         if(!isVisible||!isPrepared){
@@ -76,8 +83,14 @@ public class TeamUserFragment extends BaseFragment<UserListPresent> implements U
                 popupWindow.showAtLocation(mRecyclerView, Gravity.CENTER,0,0);
             }
         });
+        mRelSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, SearchActivity.class));
+            }
+        });
         LoadingView.showProgress(mActivity);
-             mPresent.getUserList();
+             mPresent.getUserList("");
     }
 
     @Override

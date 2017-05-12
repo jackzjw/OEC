@@ -4,7 +4,43 @@
               android:layout_width="match_parent"
               android:orientation="vertical"
               android:layout_height="match_parent">
+  <RelativeLayout
+      android:id="@+id/rel_rel_search"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@color/user_phone_number_bg_color"
+      >
+    <RelativeLayout
+        android:id="@+id/rel_search"
+        android:layout_width="340dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_home_search_background"
+        android:gravity="center"
+        android:layout_height="32dp">
+      <RelativeLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/fadajing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/home_search_icon"
+            />
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="搜索用户"
+            android:layout_toRightOf="@id/fadajing"
+            />
+      </RelativeLayout>
 
+
+
+    </RelativeLayout>
+  </RelativeLayout>
 
   <shangchuan.com.oec.widget.OrganizationView
       android:paddingLeft="10dp"

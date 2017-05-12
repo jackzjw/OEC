@@ -23,7 +23,7 @@ import shangchuan.com.oec.widget.LoadingView;
 public abstract class TrendBaseListFragment extends BaseFragment<TrendsListPresent> implements TrendsListContract.View {
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
-    protected  int jobType=0;
+    protected  String jobType="";
     private TrendsListAdapter adapter;
     private boolean isLoadingMore;
 
@@ -33,7 +33,7 @@ public abstract class TrendBaseListFragment extends BaseFragment<TrendsListPrese
             return;
         }
         LoadingView.showProgress(mActivity);
-        mPresent.getTrendList(jobType);
+        mPresent.getTrendList(jobType,"");
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -44,7 +44,7 @@ public abstract class TrendBaseListFragment extends BaseFragment<TrendsListPrese
                     if(!isLoadingMore){
                         isLoadingMore=true;
                         LoadingView.showProgress(mActivity);
-                        mPresent.getMoreTrend(jobType);
+                        mPresent.getMoreTrend(jobType,"");
                     }
                 }
 

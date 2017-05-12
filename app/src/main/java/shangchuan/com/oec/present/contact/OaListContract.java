@@ -15,11 +15,13 @@ public interface OaListContract {
         void showContent(List<OaItemBean> bean);
         void showMoreContent(List<OaItemBean> bean,int start,int end);
         void refreshStatus(int position);
+        void searchResult(List<OaItemBean> bean);
 
     }
     interface  Present extends BasePresent<View>{
         void getApplyType(String type);
         void getMoreContent();
         void registerEvent();
+        void searchOaList(String keyword);
     }
 }

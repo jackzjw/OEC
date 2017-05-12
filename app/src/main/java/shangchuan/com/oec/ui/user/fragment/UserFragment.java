@@ -57,7 +57,7 @@ public class UserFragment extends SimpleFragment implements View.OnClickListener
             userNick.setText(MySelfInfo.getInstance().getNickName());
             //手机号中间四位替换成星号
          LogUtil.i(MySelfInfo.getInstance().getNickName()+"昵称");
-            String phoneNum="13932233333"
+            String phoneNum=MySelfInfo.getInstance().getPhone()
                     .replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
             phoneNumber.setText(phoneNum);
         mTenantName.setText(MySelfInfo.getInstance().getTenantName());
@@ -77,6 +77,7 @@ public class UserFragment extends SimpleFragment implements View.OnClickListener
             case R.id.tv_logoff:
                SharePreferenceUtil.setLogin(false);
                 startActivity(new Intent(mActivity, LoginActivity.class));
+                mActivity.finish();
                 break;
             case R.id.rel_modify_password:
                 startActivity(new Intent(mActivity, ModifyPwdActivity.class));

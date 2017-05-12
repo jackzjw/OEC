@@ -46,7 +46,7 @@ public class OrganizationListPresent extends RxPresent<OrganizationListContract.
 
     @Override
     public void enterTenant(int userid, final int tenantId) {
-        Subscription subscription=mHelper.getApiSevice().enterTenant(userid,tenantId,SaveToken.mToken)
+        Subscription subscription=mHelper.getApiSevice().enterTenant(userid,tenantId,MySelfInfo.getInstance().getCurrentTenantId(),SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<CharactersTokenBean>>scheduleRxHelper())
                 .compose(RxUtil.<CharactersTokenBean>handleResult()).subscribe(new CommonSubscriber<CharactersTokenBean>(mView) {
                     @Override
@@ -56,7 +56,9 @@ public class OrganizationListPresent extends RxPresent<OrganizationListContract.
                         MySelfInfo.getInstance().setTrueName(bean.getUserinfo().getLoginUserTrueName());
                         MySelfInfo.getInstance().setAvatar(bean.getUserinfo().getLoginAvatar());
                         MySelfInfo.getInstance().setTenantName(bean.getUserinfo().getLoginTenantName());
+                        MySelfInfo.getInstance().setCurrentTenantId(bean.getUserinfo().getCurrentLoginId());
                         MySelfInfo.getInstance().writeToCache(App.getInstance());
+                        MySelfInfo.getInstance().getCache(App.getInstance());
                         mView.showCharacterInfo(bean);
                     }
                 });

@@ -1,7 +1,6 @@
 package shangchuan.com.oec.present;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,10 +59,8 @@ public class HomeListPresent extends RxPresent<HomeListContract.View> implements
 
     @Override
     public void getTrendsList() {
-        HashMap<String,Object> hashMap=new HashMap<>();
-        hashMap.put("Page",1);
-        hashMap.put("Size",5);
-        Subscription subscription = mHelper.getApiSevice().getTrendsList(hashMap, SaveToken.mToken)
+
+        Subscription subscription = mHelper.getApiSevice().getTrendsList("","",1,"5", SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<TrendsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<TrendsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<TrendsListBean>>(mView) {
                     @Override

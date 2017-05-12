@@ -15,7 +15,7 @@ public class TotalTrendsFragment extends TrendBaseListFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        jobType=0;
+        jobType="";
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -91,4 +91,17 @@ public class OaListPresent extends RxPresent<OaListContract.View> implements OaL
         add(subscription);
     }
 
+    @Override
+    public void searchOaList(String keyword) {
+        Subscription subscription=mHelper.getApiSevice().getOaKeyWord(keyword,SaveToken.mToken,1)
+                .compose(RxUtil.<HttpDataResult<OaBasicItemBean<OaItemBean>>>scheduleRxHelper())
+                .compose(RxUtil.<OaBasicItemBean<OaItemBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<OaItemBean>>(mView) {
+                    @Override
+                    public void onNext(OaBasicItemBean<OaItemBean> bean) {
+                        mView.searchResult(bean.getItems());
+                    }
+                });
+        add(subscription);
+    }
+
 }

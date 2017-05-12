@@ -1,6 +1,5 @@
 package shangchuan.com.oec.ui.user.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -15,8 +14,8 @@ import shangchuan.com.oec.model.bean.MySelfInfo;
 import shangchuan.com.oec.present.LoginPresent;
 import shangchuan.com.oec.present.contact.LoginContract;
 import shangchuan.com.oec.util.CommonUtil;
-import shangchuan.com.oec.util.SharePreferenceUtil;
 import shangchuan.com.oec.util.ToastUtil;
+import shangchuan.com.oec.widget.LoadingView;
 
 public class LoginActivity extends BaseActivity<LoginPresent> implements LoginContract.View{
     @BindView(R.id.toolbar)
@@ -27,7 +26,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> implements LoginCo
     EditText mTelphone;
     @BindView(R.id.et_password)
     EditText mPwd;
-    private ProgressDialog progressDialog;
 
 
     @Override
@@ -42,46 +40,49 @@ public class LoginActivity extends BaseActivity<LoginPresent> implements LoginCo
         initToolBar(mToolbar);
 
     }
-
+  private String getTel(){
+      return mTelphone.getText().toString().trim();
+  }
+    private String getPwd(){
+        return mPwd.getText().toString().trim();
+    }
     @Override
     protected void initInject() {
         getActivityComponent().inject(this);
     }
     @OnClick(R.id.btn_login)
     void login(){
-       String tel=mTelphone.getText().toString();
-        String pwd=mPwd.getText().toString();
-        if(TextUtils.isEmpty(pwd)){
+
+        if(TextUtils.isEmpty(getPwd())){
             ToastUtil.shortShow("请输入密码");
             return;
         }
-        if(!CommonUtil.isMobileNO(tel)){
+        if(!CommonUtil.isMobileNO(getTel())){
             ToastUtil.shortShow("请输入正确的手机号");
 
             return;
         }
-         progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("加载中");
-        progressDialog.show();
-        mPresent.login(tel,pwd);
+        LoadingView.showProgress(this);
+        mPresent.login(getTel(),getPwd());
 
 
     }
 
     @Override
     public void loginSuccess() {
-       progressDialog.dismiss();
+         LoadingView.dismissProgress();
         ToastUtil.shortShow("登录成功");
-        SharePreferenceUtil.setUserTel(mTelphone.getText().toString());
-        SharePreferenceUtil.setUserPwd(mPwd.getText().toString());
+        MySelfInfo.getInstance().setPhone(getTel());
+        MySelfInfo.getInstance().setPwd(getPwd());
+        MySelfInfo.getInstance().writeToCache(this);
         MySelfInfo.getInstance().getCache(this);
-       startActivity(new Intent(this,OrganizationListActivity.class));
+        startActivity(new Intent(this,OrganizationListActivity.class));
         finish();
     }
 
     @Override
     public void showError(String msg) {
-        progressDialog.dismiss();
+      LoadingView.dismissProgress();
         ToastUtil.show(msg);
     }
 }

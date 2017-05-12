@@ -16,7 +16,7 @@ public interface UserListContract  {
         void showMoreContent(List<UserInfoBean> bean,int start,int end);
     }
     interface Present extends BasePresent<View>{
-        void getUserList();
+        void getUserList(String keyword);
         void getMoreUser();
     }
 }

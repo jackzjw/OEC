@@ -169,6 +169,12 @@
         </activity>
         <activity android:name=".ui.apply.activity.ModifyWRDetailActivity">
         </activity>
+        <activity android:name=".ui.home.activity.SearchTrendActivity">
+        </activity>
+        <activity android:name=".ui.home.activity.SearchBannerActivity"
+
+            >
+        </activity>
     </application>
 
 </manifest>
