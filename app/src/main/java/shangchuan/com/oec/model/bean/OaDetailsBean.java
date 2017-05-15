@@ -28,8 +28,26 @@ public class OaDetailsBean {
     private String  ProjectName;
     private String  OrderTime;
     private String OrderAmount;
+    private String CreateTime;
+    private String CreateUserName;
     private ArrayList<AttchmentBean> AttachmentList;
     private ArrayList<ProcessListBean> ProcessList;
+
+    public String getCreateUserName() {
+        return CreateUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        CreateUserName = createUserName;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public ArrayList<AttchmentBean> getAttachmentList() {
         return AttachmentList;

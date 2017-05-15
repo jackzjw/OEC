@@ -81,13 +81,13 @@ public class ApproveListPresent extends RxPresent<ApproveListContract.View> impl
         add(subscription);
     }
     //申请状态ID（0-已撤销，1-待审核，2-已通过，3-已驳回）
-
+    //待审核列表回退时删除该条目
     public void registerEvent() {
         Subscription subscription= RxBus.getDefault().toDefaultObservable(OaDealEvent.class, new Action1<OaDealEvent>() {
             @Override
             public void call(OaDealEvent event) {
-                mTotalList.get(event.getPosition()).setOrderStatus(event.getStatus());
-                mView.refreshStatus(event.getPosition(),event.isDelete());
+                mTotalList.remove(event.getPosition());
+            mView.refreshStatus(event.getPosition(),mTotalList.size());
             }
         });
         add(subscription);

@@ -14,7 +14,7 @@ public interface ApproveListContract {
     interface View extends BaseView{
         void showContent(List<OaItemBean> bean);
         void showMoreContent(List<OaItemBean> bean, int start, int end);
-        void refreshStatus(int pos,boolean isDel);
+        void refreshStatus(int pos,int size);
     }
     interface Present extends BasePresent<View>{
         void getApproveList(String type,int isAudit);

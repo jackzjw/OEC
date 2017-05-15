@@ -3,10 +3,11 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rel_avater"
         android:layout_width="wrap_content"
         android:layout_centerVertical="true"
+        android:orientation="horizontal"
         android:layout_height="wrap_content">
         <shangchuan.com.oec.widget.CircleImageView
             android:layout_width="wrap_content"
@@ -19,11 +20,12 @@
             android:id="@+id/red_dot"
             android:layout_width="5dp"
             android:layout_height="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/shape_unread_red_circle_dot"
-            android:layout_alignParentRight="true"
+           android:layout_gravity="right|top"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_toRightOf="@+id/rel_avater"

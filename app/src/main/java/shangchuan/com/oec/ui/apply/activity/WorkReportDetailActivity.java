@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,7 +200,10 @@ public class WorkReportDetailActivity extends BaseActivity<WorkReportDetailPrese
             LoadingView.dismissProgress();
             ProcessListBean item = new ProcessListBean();
             item.setRemark(msg());
-            item.setUserName(MySelfInfo.getInstance().getTrueName());
+            item.setUserName(MySelfInfo.getInstance().getNickName());
+           SimpleDateFormat sdf=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+           String time=sdf.format(System.currentTimeMillis());
+            item.setCreateTime(time);
             item.setProcessResult(dealType);
             if(dealType==3) item.setToUserName(ownerList.get(0).getOwnerName());
             remarkList.add(item);

@@ -80,7 +80,7 @@ public class ApplyOfficeDetailsActivity extends BaseActivity<OaDetailsPresent> i
     @BindView(R.id.approve_to_other)
     TextView mToOther;
     @BindView(R.id.rel_first)
-    RelativeLayout relSend;
+    RelativeLayout mRelSend;
     @BindView(R.id.rel_second)
     RelativeLayout mRelTurnDown;
     @BindView(R.id.rel_third)
@@ -99,7 +99,8 @@ public class ApplyOfficeDetailsActivity extends BaseActivity<OaDetailsPresent> i
     private int mPos;
     private OaDetailsBean mData;
 
-    //index用来确认是从审核列表跳过来的还是从我的申请列表跳过来的；index=1表示从申请列表跳过来，2：审核列表
+    //index用来确认是从审核列表跳过来的还是从我的申请列表跳过来的；index=1表示从申请列表跳过来，2：待审核列表
+    //3：表示从已审核的跳转过来
     //position用来刷新处理后的状态
 public static Intent newIntent(Context context,int id,int index,int position){
     Intent intent =new Intent(context,ApplyOfficeDetailsActivity.class);
@@ -119,10 +120,19 @@ public static Intent newIntent(Context context,int id,int index,int position){
     protected void initEventData() {
         mIndex=getIntent().getIntExtra("index",0);
         mPos=getIntent().getIntExtra("position",-1);
-
-
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         initToolBar(mToolbar);
+        if(mIndex==2){
+            //待审核的显示处理操作
+            mRelSend.setVisibility(View.VISIBLE);
+            mRelTurnDown.setVisibility(View.VISIBLE);
+            mRelToOther.setVisibility(View.VISIBLE);
+            mTvPass.setText("通过");
+            mTvReject.setText("驳回");
+        }else if(mIndex==3||mIndex==1){
+            //从自己创建、已审核的跳转过来
+            mDealResult.setVisibility(View.GONE);
+        }
         mToolbartRight.setOnClickListener(this);
         mTvPass.setOnClickListener(this);
         mTvReject.setOnClickListener(this);
@@ -158,28 +168,21 @@ public static Intent newIntent(Context context,int id,int index,int position){
         }
         mToolbarTitle.setText(bean.getOrderType()+"详情");
         Glides.getInstance().load(this, SharePreferenceUtil.getUserAvater(),mUserAvater);
-        mOrderTitle.setText(bean.getOrderTitle());
-        mSubmitTime.setText(bean.getOrderTime());
+        mOrderTitle.setText(bean.getCreateUserName()+"的"+bean.getOrderType()+"申请");
+        mSubmitTime.setText(bean.getCreateTime());
         mStratTime.setText(bean.getStartTime());
         mEndTime.setText(bean.getEndTime());
         mDuration.setText(bean.getOrderPeriod());
         mStatus.setText(CommonUtil.orderStatus(bean.getOrderStatus()));
-        //2：已通过 3：已驳回 0:已撤销 1：待审核
         int status=bean.getOrderStatus();
-        if(status==1){
-            mRelTurnDown.setVisibility(View.VISIBLE);
-            mRelToOther.setVisibility(View.VISIBLE);
-            relSend.setVisibility(View.VISIBLE);
-            mTvPass.setText("通过");
-            mTvReject.setText("驳回");
-        }else
-        if(bean.getOrderStatus()==2){
+        //2：已通过 3：已驳回 0:已撤销 1：待审核
+        if(status==2){
              imgStatus.setImageResource(R.drawable.application_img_pass);
             mDealResult.setVisibility(View.GONE);
-        }else if(bean.getOrderStatus()==3){
+        }else if(status==3){
             imgStatus.setImageResource(R.drawable.application_img_reject);
             mDealResult.setVisibility(View.GONE);
-        }else {
+        }else if(status==0){
             mDealResult.setVisibility(View.GONE);
         }
         mContent.setText(bean.getOrderContent());
@@ -244,16 +247,7 @@ public static Intent newIntent(Context context,int id,int index,int position){
     public void dealSuccess() {
         //2:通过 3:转他人处理 4:驳回
            LoadingView.dismissProgress();
-        if(dealType==4) {
-            RxBus.getDefault().post(new OaDealEvent(3, mPos));
-        }
-        else if(dealType==3) {//转他人处理后退要删除该item
-            OaDealEvent event = new OaDealEvent(dealType, mPos);
-            event.setDelete(true);
-            RxBus.getDefault().post(event);
-        }else {
-            RxBus.getDefault().post(new OaDealEvent(dealType, mPos));
-        }
+       RxBus.getDefault().post(new OaDealEvent(mPos));
         finish();
 
     }

@@ -1,30 +1,21 @@
 package shangchuan.com.oec.ui.apply.fragment.project;
 
-import shangchuan.com.oec.R;
-import shangchuan.com.oec.base.BaseFragment;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by sg280 on 2017/5/4.
  */
 
-public class MyLaunchFragment extends BaseFragment {
+public class MyLaunchFragment extends MyTaskBaseListFragment {
+    @Nullable
     @Override
-    public void loadData() {
-
-    }
-
-    @Override
-    public int getResourcesLayout() {
-        return R.layout.fragment_my_launch;
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mStatus=3;
+        finishStatus=4;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

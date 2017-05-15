@@ -221,7 +221,8 @@ public class ModifyWRDetailActivity extends BaseActivity<AddWorkReportPresent> i
         if(mData.getReportType().equals("日报")){
             mllEnd.setVisibility(View.GONE);
         }
-        mStart.setText(mData.getReportType());
+        mType.setText(mData.getReportType());
+        mStart.setText(mData.getStartDate());
         mEnd.setText(mData.getEndDate());
         mTitle.setText(mData.getReportTitle());
         mContent.setText(mData.getReportContent());

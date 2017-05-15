@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -235,6 +236,9 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
               item.setRemark(msg());
               item.setUserName(MySelfInfo.getInstance().getNickName());
               item.setProcessResult(1);
+              SimpleDateFormat sdf=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+              String time=sdf.format(System.currentTimeMillis());
+              item.setCreateTime(time);
               remarkList.add(item);
               remarkAdapter.notifyItemInserted(remarkList.size()-1);
               mInputMsg.setText("");
@@ -322,6 +326,5 @@ public class WoDetailsActivity extends BaseActivity<WoDetailPresent> implements 
             dealType=3;
             mPresent.dealWoResult(3,mId,msg(),ownerList.get(0).getId()+"");
         }
-
     }
 }

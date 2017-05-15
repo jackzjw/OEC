@@ -55,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textSize="13sp"
                 android:textColor="@color/apply_wait_approve_text_color"
                 android:text="2017-05-04"
                 android:layout_gravity="center_vertical"

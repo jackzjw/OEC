@@ -59,7 +59,7 @@ public class HomeListPresent extends RxPresent<HomeListContract.View> implements
 
     @Override
     public void getTrendsList() {
-
+     //2表示全部
         Subscription subscription = mHelper.getApiSevice().getTrendsList("","",1,"5", SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<OaBasicItemBean<TrendsListBean>>>scheduleRxHelper())
                 .compose(RxUtil.<OaBasicItemBean<TrendsListBean>>handleResult()).subscribe(new CommonSubscriber<OaBasicItemBean<TrendsListBean>>(mView) {

@@ -46,7 +46,7 @@ public class OaRemarkAdapter extends RecyclerView.Adapter<OaRemarkAdapter.ViewHo
         }
         String userName=mList.get(position).getUserName();
         switch (processResult){
-            case 0:holder.mUserName.setText(userName+"已阅读你的申请");break;
+            case 0:holder.mUserName.setText(userName+"阅读了你的申请");break;
             case 4: holder.mUserName.setText(userName+"驳回了你的申请"); break;
             case 2: holder.mUserName.setText(userName+"通过了你的申请"); break;
             case 3:

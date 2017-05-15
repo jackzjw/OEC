@@ -13,6 +13,7 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.present.ApproveListPresent;
 import shangchuan.com.oec.present.contact.ApproveListContract;
 import shangchuan.com.oec.ui.apply.adapter.ApproveListAdapter;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -39,7 +40,7 @@ public abstract class BaseApproveListFragment extends BaseFragment<ApproveListPr
         mPresent.getApproveList(mType,isAudit);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.addItemDecoration(new DividerDecoration(mActivity));
-        adapter=new ApproveListAdapter(mActivity,new ArrayList<OaItemBean>());
+        adapter=new ApproveListAdapter(mActivity,new ArrayList<OaItemBean>(),2);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -94,11 +95,9 @@ public abstract class BaseApproveListFragment extends BaseFragment<ApproveListPr
     }
 
     @Override
-    public void refreshStatus(int pos,boolean isDel) {
-        if(isDel){
+    public void refreshStatus(int pos,int size) {
+        LogUtil.i("pos="+pos);
             adapter.notifyItemRemoved(pos);
-        }else {
-            adapter.notifyItemChanged(pos);
-        }
+        adapter.notifyItemRangeChanged(0,size);
     }
 }

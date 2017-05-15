@@ -17,6 +17,7 @@ import shangchuan.com.oec.model.bean.WorkReportListBean;
 import shangchuan.com.oec.ui.apply.activity.WorkReportDetailActivity;
 import shangchuan.com.oec.util.CommonUtil;
 import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 
 /**
@@ -52,7 +53,7 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glides.getInstance().load(mContext, MySelfInfo.getInstance().getAvatar(),holder.mUserAvater);
-        holder.mTitle.setText(MySelfInfo.getInstance().getNickName()+"["+mList.get(position).getReportType()+"]");
+        holder.mTitle.setText(mList.get(position).getCreateUserName()+"["+mList.get(position).getReportType()+"]");
         if(mList.get(position).getReportType().equals("周报")){
             String duration= CommonUtil.formatDate(mList.get(position).getStartDate())+"-"+CommonUtil.formatDate(mList.get(position).getEndDate());
             holder.mDuration.setText("周报日期 ("+duration+")");
@@ -61,6 +62,7 @@ public class WorkReporListAdapter extends RecyclerView.Adapter<WorkReporListAdap
         }
         holder.mContent.setText(mList.get(position).getReportTitle());
         holder.mDate.setText(CommonUtil.formatDate(mList.get(position).getCreateTime()));
+        LogUtil.i("status="+mList.get(position).getReportStatus());
         if(mList.get(position).getReportStatus()==0){
             holder.redDot.setVisibility(View.VISIBLE);
         }else {

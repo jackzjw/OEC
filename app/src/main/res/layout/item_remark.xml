@@ -30,6 +30,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:id="@+id/create_time"
+            android:textSize="12sp"
             />
 
     </RelativeLayout>

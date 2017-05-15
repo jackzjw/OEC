@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.TaskListBean;
+import shangchuan.com.oec.ui.apply.activity.TaskDetailsActivity;
+import shangchuan.com.oec.util.CommonUtil;
 
 /**
  * Created by sg280 on 2017/5/5.
@@ -25,44 +26,24 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     private Context mContext;
     private List<TaskListBean> mList;
-    private boolean isFinished;
-    private static final int TODAY_TASK=1;
-    private static final int FUNTURE_TASK=2;
-    public TaskListAdapter(Context context,List<TaskListBean> list){
+    private int mStatus;
+    public TaskListAdapter(Context context,List<TaskListBean> list,int status){
         this.mContext=context;
         this.mList=list;
+        this.mStatus=status;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        String dateLine=mList.get(position).getDeadline();
-        long t=dealDate(dateLine);
-        if(t>0){
-            return TODAY_TASK;
-        }else {
-            return FUNTURE_TASK;
-        }
-    }
-    private long dealDate(String dateLine){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        long t=0l;
-        try{
-            t=sdf.parse(dateLine).getTime();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-     return t-System.currentTimeMillis();
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View mview= LayoutInflater.from(mContext).inflate(R.layout.item_project,parent,false);
-        ViewHolder viewHolder=new ViewHolder(mview);
+        final ViewHolder viewHolder=new ViewHolder(mview);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int pos=viewHolder.getAdapterPosition();
+             mContext.startActivity(TaskDetailsActivity.getInstance(mContext,mList.get(pos).getId()+""));
             }
         });
         return viewHolder;
@@ -70,11 +51,17 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if(mStatus==2){
+            //已完成
+            holder.mImgFinish.setImageResource(R.drawable.application_button_finish_selected);
+        }else {
+            holder.mImgFinish.setImageResource(R.drawable.application_button_finish_normal);
+        }
         holder.mContent.setText(mList.get(position).getTaskTitle());
         holder.mResponseName.setText(mList.get(position).getUserName());
         holder.mProjectName.setText(mList.get(position).getProjectName());
-        holder.mDate.setText(mList.get(position).getDeadline());
-        holder.mDate.setTextColor(isFinished? ContextCompat.getColor(mContext,R.color.project_gray_text_color):ContextCompat.getColor(mContext,R.color.apply_wait_approve_text_color));
+        holder.mDate.setText(CommonUtil.formatDate(mList.get(position).getDeadline()).replace("/","月").concat("日"));
+        holder.mDate.setTextColor(mStatus==0? ContextCompat.getColor(mContext,R.color.apply_wait_approve_text_color):ContextCompat.getColor(mContext,R.color.project_gray_text_color));
     }
 
     @Override

@@ -27,6 +27,15 @@ public class OaItemBean {
     private String  Handler;
     private String  Attachments;
     private String CreateTime;
+    private String CreateUserName;
+
+    public String getCreateUserName() {
+        return CreateUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        CreateUserName = createUserName;
+    }
 
     public String getCreateTime() {
         return CreateTime;

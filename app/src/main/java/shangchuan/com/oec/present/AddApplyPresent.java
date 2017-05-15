@@ -21,7 +21,6 @@ import shangchuan.com.oec.model.bean.HttpDataResult;
 import shangchuan.com.oec.model.bean.WoSuccessBean;
 import shangchuan.com.oec.model.http.RetrofitHelper;
 import shangchuan.com.oec.present.contact.AddApplyContract;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
 import shangchuan.com.oec.widget.SaveToken;
@@ -55,6 +54,10 @@ public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements
 
     @Override
     public void upLoadFile(List<LocalMedia> selectMedia,List<String> filePaths) {
+        if(selectMedia.isEmpty()&&filePaths.isEmpty()){
+            mView.upLoadFileSuccess("");
+            return;
+        }
         MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (int i = 0; i < selectMedia.size(); i++) {
             String path;
@@ -82,11 +85,9 @@ public class AddApplyPresent extends RxPresent<AddApplyContract.View> implements
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if(response.isSuccessful()) {
-                    LogUtil.i(response.body().string());
                     mView.upLoadFileSuccess(response.body().string());
                 }else {
                     mView.showError(response.message());
-                    LogUtil.i(response.message());
                 }
             }
         });

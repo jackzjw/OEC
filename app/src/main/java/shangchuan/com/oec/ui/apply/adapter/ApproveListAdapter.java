@@ -28,9 +28,11 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
 
     private Context mContext;
     private List<OaItemBean> mList;
-    public ApproveListAdapter(Context context,List<OaItemBean> list){
+    private int mIndex;
+    public ApproveListAdapter(Context context,List<OaItemBean> list,int index){
         this.mContext=context;
         this.mList=list;
+        this.mIndex=index;
     }
     public void updateData(List<OaItemBean> bean){
         this.mList=bean;
@@ -43,7 +45,7 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
             @Override
             public void onClick(View v) {
                 int id=mList.get(viewHolder.getAdapterPosition()).getId();
-                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,2,viewHolder.getAdapterPosition()));
+                mContext.startActivity(ApplyOfficeDetailsActivity.newIntent(mContext,id,mIndex,viewHolder.getAdapterPosition()));
             }
         });
         return viewHolder;
@@ -52,7 +54,7 @@ public class ApproveListAdapter extends RecyclerView.Adapter<ApproveListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glides.getInstance().loadCircle(mContext, MySelfInfo.getInstance().getAvatar(),holder.mUserAvater);
-        holder.mTitle.setText(mList.get(position).getOrderTitle());
+        holder.mTitle.setText(mList.get(position).getCreateUserName()+"["+mList.get(position).getOrderTitle()+"]");
         holder.mDesc.setText(mList.get(position).getOrderContent());
         holder.mStatus.setText(CommonUtil.orderStatus(mList.get(position).getOrderStatus()));
         if(mList.get(position).getOrderStatus()==1){

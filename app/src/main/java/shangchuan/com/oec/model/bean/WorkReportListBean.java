@@ -17,6 +17,15 @@ public class WorkReportListBean {
     private String ReportQuestion;
     private int IsHasAttachment;
     private String CreateTime;
+     private String CreateUserName;
+
+    public String getCreateUserName() {
+        return CreateUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        CreateUserName = createUserName;
+    }
 
     public String getCreateTime() {
         return CreateTime;

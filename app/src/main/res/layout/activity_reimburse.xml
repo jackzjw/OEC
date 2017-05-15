@@ -94,7 +94,6 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:id="@+id/rel_add_owner"
             >
             <RelativeLayout
                 android:id="@+id/rel_add_owner"
@@ -199,11 +198,12 @@
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:id="@+id/reimburse_sum"
             android:textSize="14sp"
             android:hint="输入金额"
+            android:background="@android:color/transparent"
             android:singleLine="true"
             android:numeric="decimal"
             android:layout_marginLeft="50dp"
@@ -290,6 +290,7 @@
             android:layout_height="wrap_content"
             android:text="@string/apply_approve_owner"/>
        <android.support.v7.widget.RecyclerView
+           android:layout_gravity="center_vertical"
            android:id="@+id/approver_recycleview"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>

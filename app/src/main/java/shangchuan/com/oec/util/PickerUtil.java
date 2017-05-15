@@ -31,13 +31,13 @@ public class PickerUtil {
     }
     public DateTimePicker setDateTimePick(Activity context){
         DateTimePicker picker=new DateTimePicker(context,DateTimePicker.HOUR_24);
-        picker.setDateRangeStart(2016,1,1);
-        picker.setDateRangeEnd(2017,12,31);
+        picker.setDateRangeStart(2017,1,1);
+        picker.setDateRangeEnd(2018,12,31);
         Calendar c = Calendar.getInstance(Locale.CHINA);
         int year=c.get(Calendar.YEAR);
         int month=c.get(Calendar.MONTH);
         int day=c.get(Calendar.DAY_OF_MONTH);
-        int hour=c.get(Calendar.HOUR);
+        int hour=c.get(Calendar.HOUR_OF_DAY);
         picker.setSelectedItem(year,month+1,day,hour,0);
         picker.show();
         return picker;

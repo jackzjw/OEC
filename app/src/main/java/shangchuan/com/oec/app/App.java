@@ -37,7 +37,7 @@ public class App extends Application {
     public void exitApp(){
          if(mActivities!=null){
              for(Activity act:mActivities){
-                 mActivities.remove(act);
+                 act.finish();
              }
          }
        android.os.Process.killProcess(android.os.Process.myPid());

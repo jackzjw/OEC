@@ -13,6 +13,7 @@ import rx.Observable;
 import shangchuan.com.oec.model.bean.AttendanceListBean;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
+import shangchuan.com.oec.model.bean.CommentResultBean;
 import shangchuan.com.oec.model.bean.ContactListBean;
 import shangchuan.com.oec.model.bean.CustomerListBean;
 import shangchuan.com.oec.model.bean.GroupBasicBean;
@@ -33,6 +34,7 @@ import shangchuan.com.oec.model.bean.ResultBean;
 import shangchuan.com.oec.model.bean.ResultListBean;
 import shangchuan.com.oec.model.bean.RoleListBean;
 import shangchuan.com.oec.model.bean.TanentInfoBean;
+import shangchuan.com.oec.model.bean.TaskDetailsBean;
 import shangchuan.com.oec.model.bean.TaskListBean;
 import shangchuan.com.oec.model.bean.TrendsListBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
@@ -261,7 +263,7 @@ public interface HttpService {
           //我的任务
           @FormUrlEncoded
           @POST("Project/project_mytask")
-          Observable<HttpDataResult<ResultBean<OaBasicItemBean<TaskListBean>>>> getTaskList(@Field("TaskStatus") int statud,@Field("ProId") int id,@Field("token") String token);
+          Observable<HttpDataResult<ResultBean<OaBasicItemBean<TaskListBean>>>> getTaskList(@Field("TaskStatus") int status,@Field("ProId") int id,@Field("UserId") String userid,@Field("Size") int size,@Field("token") String token);
           //删除Oa
           @FormUrlEncoded
           @POST("OA/oa_del")
@@ -270,6 +272,13 @@ public interface HttpService {
           @FormUrlEncoded
           @POST("Tenant/tenant_info")
            Observable<HttpDataResult<ResultBean<TanentInfoBean>>> getTanentInfo(@Field("token") String token);
-
+          //任务详情
+          @FormUrlEncoded
+          @POST("Project/project_task_info")
+          Observable<HttpDataResult<ResultBean<TaskDetailsBean>>>  getTaskDetails(@Field("TId") String id,@Field("token") String token);
+          //任务添加评论
+           @FormUrlEncoded
+           @POST("Project/project_task_sendMsg")
+           Observable<HttpDataResult<ResultBean<CommentResultBean>>> submitRemark(@Field("TaskId") String taskId,@Field("PId") String pid,@Field("ToUserId") String toUserId,@Field("Remark") String remark,@Field("token") String token);
 
 }

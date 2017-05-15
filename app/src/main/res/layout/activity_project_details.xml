@@ -104,21 +104,31 @@
     <TextView
         android:id="@+id/task_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="15dp"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/task_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/file_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
    <TextView
        android:layout_width="match_parent"
        android:layout_height="20dp"
        android:background="@color/theme_divide_color"
        android:text="动态"
+       android:layout_marginLeft="15dp"
        android:gravity="center_vertical|left"
 
        />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/reamrk_recycleview"
+        android:id="@+id/remark_recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
@@ -140,7 +150,7 @@
             android:textSize="14sp"
             android:id="@+id/input_remark"
             android:layout_height="match_parent"/>
-        <Button
+        <TextView
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"

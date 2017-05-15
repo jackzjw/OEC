@@ -17,6 +17,15 @@ public class TaskListBean {
     private String  ClassName  ;
     private String  CreateUserID    ;
     private String CreateTime;
+    private String TodayOrFuture;
+
+    public String getTodayOrFuture() {
+        return TodayOrFuture;
+    }
+
+    public void setTodayOrFuture(String todayOrFuture) {
+        TodayOrFuture = todayOrFuture;
+    }
 
     public int getId() {
         return Id;

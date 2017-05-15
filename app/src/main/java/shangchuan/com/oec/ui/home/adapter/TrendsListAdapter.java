@@ -19,6 +19,7 @@ import shangchuan.com.oec.ui.apply.activity.ProjectDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.WoDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.WorkReportDetailActivity;
 import shangchuan.com.oec.util.Glides;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 
 /**
@@ -45,7 +46,7 @@ public class TrendsListAdapter extends RecyclerView.Adapter<TrendsListAdapter.Vi
             public void onClick(View v) {
                 int position=viewHolder.getAdapterPosition();
                 int jobType=mList.get(position).getJobType();
-                int id=mList.get(position).getId();
+                int id=mList.get(position).getOrderId();
                 switch (jobType){
                     case 1://工单
                         mContext.startActivity(WoDetailsActivity.getInstance(mContext,id,position));

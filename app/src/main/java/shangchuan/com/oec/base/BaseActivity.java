@@ -27,6 +27,7 @@ public abstract class BaseActivity<T extends RxPresent> extends AppCompatActivit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        App.getInstance().addActivity(this);
         setContentView(getResourcesLayout());
         ButterKnife.bind(this);
          initInject();
@@ -64,6 +65,7 @@ public abstract class BaseActivity<T extends RxPresent> extends AppCompatActivit
         if(mPresent!=null) {
             mPresent.deatchView();
         }
+        App.getInstance().removeActivity(this);
     }
 
     protected abstract int getResourcesLayout();

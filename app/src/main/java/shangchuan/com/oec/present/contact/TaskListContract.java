@@ -12,11 +12,13 @@ import shangchuan.com.oec.model.bean.TaskListBean;
 
 public interface TaskListContract {
     interface View extends BaseView{
-        void showUnfinishTask(List<TaskListBean> bean);
         void showFinishedTask(List<TaskListBean> bean);
+        void showTodayTask(List<TaskListBean> bean);
+        void showFutureTask(List<TaskListBean> bean);
 
     }
     interface Present extends BasePresent<View>{
         void getTaskList(int status);
+        void getFinishedTask(int status);
     }
 }

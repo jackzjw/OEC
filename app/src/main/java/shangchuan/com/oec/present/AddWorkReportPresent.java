@@ -53,6 +53,10 @@ public class AddWorkReportPresent extends RxPresent<AddApplyContract.View> imple
 
     @Override
     public void upLoadFile(List<LocalMedia> selectMedia,List<String> filePaths) {
+        if(selectMedia.isEmpty()&&filePaths.isEmpty()){
+            mView.upLoadFileSuccess("");
+            return;
+        }
         MultipartBody.Builder builder=new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (int i = 0; i < selectMedia.size(); i++) {
            String path;
@@ -63,6 +67,7 @@ public class AddWorkReportPresent extends RxPresent<AddApplyContract.View> imple
                 path = selectMedia.get(i).getPath();
 
             }
+            LogUtil.i("路径="+path);
             String fileName=path.substring(path.lastIndexOf("/")+1,path.length());
             MediaType MEDIA_TYPE =MediaType.parse( mHelper.judgeType(path));
             builder.addFormDataPart(MEDIA_TYPE.type(),fileName, RequestBody.create(MEDIA_TYPE,new File(path)));
@@ -84,7 +89,6 @@ public class AddWorkReportPresent extends RxPresent<AddApplyContract.View> imple
                     mView.upLoadFileSuccess(response.body().string());
                 }else {
                     mView.showError(response.message());
-                    LogUtil.i(response.message());
                 }
             }
         });

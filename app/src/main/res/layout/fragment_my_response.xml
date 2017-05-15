@@ -8,10 +8,49 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="15dp"
+                android:text="今天"
+                android:textSize="13sp"
+                android:background="@color/theme_divide_color"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="无任务"
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/today_empty"
+                />
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleview"
+                android:id="@+id/today_recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="20dp"
+               android:gravity="center_vertical|left"
+               android:paddingLeft="15dp"
+               android:textSize="13sp"
+               android:text="未来"
+               android:background="@color/theme_divide_color"
+               />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="无任务"
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/future_empty"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/future_recycleview"
+                ></android.support.v7.widget.RecyclerView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -29,8 +68,10 @@
                     android:text="查看已完成任务"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
+                    android:id="@+id/text_show_hide"
                     />
                 <ImageView
+                    android:id="@+id/img_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/home_news_arrow"
@@ -39,6 +80,14 @@
                     android:layout_centerVertical="true"
                     />
             </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="无任务"
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/finish_empty"
+                />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/finish_recycleview"
                 android:visibility="gone"

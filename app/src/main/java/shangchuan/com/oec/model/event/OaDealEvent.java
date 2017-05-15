@@ -9,8 +9,7 @@ public class OaDealEvent {
     private int position;
     private boolean isDelete;
     public OaDealEvent(){}
-    public OaDealEvent(int status,int pos){
-        this.status=status;
+    public OaDealEvent(int pos){
         this.position=pos;
     }
 

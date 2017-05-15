@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 
 import butterknife.BindView;
 import shangchuan.com.oec.R;
+import shangchuan.com.oec.app.App;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.ui.apply.fragment.ApplyFragment;
 import shangchuan.com.oec.ui.home.fragment.HomeFragment;
@@ -31,6 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TeamFragment mTeamFragment;
     private UserFragment mUserFragment;
     private Fragment temp;
+    private long firstBackTime;
 
 
     @Override
@@ -52,6 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             transaction.commit();
             Log.e(TAG,"application recreate");
         }
+      
 
     }
 
@@ -137,5 +140,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        long secondBackTime=System.currentTimeMillis();
+        if(secondBackTime-firstBackTime>2000){
+            ToastUtil.shortShow("再按一次退出程序");
+            firstBackTime=secondBackTime;
+        }else {
+            App.getInstance().exitApp();
+        }
+    }
 }

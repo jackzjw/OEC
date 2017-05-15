@@ -55,7 +55,7 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
         mPresent.getApproveList(mType,isAudit);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerDecoration(this));
-        adapter=new ApproveListAdapter(this,new ArrayList<OaItemBean>());
+        adapter=new ApproveListAdapter(this,new ArrayList<OaItemBean>(),3);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,7 +102,7 @@ public class ApprovePendListActivity extends BaseActivity<ApproveListPresent> im
     }
 
     @Override
-    public void refreshStatus(int pos, boolean isDel) {
+    public void refreshStatus(int pos,int size) {
 
     }
 }

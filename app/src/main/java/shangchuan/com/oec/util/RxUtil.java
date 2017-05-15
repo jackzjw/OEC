@@ -42,6 +42,7 @@ public class RxUtil {
         };
     }
 private static  <T>Observable<T> createData(final T data){
+
     return Observable.create(new Observable.OnSubscribe<T>() {
         @Override
         public void call(Subscriber<? super T> subscriber) {

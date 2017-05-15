@@ -85,6 +85,8 @@ public class ReimburseActivity extends BaseActivity<AddApplyPresent> implements 
         mToolBarTitle.setText(getResources().getString(R.string.apply_reimburse));
         mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         initToolBar(mToolbar);
+        mType.setOnClickListener(this);
+        mTime.setOnClickListener(this);
         RecyclerView.LayoutManager layoutManager=new FullyGridLayoutManager(this,4, GridLayoutManager.VERTICAL,false);
         ImgRec.setLayoutManager(layoutManager);
         adapter=new GridImgAdapter(this, new GridImgAdapter.onDelPickClickListener() {
@@ -214,6 +216,7 @@ public class ReimburseActivity extends BaseActivity<AddApplyPresent> implements 
         hashMap.put("OrderTime",mTime.getText().toString());
         hashMap.put("OrderContent",mContent.getText().toString().trim());
         hashMap.put("OrderAmount",mSum.getText().toString().trim());
+        hashMap.put("OrderType",getType());
         for(int id:ownId){
             hashMap.put("Handlers",id);
         }

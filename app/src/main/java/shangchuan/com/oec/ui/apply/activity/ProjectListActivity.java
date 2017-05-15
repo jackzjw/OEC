@@ -46,7 +46,7 @@ public class ProjectListActivity extends BaseActivity<ProjectListPresent> implem
        mRelMyTask.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               startActivity(new Intent(ProjectListActivity.this,ProjectDetailsActivity.class));
+               startActivity(new Intent(ProjectListActivity.this,MyTaskActivity.class));
            }
        });
         LoadingView.showProgress(this);

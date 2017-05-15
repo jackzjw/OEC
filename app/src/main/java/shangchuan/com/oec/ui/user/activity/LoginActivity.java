@@ -35,7 +35,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> implements LoginCo
 
     @Override
     protected void initEventData() {
-        mToolbar.setNavigationIcon(R.drawable.home_news_arrow_back);
         mToolbarTitle.setText("登录");
         initToolBar(mToolbar);
 

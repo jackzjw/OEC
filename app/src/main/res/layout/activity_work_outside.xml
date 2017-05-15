@@ -7,47 +7,148 @@
             android:orientation="vertical"
             >
             <include layout="@layout/toolbar_layout"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
 
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/apply_leave_type"
+                            android:textSize="14sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/outside_type"
+
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="50dp"
+                            android:gravity="left|center_vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/user_divide_color"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/apply_wo_destination"
+                            android:textSize="14sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <EditText
+                            android:id="@+id/outside_destination"
+                            android:hint="请输入地址"
+                            android:background="@android:color/transparent"
+                            android:maxLines="2"
+                            android:textSize="14sp"
+                            android:padding="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/user_divide_color"/>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/rel_add_owner"
+                        >
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/add_blue"
+                            android:src="@drawable/application_icon_add_blue"
+                            android:layout_centerHorizontal="true"
+                            />
+                        <TextView
+                            android:layout_below="@id/add_blue"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="添加审批人"
+                            />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/theme_divide_color"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="@string/apply_leave_type"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/outside_type"
-
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="50dp"
-                    android:gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:text="@string/apply_start"
+                    />
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/leave_start"
+                    android:gravity="left|center_vertical"
+                    android:textSize="14sp"
 
+                    android:layout_marginLeft="50dp"
+                    />
 
             </LinearLayout>
             <View
@@ -56,291 +157,197 @@
                 android:background="@color/user_divide_color"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_marginLeft="15dp"
-                    android:text="@string/apply_wo_destination"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:text="@string/apply_end"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/leave_end"
+                    android:gravity="center_vertical|left"
+                    android:textSize="14sp"
+
+                    android:layout_marginLeft="50dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/user_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:text="@string/apply_client"
+                    />
                 <EditText
-                    android:id="@+id/outside_destination"
-                    android:hint="请输入地址"
-                    android:background="@android:color/transparent"
-                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/leave_client"
                     android:textSize="14sp"
                     android:padding="5dp"
+                    android:singleLine="true"
+                    android:background="@android:color/transparent"
+                    android:hint="输入客户姓名"
+                    android:layout_marginLeft="50dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/user_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp"
+                    android:text="@string/apply_outside_company"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/outside_conpany"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:singleLine="true"
+                    android:padding="5dp"
+                   android:hint="陪同人员姓名"
+                    android:layout_marginLeft="20dp"
+                    />
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/user_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apply_explain"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    />
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                  android:hint="必要说明"
+                    android:textSize="13sp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:maxLines="3"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+                  <android.support.v7.widget.RecyclerView
+                      android:id="@+id/img_recycleview"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                  <android.support.v7.widget.RecyclerView
+                      android:layout_marginTop="5dp"
+                      android:id="@+id/file_recycleview"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/user_divide_color"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/application_icon_link"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
+                    android:id="@+id/img_link"
+                    />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/user_divide_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                >
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apply_approve_owner"/>
+              <android.support.v7.widget.RecyclerView
+                  android:layout_gravity="center_vertical"
+                  android:id="@+id/approver_recycleview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/user_divide_color"
+                >
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/apply_submit_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="14sp"
+                    android:background="@drawable/shape_commit_work_order_button_bg"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/btn_submit"
+                    />
+
+            </RelativeLayout>
 
 
         </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/user_divide_color"/>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-
-            >
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:id="@+id/rel_add_owner"
-                >
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/add_blue"
-                    android:src="@drawable/application_icon_add_blue"
-                    android:layout_centerHorizontal="true"
-                    />
-                <TextView
-                    android:layout_below="@id/add_blue"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="添加审批人"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/theme_divide_color"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="14sp"
-            android:text="@string/apply_start"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/leave_start"
-            android:gravity="left|center_vertical"
-            android:textSize="14sp"
-
-            android:layout_marginLeft="50dp"
-            />
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="14sp"
-            android:text="@string/apply_end"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/leave_end"
-            android:gravity="center_vertical|left"
-            android:textSize="14sp"
-
-            android:layout_marginLeft="50dp"
-            />
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="14sp"
-            android:text="@string/apply_client"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/leave_client"
-            android:textSize="14sp"
-            android:padding="5dp"
-            android:singleLine="true"
-            android:background="@android:color/transparent"
-            android:hint="输入客户姓名"
-            android:layout_marginLeft="50dp"
-            />
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="14sp"
-            android:text="@string/apply_outside_company"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/outside_conpany"
-            android:textSize="14sp"
-            android:background="@android:color/transparent"
-            android:singleLine="true"
-            android:padding="5dp"
-           android:hint="陪同人员姓名"
-            android:layout_marginLeft="20dp"
-            />
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_explain"
-            android:textSize="14sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            />
-        <EditText
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-          android:hint="必要说明"
-            android:textSize="13sp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:maxLines="3"
-            android:background="@android:color/transparent"
-            android:layout_height="wrap_content"/>
-          <android.support.v7.widget.RecyclerView
-              android:id="@+id/img_recycleview"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-          <android.support.v7.widget.RecyclerView
-              android:layout_marginTop="5dp"
-              android:id="@+id/file_recycleview"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@color/user_divide_color"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/application_icon_link"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:id="@+id/img_link"
-            />
-
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/user_divide_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        >
-        <TextView
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/apply_approve_owner"/>
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/approver_recycleview"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-
-    </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/user_divide_color"
-        >
-        <Button
-            android:id="@+id/btn_submit"
-            android:layout_marginTop="50dp"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="@string/apply_submit_btn"
-            android:textColor="@android:color/white"
-            android:layout_centerHorizontal="true"
-            android:textSize="14sp"
-            android:background="@drawable/shape_commit_work_order_button_bg"
-            />
-
-    </RelativeLayout>
-
-
-</LinearLayout>
-    </ScrollView>
-</LinearLayout>
+            </ScrollView>
+        </LinearLayout>
