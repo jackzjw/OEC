@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.TaskCommentBean;
+import shangchuan.com.oec.present.contact.OnItemClickListener;
 
 /**
  * Created by sg280 on 2017/5/15.
@@ -21,9 +22,13 @@ import shangchuan.com.oec.model.bean.TaskCommentBean;
 public class TaskCommentAdapter extends RecyclerView.Adapter<TaskCommentAdapter.ViewHolder> {
     private Context mContext;
     private List<TaskCommentBean> mList;
+    private OnItemClickListener mOnItemClickListener;
     public TaskCommentAdapter(Context context,List<TaskCommentBean> list){
         this.mContext=context;
         this.mList=list;
+    }
+    public void setOnItemClickListener(OnItemClickListener clickListener){
+        this.mOnItemClickListener=clickListener;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class TaskCommentAdapter extends RecyclerView.Adapter<TaskCommentAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         if(mList.get(position).getIsComment().equals("1")){
             holder.mRemark.setText(mList.get(position).getRemark());
             holder.mRemark.setVisibility(View.VISIBLE);
@@ -43,6 +48,14 @@ public class TaskCommentAdapter extends RecyclerView.Adapter<TaskCommentAdapter.
         holder.mUserName.setText(mList.get(position).getUserName());
         holder.mResultName.setText(mList.get(position).getProcessInfo());
         holder.mCreateTime.setText(mList.get(position).getCreateTime().replace("-","/"));
+        holder.mRemark.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             if(mOnItemClickListener!=null){
+                 mOnItemClickListener.onClick(position);
+             }
+         }
+     });
     }
 
     @Override

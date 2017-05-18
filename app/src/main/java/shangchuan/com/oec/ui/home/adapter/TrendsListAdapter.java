@@ -19,7 +19,6 @@ import shangchuan.com.oec.ui.apply.activity.ProjectDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.WoDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.WorkReportDetailActivity;
 import shangchuan.com.oec.util.Glides;
-import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.widget.CircleImageView;
 
 /**
@@ -60,7 +59,7 @@ public class TrendsListAdapter extends RecyclerView.Adapter<TrendsListAdapter.Vi
                         mContext.startActivity(WorkReportDetailActivity.getInstance(mContext,id,2));
                         break;
                     case 4://项目任务
-                        mContext.startActivity(ProjectDetailsActivity.getInstance(mContext,id));
+                        mContext.startActivity(ProjectDetailsActivity.getInstance(mContext,id+""));
                         break;
                 }
 

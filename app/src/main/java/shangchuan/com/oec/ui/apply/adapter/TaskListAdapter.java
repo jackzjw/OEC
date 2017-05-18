@@ -27,6 +27,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     private Context mContext;
     private List<TaskListBean> mList;
     private int mStatus;
+    //status=0;今天，status=1：未来 status=2:已完成
     public TaskListAdapter(Context context,List<TaskListBean> list,int status){
         this.mContext=context;
         this.mList=list;

@@ -74,7 +74,9 @@
             android:name=".ui.apply.activity.AddProjectActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
         </activity>
-        <activity android:name=".ui.apply.activity.TaskDetailsActivity">
+        <activity android:name=".ui.apply.activity.TaskDetailsActivity"
+                  android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            >
         </activity>
         <activity
             android:name=".ui.team.activity.AddUserActivity"
@@ -171,9 +173,11 @@
         </activity>
         <activity android:name=".ui.home.activity.SearchTrendActivity">
         </activity>
-        <activity android:name=".ui.home.activity.SearchBannerActivity"
-
-            >
+        <activity android:name=".ui.home.activity.SearchBannerActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.ProjectMemberListActivity">
+        </activity>
+        <activity android:name=".ui.apply.activity.AddTaskClassifyActivity">
         </activity>
     </application>
 

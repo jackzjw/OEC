@@ -47,7 +47,7 @@ android:layout_height="60dp"
     <shangchuan.com.oec.widget.HorizontalProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="7dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="55dp"
         android:layout_below="@+id/ll_project"

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/theme_divide_color"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="+创建新项目"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="+邀请成员"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/theme_divide_color"
+    android:text="+添加任务分类"
+    android:gravity="center"
+    android:textSize="12sp"
+    android:id="@+id/add_task_class"
+    />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
@@ -29,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:id="@+id/rel_chakan"
         >
         <TextView
             android:id="@+id/find_finished_task"
@@ -45,10 +44,17 @@
             android:layout_height="wrap_content"
             android:src="@drawable/home_news_arrow"
             android:layout_marginRight="15dp"
+            android:id="@+id/img_arrow"
             android:layout_gravity="center_vertical"
             />
 
 
     </LinearLayout>
-
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/finish_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        ></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</ScrollView>

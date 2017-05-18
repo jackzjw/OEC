@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class ProjectDetailsActivity extends SimpleActivity {
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
     private List<Fragment> mFragmentList;
-    public static Intent getInstance(Context context,int id){
+    public static Intent getInstance(Context context,String id){
         Intent intent=new Intent(context,ProjectDetailsActivity.class);
         intent.putExtra("id",id);
         return intent;
@@ -53,8 +54,15 @@ public class ProjectDetailsActivity extends SimpleActivity {
         mToolbarTitle.setText("项目");
         mToolbarRight.setText("成员列表");
         initToolBar(mToolbar);
+      final   String id=getIntent().getStringExtra("id");
+        mToolbarRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(ProjectMemberListActivity.getInstance(ProjectDetailsActivity.this,id,0));
+            }
+        });
         mFragmentList=new ArrayList<>();
-        mFragmentList.add(new TaskFragment());
+        mFragmentList.add(TaskFragment.getInstance(id));
         mFragmentList.add(new DocumentFragment());
         mFragmentList.add(new ProjectTrendFragment());
         mViewPager.setAdapter(new ListViewpagerAdapter(getSupportFragmentManager()));

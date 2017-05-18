@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_project_details"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="shangchuan.com.oec.ui.apply.activity.TaskDetailsActivity">
     <include layout="@layout/toolbar_layout"/>
     <ScrollView
@@ -41,6 +41,7 @@
             />
     </LinearLayout>
     <TextView
+        android:id="@+id/tishi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -137,6 +138,12 @@
             android:layout_height="50dp"/>
         </LinearLayout>
     </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_divide_color"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -144,21 +151,32 @@
         android:orientation="horizontal"
         >
         <EditText
+            android:layout_marginLeft="15dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@drawable/shape_project_input_remark_background"
             android:textSize="14sp"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:hint="评论"
             android:id="@+id/input_remark"
-            android:layout_height="match_parent"/>
-        <TextView
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            />
+        <Button
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:gravity="center"
             android:text="发送"
+            android:background="@drawable/shape_project_send_remark_background"
             android:textColor="@android:color/white"
             android:textSize="15sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
             android:id="@+id/btn_send"
             />
 
     </LinearLayout>
+
 </RelativeLayout>

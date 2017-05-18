@@ -143,4 +143,25 @@ public class TaskDetailsBean {
     public void setCreateUserName(String createUserName) {
         CreateUserName = createUserName;
     }
+
+    @Override
+    public String toString() {
+        return "TaskDetailsBean{" +
+                "attachment_list=" + attachment_list +
+                ", comment_list=" + comment_list +
+                ", Id='" + Id + '\'' +
+                ", ProjectId='" + ProjectId + '\'' +
+                ", TaskClassId='" + TaskClassId + '\'' +
+                ", TaskTitle='" + TaskTitle + '\'' +
+                ", TaskContent='" + TaskContent + '\'' +
+                ", TaskStatus='" + TaskStatus + '\'' +
+                ", UserID='" + UserID + '\'' +
+                ", UserName='" + UserName + '\'' +
+                ", Deadline='" + Deadline + '\'' +
+                ", Role='" + Role + '\'' +
+                ", CreateUserId='" + CreateUserId + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                ", CreateUserName='" + CreateUserName + '\'' +
+                '}';
+    }
 }

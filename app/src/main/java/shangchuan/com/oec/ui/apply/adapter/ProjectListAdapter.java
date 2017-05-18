@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.model.bean.ProjectListBean;
+import shangchuan.com.oec.ui.apply.activity.ProjectDetailsActivity;
 import shangchuan.com.oec.widget.HorizontalProgressBar;
 
 /**
@@ -31,11 +32,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mview= LayoutInflater.from(mContext).inflate(R.layout.item_project_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(mview);
+        final ViewHolder viewHolder=new ViewHolder(mview);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int pos=viewHolder.getAdapterPosition();
+              mContext.startActivity(ProjectDetailsActivity.getInstance(mContext,mList.get(pos).getId()+""));
             }
         });
         return viewHolder;

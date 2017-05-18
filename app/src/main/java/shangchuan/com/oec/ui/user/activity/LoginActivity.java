@@ -36,7 +36,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> implements LoginCo
     @Override
     protected void initEventData() {
         mToolbarTitle.setText("登录");
-        initToolBar(mToolbar);
 
     }
   private String getTel(){

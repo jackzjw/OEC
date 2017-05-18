@@ -11,6 +11,7 @@ import shangchuan.com.oec.ui.apply.fragment.SearchOaFragment;
 import shangchuan.com.oec.ui.apply.fragment.SearchWoFragment;
 import shangchuan.com.oec.ui.apply.fragment.approvepend.BaseApproveListFragment;
 import shangchuan.com.oec.ui.apply.fragment.project.MyTaskBaseListFragment;
+import shangchuan.com.oec.ui.apply.fragment.project.TaskFragment;
 import shangchuan.com.oec.ui.apply.fragment.workofficelist.WoListBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.BannersBaseFragment;
 import shangchuan.com.oec.ui.home.fragment.HomeFragment;
@@ -40,5 +41,6 @@ public interface FragmentComponent {
     void inject(SearchUserFragment fragment);
     void inject(SearchOaFragment fragment);
     void inject(SearchWoFragment fragment);
+    void inject(TaskFragment fragment);
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import shangchuan.com.oec.base.BasePresent;
 import shangchuan.com.oec.base.BaseView;
-import shangchuan.com.oec.model.bean.AttchmentBean;
 import shangchuan.com.oec.model.bean.CommentResultBean;
 import shangchuan.com.oec.model.bean.TaskCommentBean;
 import shangchuan.com.oec.model.bean.TaskDetailsBean;
@@ -16,16 +15,14 @@ import shangchuan.com.oec.model.bean.TaskDetailsBean;
 public interface TaskDetailContract {
     interface View extends BaseView{
         void showContent(TaskDetailsBean bean);
-        void showImgContent(List<AttchmentBean> imgList);
-        void showFileContent(List<AttchmentBean > fileList);
         void showRemark(List<TaskCommentBean> commentBeanList);
-        void remarkSucc(List<CommentResultBean> result);
-        void openFile(String path);
+        void remarkSucc(CommentResultBean result);
+        void finishTaskSucc();
     }
     interface Present extends BasePresent<View>{
         void getTaskDetails(String id);
         void sendRemark(String taskId,String Pid,String toUserId,String remark);
-        void downFile(String url);
+        void finishTask(String taskId);
     }
 
 }

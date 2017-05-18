@@ -12,6 +12,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 import shangchuan.com.oec.model.bean.AttendanceListBean;
 import shangchuan.com.oec.model.bean.CharactersTokenBean;
+import shangchuan.com.oec.model.bean.ClassListBean;
 import shangchuan.com.oec.model.bean.ClientDetailsBasicBean;
 import shangchuan.com.oec.model.bean.CommentResultBean;
 import shangchuan.com.oec.model.bean.ContactListBean;
@@ -280,5 +281,24 @@ public interface HttpService {
            @FormUrlEncoded
            @POST("Project/project_task_sendMsg")
            Observable<HttpDataResult<ResultBean<CommentResultBean>>> submitRemark(@Field("TaskId") String taskId,@Field("PId") String pid,@Field("ToUserId") String toUserId,@Field("Remark") String remark,@Field("token") String token);
-
+           //项目任务的添加
+            @FormUrlEncoded
+            @POST("Project/project_task_save")
+            Observable<HttpDataResult<ResultBean<WoSuccessBean>>> addProjectTask(@FieldMap HashMap<String,String> hashMap);
+            //项目任务分类的添加
+            @FormUrlEncoded
+             @POST("Project/project_taskclass_add")
+            Observable<HttpDataResult<ResultBean<WoSuccessBean>>> addClassTask(@Field("ProjectId") String id,@Field("ClassName") String className,@Field("OrderBy") String orderBy,@Field("ClassDesc")String desc,@Field("token")String token);
+            //项目成员
+             @FormUrlEncoded
+             @POST("Project/project_member")
+              Observable<HttpDataResult<ResultBean<List<UserInfoBean>>>> projectMemberList(@Field("ProjectId") String projectId,@Field("token") String token);
+              //项目列表
+              @FormUrlEncoded
+              @POST("Project/project_task_list")
+              Observable<HttpDataResult<ResultListBean<ClassListBean>>>  getProjectTaskList(@Field("ProjectId") String id,@Field("token") String token);
+              //完成任务
+              @FormUrlEncoded
+             @POST("Project/project_task_done")
+              Observable<HttpDataResult<ResultBean<WoSuccessBean>>>   finishTask(@Field("TaskId") String taskid,@Field("token") String token);
 }

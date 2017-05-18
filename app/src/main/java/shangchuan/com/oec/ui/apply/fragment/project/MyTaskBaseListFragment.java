@@ -120,12 +120,13 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
         switch (v.getId()){
             case R.id.rel_chakan:
                 isShow=!isShow;
+                if(isShow) {
                     LoadingView.showProgress(mActivity);
                     mPresent.getFinishedTask(finishStatus);
+                }
                 mFinishRec.setVisibility(isShow?View.VISIBLE:View.GONE);
                 mShowText.setText(isShow?"隐藏已完成任务":"查看已完成任务");
-
-               // mArrow.setImageResource(isShow?R.drawable.do);
+                mArrow.setImageResource(isShow?R.drawable.project_icon_below_arrow:R.drawable.home_news_arrow);
 
                 break;
         }

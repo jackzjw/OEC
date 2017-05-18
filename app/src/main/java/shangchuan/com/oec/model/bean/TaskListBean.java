@@ -122,4 +122,23 @@ public class TaskListBean {
     public void setCreateTime(String createTime) {
         CreateTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "TaskListBean{" +
+                "Id=" + Id +
+                ", ProjectId=" + ProjectId +
+                ", TaskTitle='" + TaskTitle + '\'' +
+                ", TaskStatus=" + TaskStatus +
+                ", UserID=" + UserID +
+                ", UserName='" + UserName + '\'' +
+                ", Deadline='" + Deadline + '\'' +
+                ", ProjectName='" + ProjectName + '\'' +
+                ", TaskClassId=" + TaskClassId +
+                ", ClassName='" + ClassName + '\'' +
+                ", CreateUserID='" + CreateUserID + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                ", TodayOrFuture='" + TodayOrFuture + '\'' +
+                '}';
+    }
 }
