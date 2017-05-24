@@ -18,7 +18,7 @@ public interface TaskListContract {
 
     }
     interface Present extends BasePresent<View>{
-        void getTaskList(int status);
+        void getTaskList(int status,String userId);
         void getFinishedTask(int status);
     }
 }

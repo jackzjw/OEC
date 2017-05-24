@@ -30,7 +30,9 @@ import shangchuan.com.oec.model.bean.OaItemBean;
 import shangchuan.com.oec.model.bean.OaTypeBean;
 import shangchuan.com.oec.model.bean.OrgBasicBean;
 import shangchuan.com.oec.model.bean.OrganizeInfoBean;
+import shangchuan.com.oec.model.bean.ProjectDocumentBean;
 import shangchuan.com.oec.model.bean.ProjectListBean;
+import shangchuan.com.oec.model.bean.ProjectProcessBlockList;
 import shangchuan.com.oec.model.bean.ResultBean;
 import shangchuan.com.oec.model.bean.ResultListBean;
 import shangchuan.com.oec.model.bean.RoleListBean;
@@ -301,4 +303,14 @@ public interface HttpService {
               @FormUrlEncoded
              @POST("Project/project_task_done")
               Observable<HttpDataResult<ResultBean<WoSuccessBean>>>   finishTask(@Field("TaskId") String taskid,@Field("token") String token);
+              //项目动态
+               @FormUrlEncoded
+               @POST("Project/project_news")
+               Observable<HttpDataResult<ResultBean<ProjectProcessBlockList>>> getProjectTrends(@Field("DayCount") String dayCount,@Field("Id") String id,@Field("token") String token);
+               //项目文档列表
+                @FormUrlEncoded
+                 @POST("Project/project_document_list")
+                Observable<HttpDataResult<ResultBean<OaBasicItemBean<ProjectDocumentBean>>>>  projectDocumentList(@Field("Id") String project,@Field("ClassId") String  classid,@Field("Size") int size,@Field("token") String token);
+
+
 }

@@ -13,7 +13,6 @@ import shangchuan.com.oec.base.RxPresent;
 import shangchuan.com.oec.ui.apply.activity.ApplyOfficeActivity;
 import shangchuan.com.oec.ui.apply.activity.ApprovePendActivity;
 import shangchuan.com.oec.ui.apply.activity.AttendanceActivity;
-import shangchuan.com.oec.ui.apply.activity.ClientListActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkReportActivity;
 import shangchuan.com.oec.ui.apply.activity.ProjectListActivity;
@@ -85,7 +84,7 @@ public class ApplyFragment<T extends RxPresent> extends BaseFragment implements 
                 break;
             case R.id.rel_apply_client:
                 //客户
-                mActivity.startActivity(new Intent(mActivity, ClientListActivity.class));
+               // mActivity.startActivity(new Intent(mActivity, ClientListActivity.class));
                 break;
             case R.id.rel_apply_project:
                 //项目

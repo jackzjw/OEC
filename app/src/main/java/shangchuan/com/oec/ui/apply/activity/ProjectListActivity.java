@@ -14,6 +14,7 @@ import butterknife.BindView;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.model.bean.ProjectListBean;
+import shangchuan.com.oec.model.bean.TaskListBean;
 import shangchuan.com.oec.present.ProjectListPresent;
 import shangchuan.com.oec.present.contact.ProjectListContract;
 import shangchuan.com.oec.ui.apply.adapter.ProjectListAdapter;
@@ -31,6 +32,8 @@ public class ProjectListActivity extends BaseActivity<ProjectListPresent> implem
     TextView mToolbarTitle;
     @BindView(R.id.recycleview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.task_tag)
+    TextView mRedTag;
     private ProjectListAdapter adapter ;
 
     @Override
@@ -50,7 +53,10 @@ public class ProjectListActivity extends BaseActivity<ProjectListPresent> implem
            }
        });
         LoadingView.showProgress(this);
+
         mPresent.getProjectList(2);
+        //如果今天又任务，显示红点，没有不显示
+        mPresent.getTaskList(0,"0");
     }
 
     @Override
@@ -72,4 +78,13 @@ public class ProjectListActivity extends BaseActivity<ProjectListPresent> implem
          adapter=new ProjectListAdapter(this,bean);
         mRecyclerView.setAdapter(adapter);
     }
+
+    @Override
+    public void showTodayTask(List<TaskListBean> bean) {
+        if(!bean.isEmpty()){
+            mRedTag.setVisibility(View.VISIBLE);
+        }
+    }
+
+
 }

@@ -1,12 +1,15 @@
 package shangchuan.com.oec.model.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by sg280 on 2017/3/31.
  */
 
-public class OaDetailsBean {
+public class OaDetailsBean implements Parcelable {
 
     private boolean Success ;
     private int Id  ;
@@ -252,4 +255,79 @@ public class OaDetailsBean {
                 ", ProcessList=" + ProcessList +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.Success ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.Id);
+        dest.writeInt(this.TenantId);
+        dest.writeInt(this.UserId);
+        dest.writeInt(this.ClassId);
+        dest.writeString(this.OrderType);
+        dest.writeString(this.StartTime);
+        dest.writeString(this.EndTime);
+        dest.writeString(this.OrderPeriod);
+        dest.writeString(this.OrderTitle);
+        dest.writeString(this.OrderContent);
+        dest.writeInt(this.OrderStatus);
+        dest.writeString(this.Destination);
+        dest.writeString(this.Companion);
+        dest.writeString(this.CustomerId);
+        dest.writeString(this.CustomerName);
+        dest.writeString(this.ProjectId);
+        dest.writeString(this.ProjectName);
+        dest.writeString(this.OrderTime);
+        dest.writeString(this.OrderAmount);
+        dest.writeString(this.CreateTime);
+        dest.writeString(this.CreateUserName);
+        dest.writeTypedList(this.AttachmentList);
+        dest.writeTypedList(this.ProcessList);
+    }
+
+    public OaDetailsBean() {
+    }
+
+    protected OaDetailsBean(Parcel in) {
+        this.Success = in.readByte() != 0;
+        this.Id = in.readInt();
+        this.TenantId = in.readInt();
+        this.UserId = in.readInt();
+        this.ClassId = in.readInt();
+        this.OrderType = in.readString();
+        this.StartTime = in.readString();
+        this.EndTime = in.readString();
+        this.OrderPeriod = in.readString();
+        this.OrderTitle = in.readString();
+        this.OrderContent = in.readString();
+        this.OrderStatus = in.readInt();
+        this.Destination = in.readString();
+        this.Companion = in.readString();
+        this.CustomerId = in.readString();
+        this.CustomerName = in.readString();
+        this.ProjectId = in.readString();
+        this.ProjectName = in.readString();
+        this.OrderTime = in.readString();
+        this.OrderAmount = in.readString();
+        this.CreateTime = in.readString();
+        this.CreateUserName = in.readString();
+        this.AttachmentList = in.createTypedArrayList(AttchmentBean.CREATOR);
+        this.ProcessList = in.createTypedArrayList(ProcessListBean.CREATOR);
+    }
+
+    public static final Parcelable.Creator<OaDetailsBean> CREATOR = new Parcelable.Creator<OaDetailsBean>() {
+        @Override
+        public OaDetailsBean createFromParcel(Parcel source) {
+            return new OaDetailsBean(source);
+        }
+
+        @Override
+        public OaDetailsBean[] newArray(int size) {
+            return new OaDetailsBean[size];
+        }
+    };
 }

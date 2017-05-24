@@ -47,7 +47,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
     //okhttp
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
      //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
@@ -75,4 +75,6 @@ dependencies {
     compile 'com.github.gzu-liyujiang.AndroidPicker:FilePicker:1.4.6'
   //photoView
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    //检查内存泄露
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
 }

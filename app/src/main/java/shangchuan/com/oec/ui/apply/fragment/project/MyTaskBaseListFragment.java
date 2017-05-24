@@ -10,12 +10,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import shangchuan.com.oec.R;
 import shangchuan.com.oec.base.BaseFragment;
 import shangchuan.com.oec.model.bean.TaskListBean;
 import shangchuan.com.oec.present.TaskListPresent;
 import shangchuan.com.oec.present.contact.TaskListContract;
 import shangchuan.com.oec.ui.apply.adapter.TaskListAdapter;
+import shangchuan.com.oec.util.CommonUtil;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.DividerDecoration;
 import shangchuan.com.oec.widget.LoadingView;
@@ -44,8 +47,12 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
     TextView mFinishEmpty;
     @BindView(R.id.text_show_hide)
     TextView mShowText;
+    @BindView(R.id.rel_call)
+    RelativeLayout relCall;
     protected int mStatus=0;
+    protected String userId="0";
     protected int finishStatus=1;
+    protected String tel;
     private boolean isShow;
     @Override
     public void loadData() {
@@ -53,8 +60,12 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
             return;
         }
        mRelFinishedTask.setOnClickListener(this);
+        LogUtil.i(tel);
+        if(tel!=null&&mStatus==0){
+            relCall.setVisibility(View.VISIBLE);
+        }
         LoadingView.showProgress(mActivity);
-        mPresent.getTaskList(mStatus);
+        mPresent.getTaskList(mStatus,userId);
 
     }
 
@@ -77,12 +88,11 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
 
     @Override
     public void showFinishedTask(List<TaskListBean> bean) {
+        LoadingView.dismissProgress();
         if(bean.isEmpty()){
             mFinishEmpty.setVisibility(View.VISIBLE);
             return;
         }
-        LoadingView.dismissProgress();
-        if(bean.isEmpty()) return;
         mFinishRec.setLayoutManager(new LinearLayoutManager(mActivity));
         mFinishRec.addItemDecoration(new DividerDecoration(mActivity));
         TaskListAdapter finishedAdapter = new TaskListAdapter(mActivity, bean,2);
@@ -120,10 +130,8 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
         switch (v.getId()){
             case R.id.rel_chakan:
                 isShow=!isShow;
-                if(isShow) {
                     LoadingView.showProgress(mActivity);
                     mPresent.getFinishedTask(finishStatus);
-                }
                 mFinishRec.setVisibility(isShow?View.VISIBLE:View.GONE);
                 mShowText.setText(isShow?"隐藏已完成任务":"查看已完成任务");
                 mArrow.setImageResource(isShow?R.drawable.project_icon_below_arrow:R.drawable.home_news_arrow);
@@ -131,4 +139,9 @@ public class MyTaskBaseListFragment extends BaseFragment<TaskListPresent> implem
                 break;
         }
     }
+    @OnClick(R.id.call_phone)
+    void call(){
+        CommonUtil.callPhone(mActivity,tel);
+    }
+
 }

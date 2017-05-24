@@ -306,8 +306,18 @@ public static Intent newIntent(Context context,int id,int index,int position){
             case R.id.toolbar_right_title:
                  //重新提交
                 if(mData.getOrderStatus()==0){
-                   //要写五个界面，好烦
-
+                    String orderType=mData.getOrderType();
+                   if(orderType.equals("加班")){
+                       startActivity(ModifyOverTimeActivity.getInstance(this,mData));
+                   }else if(orderType.equals("报销")) {
+                       startActivity(ModifyReimburseActivity.getInstance(this, mData));
+                   }else if(orderType.equals("外勤/出差")){
+                       startActivity(ModifyReimburseActivity.getInstance(this, mData));
+                   }else if(orderType.equals("请假")){
+                       startActivity(ModifyLeaveActivity.getInstance(this,mData));
+                   }else {
+                       startActivity(ModifyCommonActivity.getInstance(this,mData));
+                   }
                 }else {
                     //撤回
                     LoadingView.showProgress(this);

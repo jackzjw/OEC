@@ -17,6 +17,7 @@ import shangchuan.com.oec.ui.apply.activity.AttendanceActivity;
 import shangchuan.com.oec.ui.apply.activity.ClientDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkOrderActivity;
 import shangchuan.com.oec.ui.apply.activity.CreateWorkReportActivity;
+import shangchuan.com.oec.ui.apply.activity.ModifyBaseActivity;
 import shangchuan.com.oec.ui.apply.activity.ModifyClientDetailsActivity;
 import shangchuan.com.oec.ui.apply.activity.ModifyWRDetailActivity;
 import shangchuan.com.oec.ui.apply.activity.ModifyWoDetailActivity;
@@ -76,5 +77,6 @@ public interface ActivityComponent {
     void inject(SearchTrendActivity activity);
     void inject(SearchBannerActivity activity);
     void inject(TaskDetailsActivity activity);
+    void inject(ModifyBaseActivity activity);
 
 }

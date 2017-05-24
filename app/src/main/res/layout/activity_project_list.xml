@@ -37,6 +37,7 @@
             android:id="@+id/task_tag"
             android:layout_width="5dp"
             android:layout_height="5dp"
+            android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:background="@drawable/shape_unread_red_circle_dot"

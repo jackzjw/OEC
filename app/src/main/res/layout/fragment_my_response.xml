@@ -93,5 +93,25 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/rel_call"
+            android:visibility="gone"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_project_send_remark_background"
+                android:text="拨号"
+                android:id="@+id/call_phone"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                />
+
+        </RelativeLayout>
         </LinearLayout>
+
     </ScrollView>

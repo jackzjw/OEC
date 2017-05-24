@@ -51,6 +51,11 @@ public class LoadingView extends Dialog {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void init(){
 
       //  getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, 50);
@@ -69,6 +74,8 @@ public class LoadingView extends Dialog {
     public static void dismissProgress(){
         if(mLoadView!=null){
             mLoadView.dismiss();
+            mLoadView=null;
+
         }
     }
 

@@ -16,6 +16,7 @@ public class MyResponseFragment extends MyTaskBaseListFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mStatus=0;
         finishStatus=1;
+        userId="0";
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }

@@ -3,6 +3,8 @@ package shangchuan.com.oec.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import java.util.HashSet;
 
 import shangchuan.com.oec.di.component.AppComponent;
@@ -20,6 +22,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance=this;
+        if(LeakCanary.isInAnalyzerProcess(this)){
+            return;
+        }
+        LeakCanary.install(this);
     }
     public static App getInstance(){
         return instance;

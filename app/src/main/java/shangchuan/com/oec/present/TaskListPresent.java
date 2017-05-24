@@ -27,9 +27,10 @@ public class TaskListPresent extends RxPresent<TaskListContract.View> implements
     public TaskListPresent(RetrofitHelper helper){
         this.mHelper=helper;
     }
+
     @Override
-    public void getTaskList(int status) {
-        Subscription subscription=mHelper.getApiSevice().getTaskList(status,0,"0",99, SaveToken.mToken)
+    public void getTaskList(int status,String userId) {
+        Subscription subscription=mHelper.getApiSevice().getTaskList(status,0,userId,99, SaveToken.mToken)
                 .compose(RxUtil.<HttpDataResult<ResultBean<OaBasicItemBean<TaskListBean>>>>scheduleRxHelper())
                 .compose(RxUtil.<ResultBean<OaBasicItemBean<TaskListBean>>>handleResult()).subscribe(new CommonSubscriber<ResultBean<OaBasicItemBean<TaskListBean>>>(mView) {
                     @Override
@@ -46,6 +47,7 @@ public class TaskListPresent extends RxPresent<TaskListContract.View> implements
                                 futureList.add(item);
                             }
                         }
+
                         mView.showTodayTask(todayList);
                         mView.showFutureTask(futureList);
                     }

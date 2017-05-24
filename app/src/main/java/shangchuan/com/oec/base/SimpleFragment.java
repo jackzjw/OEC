@@ -17,6 +17,7 @@ import shangchuan.com.oec.app.App;
 import shangchuan.com.oec.di.component.ActivityComponent;
 import shangchuan.com.oec.di.component.DaggerActivityComponent;
 import shangchuan.com.oec.di.module.ActivityModule;
+import shangchuan.com.oec.util.LogUtil;
 
 /**
  * Created by sg280 on 2017/5/3.
@@ -27,7 +28,8 @@ public abstract class SimpleFragment extends Fragment implements BaseView{
     protected Activity mActivity;
     protected Context mContext;
     private Unbinder mUnBinder;
-    private boolean isInited = false;
+    protected boolean isInited = false;
+    protected boolean isPrepared=true;
     private CompositeSubscription mSubscription;
 
     @Override
@@ -48,8 +50,8 @@ public abstract class SimpleFragment extends Fragment implements BaseView{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnBinder = ButterKnife.bind(this, view);
-        if (savedInstanceState == null) {
-            if (!isHidden()) {
+       /* if (savedInstanceState == null) {
+           if (!isHidden()) {
                 isInited = true;
                 initEventAndData();
             }
@@ -58,7 +60,10 @@ public abstract class SimpleFragment extends Fragment implements BaseView{
                 isInited = true;
                 initEventAndData();
             }
-        }
+        }*/
+
+        initEventAndData();
+
     }
     protected ActivityComponent getActivityComponent(){
         return DaggerActivityComponent.builder()
@@ -79,10 +84,11 @@ public abstract class SimpleFragment extends Fragment implements BaseView{
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!isInited && !hidden) {
-            isInited = true;
-            initEventAndData();
-        }
+        //经过测试这里不走
+            isPrepared=hidden;
+        LogUtil.i("isPrepared="+isPrepared);
+        initEventAndData();
+
     }
 
     @Override

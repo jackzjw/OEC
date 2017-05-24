@@ -18,6 +18,7 @@ import shangchuan.com.oec.model.bean.ResultBean;
 import shangchuan.com.oec.model.bean.UserInfoBean;
 import shangchuan.com.oec.present.contact.OnItemClickListener;
 import shangchuan.com.oec.ui.apply.adapter.ProjectMemAdapter;
+import shangchuan.com.oec.util.LogUtil;
 import shangchuan.com.oec.util.RxUtil;
 import shangchuan.com.oec.util.ToastUtil;
 import shangchuan.com.oec.widget.CommonSubscriber;
@@ -80,6 +81,17 @@ public class ProjectMemberListActivity extends SimpleActivity {
                             intent.putExtra("username",bean.getResult().get(position).getUserNickName());
                              setResult(RESULT_OK,intent);
                             finish();
+                        }
+                    });
+                }else if(mType==0){
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onClick(int position) {
+                            String userid=bean.getResult().get(position).getUserId()+"";
+                            String nickName=bean.getResult().get(position).getUserNickName();
+                            String tel=bean.getResult().get(position).getUserMobile();
+                            LogUtil.i("mem tel"+tel);
+                            startActivity(HeTaskActivity.getInstance(ProjectMemberListActivity.this,userid,nickName,tel));
                         }
                     });
                 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">oec</string>
+    <string name="app_name">易事本</string>
     <!--标题描述-->
     <string name="home_fragment_toolbar_title">商传</string>
     <string name="classify_fragment_toolbar_title">应用</string>
