@@ -1,5 +1,8 @@
 package shangchuan.com.oec.ui.user.activity;
 
+@BindView(R.id.toolbar)
+    Toolbar mToolbar;
+@BindView(R.id.toolbar_title)
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -14,9 +17,6 @@ import shangchuan.com.oec.base.BaseActivity;
 import shangchuan.com.oec.widget.VerifyCodeButton;
 
 public class FetchPwdActivity extends BaseActivity {
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
     @BindView(R.id.et_phone_number)
     EditText phoneNumber;

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -59,6 +60,12 @@ public abstract class BaseActivity<T extends RxPresent> extends AppCompatActivit
                 .appComponent(App.getAppComponent()).activityModule(new ActivityModule(this)).build();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -90,6 +90,7 @@ public class WoDetailPresent extends RxPresent<WoDetailContract.View> implements
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+
                 InputStream is = null;
                 byte[] buf = new byte[2048];
                 int len = 0;

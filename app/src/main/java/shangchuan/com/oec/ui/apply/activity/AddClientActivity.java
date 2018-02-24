@@ -99,10 +99,7 @@ public class AddClientActivity extends BaseActivity<AddClientPresent> implements
 
     @Override
     public void saveSuccess(WoSuccessBean result) {
-
     }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Constants.REQUEST_CODE&&resultCode==RESULT_OK){

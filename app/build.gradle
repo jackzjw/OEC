@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'android-apt'
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "shangchuan.com.oec"
         minSdkVersion 16
@@ -77,4 +77,8 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     //检查内存泄露
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    //检查Hierarchy Viewer
+ //   compile 'com.hanhuy.android:viewserver:1.0.3'
+
+
 }

@@ -34,6 +34,5 @@ public class RxPresent<T extends BaseView> implements BasePresent<T>{
     public void deatchView() {
         mView=null;
         unSubscribe();
-
     }
 }
